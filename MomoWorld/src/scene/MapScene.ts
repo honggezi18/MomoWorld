@@ -46,6 +46,7 @@ class MapScene extends egret.DisplayObjectContainer {
         for (var i = 1; i < 11; i++) {
             this["map" + i].width = Math.floor(this["map" + i].measuredWidth * scaleX);
             this["map" + i].height = Math.floor(this["map" + i].measuredHeight * scaleY);
+            if (GameData.MapState[i - 1].state != "disable")this["map" + i].visible = false;
         }
 
 
@@ -71,7 +72,9 @@ class MapScene extends egret.DisplayObjectContainer {
     }
 
     //控制难度选择
-    public ctrlSelect():void {
+    public ctrlSelect(map:string):void {
+        if (this[map].visible == false)return;
+
         if (this.isSelect == false) {
             this.isSelect = true;
             this.select.visible = true;
@@ -116,9 +119,8 @@ class MapScene extends egret.DisplayObjectContainer {
         else if (305 < e.stageX && e.stageX < 410 && 412 < e.stageY && e.stageY < 437)this.map8.texture = RES.getRes("worldMap_map8_disable_png");
         else if (180 < e.stageX && e.stageX < 285 && 360 < e.stageY && e.stageY < 390)this.map9.texture = RES.getRes("worldMap_map9_disable_png");
         else if (45 < e.stageX && e.stageX < 150 && 420 < e.stageY && e.stageY < 445)this.map10.texture = RES.getRes("worldMap_map10_disable_png");
-        this.ctrlSelect();
     }
-    
+
     public onRemove(e:egret.Event):void {
         e.target.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
         e.target.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);

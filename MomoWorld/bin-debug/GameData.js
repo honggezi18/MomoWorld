@@ -24,6 +24,58 @@ var GameData = (function () {
     GameData.gameWidth = 480;
     GameData.gameHeight = 800;
     GameData.scaleSmall = 1;
+    GameData.MapState = [
+        {
+            "name": "map1",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map2",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map3",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map4",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map5",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map6",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map7",
+            "state": "common",
+            "item": [""],
+        },
+        {
+            "name": "map8",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map9",
+            "state": "disable",
+            "item": [""],
+        },
+        {
+            "name": "map10",
+            "state": "disable",
+            "item": [""],
+        },
+    ];
     return GameData;
 })();
 egret.registerClass(GameData,"GameData");

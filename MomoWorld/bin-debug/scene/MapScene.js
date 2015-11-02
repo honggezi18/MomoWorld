@@ -27,6 +27,8 @@ var MapScene = (function (_super) {
         for (var i = 1; i < 11; i++) {
             this["map" + i].width = Math.floor(this["map" + i].measuredWidth * scaleX);
             this["map" + i].height = Math.floor(this["map" + i].measuredHeight * scaleY);
+            if (GameData.MapState[i - 1].state != "disable")
+                this["map" + i].visible = false;
         }
         this.select = new egret.DisplayObjectContainer();
         this.addChild(this.select);
@@ -47,7 +49,9 @@ var MapScene = (function (_super) {
         this.selectBox.y = (this.height - this.selectBox.height) / 2;
     };
     //�����Ѷ�ѡ��
-    p.ctrlSelect = function () {
+    p.ctrlSelect = function (map) {
+        if (this[map].visible == false)
+            return;
         if (this.isSelect == false) {
             this.isSelect = true;
             this.select.visible = true;
@@ -109,9 +113,7 @@ var MapScene = (function (_super) {
             this.map9.texture = RES.getRes("worldMap_map9_disable_png");
         else if (45 < e.stageX && e.stageX < 150 && 420 < e.stageY && e.stageY < 445)
             this.map10.texture = RES.getRes("worldMap_map10_disable_png");
-        this.ctrlSelect();
     };
-    //
     p.onRemove = function (e) {
         e.target.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
         e.target.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
