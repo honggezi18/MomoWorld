@@ -8,73 +8,70 @@ var GameData = (function () {
     };
     //加载数据
     GameData.loadData = function () {
-        var nameList = ["Hero1", "Hero2", "Hero3"]; //角色列表.
-        for (var i = 0; i < nameList.length; i++) {
-            if (Tool.checkLocal(nameList[i])) {
-                GameData[nameList[i]] = JSON.parse(Tool.getLocal(nameList[i]));
-            }
+        if (Tool.checkLocal("MapState")) {
+            GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
     };
     //保存数据//角色数据//基本数据（金币数）
     GameData.saveData = function () {
-        var nameList = ["Hero1", "Hero2", "Hero3"]; //角色列表.
-        for (var i = 0; i < nameList.length; i++)
-            Tool.setLocal(nameList[i], JSON.stringify(GameData[nameList[i]]));
+        Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     };
     GameData.gameWidth = 480;
     GameData.gameHeight = 800;
     GameData.scaleSmall = 1;
+    GameData.mapIndex = -1; //标示当前选中的地图
+    GameData.difficulty = 0; //标示当前的游戏难度
     GameData.MapState = [
         {
+            "name": "map0",
+            "state": 1,
+            "item": [""],
+        },
+        {
             "name": "map1",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map2",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map3",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map4",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map5",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map6",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map7",
-            "state": "common",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map8",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map9",
-            "state": "disable",
+            "state": 0,
             "item": [""],
-        },
-        {
-            "name": "map10",
-            "state": "disable",
-            "item": [""],
-        },
+        }
     ];
     return GameData;
 })();

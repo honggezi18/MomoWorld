@@ -1,6 +1,7 @@
 //游戏场景管理类
 class UIManage {
     static instance;
+    private welcomeScene:WelcomeScene;
     private mapScene:MapScene;
 
     public static getInstance():UIManage {
@@ -11,6 +12,22 @@ class UIManage {
     constructor() {
         if (UIManage.instance == null)UIManage.instance = this;
         else throw new Error("UIManage had been Instanced");
+    }
+
+    public showWelcome() {
+        console.log("showWelcome");
+        if (this.welcomeScene != null)this.welcomeScene = null;
+        this.welcomeScene = new WelcomeScene();
+        Main.Stage.addChild(this.welcomeScene);
+    }
+
+    public hideWelcome() {
+        if (this.welcomeScene != null) {
+            console.log("hideWelcome");
+            Main.Stage.removeChild(this.welcomeScene);
+            this.welcomeScene = null;
+        }
+        else console.log("welcomeScene   had   not  instance");
     }
 
     public showMap() {

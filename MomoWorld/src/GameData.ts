@@ -4,58 +4,61 @@ class GameData {
     static gameHeight:number = 800;
     static scaleSmall:number = 1;
 
+    static mapIndex:number = -1;//标示当前选中的地图
+    static difficulty:number = 0;//标示当前的游戏难度
+
 
     static MapState = [//地图信息
+        {//state中0为未开放，1为普通，2为困难，3为地狱
+            "name": "map0",
+            "state": 1,
+            "item": [""],
+        },
         {
             "name": "map1",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map2",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map3",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map4",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map5",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map6",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map7",
-            "state": "common",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map8",
-            "state": "disable",
+            "state": 0,
             "item": [""],
         },
         {
             "name": "map9",
-            "state": "disable",
+            "state": 0,
             "item": [""],
-        },
-        {
-            "name": "map10",
-            "state": "disable",
-            "item": [""],
-        },
+        }
     ];
 
 
@@ -67,21 +70,14 @@ class GameData {
 
     //加载数据
     static loadData():void {
-        var nameList = ["Hero1", "Hero2", "Hero3"];//角色列表.
-        for (var i = 0; i < nameList.length; i++) {
-            if (Tool.checkLocal(nameList[i])) {//若本地端有保存数据
-                GameData[nameList[i]] = JSON.parse(Tool.getLocal(nameList[i]));
-            }
+        if (Tool.checkLocal("MapState")) {//加载地图
+            GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
-
-
     }
 
     //保存数据//角色数据//基本数据（金币数）
     static saveData():void {
-        var nameList = ["Hero1", "Hero2", "Hero3"];//角色列表.
-        for (var i = 0; i < nameList.length; i++)
-            Tool.setLocal(nameList[i], JSON.stringify(GameData[nameList[i]]));
+        Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     }
 
 

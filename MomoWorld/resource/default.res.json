@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"worldMap_map9_png,worldMap_map10_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map10_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png",
+		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png",
 		"name":"map"
 	}],
 	"resources":[
@@ -14,11 +14,6 @@
 		"name":"worldMap_map9_png",
 		"type":"image",
 		"url":"assets/WorldMap/worldMap_map9.png"
-	},
-	{
-		"name":"worldMap_map10_png",
-		"type":"image",
-		"url":"assets/WorldMap/worldMap_map10.png"
 	},
 	{
 		"name":"worldMap_point_png",
@@ -101,11 +96,6 @@
 		"url":"assets/WorldMap/worldMap_map9_disable.png"
 	},
 	{
-		"name":"worldMap_map10_disable_png",
-		"type":"image",
-		"url":"assets/WorldMap/worldMap_map10_disable.png"
-	},
-	{
 		"name":"worldMap_map1_disable_png",
 		"type":"image",
 		"url":"assets/WorldMap/worldMap_map1_disable.png"
@@ -169,5 +159,25 @@
 		"name":"worldMap_box_png",
 		"type":"image",
 		"url":"assets/WorldMap/worldMap_box.png"
+	},
+	{
+		"name":"worldMap_map0_png",
+		"type":"image",
+		"url":"assets/WorldMap/worldMap_map0.png"
+	},
+	{
+		"name":"worldMap_map0_disable_png",
+		"type":"image",
+		"url":"assets/WorldMap/worldMap_map0_disable.png"
+	},
+	{
+		"name":"worldMap_back1_png",
+		"type":"image",
+		"url":"assets/WorldMap/worldMap_back1.png"
+	},
+	{
+		"name":"worldMap_back2_png",
+		"type":"image",
+		"url":"assets/WorldMap/worldMap_back2.png"
 	}]
 }
