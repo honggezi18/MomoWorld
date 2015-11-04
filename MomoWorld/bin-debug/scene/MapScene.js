@@ -1,4 +1,4 @@
-//��Ϸ��ӭҳ��
+//��ͼѡ��ҳ��
 var MapScene = (function (_super) {
     __extends(MapScene, _super);
     function MapScene() {

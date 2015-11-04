@@ -11,6 +11,7 @@ var game_file_list = [
 	"bin-debug/GameData.js",
 	"bin-debug/Main.js",
 	"bin-debug/scene/MapScene.js",
+	"bin-debug/scene/WelcomeScene.js",
 	"bin-debug/Tool.js",
 	"bin-debug/UIManage.js",
 	//----auto game_file_list end----

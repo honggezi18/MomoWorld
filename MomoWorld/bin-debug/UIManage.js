@@ -12,6 +12,22 @@ var UIManage = (function () {
             UIManage.instance = new UIManage();
         return UIManage.instance;
     };
+    p.showWelcome = function () {
+        console.log("showWelcome");
+        if (this.welcomeScene != null)
+            this.welcomeScene = null;
+        this.welcomeScene = new WelcomeScene();
+        Main.Stage.addChild(this.welcomeScene);
+    };
+    p.hideWelcome = function () {
+        if (this.welcomeScene != null) {
+            console.log("hideWelcome");
+            Main.Stage.removeChild(this.welcomeScene);
+            this.welcomeScene = null;
+        }
+        else
+            console.log("welcomeScene   had   not  instance");
+    };
     p.showMap = function () {
         console.log("showMap");
         if (this.mapScene != null)

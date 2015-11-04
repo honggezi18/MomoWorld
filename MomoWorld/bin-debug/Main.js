@@ -28,7 +28,7 @@ var Main = (function (_super) {
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             GameData.loadData();
             GameData.reset();
-            UIManage.getInstance().showMap();
+            UIManage.getInstance().showWelcome();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);
