@@ -1033,7 +1033,7 @@ var egret;
                 bufferSource.onended = this.onPlayEnd;
                 this._startTime = Date.now();
                 this.gain.gain.value = this._volume;
-                bufferSource.start(0, this._currentTime);
+                bufferSource.start(0, this.$startTime);
                 this._currentTime = 0;
             };
             p.stop = function () {
@@ -1078,7 +1078,7 @@ var egret;
                  */
                 ,function () {
                     if (this.bufferSource) {
-                        return Math.floor((Date.now() - this._startTime));
+                        return Math.floor((Date.now() - this._startTime) / 1000);
                     }
                     return 0;
                 }
@@ -1241,6 +1241,11 @@ var egret;
                 video.style.left = "0px";
                 video.height = this.heightSet;
                 video.width = this.widthSet;
+                if (egret.Capabilities.os != "Windows PC" && egret.Capabilities.os != "Mac OS") {
+                    setTimeout(function () {
+                        video.width = 0;
+                    }, 1000);
+                }
                 this.checkFullScreen(this._fullscreen);
             };
             p.checkFullScreen = function (playFullScreen) {
@@ -1249,9 +1254,9 @@ var egret;
                     if (video.parentElement == null) {
                         video.removeAttribute("webkit-playsinline");
                         document.body.appendChild(video);
-                        this.goFullscreen();
-                        egret.stopTick(this.markDirty, this);
                     }
+                    egret.stopTick(this.markDirty, this);
+                    this.goFullscreen();
                 }
                 else {
                     if (video.parentElement != null) {
@@ -1427,7 +1432,7 @@ var egret;
                     if (!this._bitmapData) {
                         this.video.width = this.video.videoWidth;
                         this.video.height = this.video.videoHeight;
-                        this._bitmapData = egret.web['toBitmapData'](this.video);
+                        this._bitmapData = egret.$toBitmapData(this.video);
                     }
                     return this._bitmapData;
                 }
@@ -1829,7 +1834,11 @@ var egret;
              * @param url 要加载的图像文件的地址。
              */
             p.load = function (url) {
-                if (web.Html5Capatibility._canUseBlob && url.indexOf("data:") != 0 && url.indexOf("http:") != 0 && url.indexOf("https:") != 0) {
+                if (web.Html5Capatibility._canUseBlob
+                    && url.indexOf("wxLocalResource:") != 0 //微信专用不能使用 blob
+                    && url.indexOf("data:") != 0
+                    && url.indexOf("http:") != 0
+                    && url.indexOf("https:") != 0) {
                     var request = this.request;
                     if (!request) {
                         request = this.request = new egret.web.WebHttpRequest();
@@ -1887,7 +1896,7 @@ var egret;
                 if (!image) {
                     return;
                 }
-                this.data = web.toBitmapData(image);
+                this.data = egret.$toBitmapData(image);
                 var self = this;
                 window.setTimeout(function () {
                     self.dispatchEventWith(egret.Event.COMPLETE);
@@ -2013,6 +2022,10 @@ var egret;
                  * @private
                  */
                 this.textValue = "";
+                /**
+                 * @private
+                 */
+                this.colorValue = 0xffffff;
                 /**
                  * @private
                  */
@@ -2148,6 +2161,20 @@ var egret;
                     this.inputElement.value = this.textValue;
                 }
             };
+            p.$setColor = function (value) {
+                this.colorValue = value;
+                this.resetColor();
+                return true;
+            };
+            /**
+             * @private
+             *
+             */
+            p.resetColor = function () {
+                if (this.inputElement) {
+                    this.setElementStyle("color", egret.toColorString(this.colorValue));
+                }
+            };
             p.$onBlur = function () {
                 if (web.Html5Capatibility._System_OS == web.SystemOSType.WPHONE) {
                     egret.Event.dispatchEvent(this, "updateText", false);
@@ -2249,7 +2276,14 @@ var egret;
                     this.setElementStyle("textAlign", textfield.textAlign);
                     this.setElementStyle("fontSize", textfield.size * this._gscaleY + "px");
                     this.setElementStyle("color", egret.toColorString(textfield.textColor));
-                    this.setElementStyle("width", textfield.width * this._gscaleX + "px");
+                    if (textfield.stage) {
+                        var tw = textfield.localToGlobal(0, 0).x;
+                        tw = Math.min(textfield.width, textfield.stage.stageWidth - tw);
+                    }
+                    else {
+                        tw = textfield.width;
+                    }
+                    this.setElementStyle("width", tw * this._gscaleX + "px");
                     this.setElementStyle("verticalAlign", textfield.verticalAlign);
                     if (textfield.multiline) {
                         this.setAreaHeight();
@@ -2271,7 +2305,7 @@ var egret;
                     }
                     this.inputDiv.style.clip = "rect(0px " + (textfield.width * this._gscaleX) + "px " + (textfield.height * this._gscaleY) + "px 0px)";
                     this.inputDiv.style.height = textfield.height * this._gscaleY + "px";
-                    this.inputDiv.style.width = textfield.width * this._gscaleX + "px";
+                    this.inputDiv.style.width = tw * this._gscaleX + "px";
                 }
             };
             return HTML5StageText;
@@ -2338,6 +2372,9 @@ var egret;
              *
              */
             p.$updateSize = function () {
+                if (!this.canvas) {
+                    return;
+                }
                 var stageW = this.canvas.width;
                 var stageH = this.canvas.height;
                 var screenW = this.canvas.style.width.split("px")[0];
@@ -2523,13 +2560,24 @@ var egret;
     var web;
     (function (web) {
         var stageToTextLayerMap = {};
+        var stageToCanvasMap = {};
+        var stageToContainerMap = {};
         /**
          * @private
          * 获取
          */
         function $getTextAdapter(textfield) {
             var stageHash = textfield.stage ? textfield.stage.$hashCode : 0;
-            return stageToTextLayerMap[stageHash];
+            var adapter = stageToTextLayerMap[stageHash];
+            var canvas = stageToCanvasMap[stageHash];
+            var container = stageToContainerMap[stageHash];
+            if (canvas && container) {
+                //adapter._initStageDelegateDiv(container, canvas);
+                //adapter.$updateSize();
+                delete stageToCanvasMap[stageHash];
+                delete stageToContainerMap[stageHash];
+            }
+            return adapter;
         }
         web.$getTextAdapter = $getTextAdapter;
         /**
@@ -2538,6 +2586,8 @@ var egret;
         function $cacheTextAdapter(adapter, stage, container, canvas) {
             adapter._initStageDelegateDiv(container, canvas);
             stageToTextLayerMap[stage.$hashCode] = adapter;
+            stageToCanvasMap[stage.$hashCode] = canvas;
+            stageToContainerMap[stage.$hashCode] = container;
         }
         web.$cacheTextAdapter = $cacheTextAdapter;
     })(web = egret.web || (egret.web = {}));
@@ -2646,7 +2696,7 @@ var egret;
                 var context = canvas.getContext("2d");
                 canvas["renderContext"] = context;
                 context["surface"] = canvas;
-                web.toBitmapData(canvas);
+                egret.$toBitmapData(canvas);
                 if (egret.sys.isUndefined(context["imageSmoothingEnabled"])) {
                     var keys = ["webkitImageSmoothingEnabled", "mozImageSmoothingEnabled", "msImageSmoothingEnabled"];
                     for (var i = keys.length - 1; i >= 0; i--) {
@@ -2766,14 +2816,17 @@ var egret;
                 var _this = this;
                 if (window.navigator.msPointerEnabled) {
                     this.canvas.addEventListener("MSPointerDown", function (event) {
+                        event.identifier = event.pointerId;
                         _this.onTouchBegin(event);
                         _this.prevent(event);
                     }, false);
                     this.canvas.addEventListener("MSPointerMove", function (event) {
+                        event.identifier = event.pointerId;
                         _this.onTouchMove(event);
                         _this.prevent(event);
                     }, false);
                     this.canvas.addEventListener("MSPointerUp", function (event) {
+                        event.identifier = event.pointerId;
                         _this.onTouchEnd(event);
                         _this.prevent(event);
                     }, false);
@@ -3357,7 +3410,11 @@ var egret;
          * 启动心跳计时器。
          */
         function startTicker(ticker) {
-            var requestAnimationFrame = window["requestAnimationFrame"] || window["webkitRequestAnimationFrame"] || window["mozRequestAnimationFrame"] || window["oRequestAnimationFrame"] || window["msRequestAnimationFrame"];
+            var requestAnimationFrame = window["requestAnimationFrame"] ||
+                window["webkitRequestAnimationFrame"] ||
+                window["mozRequestAnimationFrame"] ||
+                window["oRequestAnimationFrame"] ||
+                window["msRequestAnimationFrame"];
             if (!requestAnimationFrame) {
                 requestAnimationFrame = function (callback) {
                     return window.setTimeout(callback, 1000 / 60);
@@ -3373,50 +3430,6 @@ var egret;
         window["isNaN"] = function (value) {
             value = +value;
             return value !== value;
-        };
-        /**
-         * @private
-         *
-         * @param argument
-         */
-        function toArray(argument) {
-            var args = [];
-            for (var i = 0; i < argument.length; i++) {
-                args.push(argument[i]);
-            }
-            return args;
-        }
-        egret.warn = function () {
-            console.warn.apply(console, toArray(arguments));
-        };
-        egret.error = function () {
-            console.error.apply(console, toArray(arguments));
-        };
-        egret.assert = function () {
-            console.assert.apply(console, toArray(arguments));
-        };
-        if (DEBUG) {
-            egret.log = function () {
-                if (DEBUG) {
-                    var length = arguments.length;
-                    var info = "";
-                    for (var i = 0; i < length; i++) {
-                        info += arguments[i] + " ";
-                    }
-                    egret.sys.$logToFPS(info);
-                }
-                console.log.apply(console, toArray(arguments));
-            };
-        }
-        else {
-            egret.log = function () {
-                console.log.apply(console, toArray(arguments));
-            };
-        }
-        //兼容runtime的RenderTexture，以后应该会废弃
-        CanvasRenderingContext2D.prototype["begin"] = function () {
-        };
-        CanvasRenderingContext2D.prototype["end"] = function () {
         };
         var originCanvas2DFill = CanvasRenderingContext2D.prototype.fill;
         CanvasRenderingContext2D.prototype.fill = function () {
@@ -3491,15 +3504,6 @@ var egret;
         egret.registerClass(HTMLImageElement, className);
         egret.registerClass(HTMLCanvasElement, className);
         egret.registerClass(HTMLVideoElement, className);
-        /**
-         * @private
-         * 转换 Image，Canvas，Video 为 Egret 框架内使用的 BitmapData 对象。
-         */
-        function toBitmapData(data) {
-            data["hashCode"] = data["$hashCode"] = egret.$hashCount++;
-            return data;
-        }
-        web.toBitmapData = toBitmapData;
     })(web = egret.web || (egret.web = {}));
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
@@ -3699,11 +3703,9 @@ var egret;
                 var player = new egret.sys.Player(surface.renderContext, stage, option.entryClassName);
                 var webHide = new egret.web.WebHideHandler(stage);
                 var webInput = new web.HTMLInput();
-                if (DEBUG) {
-                    player.showPaintRect(option.showPaintRect);
-                    if (option.showFPS || option.showLog) {
-                        player.displayFPS(option.showFPS, option.showLog, option.logFilter, option.fpsStyles);
-                    }
+                player.showPaintRect(option.showPaintRect);
+                if (option.showFPS || option.showLog) {
+                    player.displayFPS(option.showFPS, option.showLog, option.logFilter, option.fpsStyles);
                 }
                 this.playerOption = option;
                 this.container = container;
@@ -3723,7 +3725,7 @@ var egret;
                 window.addEventListener("orientationchange", function () {
                     window.setTimeout(function () {
                         egret.StageOrientationEvent.dispatchStageOrientationEvent(self.stage, egret.StageOrientationEvent.ORIENTATION_CHANGE);
-                    }, 100);
+                    }, 350);
                 });
             };
             /**
@@ -3739,20 +3741,18 @@ var egret;
                 option.orientation = container.getAttribute("data-orientation") || egret.OrientationMode.AUTO;
                 option.maxTouches = +container.getAttribute("data-multi-fingered") || 2;
                 option.textureScaleFactor = +container.getAttribute("texture-scale-factor") || 1;
-                if (DEBUG) {
-                    option.showPaintRect = container.getAttribute("data-show-paint-rect") == "true";
-                    option.showFPS = container.getAttribute("data-show-fps") == "true";
-                    var styleStr = container.getAttribute("data-show-fps-style") || "";
-                    var stylesArr = styleStr.split(",");
-                    var styles = {};
-                    for (var i = 0; i < stylesArr.length; i++) {
-                        var tempStyleArr = stylesArr[i].split(":");
-                        styles[tempStyleArr[0]] = tempStyleArr[1];
-                    }
-                    option.fpsStyles = styles;
-                    option.showLog = container.getAttribute("data-show-log") == "true";
-                    option.logFilter = container.getAttribute("data-log-filter");
+                option.showPaintRect = container.getAttribute("data-show-paint-rect") == "true";
+                option.showFPS = container.getAttribute("data-show-fps") == "true";
+                var styleStr = container.getAttribute("data-show-fps-style") || "";
+                var stylesArr = styleStr.split(",");
+                var styles = {};
+                for (var i = 0; i < stylesArr.length; i++) {
+                    var tempStyleArr = stylesArr[i].split(":");
+                    styles[tempStyleArr[0]] = tempStyleArr[1];
                 }
+                option.fpsStyles = styles;
+                option.showLog = container.getAttribute("data-show-log") == "true";
+                option.logFilter = container.getAttribute("data-log-filter");
                 return option;
             };
             /**
@@ -3771,6 +3771,7 @@ var egret;
                 style = container.style;
                 style.overflow = "hidden";
                 style.position = "relative";
+                style["webkitTransform"] = "translateZ(0)";
             };
             /**
              * @private
@@ -3785,7 +3786,8 @@ var egret;
                 var shouldRotate = false;
                 var orientation = this.stage.$orientation;
                 if (orientation != egret.OrientationMode.AUTO) {
-                    shouldRotate = orientation != egret.OrientationMode.PORTRAIT && screenRect.height > screenRect.width || orientation == egret.OrientationMode.PORTRAIT && screenRect.width > screenRect.height;
+                    shouldRotate = orientation != egret.OrientationMode.PORTRAIT && screenRect.height > screenRect.width
+                        || orientation == egret.OrientationMode.PORTRAIT && screenRect.width > screenRect.height;
                 }
                 var screenWidth = shouldRotate ? screenRect.height : screenRect.width;
                 var screenHeight = shouldRotate ? screenRect.width : screenRect.height;
@@ -3822,10 +3824,16 @@ var egret;
                 }
                 var transform = "rotate(" + rotation + "deg)";
                 canvas.style[egret.web.getPrefixStyleName("transform")] = transform;
-                this.player.updateStageSize(stageWidth, stageHeight);
                 var scalex = displayWidth / stageWidth, scaley = displayHeight / stageHeight;
                 this.webTouchHandler.updateScaleMode(scalex, scaley, rotation);
                 this.webInput.$updateSize();
+                this.player.updateStageSize(stageWidth, stageHeight); //不要在这个方法后面修改属性
+            };
+            p.setContentSize = function (width, height) {
+                var option = this.playerOption;
+                option.contentWidth = width;
+                option.contentHeight = height;
+                this.updateScreenSize();
             };
             /**
              * @private

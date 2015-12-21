@@ -1,5 +1,90 @@
 //工具类
 class Tool {
+
+
+    //添加帧动画的函数
+    static addMoveClip(target:any, res:string, x:number, y:number, scale:number, time:number):egret.MovieClip {
+        var data = RES.getRes(res + "_json");
+        var txtr = RES.getRes(res + "_png");
+        var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, txtr);
+        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
+        if (scale != 0) {
+            mc.scaleX = scale;
+            mc.scaleY = scale;
+        }
+        target.addChild(mc);
+        mc.play(time);
+        return mc;
+    }
+
+    //获取两点间的距离
+    static getDistance(obj1:any, obj2:any):number {
+        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2));//求两点间的距离
+    }
+
+    //获取弧度值
+    static getRadian(angle:number):number {
+        return Math.PI * angle / 180;//角度转化为弧度
+    }
+
+    //获取角度值
+    static getAngle(radian:number):number {
+        return radian * 180 / Math.PI;//角度转化为弧度
+    }
+
+    //清除所有计时器
+    static clearTimeout():void {
+        var end = setTimeout(function () {
+        }, 1);
+        var start = (end - 100) > 0 ? end - 100 : 0;
+        for (var i = start; i <= end; i++)clearTimeout(i);
+        console.log("clearTimer");
+    }
+
+    //清除循环计时器
+    static clearInterval():void {
+        var end = setInterval(function () {
+        }, 1);
+        var start = (end - 100) > 0 ? end - 100 : 0;
+        for (var i = start; i <= end; i++)clearInterval(i);
+        console.log("clearInterval");
+    }
+
+    //弹框显示效果
+    static addShowScaleEffect(obj):void {
+        obj.visible = true;
+        obj.scaleX = 0.3;
+        obj.scaleY = 0.3;
+        egret.Tween.get(obj).to({
+            scaleX: 1,
+            scaleY: 1
+        }, 1000, egret.Ease.elasticOut);
+    }
+
+    //添加按下时的放大缩小效果
+    static addTouchScaleEffect(obj, target, fun:Function):void {
+        obj.touchEnabled = true;
+        obj.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 0.8,
+                scaleY: 0.8
+            }, 50);
+        }, target);
+
+        obj.addEventListener(egret.TouchEvent.TOUCH_END, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 1,
+                scaleY: 1
+            }, 50).call(fun, target);
+        }, target);
+        obj.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 1,
+                scaleY: 1
+            }, 50).call(fun, target);
+        }, target);
+    }
+
     //添加按钮的函数
     static addBitmap(target:any, res:string, x:number, y:number, width:number, height:number, isButton:boolean):egret.Bitmap {
         var temp:egret.Bitmap = new egret.Bitmap();
@@ -22,12 +107,12 @@ class Tool {
     }
 
     //添加位图文字的函数
-    static addBitmapText(target:any, res:string, x:number, y:number, width:number, height:number, text:string):egret.BitmapText {
+    static addBitmapText(target:any, res:string, x:number, y:number, scale:number, text:string):egret.BitmapText {
         var temp:egret.BitmapText = new egret.BitmapText();
         temp.font = RES.getRes(res);
-        if (width != 0) {
-            temp.width = Math.floor(width * GameData.scaleSmall);
-            temp.height = Math.floor(height * GameData.scaleSmall);
+        if (scale != 0) {
+            temp.scaleX = scale * GameData.scaleSmall;
+            temp.scaleY = scale * GameData.scaleSmall;
         }
         temp.x = Math.floor(x * GameData.scaleSmall);
         temp.y = Math.floor(y * GameData.scaleSmall);
@@ -45,6 +130,7 @@ class Tool {
             temp.width = Math.floor(width * GameData.scaleSmall);
             temp.height = Math.floor(height * GameData.scaleSmall);
         }
+        temp.textAlign = egret.HorizontalAlign.CENTER;
         temp.textColor = color;
         temp.bold = true;
         temp.size = Math.floor(size * GameData.scaleSmall);

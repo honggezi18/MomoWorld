@@ -17,12 +17,13 @@ var UIManage = (function () {
         if (this.welcomeScene != null)
             this.welcomeScene = null;
         this.welcomeScene = new WelcomeScene();
-        Main.Stage.addChild(this.welcomeScene);
+        UIManage.target = this.welcomeScene;
+        World.Scene.addChild(this.welcomeScene);
     };
     p.hideWelcome = function () {
         if (this.welcomeScene != null) {
             console.log("hideWelcome");
-            Main.Stage.removeChild(this.welcomeScene);
+            World.Scene.removeChild(this.welcomeScene);
             this.welcomeScene = null;
         }
         else
@@ -33,12 +34,13 @@ var UIManage = (function () {
         if (this.mapScene != null)
             this.mapScene = null;
         this.mapScene = new MapScene();
-        Main.Stage.addChild(this.mapScene);
+        UIManage.target = this.mapScene;
+        World.Scene.addChild(this.mapScene);
     };
     p.hideMap = function () {
         if (this.mapScene != null) {
             console.log("hideMap");
-            Main.Stage.removeChild(this.mapScene);
+            World.Scene.removeChild(this.mapScene);
             this.mapScene = null;
         }
         else

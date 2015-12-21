@@ -1,6 +1,7 @@
 //游戏场景管理类
 class UIManage {
     static instance;
+    static target;//当前显示的场景
     private welcomeScene:WelcomeScene;
     private mapScene:MapScene;
 
@@ -18,13 +19,14 @@ class UIManage {
         console.log("showWelcome");
         if (this.welcomeScene != null)this.welcomeScene = null;
         this.welcomeScene = new WelcomeScene();
-        Main.Stage.addChild(this.welcomeScene);
+        UIManage.target = this.welcomeScene;
+        World.Scene.addChild(this.welcomeScene);
     }
 
     public hideWelcome() {
         if (this.welcomeScene != null) {
             console.log("hideWelcome");
-            Main.Stage.removeChild(this.welcomeScene);
+            World.Scene.removeChild(this.welcomeScene);
             this.welcomeScene = null;
         }
         else console.log("welcomeScene   had   not  instance");
@@ -34,13 +36,14 @@ class UIManage {
         console.log("showMap");
         if (this.mapScene != null)this.mapScene = null;
         this.mapScene = new MapScene();
-        Main.Stage.addChild(this.mapScene);
+        UIManage.target = this.mapScene;
+        World.Scene.addChild(this.mapScene);
     }
 
     public hideMap() {
         if (this.mapScene != null) {
             console.log("hideMap");
-            Main.Stage.removeChild(this.mapScene);
+            World.Scene.removeChild(this.mapScene);
             this.mapScene = null;
         }
         else console.log("mapScene   had   not  instance");

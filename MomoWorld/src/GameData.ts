@@ -7,6 +7,8 @@ class GameData {
     static mapIndex:number = -1;//标示当前选中的地图
     static difficulty:number = 0;//标示当前的游戏难度
 
+    static welcomeMoveSpeed:number = 5;//欢迎页面中地图移动的速度
+
 
     static MapState = [//地图信息
         {//state中0为未开放，1为普通，2为困难，3为地狱

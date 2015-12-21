@@ -3,6 +3,18 @@
 	{
 		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png",
 		"name":"map"
+	},
+	{
+		"keys":"welcome_background_png",
+		"name":"welcome"
+	},
+	{
+		"keys":"hero_walk_json,hero_stand_png,hero_stand_json,hero_walk_png",
+		"name":"hero"
+	},
+	{
+		"keys":"testColor_png",
+		"name":"other"
 	}],
 	"resources":[
 	{
@@ -179,5 +191,35 @@
 		"name":"worldMap_back2_png",
 		"type":"image",
 		"url":"assets/WorldMap/worldMap_back2.png"
+	},
+	{
+		"name":"welcome_background_png",
+		"type":"image",
+		"url":"assets/welcome/welcome_background.png"
+	},
+	{
+		"name":"hero_walk_json",
+		"type":"json",
+		"url":"assets/hero/hero_walk.json"
+	},
+	{
+		"name":"hero_stand_png",
+		"type":"image",
+		"url":"assets/hero/hero_stand.png"
+	},
+	{
+		"name":"hero_stand_json",
+		"type":"json",
+		"url":"assets/hero/hero_stand.json"
+	},
+	{
+		"name":"hero_walk_png",
+		"type":"image",
+		"url":"assets/hero/hero_walk.png"
+	},
+	{
+		"name":"testColor_png",
+		"type":"image",
+		"url":"assets/testColor.png"
 	}]
 }

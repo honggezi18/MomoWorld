@@ -3,6 +3,82 @@ var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
+    //����֡�����ĺ���
+    Tool.addMoveClip = function (target, res, x, y, scale, time) {
+        var data = RES.getRes(res + "_json");
+        var txtr = RES.getRes(res + "_png");
+        var mcFactory = new egret.MovieClipDataFactory(data, txtr);
+        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
+        if (scale != 0) {
+            mc.scaleX = scale;
+            mc.scaleY = scale;
+        }
+        target.addChild(mc);
+        mc.play(time);
+        return mc;
+    };
+    //��ȡ�������ľ���
+    Tool.getDistance = function (obj1, obj2) {
+        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2)); //���������ľ���
+    };
+    //��ȡ����ֵ
+    Tool.getRadian = function (angle) {
+        return Math.PI * angle / 180; //�Ƕ�ת��Ϊ����
+    };
+    //��ȡ�Ƕ�ֵ
+    Tool.getAngle = function (radian) {
+        return radian * 180 / Math.PI; //�Ƕ�ת��Ϊ����
+    };
+    //�������м�ʱ��
+    Tool.clearTimeout = function () {
+        var end = setTimeout(function () {
+        }, 1);
+        var start = (end - 100) > 0 ? end - 100 : 0;
+        for (var i = start; i <= end; i++)
+            clearTimeout(i);
+        console.log("clearTimer");
+    };
+    //����ѭ����ʱ��
+    Tool.clearInterval = function () {
+        var end = setInterval(function () {
+        }, 1);
+        var start = (end - 100) > 0 ? end - 100 : 0;
+        for (var i = start; i <= end; i++)
+            clearInterval(i);
+        console.log("clearInterval");
+    };
+    //������ʾЧ��
+    Tool.addShowScaleEffect = function (obj) {
+        obj.visible = true;
+        obj.scaleX = 0.3;
+        obj.scaleY = 0.3;
+        egret.Tween.get(obj).to({
+            scaleX: 1,
+            scaleY: 1
+        }, 1000, egret.Ease.elasticOut);
+    };
+    //���Ӱ���ʱ�ķŴ���СЧ��
+    Tool.addTouchScaleEffect = function (obj, target, fun) {
+        obj.touchEnabled = true;
+        obj.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 0.8,
+                scaleY: 0.8
+            }, 50);
+        }, target);
+        obj.addEventListener(egret.TouchEvent.TOUCH_END, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 1,
+                scaleY: 1
+            }, 50).call(fun, target);
+        }, target);
+        obj.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, function () {
+            egret.Tween.get(obj).to({
+                scaleX: 1,
+                scaleY: 1
+            }, 50).call(fun, target);
+        }, target);
+    };
     //���Ӱ�ť�ĺ���
     Tool.addBitmap = function (target, res, x, y, width, height, isButton) {
         var temp = new egret.Bitmap();
@@ -24,12 +100,12 @@ var Tool = (function () {
         return temp;
     };
     //����λͼ���ֵĺ���
-    Tool.addBitmapText = function (target, res, x, y, width, height, text) {
+    Tool.addBitmapText = function (target, res, x, y, scale, text) {
         var temp = new egret.BitmapText();
         temp.font = RES.getRes(res);
-        if (width != 0) {
-            temp.width = Math.floor(width * GameData.scaleSmall);
-            temp.height = Math.floor(height * GameData.scaleSmall);
+        if (scale != 0) {
+            temp.scaleX = scale * GameData.scaleSmall;
+            temp.scaleY = scale * GameData.scaleSmall;
         }
         temp.x = Math.floor(x * GameData.scaleSmall);
         temp.y = Math.floor(y * GameData.scaleSmall);
@@ -46,6 +122,7 @@ var Tool = (function () {
             temp.width = Math.floor(width * GameData.scaleSmall);
             temp.height = Math.floor(height * GameData.scaleSmall);
         }
+        temp.textAlign = egret.HorizontalAlign.CENTER;
         temp.textColor = color;
         temp.bold = true;
         temp.size = Math.floor(size * GameData.scaleSmall);

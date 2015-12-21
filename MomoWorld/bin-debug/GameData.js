@@ -21,6 +21,7 @@ var GameData = (function () {
     GameData.scaleSmall = 1;
     GameData.mapIndex = -1; //标示当前选中的地图
     GameData.difficulty = 0; //标示当前的游戏难度
+    GameData.welcomeMoveSpeed = 5; //欢迎页面中地图移动的速度
     GameData.MapState = [
         {
             "name": "map0",

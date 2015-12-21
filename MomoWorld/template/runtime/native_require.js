@@ -8,12 +8,16 @@ var game_file_list = [
 	"libs/modules/game/game.native.js",
 	"libs/modules/tween/tween.js",
 	"libs/modules/res/res.js",
+	"libs/modules/p2/p2.js",
+	"bin-debug/data/Hero.js",
 	"bin-debug/GameData.js",
 	"bin-debug/Main.js",
+	"bin-debug/P2Tool.js",
 	"bin-debug/scene/MapScene.js",
 	"bin-debug/scene/WelcomeScene.js",
 	"bin-debug/Tool.js",
 	"bin-debug/UIManage.js",
+	"bin-debug/World.js",
 	//----auto game_file_list end----
 ];
 

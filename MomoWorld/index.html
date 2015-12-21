@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Egret</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="full-screen" content="true"/>
     <meta name="screen-orientation" content="portrait"/>
@@ -20,6 +21,18 @@
         }
     </style>
 
+    <script>
+        window.addEventListener("keydown", function (e) {
+            if (e.keyCode == 13)window["keyConfirm"].call(window["gameObj"], 'Enter');
+            if (e.keyCode == 16)window["keyMenu"].call(window["gameObj"], 'Menu');
+            if (e.keyCode == 66)window["keyBack"].call(window["gameObj"], 'Back');
+            if (e.keyCode == 37)window["keyLeft"].call(window["gameObj"], 'Left');
+            if (e.keyCode == 38)window["keyUp"].call(window["gameObj"], 'Up');
+            if (e.keyCode == 39)window["keyRight"].call(window["gameObj"], 'Right');
+            if (e.keyCode == 40)window["keyDown"].call(window["gameObj"], 'Down');
+        });
+    </script>
+
     <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件-->
     <!--modules_files_start-->
 	<script egret="lib" src="libs/modules/egret/egret.js" src-release="libs/modules/egret/egret.min.js"></script>
@@ -28,6 +41,7 @@
 	<script egret="lib" src="libs/modules/game/game.web.js" src-release="libs/modules/game/game.web.min.js"></script>
 	<script egret="lib" src="libs/modules/tween/tween.js" src-release="libs/modules/tween/tween.min.js"></script>
 	<script egret="lib" src="libs/modules/res/res.js" src-release="libs/modules/res/res.min.js"></script>
+	<script egret="lib" src="libs/modules/p2/p2.js" src-release="libs/modules/p2/p2.min.js"></script>
 	<!--modules_files_end-->
 
     <!--这个标签为不通过egret提供的第三方库的方式使用的 javascript 文件，请将这些文件放在libs下，但不要放在modules下面。-->
@@ -36,12 +50,15 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件-->
     <!--game_files_start-->
+	<script egret="game" src="bin-debug/data/Hero.js"></script>
 	<script egret="game" src="bin-debug/GameData.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
+	<script egret="game" src="bin-debug/P2Tool.js"></script>
 	<script egret="game" src="bin-debug/scene/MapScene.js"></script>
 	<script egret="game" src="bin-debug/scene/WelcomeScene.js"></script>
 	<script egret="game" src="bin-debug/Tool.js"></script>
 	<script egret="game" src="bin-debug/UIManage.js"></script>
+	<script egret="game" src="bin-debug/World.js"></script>
 	<!--game_files_end-->
 </head>
 <body>

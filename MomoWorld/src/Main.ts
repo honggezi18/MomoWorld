@@ -1,13 +1,10 @@
 //入口函数
 class Main extends egret.DisplayObjectContainer {
-    static Stage:egret.DisplayObjectContainer;
-
     private hadLoad:number = 0;
-    private resList:string[] = ["map"];
+    private resList:string[] = ["map", "welcome", "hero", "other"];
 
     public constructor() {
         super();
-        Main.Stage = this;
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
 
@@ -35,6 +32,7 @@ class Main extends egret.DisplayObjectContainer {
 
             GameData.loadData();
             GameData.reset();
+            this.addChild(new World());
             UIManage.getInstance().showWelcome();
             //UIManage.getInstance().showMap();
         }
