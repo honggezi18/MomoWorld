@@ -1,6 +1,6 @@
 {"mc":{
-	"walk":{
-		"frameRate":60,
+	"hero_walk":{
+		"frameRate":6,
 		"events":[
 			
 			],

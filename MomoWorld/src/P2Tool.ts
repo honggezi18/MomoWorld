@@ -100,6 +100,16 @@ class P2Tool {
         return extentEgret / this.factor;
     }
 
+    //获取物体在P2中的的Y坐标
+    public static getP2Y(yEgret:number):number {
+        return ( this.worldShape.height - yEgret ) / this.factor;
+    }
+
+    //获取物体在Egret中的Y坐标
+    public static getEgretY(yP2:number):number {
+        return this.worldShape.height - yP2 * this.factor;
+    }
+
     //将Egret坐标转化到P2坐标,可以看到Egret坐标系和P2坐标系的Y轴走向是相反的。所以不能用在基本的大小运算
     public static getP2Pos(xEgret:number, yEgret:number):number[] {
         var temp = [xEgret / this.factor, ( this.worldShape.height - yEgret ) / this.factor];

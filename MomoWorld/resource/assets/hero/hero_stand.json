@@ -1,6 +1,6 @@
 {"mc":{
-	"stand":{
-		"frameRate":60,
+	"hero_stand":{
+		"frameRate":6,
 		"events":[
 			
 			],

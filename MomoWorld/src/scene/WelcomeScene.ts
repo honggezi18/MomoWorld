@@ -5,8 +5,8 @@ class WelcomeScene extends egret.DisplayObjectContainer {
     private showBody:Array<p2.Body>;//需要同步数据的刚体
 
 
-    private absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
-    private absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
+    public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
+    public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
 
     constructor() {
         super();
@@ -20,8 +20,10 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
         this.background = Tool.addBitmap(this, "welcome_background_png", 0, 0, 0, 0, true);
-        P2Tool.createPlane(World.P2World, 0, -550, 0);
+        P2Tool.createPlane(World.P2World, 0, -555, 0);
         this.showBody = [];
+        this.addChild(Hero.getInstance());
+        //this.y = 300;
     }
 
     //界面刷新函数
@@ -32,6 +34,7 @@ class WelcomeScene extends egret.DisplayObjectContainer {
     //同步素材
     public syncDisplay():void {
         for (var i = 0; i < this.showBody.length; i++)P2Tool.syncDisplay(this.showBody[i]);
+        Hero.getInstance().syncFun();
     }
 
     //触屏按下
@@ -47,7 +50,7 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)console.log("select   武器升级");
         if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)console.log("select   我的储物箱");
 
-        this.showBody.push(P2Tool.createBox(this, World.P2World, this.absoluteX, this.absoluteY, 30, 30, "testColor_png", false));
+        //this.showBody.push(P2Tool.createBox(this, World.P2World, this.absoluteX, this.absoluteY, 30, 30, "testColor_png", false));
     }
 
     //触屏松开

@@ -4,16 +4,23 @@ var Tool = (function () {
     }
     var d = __define,c=Tool;p=c.prototype;
     //����֡�����ĺ���
-    Tool.addMoveClip = function (target, res, x, y, scale, time) {
+    Tool.addMoveClip = function (target, res, x, y, scale, time, isCenter) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (scale === void 0) { scale = 1; }
+        if (time === void 0) { time = -1; }
+        if (isCenter === void 0) { isCenter = false; }
         var data = RES.getRes(res + "_json");
         var txtr = RES.getRes(res + "_png");
         var mcFactory = new egret.MovieClipDataFactory(data, txtr);
         var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
-        if (scale != 0) {
-            mc.scaleX = scale;
-            mc.scaleY = scale;
-        }
+        mc.scaleX = scale;
+        mc.scaleY = scale;
         target.addChild(mc);
+        if (isCenter) {
+            mc.anchorOffsetX = mc.measuredWidth / 2;
+            mc.anchorOffsetY = mc.measuredHeight / 2;
+        }
         mc.play(time);
         return mc;
     };

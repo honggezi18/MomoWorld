@@ -91,6 +91,14 @@ var P2Tool = (function () {
     P2Tool.getP2Num = function (extentEgret) {
         return extentEgret / this.factor;
     };
+    //获取物体在P2中的的Y坐标
+    P2Tool.getP2Y = function (yEgret) {
+        return (this.worldShape.height - yEgret) / this.factor;
+    };
+    //获取物体在Egret中的Y坐标
+    P2Tool.getEgretY = function (yP2) {
+        return this.worldShape.height - yP2 * this.factor;
+    };
     //将Egret坐标转化到P2坐标,可以看到Egret坐标系和P2坐标系的Y轴走向是相反的。所以不能用在基本的大小运算
     P2Tool.getP2Pos = function (xEgret, yEgret) {
         var temp = [xEgret / this.factor, (this.worldShape.height - yEgret) / this.factor];

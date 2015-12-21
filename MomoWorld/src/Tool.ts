@@ -3,16 +3,18 @@ class Tool {
 
 
     //添加帧动画的函数
-    static addMoveClip(target:any, res:string, x:number, y:number, scale:number, time:number):egret.MovieClip {
+    static addMoveClip(target:any, res:string, x:number = 0, y:number = 0, scale:number = 1, time:number = -1, isCenter:boolean = false):egret.MovieClip {
         var data = RES.getRes(res + "_json");
         var txtr = RES.getRes(res + "_png");
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, txtr);
         var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
-        if (scale != 0) {
-            mc.scaleX = scale;
-            mc.scaleY = scale;
-        }
+        mc.scaleX = scale;
+        mc.scaleY = scale;
         target.addChild(mc);
+        if (isCenter) {
+            mc.anchorOffsetX = mc.measuredWidth / 2;
+            mc.anchorOffsetY = mc.measuredHeight / 2;
+        }
         mc.play(time);
         return mc;
     }

@@ -42,17 +42,18 @@ class World extends egret.DisplayObjectContainer {
     //键盘按钮的响应函数
     private control(msg) {
         console.log("control    " + msg);
-        if (msg == "Up") {
-            UIManage.target.y += GameData.welcomeMoveSpeed;
+        if (msg == "UpDown") {
         }
-        else if (msg == "Down") {
-            UIManage.target.y -= GameData.welcomeMoveSpeed;
+        else if (msg == "DownDown") {
         }
-        else if (msg == "Left") {
-            UIManage.target.x += GameData.welcomeMoveSpeed;
+        else if (msg == "LeftDown") {
+            Hero.getInstance().move("Left");
         }
-        else if (msg == "Right") {
-            UIManage.target.x -= GameData.welcomeMoveSpeed;
+        else if (msg == "RightDown") {
+            Hero.getInstance().move("Right");
+        }
+        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
+            Hero.getInstance().move("stop");
         }
         else if (msg == "Enter") {
 
