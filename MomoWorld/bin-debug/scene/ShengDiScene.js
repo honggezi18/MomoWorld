@@ -1,7 +1,7 @@
 //游戏欢迎页面
-var WelcomeScene = (function (_super) {
-    __extends(WelcomeScene, _super);
-    function WelcomeScene() {
+var ShengDiScene = (function (_super) {
+    __extends(ShengDiScene, _super);
+    function ShengDiScene() {
         _super.call(this);
         this.absoluteX = 0; //标示点击的绝对坐标，即相对于背景的坐标
         this.absoluteY = 0; //标示点击的绝对坐标，即相对于背景的坐标
@@ -9,7 +9,7 @@ var WelcomeScene = (function (_super) {
         this.tureHeight = 0;
         this.init();
     }
-    var d = __define,c=WelcomeScene;p=c.prototype;
+    var d = __define,c=ShengDiScene;p=c.prototype;
     //初始化资源
     p.init = function () {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
@@ -31,23 +31,16 @@ var WelcomeScene = (function (_super) {
     };
     //触屏按下
     p.onTouchStart = function (e) {
-        console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
-        this.absoluteX = e.stageX - this.x;
-        this.absoluteY = e.stageY - this.y;
-        if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)
-            console.log("select   每日任务");
-        if (315 < this.absoluteX && this.absoluteX < 350 && 190 < this.absoluteY && this.absoluteY < 280)
-            console.log("select   达成成就");
-        if (480 < this.absoluteX && this.absoluteX < 540 && 135 < this.absoluteY && this.absoluteY < 250)
-            console.log("select   技能升级");
-        if (110 < this.absoluteX && this.absoluteX < 175 && 325 < this.absoluteY && this.absoluteY < 395)
-            console.log("select   武器商店");
-        if (245 < this.absoluteX && this.absoluteX < 305 && 325 < this.absoluteY && this.absoluteY < 395)
-            console.log("select   药水商店");
-        if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)
-            console.log("select   武器升级");
-        if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)
-            console.log("select   我的储物箱");
+        //console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
+        //this.absoluteX = e.stageX - this.x;
+        //this.absoluteY = e.stageY - this.y;
+        //if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)console.log("select   每日任务");
+        //if (315 < this.absoluteX && this.absoluteX < 350 && 190 < this.absoluteY && this.absoluteY < 280)console.log("select   达成成就");
+        //if (480 < this.absoluteX && this.absoluteX < 540 && 135 < this.absoluteY && this.absoluteY < 250)console.log("select   技能升级");
+        //if (110 < this.absoluteX && this.absoluteX < 175 && 325 < this.absoluteY && this.absoluteY < 395)console.log("select   武器商店");
+        //if (245 < this.absoluteX && this.absoluteX < 305 && 325 < this.absoluteY && this.absoluteY < 395)console.log("select   药水商店");
+        //if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)console.log("select   武器升级");
+        //if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)console.log("select   我的储物箱");
         //this.showBody.push(P2Tool.createBox(this, World.P2World, this.absoluteX, this.absoluteY, 30, 30, "testColor_png", false));
     };
     //触屏松开
@@ -84,6 +77,6 @@ var WelcomeScene = (function (_super) {
             Hero.getInstance().move("JumpDown");
         }
     };
-    return WelcomeScene;
+    return ShengDiScene;
 })(egret.DisplayObjectContainer);
-egret.registerClass(WelcomeScene,"WelcomeScene");
+egret.registerClass(ShengDiScene,"ShengDiScene");

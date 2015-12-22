@@ -162,7 +162,7 @@ class MapScene extends egret.DisplayObjectContainer {
 
         if (e.target == this.back) {
             this.back.texture = RES.getRes("worldMap_back1_png");
-            //UIManage.getInstance().showWelcome();
+            UIManage.getInstance().showWelcome();
         }
 
 

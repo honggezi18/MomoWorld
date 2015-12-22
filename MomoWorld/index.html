@@ -25,7 +25,7 @@
         window.addEventListener("keydown", function (e) {
             if (e.keyCode == 13)window["keyConfirm"].call(window["gameObj"], 'Enter');
             if (e.keyCode == 16)window["keyMenu"].call(window["gameObj"], 'Menu');
-            if (e.keyCode == 66)window["keyBack"].call(window["gameObj"], 'Back');
+            if (e.keyCode == 67)window["keyJump"].call(window["gameObj"], 'JumpDown');
             if (e.keyCode == 37)window["keyLeft"].call(window["gameObj"], 'LeftDown');
             if (e.keyCode == 38)window["keyUp"].call(window["gameObj"], 'UpDown');
             if (e.keyCode == 39)window["keyRight"].call(window["gameObj"], 'RightDown');
@@ -34,7 +34,7 @@
         window.addEventListener("keyup", function (e) {
             if (e.keyCode == 13)window["keyConfirm"].call(window["gameObj"], 'Enter');
             if (e.keyCode == 16)window["keyMenu"].call(window["gameObj"], 'Menu');
-            if (e.keyCode == 66)window["keyBack"].call(window["gameObj"], 'Back');
+            if (e.keyCode == 67)window["keyJump"].call(window["gameObj"], 'JumpUp');
             if (e.keyCode == 37)window["keyLeft"].call(window["gameObj"], 'LeftUp');
             if (e.keyCode == 38)window["keyUp"].call(window["gameObj"], 'UpUp');
             if (e.keyCode == 39)window["keyRight"].call(window["gameObj"], 'RightUp');
@@ -64,6 +64,7 @@
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/P2Tool.js"></script>
 	<script egret="game" src="bin-debug/scene/MapScene.js"></script>
+	<script egret="game" src="bin-debug/scene/ShengDiScene.js"></script>
 	<script egret="game" src="bin-debug/scene/WelcomeScene.js"></script>
 	<script egret="game" src="bin-debug/Tool.js"></script>
 	<script egret="game" src="bin-debug/UIManage.js"></script>

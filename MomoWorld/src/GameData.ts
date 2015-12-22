@@ -1,7 +1,7 @@
 //游戏数据类
 class GameData {
-    static gameWidth:number = 480;
-    static gameHeight:number = 800;
+    static gameWidth:number = 800;
+    static gameHeight:number = 480;
     static scaleSmall:number = 1;
 
     static mapIndex:number = -1;//标示当前选中的地图

@@ -146,6 +146,7 @@ var MapScene = (function (_super) {
         }
         if (e.target == this.back) {
             this.back.texture = RES.getRes("worldMap_back1_png");
+            UIManage.getInstance().showWelcome();
         }
         //������ͼ���ɿ����ָ���ͼ��ʽ
         if (GameData.mapIndex != -1 && GameData.MapState[GameData.mapIndex].state > 0) {

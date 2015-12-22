@@ -4,14 +4,14 @@ class WelcomeScene extends egret.DisplayObjectContainer {
     private ground:p2.Body;//场景的地板刚体
     private showBody:Array<p2.Body>;//需要同步数据的刚体
 
-
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
+    public tureWidth:number = 0;
+    public tureHeight:number = 0;
 
     constructor() {
         super();
         this.init();
-
     }
 
     //初始化资源
@@ -19,16 +19,14 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
+
         this.background = Tool.addBitmap(this, "welcome_background_png", 0, 0, 0, 0, true);
+        this.tureWidth = this.background.width;
+        this.tureHeight = this.background.height;
         P2Tool.createPlane(World.P2World, 0, -555, 0);
         this.showBody = [];
         this.addChild(Hero.getInstance());
-        //this.y = 300;
-    }
-
-    //界面刷新函数
-    public flashGame():void {
-
+        this.y = -180;
     }
 
     //同步素材
@@ -64,7 +62,6 @@ class WelcomeScene extends egret.DisplayObjectContainer {
             this.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
             this.removeEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
             this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
-            this.removeEventListener(egret.Event.ENTER_FRAME, this.flashGame, this);
         }
         else {
             e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
@@ -73,6 +70,24 @@ class WelcomeScene extends egret.DisplayObjectContainer {
             e.target.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
         }
     }
+
+    //键盘按钮的响应函数
+    private control(msg) {
+        //console.log("control    " + msg);
+        if (msg == "DownDown" || msg == "LeftDown" || msg == "RightDown" || msg == "UpDown") {
+            Hero.getInstance().move(msg);
+        }
+        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
+            Hero.getInstance().move("stop");
+        }
+        else if (msg == "JumpUp") {
+            Hero.getInstance().move("other");
+        }
+        else if (msg == "JumpDown") {
+            Hero.getInstance().move("JumpDown");
+        }
+    }
+
 
 
 }

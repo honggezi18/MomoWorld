@@ -27,8 +27,10 @@ var Main = (function (_super) {
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             GameData.loadData();
             GameData.reset();
-            this.addChild(new World());
-            UIManage.getInstance().showWelcome();
+            new World();
+            World.Scene = this;
+            //UIManage.getInstance().showWelcome();
+            UIManage.getInstance().showShengDiScene();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);

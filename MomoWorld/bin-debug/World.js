@@ -4,6 +4,10 @@ var World = (function (_super) {
     function World() {
         _super.call(this);
         this.world_speed = 0.05; //ÿ��ˢ�£����������Ĳ���ʱ��
+        if (World.instance == null)
+            World.instance = this;
+        else
+            throw new Error("World had been Instanced");
         this.init();
     }
     var d = __define,c=World;p=c.prototype;
@@ -13,7 +17,6 @@ var World = (function (_super) {
         this.addChild(World.Scene);
         this.createWorldSystem();
         World.P2World = this.world;
-        this.registerAndroidEvent(); //ע�����¼�
         this.addEventListener(egret.Event.ENTER_FRAME, this.flash, this); //����ÿһ֡�����ݴ���
     };
     //��������ϵͳ
@@ -28,41 +31,12 @@ var World = (function (_super) {
     //ÿһ֡�����ݴ�����������ͬ������
     p.flash = function () {
         this.world.step(this.world_speed); //ʹ����ϵͳ��ǰ����һ��ʱ��
-        UIManage.target.syncDisplay();
+        if (UIManage.target != null && typeof (UIManage.target.syncDisplay) == "function")
+            UIManage.target.syncDisplay();
     };
     //���̰�ť����Ӧ����
     p.control = function (msg) {
-        console.log("control    " + msg);
-        if (msg == "UpDown") {
-        }
-        else if (msg == "DownDown") {
-        }
-        else if (msg == "LeftDown") {
-            Hero.getInstance().move("Left");
-        }
-        else if (msg == "RightDown") {
-            Hero.getInstance().move("Right");
-        }
-        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
-            Hero.getInstance().move("stop");
-        }
-        else if (msg == "Enter") {
-        }
-        else if (msg == "Back") {
-        }
-        else if (msg == "Menu") {
-        }
-    };
-    //���̰�ť��ģ��
-    p.registerAndroidEvent = function () {
-        window['gameObj'] = this;
-        window['keyConfirm'] = this.control; //ȷ��
-        window['keyMenu'] = this.control; //�˵�
-        window['keyBack'] = this.control; //����
-        window['keyLeft'] = this.control; //��
-        window['keyUp'] = this.control; //��
-        window['keyRight'] = this.control; //��
-        window['keyDown'] = this.control; //��
+        console.log("this is World control");
     };
     return World;
 })(egret.DisplayObjectContainer);

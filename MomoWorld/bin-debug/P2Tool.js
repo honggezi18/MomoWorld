@@ -8,6 +8,14 @@ var P2Tool = (function () {
         this.factor = factor;
         this.worldShape = rectWorld;
     };
+    //清除物理世界内容
+    P2Tool.clearWorld = function (world) {
+        if (world == null)
+            return;
+        for (var i = 0; i < world.bodies.length; i++)
+            world.removeBody(world.bodies[0]);
+        world.clear();
+    };
     //创建矩形刚体
     P2Tool.createBox = function (target, world, x, y, w, h, resid, hadM) {
         var tempBody = new p2.Body({
@@ -58,6 +66,7 @@ var P2Tool = (function () {
         body.position[0] = P2Tool.getP2Num(width); //设置X坐标
         body.position[1] = P2Tool.getP2Num(height); //设置Y坐标
         body.angle = Tool.getRadian(angle);
+        console.log("angle   " + Tool.getRadian(angle));
         world.addBody(body);
         return body;
     };

@@ -9,7 +9,7 @@
 		"name":"welcome"
 	},
 	{
-		"keys":"hero_walk_json,hero_stand_png,hero_stand_json,hero_walk_png",
+		"keys":"hero_walk_json,hero_stand_png,hero_stand_json,hero_walk_png,hero_jump_json,hero_jump_png",
 		"name":"hero"
 	},
 	{
@@ -221,5 +221,15 @@
 		"name":"testColor_png",
 		"type":"image",
 		"url":"assets/testColor.png"
+	},
+	{
+		"name":"hero_jump_json",
+		"type":"json",
+		"url":"assets/hero/hero_jump.json"
+	},
+	{
+		"name":"hero_jump_png",
+		"type":"image",
+		"url":"assets/hero/hero_jump.png"
 	}]
 }

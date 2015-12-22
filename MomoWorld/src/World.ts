@@ -1,5 +1,6 @@
 //世界管理类，用于统筹各个元素
 class World extends egret.DisplayObjectContainer {
+    static instance:World;//物理世界管理变量
     static P2World:p2.World;//物理世界管理变量
     static Scene:egret.DisplayObjectContainer;//场景管理变量
 
@@ -9,6 +10,8 @@ class World extends egret.DisplayObjectContainer {
 
     constructor() {
         super();
+        if (World.instance == null)World.instance = this;
+        else throw new Error("World had been Instanced");
         this.init();
     }
 
@@ -18,7 +21,7 @@ class World extends egret.DisplayObjectContainer {
         this.addChild(World.Scene);
         this.createWorldSystem();
         World.P2World = this.world;
-        this.registerAndroidEvent();//注册各事件
+
         this.addEventListener(egret.Event.ENTER_FRAME, this.flash, this);//进行每一帧的数据处理
     }
 
@@ -35,48 +38,12 @@ class World extends egret.DisplayObjectContainer {
     //每一帧的数据处理函数，用于同步数据
     public flash():void {
         this.world.step(this.world_speed);//使物理系统向前经过一定时间
-        UIManage.target.syncDisplay();
+        if (UIManage.target != null && typeof(UIManage.target.syncDisplay) == "function")UIManage.target.syncDisplay();
     }
-
 
     //键盘按钮的响应函数
     private control(msg) {
-        console.log("control    " + msg);
-        if (msg == "UpDown") {
-        }
-        else if (msg == "DownDown") {
-        }
-        else if (msg == "LeftDown") {
-            Hero.getInstance().move("Left");
-        }
-        else if (msg == "RightDown") {
-            Hero.getInstance().move("Right");
-        }
-        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
-            Hero.getInstance().move("stop");
-        }
-        else if (msg == "Enter") {
-
-        }
-        else if (msg == "Back") {
-
-        }
-        else if (msg == "Menu") {
-
-        }
+        console.log("this is World control");
     }
-
-    //键盘按钮的模拟
-    private registerAndroidEvent() {
-        window['gameObj'] = this;
-        window['keyConfirm'] = this.control;//确定
-        window['keyMenu'] = this.control;//菜单
-        window['keyBack'] = this.control;//返回
-        window['keyLeft'] = this.control;//左
-        window['keyUp'] = this.control;//上
-        window['keyRight'] = this.control;//右
-        window['keyDown'] = this.control;//下
-    }
-
 
 }

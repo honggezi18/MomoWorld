@@ -9,8 +9,15 @@ class P2Tool {
         this.worldShape = rectWorld;
     }
 
+    //清除物理世界内容
+    public static clearWorld(world:p2.World):void {
+        if (world == null)return;
+        for (var i = 0; i < world.bodies.length; i++)world.removeBody(world.bodies[0]);
+        world.clear();
+    }
+
     //创建矩形刚体
-    public static createBox(target:any, world:any, x:number, y:number, w:number, h:number, resid:string, hadM:boolean):p2.Body {
+    public static createBox(target:any, world:p2.World, x:number, y:number, w:number, h:number, resid:string, hadM:boolean):p2.Body {
         var tempBody:p2.Body = new p2.Body(
             {
                 mass: 1,
@@ -33,7 +40,7 @@ class P2Tool {
     }
 
     //创建圆形刚体
-    public static createCircle(target:any, world:any, x:number, y:number, radius:number, resid:string, hadM:boolean):p2.Body {
+    public static createCircle(target:any, world:p2.World, x:number, y:number, radius:number, resid:string, hadM:boolean):p2.Body {
         var tempBody:p2.Body = new p2.Body(
             {
                 mass: 1,
@@ -55,7 +62,7 @@ class P2Tool {
     }
 
     //创建墙面
-    public static createPlane(world:any, width:number, height:number, angle:number):p2.Body {
+    public static createPlane(world:p2.World, width:number, height:number, angle:number):p2.Body {
         var body:p2.Body = new p2.Body();
         var plane:p2.Plane = new p2.Plane();
         body.addShape(plane);
@@ -63,6 +70,7 @@ class P2Tool {
         body.position[0] = P2Tool.getP2Num(width);//设置X坐标
         body.position[1] = P2Tool.getP2Num(height);//设置Y坐标
         body.angle = Tool.getRadian(angle);
+        console.log("angle   " + Tool.getRadian(angle));
         world.addBody(body);
         return body;
     }

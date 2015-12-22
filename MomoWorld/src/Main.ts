@@ -32,8 +32,10 @@ class Main extends egret.DisplayObjectContainer {
 
             GameData.loadData();
             GameData.reset();
-            this.addChild(new World());
-            UIManage.getInstance().showWelcome();
+            new World();
+            World.Scene = this;
+            //UIManage.getInstance().showWelcome();
+            UIManage.getInstance().showShengDiScene();
             //UIManage.getInstance().showMap();
         }
         else {

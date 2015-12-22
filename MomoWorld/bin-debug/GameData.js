@@ -16,8 +16,8 @@ var GameData = (function () {
     GameData.saveData = function () {
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     };
-    GameData.gameWidth = 480;
-    GameData.gameHeight = 800;
+    GameData.gameWidth = 800;
+    GameData.gameHeight = 480;
     GameData.scaleSmall = 1;
     GameData.mapIndex = -1; //标示当前选中的地图
     GameData.difficulty = 0; //标示当前的游戏难度
