@@ -4,7 +4,7 @@ var Tool = (function () {
     }
     var d = __define,c=Tool;p=c.prototype;
     //����֡�����ĺ���
-    Tool.addMoveClip = function (target, res, x, y, scale, time, isCenter) {
+    Tool.addMoveClip = function (target, res, type, x, y, scale, time, isCenter) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
         if (scale === void 0) { scale = 1; }
@@ -13,7 +13,7 @@ var Tool = (function () {
         var data = RES.getRes(res + "_json");
         var txtr = RES.getRes(res + "_png");
         var mcFactory = new egret.MovieClipDataFactory(data, txtr);
-        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
+        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(type));
         mc.scaleX = scale;
         mc.scaleY = scale;
         target.addChild(mc);

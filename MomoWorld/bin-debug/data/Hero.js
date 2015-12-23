@@ -22,7 +22,7 @@ var Hero = (function (_super) {
     };
     //��ʼ����Դ
     p.init = function () {
-        this.show = Tool.addMoveClip(this, "hero_stand", 0, 0, 1, -1, true);
+        this.show = Tool.addMoveClip(this, "hero_stand", "hero_stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredWidth, this.show.measuredHeight / 2, "testColor_png", false);
         this.setChildIndex(this.show, 99);
     };
@@ -90,7 +90,7 @@ var Hero = (function (_super) {
         var scaleX = this.show.scaleX;
         if (this.show != null && this.show.parent != null)
             this.removeChild(this.show);
-        this.show = Tool.addMoveClip(this, type, 0, 0, 1, time, true);
+        this.show = Tool.addMoveClip(this, type, type, 0, 0, 1, time, true);
         this.show.scaleX = scaleX;
     };
     p.onRemove = function (e) {

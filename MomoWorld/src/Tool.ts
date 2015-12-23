@@ -3,11 +3,11 @@ class Tool {
 
 
     //添加帧动画的函数
-    static addMoveClip(target:any, res:string, x:number = 0, y:number = 0, scale:number = 1, time:number = -1, isCenter:boolean = false):egret.MovieClip {
+    static addMoveClip(target:any, res:string, type:string, x:number = 0, y:number = 0, scale:number = 1, time:number = -1, isCenter:boolean = false):egret.MovieClip {
         var data = RES.getRes(res + "_json");
         var txtr = RES.getRes(res + "_png");
         var mcFactory:egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, txtr);
-        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(res));
+        var mc = new egret.MovieClip(mcFactory.generateMovieClipData(type));
         mc.scaleX = scale;
         mc.scaleY = scale;
         target.addChild(mc);

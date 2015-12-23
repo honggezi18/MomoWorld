@@ -61,7 +61,7 @@ var UIManage = (function () {
         else
             console.log("mapScene   had   not  instance");
     };
-    //显示欢迎页面
+    //显示圣地地图页面
     p.showShengDiScene = function () {
         console.log("showShengDi");
         if (this.shengDiScene != null)
@@ -71,7 +71,7 @@ var UIManage = (function () {
         UIManage.target = this.shengDiScene;
         World.Scene.addChild(this.shengDiScene);
     };
-    //隐藏欢迎页面
+    //隐藏圣地地图页面
     p.hideShengDiScene = function () {
         if (this.shengDiScene != null) {
             console.log("hideShengDi");

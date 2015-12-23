@@ -23,7 +23,7 @@ class Hero extends egret.DisplayObjectContainer {
 
     //初始化资源
     public init():void {
-        this.show = Tool.addMoveClip(this, "hero_stand", 0, 0, 1, -1, true);
+        this.show = Tool.addMoveClip(this, "hero_stand","hero_stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredWidth, this.show.measuredHeight / 2, "testColor_png", false);
         this.setChildIndex(this.show, 99);
     }
@@ -84,7 +84,7 @@ class Hero extends egret.DisplayObjectContainer {
     public setMoveClip(type:string, time:number = -1):void {
         var scaleX = this.show.scaleX;
         if (this.show != null && this.show.parent != null)this.removeChild(this.show);
-        this.show = Tool.addMoveClip(this, type, 0, 0, 1, time, true);
+        this.show = Tool.addMoveClip(this, type, type, 0, 0, 1, time, true);
         this.show.scaleX = scaleX;
     }
 

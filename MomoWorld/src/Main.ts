@@ -1,7 +1,7 @@
 //入口函数
 class Main extends egret.DisplayObjectContainer {
     private hadLoad:number = 0;
-    private resList:string[] = ["map", "welcome", "hero", "other"];
+    private resList:string[] = ["worldMap", "map", "hero", "enemy", "other"];
 
     public constructor() {
         super();

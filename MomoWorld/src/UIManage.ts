@@ -68,7 +68,7 @@ class UIManage {
     }
 
 
-    //显示欢迎页面
+    //显示圣地地图页面
     public showShengDiScene():void {
         console.log("showShengDi");
         if (this.shengDiScene != null)this.shengDiScene = null;
@@ -78,7 +78,7 @@ class UIManage {
         World.Scene.addChild(this.shengDiScene);
     }
 
-    //隐藏欢迎页面
+    //隐藏圣地地图页面
     public hideShengDiScene():void {
         if (this.shengDiScene != null) {
             console.log("hideShengDi");

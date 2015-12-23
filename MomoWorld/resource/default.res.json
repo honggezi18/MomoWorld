@@ -2,11 +2,7 @@
 	"groups":[
 	{
 		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png",
-		"name":"map"
-	},
-	{
-		"keys":"welcome_background_png",
-		"name":"welcome"
+		"name":"worldMap"
 	},
 	{
 		"keys":"hero_walk_json,hero_stand_png,hero_stand_json,hero_walk_png,hero_jump_json,hero_jump_png",
@@ -15,6 +11,14 @@
 	{
 		"keys":"testColor_png",
 		"name":"other"
+	},
+	{
+		"keys":"map_shengdi_png,map_welcome_png",
+		"name":"map"
+	},
+	{
+		"keys":"enemy1_png,enemy2_json,enemy2_png,enemy1_json",
+		"name":"enemy"
 	}],
 	"resources":[
 	{
@@ -193,11 +197,6 @@
 		"url":"assets/WorldMap/worldMap_back2.png"
 	},
 	{
-		"name":"welcome_background_png",
-		"type":"image",
-		"url":"assets/welcome/welcome_background.png"
-	},
-	{
 		"name":"hero_walk_json",
 		"type":"json",
 		"url":"assets/hero/hero_walk.json"
@@ -231,5 +230,35 @@
 		"name":"hero_jump_png",
 		"type":"image",
 		"url":"assets/hero/hero_jump.png"
+	},
+	{
+		"name":"map_shengdi_png",
+		"type":"image",
+		"url":"assets/map/map_shengdi.png"
+	},
+	{
+		"name":"map_welcome_png",
+		"type":"image",
+		"url":"assets/map/map_welcome.png"
+	},
+	{
+		"name":"enemy1_png",
+		"type":"image",
+		"url":"assets/enemy/enemy1.png"
+	},
+	{
+		"name":"enemy2_json",
+		"type":"json",
+		"url":"assets/enemy/enemy2.json"
+	},
+	{
+		"name":"enemy2_png",
+		"type":"image",
+		"url":"assets/enemy/enemy2.png"
+	},
+	{
+		"name":"enemy1_json",
+		"type":"json",
+		"url":"assets/enemy/enemy1.json"
 	}]
 }

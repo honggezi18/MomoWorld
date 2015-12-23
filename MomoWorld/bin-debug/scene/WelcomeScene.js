@@ -15,7 +15,7 @@ var WelcomeScene = (function (_super) {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
-        this.background = Tool.addBitmap(this, "welcome_background_png", 0, 0, 0, 0, true);
+        this.background = Tool.addBitmap(this, "map_welcome_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
         this.tureHeight = this.background.height;
         P2Tool.createPlane(World.P2World, 0, -555, 0);
