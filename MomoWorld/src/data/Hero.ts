@@ -23,8 +23,8 @@ class Hero extends egret.DisplayObjectContainer {
 
     //初始化资源
     public init():void {
-        this.show = Tool.addMoveClip(this, "hero_stand","hero_stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredWidth, this.show.measuredHeight / 2, "testColor_png", false);
+        this.show = Tool.addMoveClip(this, "hero_stand", "hero_stand", 0, 0, 1, -1, true);
+        this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredHeight / 2, this.show.measuredHeight / 2, "testColor_png", false);
         this.setChildIndex(this.show, 99);
     }
 
@@ -33,6 +33,7 @@ class Hero extends egret.DisplayObjectContainer {
         P2Tool.syncDisplay(this.body);
         this.show.x = P2Tool.getEgretNum(this.body.position[0]);
         this.show.y = P2Tool.getEgretY(this.body.position[1]);
+
 
         //设置人物左右移动
         if (this.show.x < this.show.width / 2)this.body.position[0] = P2Tool.getP2Num(this.show.width / 2);

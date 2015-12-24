@@ -23,7 +23,7 @@ var Hero = (function (_super) {
     //��ʼ����Դ
     p.init = function () {
         this.show = Tool.addMoveClip(this, "hero_stand", "hero_stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredWidth, this.show.measuredHeight / 2, "testColor_png", false);
+        this.body = P2Tool.createBox(this, World.P2World, 200, 50, this.show.measuredHeight / 2, this.show.measuredHeight / 2, "testColor_png", false);
         this.setChildIndex(this.show, 99);
     };
     //ͬ������
