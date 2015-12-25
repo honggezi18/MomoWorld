@@ -2,7 +2,7 @@
 	"attack":{
 		"frameRate":6,
 		"events":[
-			
+			  { "name": "attackTure", "frame": 4}
 			],
 		"frames":[
 			
@@ -138,7 +138,7 @@
 			"y":0
 			}
 			]
-},"move":{
+},"walk":{
 		"frameRate":6,
 		"events":[
 			

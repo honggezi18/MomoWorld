@@ -20,7 +20,7 @@ var P2Tool = (function () {
     P2Tool.createBox = function (target, world, x, y, w, h, resid, hadM) {
         var tempBody = new p2.Body({
             mass: 1,
-            position: P2Tool.getP2Pos(x, y),
+            position: P2Tool.getP2Pos(x, y)
         });
         var tempBox = new p2.Box({ width: P2Tool.getP2Num(w), height: P2Tool.getP2Num(h) });
         if (resid != "") {
@@ -118,6 +118,10 @@ var P2Tool = (function () {
         var xP2 = body.position[0];
         var yP2 = body.position[1];
         return [xP2 * this.factor, this.worldShape.height - yP2 * this.factor];
+    };
+    //获取两刚体中心点的距离
+    P2Tool.getDistance = function (obj1, obj2) {
+        return Math.sqrt(Math.pow(P2Tool.getEgretNum(obj1.position[0]) - P2Tool.getEgretNum(obj2.position[0]), 2) + Math.pow(P2Tool.getEgretNum(obj1.position[1]) - P2Tool.getEgretNum(obj2.position[1]), 2)); //求两点间的距离
     };
     return P2Tool;
 })();

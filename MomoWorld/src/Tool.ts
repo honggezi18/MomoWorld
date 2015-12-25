@@ -1,6 +1,14 @@
 //工具类
 class Tool {
 
+    //深度赋值
+    static deepCopy(source) {
+        var result = {};
+        for (var key in source) {
+            result[key] = typeof source[key] ==='object'? Tool.deepCopy(source[key]) : source[key];
+        }
+        return result;
+    }
 
     //添加帧动画的函数
     static addMoveClip(target:any, res:string, type:string, x:number = 0, y:number = 0, scale:number = 1, time:number = -1, isCenter:boolean = false):egret.MovieClip {

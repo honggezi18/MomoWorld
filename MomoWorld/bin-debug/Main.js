@@ -4,7 +4,7 @@ var Main = (function (_super) {
     function Main() {
         _super.call(this);
         this.hadLoad = 0;
-        this.resList = ["worldMap", "map", "hero", "enemy", "other"];
+        this.resList = ["worldMap", "map", "hero", "enemy", "attack", "other"];
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main;p=c.prototype;

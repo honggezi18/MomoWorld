@@ -75,16 +75,16 @@ class WelcomeScene extends egret.DisplayObjectContainer {
     private control(msg) {
         //console.log("control    " + msg);
         if (msg == "DownDown" || msg == "LeftDown" || msg == "RightDown" || msg == "UpDown") {
-            Hero.getInstance().move(msg);
+            Hero.getInstance().action(msg);
         }
         else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
-            Hero.getInstance().move("stop");
+            Hero.getInstance().action("stop");
         }
         else if (msg == "JumpUp") {
-            Hero.getInstance().move("other");
+            Hero.getInstance().action("other");
         }
         else if (msg == "JumpDown") {
-            Hero.getInstance().move("JumpDown");
+            Hero.getInstance().action("JumpDown");
         }
     }
 

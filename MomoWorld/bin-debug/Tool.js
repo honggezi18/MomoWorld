@@ -3,6 +3,14 @@ var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
+    //���ȸ�ֵ
+    Tool.deepCopy = function (source) {
+        var result = {};
+        for (var key in source) {
+            result[key] = typeof source[key] === 'object' ? Tool.deepCopy(source[key]) : source[key];
+        }
+        return result;
+    };
     //����֡�����ĺ���
     Tool.addMoveClip = function (target, res, type, x, y, scale, time, isCenter) {
         if (x === void 0) { x = 0; }

@@ -21,7 +21,7 @@ class P2Tool {
         var tempBody:p2.Body = new p2.Body(
             {
                 mass: 1,
-                position: P2Tool.getP2Pos(x, y),
+                position: P2Tool.getP2Pos(x, y)
             }
         );
         var tempBox:p2.Box = new p2.Box({width: P2Tool.getP2Num(w), height: P2Tool.getP2Num(h)});
@@ -129,5 +129,10 @@ class P2Tool {
         var xP2:number = body.position[0];
         var yP2:number = body.position[1];
         return [xP2 * this.factor, this.worldShape.height - yP2 * this.factor];
+    }
+
+    //获取两刚体中心点的距离
+    static getDistance(obj1:any, obj2:any):number {
+        return Math.sqrt(Math.pow(P2Tool.getEgretNum(obj1.position[0]) - P2Tool.getEgretNum(obj2.position[0]), 2) + Math.pow(P2Tool.getEgretNum(obj1.position[1]) - P2Tool.getEgretNum(obj2.position[1]), 2));//求两点间的距离
     }
 }

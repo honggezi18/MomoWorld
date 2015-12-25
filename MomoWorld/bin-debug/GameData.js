@@ -19,9 +19,12 @@ var GameData = (function () {
     GameData.gameWidth = 800;
     GameData.gameHeight = 480;
     GameData.scaleSmall = 1;
+    GameData.bodyWidth = 25; //所有角色的刚体宽度
     GameData.mapIndex = -1; //标示当前选中的地图
     GameData.difficulty = 0; //标示当前的游戏难度
-    GameData.welcomeMoveSpeed = 5; //欢迎页面中地图移动的速度
+    GameData.heroIndex = 1; //选择的角色
+    GameData.enemyArray = []; //敌人数组
+    GameData.bulletArray = []; //子弹数组
     GameData.MapState = [
         {
             "name": "map0",

@@ -5,7 +5,7 @@
 		"name":"worldMap"
 	},
 	{
-		"keys":"hero_walk_json,hero_stand_png,hero_stand_json,hero_walk_png,hero_jump_json,hero_jump_png",
+		"keys":"hero1_json,hero1_png",
 		"name":"hero"
 	},
 	{
@@ -19,6 +19,10 @@
 	{
 		"keys":"enemy1_png,enemy2_json,enemy2_png,enemy1_json",
 		"name":"enemy"
+	},
+	{
+		"keys":"bullet1_png",
+		"name":"attack"
 	}],
 	"resources":[
 	{
@@ -197,39 +201,9 @@
 		"url":"assets/WorldMap/worldMap_back2.png"
 	},
 	{
-		"name":"hero_walk_json",
-		"type":"json",
-		"url":"assets/hero/hero_walk.json"
-	},
-	{
-		"name":"hero_stand_png",
-		"type":"image",
-		"url":"assets/hero/hero_stand.png"
-	},
-	{
-		"name":"hero_stand_json",
-		"type":"json",
-		"url":"assets/hero/hero_stand.json"
-	},
-	{
-		"name":"hero_walk_png",
-		"type":"image",
-		"url":"assets/hero/hero_walk.png"
-	},
-	{
 		"name":"testColor_png",
 		"type":"image",
 		"url":"assets/testColor.png"
-	},
-	{
-		"name":"hero_jump_json",
-		"type":"json",
-		"url":"assets/hero/hero_jump.json"
-	},
-	{
-		"name":"hero_jump_png",
-		"type":"image",
-		"url":"assets/hero/hero_jump.png"
 	},
 	{
 		"name":"map_shengdi_png",
@@ -260,5 +234,20 @@
 		"name":"enemy1_json",
 		"type":"json",
 		"url":"assets/enemy/enemy1.json"
+	},
+	{
+		"name":"hero1_json",
+		"type":"json",
+		"url":"assets/hero/hero1.json"
+	},
+	{
+		"name":"hero1_png",
+		"type":"image",
+		"url":"assets/hero/hero1.png"
+	},
+	{
+		"name":"bullet1_png",
+		"type":"image",
+		"url":"assets/attack/bullet1.png"
 	}]
 }

@@ -2,7 +2,6 @@
 class ShengDiScene extends egret.DisplayObjectContainer {
     private background:egret.Bitmap;//欢迎页面背景
     private ground:p2.Body;//场景的地板刚体
-    private showBody = [];//需要同步数据的物体
 
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
@@ -26,27 +25,52 @@ class ShengDiScene extends egret.DisplayObjectContainer {
         this.background = Tool.addBitmap(this, "map_shengdi_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
         this.tureHeight = this.background.height;
-        P2Tool.createPlane(World.P2World, 0, -555, 0);
-        this.showBody = [];
+        var tempPlane = P2Tool.createPlane(World.P2World, 0, -555, 0);
+        tempPlane.shapes[0].collisionMask = 3;//设置当前碰撞组，即只与这些类型的发送碰撞
         this.addChild(Hero.getInstance());
         this.y = -180;
 
-        this.enemy = new Enemy();
-        this.showBody.push(this.enemy);
+        this.enemy = new Enemy("1");
+        GameData.enemyArray.push(this.enemy);
         this.addChild(this.enemy);
-
     }
 
-    //同步素材
+    //同步素材//先清空，再同步
     public syncDisplay():void {
-        for (var i = 0; i < this.showBody.length; i++)this.showBody[i].syncFun();
-        Hero.getInstance().syncFun();
+        //释放内存，消除enemy
+        for (var i = 0; i < GameData.enemyArray.length; i++) {
+            var tempEnemy:Enemy = GameData.enemyArray[i];
+            if (tempEnemy.isDie) {
+                Tool.removeOne(GameData.enemyArray, i);
+                i--;
+            }
+
+        }
+
+        //释放内存，消除子弹
+        for (var i = 0; i < GameData.bulletArray.length; i++) {
+            var tempBullet:Bullet = GameData.bulletArray[i];
+            if (tempBullet.isOver) {
+                tempBullet.show.parent.removeChild(tempBullet.show);
+                Tool.removeOne(GameData.bulletArray, i);
+                console.log("bulletArray   " + GameData.bulletArray.length);
+                i--;
+            }
+        }
+
+        Hero.getInstance().syncFun();//同步英雄
+        for (var i = 0; i < GameData.enemyArray.length; i++) GameData.enemyArray[i].syncFun();
+        for (var i = 0; i < GameData.bulletArray.length; i++) GameData.bulletArray[i].syncFun();
     }
 
     //触屏按下
     public onTouchStart(e:egret.TouchEvent):void {
         console.log("onTouchStart");
-        this.enemy.action("move");
+        //Hero.getInstance().action("hit");
+
+        //this.enemy.action("die");
+
+        Hero.getInstance().checkHit();
 
         //this.testTime++;
         //this.testTime %= 5;
@@ -81,16 +105,25 @@ class ShengDiScene extends egret.DisplayObjectContainer {
     private control(msg) {
         //console.log("control    " + msg);
         if (msg == "DownDown" || msg == "LeftDown" || msg == "RightDown" || msg == "UpDown") {
-            Hero.getInstance().move(msg);
+            Hero.getInstance().action(msg);
         }
-        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
-            Hero.getInstance().move("stop");
+        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp" || msg == "AttackUp" || msg == "SkillUp" || msg == "GetUp") {
+            Hero.getInstance().action("stand");
         }
         else if (msg == "JumpUp") {
-            Hero.getInstance().move("other");
+            Hero.getInstance().action("other");
         }
         else if (msg == "JumpDown") {
-            Hero.getInstance().move("JumpDown");
+            Hero.getInstance().action("JumpDown");
+        }
+        else if (msg == "AttackDown") {
+            Hero.getInstance().action("AttackDown");
+        }
+        else if (msg == "SkillDown") {
+            Hero.getInstance().action("SkillDown");
+        }
+        else if (msg == "GetDown") {
+            Hero.getInstance().action("GetDown");
         }
     }
 

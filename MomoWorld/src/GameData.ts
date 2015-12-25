@@ -4,10 +4,16 @@ class GameData {
     static gameHeight:number = 480;
     static scaleSmall:number = 1;
 
+    static bodyWidth:number = 25;//所有角色的刚体宽度
+
     static mapIndex:number = -1;//标示当前选中的地图
     static difficulty:number = 0;//标示当前的游戏难度
 
-    static welcomeMoveSpeed:number = 5;//欢迎页面中地图移动的速度
+    static heroIndex:number = 1;//选择的角色
+
+
+    static enemyArray = [];//敌人数组
+    static bulletArray = [];//子弹数组
 
 
     static MapState = [//地图信息

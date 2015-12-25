@@ -93,6 +93,9 @@ class UIManage {
         window['keyConfirm'] = target.control;//确定
         window['keyMenu'] = target.control;//菜单
         window['keyJump'] = target.control;//弹跳
+        window['keySkill'] = target.control;//技能
+        window['keyGet'] = target.control;//捡取
+        window['keyAttack'] = target.control;//攻击
         window['keyLeft'] = target.control;//左
         window['keyUp'] = target.control;//上
         window['keyRight'] = target.control;//右
