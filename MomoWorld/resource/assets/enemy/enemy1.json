@@ -2,7 +2,7 @@
 	"attack":{
 		"frameRate":6,
 		"events":[
-			  { "name": "attackTure", "frame": 4}
+			  { "name": "@attackTure", "frame": 6}
 			],
 		"frames":[
 			

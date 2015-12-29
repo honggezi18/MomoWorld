@@ -5,18 +5,21 @@ var Hero = (function (_super) {
         _super.call(this);
         this.offsetX = 0; //��ǰƤ����ƫ��ֵ
         this.offsetY = 0;
+        this.blood = 1; //Ѫ��
         this.toward = 1; //��ǰ�ĳ���,����1Ϊ������-1Ϊ����
-        this.hitTime = 0; //������ʱ����ȴʱ��
-        this.dieTime = 0; //���������������Ĵ���ʱ��
+        this.attackCD = 0; //��ͨ��������ȴʱ��
+        this.hitCD = 0; //������ʱ����ȴʱ��
         this.moveSpeed = 8; //��ɫ�ƶ����ٶ�
         this.jumpPower = 5; //������
         this._name = "1";
         this.jumpState = ""; //��ʾ��ɫ��ǰ��Ծ��״̬
         this.actionType = ""; //�˶�״̬
+        this.mcType = ""; //��ʾ��ǰ����������
         this.isDie = false; //��ʾ�Ƿ��Ѿ�����
         this.isWalking = false; //��ʾ��ǰ�Ƿ����ڱ���
         this.isHitting = false; //��ʾ��ǰ�Ƿ����ڱ�����
         this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,�����������Ķ����޵�
+        this.isAttack = false; //��ʾ��ǰ�Ƿ����ڹ���״̬
         if (Hero.instance == null)
             Hero.instance = this;
         else
@@ -33,6 +36,7 @@ var Hero = (function (_super) {
     p.init = function (name) {
         this._name = name;
         this.data = getHero(this._name);
+        this.blood = this.data.blood;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;
@@ -41,6 +45,8 @@ var Hero = (function (_super) {
     };
     //ͬ������
     p.syncFun = function () {
+        if (this.blood < 0 && !this.isDie)
+            this.action("die");
         //���ñ���������
         this.checkHit();
         //ͬ������Ƥ��
@@ -72,47 +78,59 @@ var Hero = (function (_super) {
         }
         //������ʱ�Ĵ���
         if (this.isMissing) {
-            this.hitTime--;
-            if (this.hitTime < 0 && this.isHitting == true) {
+            this.hitCD--;
+            if (this.hitCD < 0 && this.isHitting == true) {
                 this.isHitting = false;
                 this.action("stand");
             }
-            if (this.hitTime < -80)
+            if (this.hitCD < -80)
                 this.isMissing = false;
         }
-        //����ʱ�Ĵ���
-        if (this.isDie) {
-            this.dieTime--;
-            if (this.dieTime < 0)
-                this.dieOver();
+        //���й���ʱ�Ĵ���
+        if (this.isAttack) {
+            this.attackCD--;
+            if (this.attackCD < 0) {
+                this.attackCD = this.data.attack.CD;
+                GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
+            }
         }
     };
     //���ⱻ����
     p.checkHit = function () {
-        if (this.isMissing)
+        if (this.isMissing || this.isDie)
             return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var temp = GameData.enemyArray[i];
             if (temp.isDie)
                 return;
-            var direction1 = Math.abs(temp.show.x - P2Tool.getEgretNum(this.body.position[0]));
-            if (direction1 < temp.data.stand.halfWidth) {
-                console.log("Touch!!!     direction1    " + direction1);
-                this.action("hit");
-                return;
+            if (temp.isSkill == false) {
+                var direction1 = Math.abs(temp.show.x - P2Tool.getEgretNum(this.body.position[0]));
+                if (direction1 < temp.data.stand.halfWidth) {
+                    this.action("hit");
+                    var power = temp.data.stand.powerBase + Math.floor(Math.random() * temp.data.stand.powerSpace);
+                    this.blood -= power;
+                    console.log("Hero blood   " + this.blood);
+                    new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
+                    return;
+                }
+            }
+            else {
+                var direction1 = (P2Tool.getEgretNum(temp.body.position[0]) - P2Tool.getEgretNum(this.body.position[0])) * temp.toward;
+                if (direction1 < temp.data.attack.range && direction1 > 0) {
+                    this.action("hit");
+                    var power = temp.data.attack.powerBase + Math.floor(Math.random() * temp.data.attack.powerSpace);
+                    this.blood -= power;
+                    console.log("Hero blood   " + this.blood);
+                    new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
+                    return;
+                }
             }
         }
-    };
-    //�������Ĳ���
-    p.dieOver = function () {
-        console.log("dieOver");
-        this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
     };
     //��ɫ�Ķ���
     p.action = function (type) {
         if (this.actionType == type || this.isHitting || this.isDie)
             return;
-        //console.log("type  " + type);
         this.actionType = type;
         if (type == "RightDown" || type == "LeftDown") {
             this.toward = 1;
@@ -122,8 +140,9 @@ var Hero = (function (_super) {
             this.setMoveClip("walk");
         }
         else if (type == "AttackDown") {
+            this.attackCD = 0;
+            this.isAttack = true;
             this.setMoveClip("attack");
-            GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
         }
         else if (type == "SkillDown") {
             this.setMoveClip("skill");
@@ -138,7 +157,7 @@ var Hero = (function (_super) {
             this.isHitting = true;
             this.isMissing = true;
             this.isWalking = false;
-            this.hitTime = this.data.hit.hitTime;
+            this.hitCD = this.data.hit.CD;
             this.body.velocity[0] += this.data.hit.hitMove * this.toward;
             this.body.velocity[1] += this.data.hit.hitMove;
         }
@@ -150,6 +169,7 @@ var Hero = (function (_super) {
         }
         else if (type == "stand") {
             this.setMoveClip("stand");
+            this.isAttack = false;
             this.isWalking = false;
         }
         //�����Ƿ�������ͼ
@@ -159,16 +179,26 @@ var Hero = (function (_super) {
             UIManage.getInstance().showMap();
         }
     };
+    //�������Ž���
+    p.mcOver = function () {
+        if (this.mcType == "die") {
+            //this.show = null;
+            //this.parent.removeChild(this);
+            World.P2World.removeBody(this.body);
+        }
+    };
     //����Ƥ�𶯻����л�
-    p.setMoveClip = function (type, time) {
-        if (time === void 0) { time = -1; }
+    p.setMoveClip = function (type) {
+        this.mcType = type;
         this.offsetX = this.data[type].offsetX;
         this.offsetY = this.data[type].offsetY;
         if (this.show != null && this.show.parent != null)
             this.removeChild(this.show);
-        this.show = Tool.addMoveClip(this, this.data.name, type, 0, 0, 1, time, true);
+        this.show = Tool.addMoveClip(this, this.data.name, type, 0, 0, 1, -1, true);
+        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;
+        this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
+        this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         this.show.scaleX = this.toward;
-        this.setChildIndex(this.show, this.$children.length - 2);
     };
     p.onRemove = function (e) {
         e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);

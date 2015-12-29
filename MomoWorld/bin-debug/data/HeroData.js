@@ -4,6 +4,7 @@ var getHero = function (name) {
 };
 var hero1 = {
     name: "hero1",
+    blood: 50,
     stand: {
         offsetX: -10,
         offsetY: -17.5
@@ -20,21 +21,25 @@ var hero1 = {
     attack: {
         offsetX: -12,
         offsetY: -17.5,
-        speed: 20 //��ͨ�������ƶ��ٶ�
+        powerBase: 50,
+        powerSpace: 20,
+        speed: 20,
+        CD: 25
     },
     skill: {
         offsetX: -2,
-        offsetY: -22.5
+        offsetY: -22.5,
+        powerBase: 50,
+        powerSpace: 20,
     },
     hit: {
         offsetX: -13,
         offsetY: -20,
-        hitTime: 30,
+        CD: 30,
         hitMove: 1,
     },
     die: {
         offsetX: 0,
-        offsetY: -6,
-        dieTime: 60
+        offsetY: -6
     },
 };

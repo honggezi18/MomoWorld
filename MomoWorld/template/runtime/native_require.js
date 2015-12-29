@@ -15,6 +15,7 @@ var game_file_list = [
 	"bin-debug/data/EnemyData.js",
 	"bin-debug/data/Hero.js",
 	"bin-debug/data/HeroData.js",
+	"bin-debug/data/Num.js",
 	"bin-debug/GameData.js",
 	"bin-debug/Main.js",
 	"bin-debug/MomoEvent.js",

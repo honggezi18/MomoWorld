@@ -7,18 +7,21 @@ class Enemy extends egret.DisplayObjectContainer {
 
     private offsetX:number = 0;//当前皮肤的偏移值
     private offsetY:number = 0;
+    private blood:number = 1;//血量
     private moveSpeed:number = 1;//角色移动的速度
-    private toward:number = 1;//当前的朝向,其中1为向左。-1为向右
+    public toward:number = 1;//当前的朝向,其中1为向左。-1为向右
 
     private moveTime:number = 0;//行走的时间
-    private hitTime:number = 0;//被攻击时的冷却时间
-    private dieTime:number = 0;//死亡的过程时间
+    private hitCD:number = 0;//被攻击时的冷却时间
 
     private actionType:string = "";//标示角色当前状态
+    private mcType:string = "";//标示当前动画的类型
+    private _name:string = "empty";
 
     public isDie:boolean = false;//标示是否已经死亡
-
-    private _name:string = "empty";
+    public isSkill:boolean = false;//标示当前是否在发动技能
+    private isAngry:boolean = false;//标示当前是否处于生气状态，即是否被攻击过
+    private isMissing:boolean = false;//标示当前是否闪避状态,即被攻击后的短暂无敌
 
 
     constructor(name) {
@@ -26,39 +29,55 @@ class Enemy extends egret.DisplayObjectContainer {
         this.init(name);
     }
 
-
     //初始化资源
     public init(name):void {
         this._name = name;
         this.data = getEnemy(this._name);
+        this.blood = this.data.blood;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 400, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;//设置当前所在碰撞组
         this.body.shapes[0].collisionMask = 1;//与那些组发生碰撞
         this.setChildIndex(this.show, 99);
         this.action("stand");
-        this.show.addEventListener(MomoEvent.attackTure, this.AT, this);
-    }
-
-    public AT():void {
-        console.log("AT");
     }
 
     //同步函数
     public syncFun():void {
-        //检测被攻击
-        this.checkHit();
+        //检测死亡
+        if (this.blood < 0 && !this.isDie)this.action("die");
+        if (this.isDie)return;
+
+        this.checkHit(); //检测被攻击
 
         //同步皮肤
         P2Tool.syncDisplay(this.body);
         this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;//根据向左还是向右的不同改变各个动作的偏移值
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
 
+
         //走路动作的实现
         if (this.actionType == "walk") {
+            if (this.isAngry) {//处于生气状态，不断行走
+                var walk = function () {
+                    if (Hero.getInstance().body.position[0] > this.body.position[0] + P2Tool.getP2Num(50))this.toward = -1;
+                    else if (Hero.getInstance().body.position[0] < this.body.position[0] - P2Tool.getP2Num(50))this.toward = 1;
+                    this.show.scaleX = this.toward;
+                    this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed * this.toward);
+                }.bind(this);
+
+                if (this.data.attack == null)walk();
+                else {//Momo,添加判断，先判断是否在skill攻击范围内。
+                    var distance:number = Math.abs(P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0]));
+                    if (distance < this.data.attack.range)this.action("attack");
+                    else walk();
+                }
+                return;
+            }
+
+            //普通的随机行走
             this.moveTime--;
-            //设置行走约束
-            var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward;
+            var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward;//设置行走约束
             var parentWidth = UIManage.target.tureWidth;
             if (this.show.x > tempX && this.show.x < parentWidth - tempX)this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed * this.toward);
 
@@ -67,21 +86,17 @@ class Enemy extends egret.DisplayObjectContainer {
                 this.action("stand");
             }
         }
+
         //被攻击的冷却计时器
         else if (this.actionType == "hit") {
-            this.hitTime--;
-            if (this.hitTime < 0) this.action("attack");
+            this.hitCD--;
+            if (this.hitCD == 0)this.action("walk");
         }
-        //死亡的冷却计时器
-        else if (this.actionType == "die") {
-            this.dieTime--;
-            if (this.dieTime < 0) this.die();
-        }
-
     }
 
     //检测被攻击
     public checkHit():void {
+
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet:Bullet = GameData.bulletArray[i];
             if (tempBullet.isOver)return;
@@ -89,6 +104,13 @@ class Enemy extends egret.DisplayObjectContainer {
             if (direction1 < this.data.stand.halfWidth) {
                 tempBullet.isOver = true;
                 this.action("hit");
+                this.isAngry = true;
+                var powerSpace:number = Math.floor(Math.random() * Hero.getInstance().data.attack.powerSpace);
+                var power:number = Hero.getInstance().data.attack.powerBase + powerSpace;
+                this.blood -= power;
+                console.log("blood   " + this.blood);
+                if (powerSpace > Hero.getInstance().data.attack.powerSpace * 0.8)new Num("num3", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
+                else new Num("num2", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                 return;
             }
         }
@@ -96,55 +118,70 @@ class Enemy extends egret.DisplayObjectContainer {
 
     //角色的动作
     public action(type:string):void {
-        console.log("type  " + type);
-
         this.actionType = type;
-
         var temp:egret.Bitmap = <egret.Bitmap>this.body.displays[0];
         this.setChildIndex(temp, 99);
 
         if (type == "walk") {
             this.toward = 1;
             if (Math.random() < 0.5)this.toward = -1;
-            this.toward = 1;
             this.moveTime = Math.floor(Math.random() * (this.data.walk.moveMaxTime - this.data.walk.moveMinTime)) + this.data.walk.moveMinTime;
             this.setMoveClip("walk");
         }
         else if (type == "stand") {
             this.setMoveClip("stand");
         }
-        else if (type == "hit") {
-            this.hitTime = this.data.hit.hitTime;
+        else if (type == "hit" && !this.isMissing) {
+            console.log("enter  hit");
+            this.isSkill = false;
+            this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
         }
         else if (type == "attack") {
+            this.isMissing = true;
             this.setMoveClip("attack");
         }
         else if (type == "die") {
+            this.isDie = true;
             this.setMoveClip("die");
-            this.show.play(1);
-            this.dieTime = this.data.die.dieTime;
         }
 
 
     }
 
-    //死亡函数，回收资源和内存
-    public die():void {
-        console.log("die");
-        this.show = null;
-        this.isDie = true;
-        this.parent.removeChild(this);
-        World.P2World.removeBody(this.body);
+    //动画播放结束
+    public mcOver():void {
+        if (this.mcType == "attack") {
+            this.isMissing = false;
+            var distance:number = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward;//判断是否继续攻击，还是移动
+            if (distance > this.data.attack.range || distance < 0) {//若距离不足，则切换成走路，否则继续攻击
+                this.isSkill = false;
+                this.action("walk");
+            }
+        }
+        else if (this.mcType == "die") {
+            this.show = null;
+            this.parent.removeChild(this);
+            World.P2World.removeBody(this.body);
+        }
     }
 
     //设置皮肤动画的切换
-    public setMoveClip(type:string, time:number = -1):void {
+    public setMoveClip(type:string):void {
+        this.mcType = type;
         this.offsetX = this.data[type].offsetX;
         this.offsetY = this.data[type].offsetY;
         if (this.show != null && this.show.parent != null)this.removeChild(this.show);
-        this.show = Tool.addMoveClip(this, this.data.name, type, 0, 0, 1, time, true);
+        this.show = Tool.addMoveClip(this, this.data.name, type, 0, 0, 1, -1, true);
+        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;
+        this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.scaleX = this.toward;
+
+        //设置动画的事件侦听
+        this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
+        if (this.mcType == "attack")this.show.addEventListener(egret.MovieClipEvent.FRAME_LABEL, (e:egret.MovieClipEvent)=> {
+            if (e.frameLabel == "@attackTure")this.isSkill = true;
+        }, this);
     }
 
     public onRemove(e:egret.Event):void {

@@ -53,7 +53,6 @@ class ShengDiScene extends egret.DisplayObjectContainer {
             if (tempBullet.isOver) {
                 tempBullet.show.parent.removeChild(tempBullet.show);
                 Tool.removeOne(GameData.bulletArray, i);
-                console.log("bulletArray   " + GameData.bulletArray.length);
                 i--;
             }
         }
@@ -66,11 +65,13 @@ class ShengDiScene extends egret.DisplayObjectContainer {
     //触屏按下
     public onTouchStart(e:egret.TouchEvent):void {
         console.log("onTouchStart");
+
+
         //Hero.getInstance().action("hit");
 
         //this.enemy.action("die");
 
-        Hero.getInstance().checkHit();
+        //Hero.getInstance().checkHit();
 
         //this.testTime++;
         //this.testTime %= 5;

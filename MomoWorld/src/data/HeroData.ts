@@ -4,6 +4,7 @@ var getHero = function (name) {
 
 var hero1 = {
     name: "hero1",
+    blood: 50,
     stand: {
         offsetX: -10,
         offsetY: -17.5
@@ -23,24 +24,28 @@ var hero1 = {
     attack: {
         offsetX: -12,
         offsetY: -17.5,
-        speed: 20//普通攻击的移动速度
+        powerBase: 50,//碰撞攻击的基本数值
+        powerSpace: 20,//浮动值
+        speed: 20,//普通攻击的移动速度
+        CD:25
     },
 
     skill: {
         offsetX: -2,
-        offsetY: -22.5
+        offsetY: -22.5,
+        powerBase: 50,//碰撞攻击的基本数值
+        powerSpace: 20,//浮动值
     },
 
     hit: {
         offsetX: -13,
         offsetY: -20,
-        hitTime: 30,
+        CD: 30,
         hitMove: 1,//被攻击后往后弹的效果
     },
 
     die: {
         offsetX: 0,
-        offsetY: -6,
-        dieTime: 60
+        offsetY: -6
     },
 };

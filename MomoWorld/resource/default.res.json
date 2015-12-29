@@ -23,6 +23,10 @@
 	{
 		"keys":"bullet1_png",
 		"name":"attack"
+	},
+	{
+		"keys":"num3_fnt,num2_fnt,num1_fnt,num_title_png",
+		"name":"num"
 	}],
 	"resources":[
 	{
@@ -249,5 +253,25 @@
 		"name":"bullet1_png",
 		"type":"image",
 		"url":"assets/attack/bullet1.png"
+	},
+	{
+		"name":"num3_fnt",
+		"type":"font",
+		"url":"assets/_number/num3.fnt"
+	},
+	{
+		"name":"num2_fnt",
+		"type":"font",
+		"url":"assets/_number/num2.fnt"
+	},
+	{
+		"name":"num1_fnt",
+		"type":"font",
+		"url":"assets/_number/num1.fnt"
+	},
+	{
+		"name":"num_title_png",
+		"type":"image",
+		"url":"assets/_number/num_title.png"
 	}]
 }

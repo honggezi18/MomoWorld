@@ -43,7 +43,6 @@ var ShengDiScene = (function (_super) {
             if (tempBullet.isOver) {
                 tempBullet.show.parent.removeChild(tempBullet.show);
                 Tool.removeOne(GameData.bulletArray, i);
-                console.log("bulletArray   " + GameData.bulletArray.length);
                 i--;
             }
         }
@@ -58,7 +57,7 @@ var ShengDiScene = (function (_super) {
         console.log("onTouchStart");
         //Hero.getInstance().action("hit");
         //this.enemy.action("die");
-        Hero.getInstance().checkHit();
+        //Hero.getInstance().checkHit();
         //this.testTime++;
         //this.testTime %= 5;
         //if (this.testTime == 0)this.enemy.action("stand");
