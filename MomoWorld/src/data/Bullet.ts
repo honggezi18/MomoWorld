@@ -4,6 +4,7 @@ class Bullet {
     public data:any;//静态数据
     private _name:string = "1";
     private speed:number = 0;//移动速度
+    private originX:number = 0;//初始距离，产生子弹的X坐标
     private toward:number = 1;//当前的朝向,其中1为向左。-1为向右
     public isOver:boolean = false;
 
@@ -13,20 +14,19 @@ class Bullet {
         this.speed = speed;
         this.toward = toward;
         this.data = getBullet(this._name);
-        this.show = Tool.addBitmap(UIManage.target, this.data.name + "_png", x, y, 0, 0, false);
+        this.show = Tool.addBitmap(UIManage.target.item, this.data.name + "_png", x, y, 0, 0, false);
         this.show.anchorOffsetX = this.show.width / 2;
         this.show.anchorOffsetY = this.show.height / 2;
         this.show.scaleX = this.toward;
+        this.originX = x;
     }
 
 
     //同步函数
     public syncFun():void {
         this.show.x -= this.speed * this.toward;
-        if (this.show.x < this.show.width || this.show.x > this.show.width + UIManage.target.tureWidth)this.isOver = true;
-    }
-
-    public onRemove(e:egret.Event):void {
-        e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
+        var distance:number = Math.abs(this.show.x - this.originX);
+        if (distance > this.data.range - 50)this.show.alpha = ( this.data.range - distance) / 50;
+        if (distance > this.data.range)this.isOver = true;
     }
 }

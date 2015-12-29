@@ -108,6 +108,8 @@ class MapScene extends egret.DisplayObjectContainer {
             var tw = egret.Tween.get(this.select);
             tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
                 this.select.visible = false;
+                UIManage.getInstance().hideMap();
+                UIManage.getInstance().showShengDiScene();
             }, this);
         }
     }
@@ -162,6 +164,7 @@ class MapScene extends egret.DisplayObjectContainer {
 
         if (e.target == this.back) {
             this.back.texture = RES.getRes("worldMap_back1_png");
+            UIManage.getInstance().hideMap();
             UIManage.getInstance().showWelcome();
         }
 

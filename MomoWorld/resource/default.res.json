@@ -27,6 +27,10 @@
 	{
 		"keys":"num3_fnt,num2_fnt,num1_fnt,num_title_png",
 		"name":"num"
+	},
+	{
+		"keys":"item_thing1_png",
+		"name":"item"
 	}],
 	"resources":[
 	{
@@ -273,5 +277,10 @@
 		"name":"num_title_png",
 		"type":"image",
 		"url":"assets/_number/num_title.png"
+	},
+	{
+		"name":"item_thing1_png",
+		"type":"image",
+		"url":"assets/item/item_thing1.png"
 	}]
 }

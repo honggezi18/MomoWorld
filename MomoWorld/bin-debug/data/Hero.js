@@ -95,8 +95,15 @@ var Hero = (function (_super) {
             }
         }
     };
-    //���ⱻ����
+    //������ײ
     p.checkHit = function () {
+        //������ʰ��Ʒ
+        for (var i = 0; i < GameData.itemArray.length; i++) {
+            var tempItem = GameData.itemArray[i];
+            if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)
+                tempItem.pickUp();
+        }
+        //���ⱻ����
         if (this.isMissing || this.isDie)
             return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
@@ -182,8 +189,6 @@ var Hero = (function (_super) {
     //�������Ž���
     p.mcOver = function () {
         if (this.mcType == "die") {
-            //this.show = null;
-            //this.parent.removeChild(this);
             World.P2World.removeBody(this.body);
         }
     };
@@ -199,9 +204,6 @@ var Hero = (function (_super) {
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         this.show.scaleX = this.toward;
-    };
-    p.onRemove = function (e) {
-        e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
     };
     return Hero;
 })(egret.DisplayObjectContainer);

@@ -18,7 +18,8 @@ var WelcomeScene = (function (_super) {
         this.background = Tool.addBitmap(this, "map_welcome_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
         this.tureHeight = this.background.height;
-        P2Tool.createPlane(World.P2World, 0, -555, 0);
+        var tempPlane = P2Tool.createPlane(World.P2World, 0, -555, 0);
+        tempPlane.shapes[0].collisionMask = 3; //设置当前碰撞组，即只与这些类型的发送碰撞
         this.showBody = [];
         this.addChild(Hero.getInstance());
         this.y = -180;
@@ -74,14 +75,20 @@ var WelcomeScene = (function (_super) {
         if (msg == "DownDown" || msg == "LeftDown" || msg == "RightDown" || msg == "UpDown") {
             Hero.getInstance().action(msg);
         }
-        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp") {
-            Hero.getInstance().action("stop");
+        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp" || msg == "AttackUp" || msg == "SkillUp" || msg == "GetUp") {
+            Hero.getInstance().action("stand");
         }
         else if (msg == "JumpUp") {
             Hero.getInstance().action("other");
         }
         else if (msg == "JumpDown") {
             Hero.getInstance().action("JumpDown");
+        }
+        else if (msg == "AttackDown") {
+        }
+        else if (msg == "SkillDown") {
+        }
+        else if (msg == "GetDown") {
         }
     };
     return WelcomeScene;

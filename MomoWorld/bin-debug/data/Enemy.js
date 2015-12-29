@@ -1,14 +1,14 @@
 //����ҳ��
 var Enemy = (function (_super) {
     __extends(Enemy, _super);
-    function Enemy(name) {
+    function Enemy(name, x) {
         _super.call(this);
         this.offsetX = 0; //��ǰƤ����ƫ��ֵ
         this.offsetY = 0;
         this.blood = 1; //Ѫ��
-        this.moveSpeed = 1; //��ɫ�ƶ����ٶ�
         this.toward = 1; //��ǰ�ĳ���,����1Ϊ������-1Ϊ����
         this.moveTime = 0; //���ߵ�ʱ��
+        this.standTime = 0; //���ߵ�ʱ��
         this.hitCD = 0; //������ʱ����ȴʱ��
         this.actionType = ""; //��ʾ��ɫ��ǰ״̬
         this.mcType = ""; //��ʾ��ǰ����������
@@ -17,16 +17,16 @@ var Enemy = (function (_super) {
         this.isSkill = false; //��ʾ��ǰ�Ƿ��ڷ�������
         this.isAngry = false; //��ʾ��ǰ�Ƿ���������״̬�����Ƿ񱻹�����
         this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,�����������Ķ����޵�
-        this.init(name);
+        this.init(name, x);
     }
     var d = __define,c=Enemy;p=c.prototype;
     //��ʼ����Դ
-    p.init = function (name) {
+    p.init = function (name, x) {
         this._name = name;
         this.data = getEnemy(this._name);
         this.blood = this.data.blood;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, 400, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
+        this.body = P2Tool.createBox(this, World.P2World, x, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2; //���õ�ǰ������ײ��
         this.body.shapes[0].collisionMask = 1; //����Щ�鷢����ײ
         this.setChildIndex(this.show, 99);
@@ -53,7 +53,7 @@ var Enemy = (function (_super) {
                     else if (Hero.getInstance().body.position[0] < this.body.position[0] - P2Tool.getP2Num(50))
                         this.toward = 1;
                     this.show.scaleX = this.toward;
-                    this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed * this.toward);
+                    this.body.position[0] -= P2Tool.getP2Num(this.data.walk.speed * this.toward);
                 }.bind(this);
                 if (this.data.attack == null)
                     walk();
@@ -71,11 +71,16 @@ var Enemy = (function (_super) {
             var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward; //��������Լ��
             var parentWidth = UIManage.target.tureWidth;
             if (this.show.x > tempX && this.show.x < parentWidth - tempX)
-                this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed * this.toward);
+                this.body.position[0] -= P2Tool.getP2Num(this.data.walk.speed * this.toward);
             if (this.moveTime < 0) {
                 this.body.velocity[0] = 0;
                 this.action("stand");
             }
+        }
+        else if (this.actionType == "stand") {
+            this.standTime--;
+            if (this.standTime == 0)
+                this.action("walk");
         }
         else if (this.actionType == "hit") {
             this.hitCD--;
@@ -97,7 +102,6 @@ var Enemy = (function (_super) {
                 var powerSpace = Math.floor(Math.random() * Hero.getInstance().data.attack.powerSpace);
                 var power = Hero.getInstance().data.attack.powerBase + powerSpace;
                 this.blood -= power;
-                console.log("blood   " + this.blood);
                 if (powerSpace > Hero.getInstance().data.attack.powerSpace * 0.8)
                     new Num("num3", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                 else
@@ -115,14 +119,14 @@ var Enemy = (function (_super) {
             this.toward = 1;
             if (Math.random() < 0.5)
                 this.toward = -1;
-            this.moveTime = Math.floor(Math.random() * (this.data.walk.moveMaxTime - this.data.walk.moveMinTime)) + this.data.walk.moveMinTime;
+            this.moveTime = Math.floor(Math.random() * this.data.walk.spaceTime) + this.data.walk.baseTime;
             this.setMoveClip("walk");
         }
         else if (type == "stand") {
             this.setMoveClip("stand");
+            this.standTime = Math.floor(Math.random() * this.data.stand.spaceTime) + this.data.stand.baseTime;
         }
         else if (type == "hit" && !this.isMissing) {
-            console.log("enter  hit");
             this.isSkill = false;
             this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
@@ -150,6 +154,8 @@ var Enemy = (function (_super) {
             this.show = null;
             this.parent.removeChild(this);
             World.P2World.removeBody(this.body);
+            var random = Math.floor(Math.random() * this.data.die.items.length);
+            GameData.itemArray.push(new Item(this.data.die.items[random], P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1])));
         }
     };
     //����Ƥ�𶯻����л�
@@ -171,9 +177,6 @@ var Enemy = (function (_super) {
                 if (e.frameLabel == "@attackTure")
                     _this.isSkill = true;
             }, this);
-    };
-    p.onRemove = function (e) {
-        e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
     };
     return Enemy;
 })(egret.DisplayObjectContainer);

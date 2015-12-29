@@ -11,14 +11,16 @@ var enemy1 = {
         halfWidth: 65,
         halfHeight: 100,
         powerBase: 5,
-        powerSpace: 2 //����ֵ
+        powerSpace: 2,
+        baseTime: 200,
+        spaceTime: 200,
     },
     walk: {
         offsetX: -15,
         offsetY: -25,
-        moveSpeed: 2,
-        moveMinTime: 200,
-        moveMaxTime: 400,
+        speed: 1,
+        baseTime: 200,
+        spaceTime: 200,
     },
     attack: {
         offsetX: -85,
@@ -34,6 +36,9 @@ var enemy1 = {
     },
     die: {
         offsetX: -30,
-        offsetY: -35
+        offsetY: -35,
+        items: [
+            "thing1"
+        ]
     },
 };

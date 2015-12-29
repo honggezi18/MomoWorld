@@ -4,7 +4,7 @@ var Main = (function (_super) {
     function Main() {
         _super.call(this);
         this.hadLoad = 0;
-        this.resList = ["worldMap", "map", "hero", "enemy", "attack", "other", "num"];
+        this.resList = ["worldMap", "map", "hero", "enemy", "attack", "other", "num", "item"];
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main;p=c.prototype;
@@ -29,8 +29,7 @@ var Main = (function (_super) {
             GameData.reset();
             new World();
             World.Scene = this;
-            //UIManage.getInstance().showWelcome();
-            UIManage.getInstance().showShengDiScene();
+            UIManage.getInstance().showWelcome();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);

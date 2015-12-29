@@ -14,6 +14,7 @@ class GameData {
 
     static enemyArray = [];//敌人数组
     static bulletArray = [];//子弹数组
+    static itemArray = [];//物品数组
 
 
     static MapState = [//地图信息

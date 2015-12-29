@@ -13,15 +13,17 @@ var enemy1 = {
         halfWidth: 65,//碰撞碰撞攻击的半径
         halfHeight: 100,
         powerBase: 5,//碰撞攻击的基本数值
-        powerSpace: 2//浮动值
+        powerSpace: 2,//浮动值
+        baseTime: 200,//等待最短时间
+        spaceTime: 200,//等待最长时间
     },
 
     walk: {
         offsetX: -15,//显示移动皮肤时的X轴偏移值
         offsetY: -25,//显示移动皮肤时的Y轴偏移值
-        moveSpeed: 2,//移动的速度
-        moveMinTime: 200,//走路最短时间
-        moveMaxTime: 400,//走路最长时间
+        speed: 1,//移动的速度
+        baseTime: 200,//等待最短时间
+        spaceTime: 200,//等待最长时间
     },
 
     attack: {
@@ -40,6 +42,9 @@ var enemy1 = {
 
     die: {
         offsetX: -30,
-        offsetY: -35
+        offsetY: -35,
+        items: [
+            "thing1"
+        ]
     },
 };

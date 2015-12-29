@@ -21,7 +21,6 @@ class World extends egret.DisplayObjectContainer {
         this.addChild(World.Scene);
         this.createWorldSystem();
         World.P2World = this.world;
-
         this.addEventListener(egret.Event.ENTER_FRAME, this.flash, this);//进行每一帧的数据处理
     }
 

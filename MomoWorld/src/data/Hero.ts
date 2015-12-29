@@ -103,8 +103,15 @@ class Hero extends egret.DisplayObjectContainer {
 
     }
 
-    //¼ì²â±»¹¥»÷
+    //¼ì²âÅö×²
     public checkHit():void {
+        //¼ì²â¼ñÊ°ÎïÆ·
+        for (var i = 0; i < GameData.itemArray.length; i++) {
+            var tempItem:Item = GameData.itemArray[i];
+            if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)tempItem.pickUp();
+        }
+
+        //¼ì²â±»¹¥»÷
         if (this.isMissing || this.isDie)return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var temp:Enemy = GameData.enemyArray[i];
@@ -210,9 +217,5 @@ class Hero extends egret.DisplayObjectContainer {
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         this.show.scaleX = this.toward;
-    }
-
-    public onRemove(e:egret.Event):void {
-        e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
     }
 }

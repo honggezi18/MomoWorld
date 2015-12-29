@@ -4,7 +4,7 @@ var getHero = function (name) {
 };
 var hero1 = {
     name: "hero1",
-    blood: 50,
+    blood: 500,
     stand: {
         offsetX: -10,
         offsetY: -17.5
@@ -12,7 +12,7 @@ var hero1 = {
     walk: {
         offsetX: 5,
         offsetY: -22,
-        moveSpeed: 2,
+        moveSpeed: 1.5,
     },
     jump: {
         offsetX: 10,
@@ -35,7 +35,7 @@ var hero1 = {
     hit: {
         offsetX: -13,
         offsetY: -20,
-        CD: 30,
+        CD: 50,
         hitMove: 1,
     },
     die: {

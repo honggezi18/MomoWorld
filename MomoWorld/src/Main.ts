@@ -1,7 +1,7 @@
 //入口函数
 class Main extends egret.DisplayObjectContainer {
     private hadLoad:number = 0;
-    private resList:string[] = ["worldMap", "map", "hero", "enemy", "attack", "other", "num"];
+    private resList:string[] = ["worldMap", "map", "hero", "enemy", "attack", "other", "num", "item"];
 
     public constructor() {
         super();
@@ -34,8 +34,8 @@ class Main extends egret.DisplayObjectContainer {
             GameData.reset();
             new World();
             World.Scene = this;
-            //UIManage.getInstance().showWelcome();
-            UIManage.getInstance().showShengDiScene();
+            UIManage.getInstance().showWelcome();
+            //UIManage.getInstance().showShengDiScene();
             //UIManage.getInstance().showMap();
         }
         else {

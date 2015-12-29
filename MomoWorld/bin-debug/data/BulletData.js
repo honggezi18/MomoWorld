@@ -5,4 +5,5 @@ var getBullet = function (name) {
 };
 var bullet1 = {
     name: "bullet1",
+    range: 350,
 };
