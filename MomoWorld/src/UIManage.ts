@@ -12,7 +12,7 @@ class UIManage {
     }
 
     constructor() {
-        if (UIManage.instance == null){
+        if (UIManage.instance == null) {
             UIManage.instance = this;
             this.registerAndroidEvent(World.instance);
         }
@@ -23,7 +23,8 @@ class UIManage {
     public clear(targer:any):void {
         this.registerAndroidEvent(World.instance);
         if (Hero.getInstance() != null)Hero.instance = null;
-        World.Scene.removeChild(targer);
+        World.instance.removeChild(UIManage.target);
+        CtrlScene.getInstance().removeAll();
         P2Tool.clearWorld(World.P2World);
         UIManage.target = null;
         targer = null;
@@ -37,14 +38,14 @@ class UIManage {
         this.welcomeScene = new WelcomeScene();
         this.registerAndroidEvent(this.welcomeScene);
         UIManage.target = this.welcomeScene;
-        World.Scene.addChild(this.welcomeScene);
+        World.instance.addChildAt(UIManage.target, 0);
     }
 
     //隐藏欢迎页面
     public hideWelcome():void {
         if (this.welcomeScene != null) {
             console.log("hideWelcome");
-          this.clear(this.welcomeScene);
+            this.clear(this.welcomeScene);
         }
         else console.log("welcomeScene   had   not  instance");
     }
@@ -55,7 +56,7 @@ class UIManage {
         if (this.mapScene != null)this.mapScene = null;
         this.mapScene = new MapScene();
         UIManage.target = this.mapScene;
-        World.Scene.addChild(this.mapScene);
+        World.instance.addChildAt(UIManage.target, 0);
     }
 
     //隐藏地图页面
@@ -75,7 +76,9 @@ class UIManage {
         this.shengDiScene = new ShengDiScene();
         this.registerAndroidEvent(this.shengDiScene);
         UIManage.target = this.shengDiScene;
-        World.Scene.addChild(this.shengDiScene);
+        World.instance.addChildAt(UIManage.target, 0);
+
+        CtrlScene.getInstance().showTop();
     }
 
     //隐藏圣地地图页面

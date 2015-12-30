@@ -4,6 +4,8 @@ class ShengDiScene extends egret.DisplayObjectContainer {
     public role:egret.DisplayObjectContainer;//角色层
     public item:egret.DisplayObjectContainer;//物品层
 
+
+    public _name:string;//当前关卡名字
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public tureWidth:number = 0;
@@ -20,6 +22,7 @@ class ShengDiScene extends egret.DisplayObjectContainer {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
+        this._name = "圣地";
 
         this.background = Tool.addBitmap(this, "map_shengdi_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
@@ -37,10 +40,10 @@ class ShengDiScene extends egret.DisplayObjectContainer {
         this.role.addChild(Hero.getInstance());
         this.y = -180;
 
-        for (var i = 0; i < 10; i++) {
-            GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
-            this.role.addChild(GameData.enemyArray[i]);
-        }
+        //for (var i = 0; i < 10; i++) {
+        //    GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
+        //    this.role.addChild(GameData.enemyArray[i]);
+        //}
     }
 
     //同步素材//先清空，再同步

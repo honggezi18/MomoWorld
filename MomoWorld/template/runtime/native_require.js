@@ -21,6 +21,7 @@ var game_file_list = [
 	"bin-debug/data/Num.js",
 	"bin-debug/Main.js",
 	"bin-debug/P2Tool.js",
+	"bin-debug/scene/CtrlScene.js",
 	"bin-debug/scene/MapScene.js",
 	"bin-debug/scene/ShengDiScene.js",
 	"bin-debug/scene/WelcomeScene.js",

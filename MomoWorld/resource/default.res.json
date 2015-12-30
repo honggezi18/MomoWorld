@@ -31,6 +31,10 @@
 	{
 		"keys":"item_thing1_png",
 		"name":"item"
+	},
+	{
+		"keys":"ctrl_barBackground_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_powerBar_png,ctrl_topBackground_png",
+		"name":"ctrl"
 	}],
 	"resources":[
 	{
@@ -282,5 +286,30 @@
 		"name":"item_thing1_png",
 		"type":"image",
 		"url":"assets/item/item_thing1.png"
+	},
+	{
+		"name":"ctrl_barBackground_png",
+		"type":"image",
+		"url":"assets/ctrl/ctrl_barBackground.png"
+	},
+	{
+		"name":"ctrl_bloodBar_png",
+		"type":"image",
+		"url":"assets/ctrl/ctrl_bloodBar.png"
+	},
+	{
+		"name":"ctrl_expBar_png",
+		"type":"image",
+		"url":"assets/ctrl/ctrl_expBar.png"
+	},
+	{
+		"name":"ctrl_powerBar_png",
+		"type":"image",
+		"url":"assets/ctrl/ctrl_powerBar.png"
+	},
+	{
+		"name":"ctrl_topBackground_png",
+		"type":"image",
+		"url":"assets/ctrl/ctrl_topBackground.png"
 	}]
 }

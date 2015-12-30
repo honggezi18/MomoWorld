@@ -96,6 +96,11 @@ var Tool = (function () {
     };
     //���Ӱ�ť�ĺ���
     Tool.addBitmap = function (target, res, x, y, width, height, isButton) {
+        if (x === void 0) { x = 0; }
+        if (y === void 0) { y = 0; }
+        if (width === void 0) { width = 0; }
+        if (height === void 0) { height = 0; }
+        if (isButton === void 0) { isButton = false; }
         var temp = new egret.Bitmap();
         temp.texture = RES.getRes(res);
         if (width != 0) {
@@ -131,6 +136,7 @@ var Tool = (function () {
     //����������
     Tool.addTextField = function (target, x, y, width, height, size, color, text) {
         var temp = new egret.TextField();
+        temp.fontFamily = "Microsoft YaHei";
         temp.x = Math.floor(x * GameData.scaleSmall);
         temp.y = Math.floor(y * GameData.scaleSmall);
         if (width != 0) {
@@ -141,7 +147,7 @@ var Tool = (function () {
         temp.textColor = color;
         temp.bold = true;
         temp.size = Math.floor(size * GameData.scaleSmall);
-        temp.text = text;
+        temp.text = text + "";
         target.addChild(temp);
         return temp;
     };

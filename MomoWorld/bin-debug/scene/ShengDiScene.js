@@ -15,6 +15,7 @@ var ShengDiScene = (function (_super) {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
+        this._name = "圣地";
         this.background = Tool.addBitmap(this, "map_shengdi_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
         this.tureHeight = this.background.height;
@@ -26,10 +27,10 @@ var ShengDiScene = (function (_super) {
         this.addChild(this.item);
         this.role.addChild(Hero.getInstance());
         this.y = -180;
-        for (var i = 0; i < 10; i++) {
-            GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
-            this.role.addChild(GameData.enemyArray[i]);
-        }
+        //for (var i = 0; i < 10; i++) {
+        //    GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
+        //    this.role.addChild(GameData.enemyArray[i]);
+        //}
     };
     //同步素材//先清空，再同步
     p.syncDisplay = function () {

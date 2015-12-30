@@ -4,7 +4,7 @@ var Main = (function (_super) {
     function Main() {
         _super.call(this);
         this.hadLoad = 0;
-        this.resList = ["worldMap", "map", "hero", "enemy", "attack", "other", "num", "item"];
+        this.resList = ["worldMap", "map", "hero", "enemy", "attack", "other", "num", "item", "ctrl"];
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
     var d = __define,c=Main;p=c.prototype;
@@ -27,9 +27,9 @@ var Main = (function (_super) {
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
             GameData.loadData();
             GameData.reset();
-            new World();
-            World.Scene = this;
-            UIManage.getInstance().showWelcome();
+            this.stage.addChild(new World());
+            //UIManage.getInstance().showWelcome();
+            UIManage.getInstance().showShengDiScene();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);

@@ -5,6 +5,8 @@ var getHero = function (name) {
 var hero1 = {
     name: "hero1",
     blood: 500,
+    power: 200,
+    exp: 1000,
     stand: {
         offsetX: -10,
         offsetY: -17.5

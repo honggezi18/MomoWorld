@@ -19,7 +19,8 @@ var UIManage = (function () {
         this.registerAndroidEvent(World.instance);
         if (Hero.getInstance() != null)
             Hero.instance = null;
-        World.Scene.removeChild(targer);
+        World.instance.removeChild(UIManage.target);
+        CtrlScene.getInstance().removeAll();
         P2Tool.clearWorld(World.P2World);
         UIManage.target = null;
         targer = null;
@@ -32,7 +33,7 @@ var UIManage = (function () {
         this.welcomeScene = new WelcomeScene();
         this.registerAndroidEvent(this.welcomeScene);
         UIManage.target = this.welcomeScene;
-        World.Scene.addChild(this.welcomeScene);
+        World.instance.addChildAt(UIManage.target, 0);
     };
     //隐藏欢迎页面
     p.hideWelcome = function () {
@@ -50,7 +51,7 @@ var UIManage = (function () {
             this.mapScene = null;
         this.mapScene = new MapScene();
         UIManage.target = this.mapScene;
-        World.Scene.addChild(this.mapScene);
+        World.instance.addChildAt(UIManage.target, 0);
     };
     //隐藏地图页面
     p.hideMap = function () {
@@ -69,7 +70,8 @@ var UIManage = (function () {
         this.shengDiScene = new ShengDiScene();
         this.registerAndroidEvent(this.shengDiScene);
         UIManage.target = this.shengDiScene;
-        World.Scene.addChild(this.shengDiScene);
+        World.instance.addChildAt(UIManage.target, 0);
+        CtrlScene.getInstance().showTop();
     };
     //隐藏圣地地图页面
     p.hideShengDiScene = function () {

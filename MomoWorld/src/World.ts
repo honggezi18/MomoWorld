@@ -2,9 +2,6 @@
 class World extends egret.DisplayObjectContainer {
     static instance:World;//物理世界管理变量
     static P2World:p2.World;//物理世界管理变量
-    static Scene:egret.DisplayObjectContainer;//场景管理变量
-
-
     private world:p2.World;//物理世界
     private world_speed:number = 0.05;//每次刷新，物理世界的步进时长
 
@@ -17,8 +14,7 @@ class World extends egret.DisplayObjectContainer {
 
     //初始化资源
     public init():void {
-        World.Scene = new egret.DisplayObjectContainer();
-        this.addChild(World.Scene);
+        CtrlScene.getInstance();
         this.createWorldSystem();
         World.P2World = this.world;
         this.addEventListener(egret.Event.ENTER_FRAME, this.flash, this);//进行每一帧的数据处理
@@ -36,6 +32,7 @@ class World extends egret.DisplayObjectContainer {
 
     //每一帧的数据处理函数，用于同步数据
     public flash():void {
+        CtrlScene.getInstance().syncFun();
         this.world.step(this.world_speed);//使物理系统向前经过一定时间
         if (UIManage.target != null && typeof(UIManage.target.syncDisplay) == "function")UIManage.target.syncDisplay();
     }

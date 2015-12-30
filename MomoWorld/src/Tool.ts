@@ -5,7 +5,7 @@ class Tool {
     static deepCopy(source) {
         var result = {};
         for (var key in source) {
-            result[key] = typeof source[key] ==='object'? Tool.deepCopy(source[key]) : source[key];
+            result[key] = typeof source[key] === 'object' ? Tool.deepCopy(source[key]) : source[key];
         }
         return result;
     }
@@ -96,7 +96,7 @@ class Tool {
     }
 
     //添加按钮的函数
-    static addBitmap(target:any, res:string, x:number, y:number, width:number, height:number, isButton:boolean):egret.Bitmap {
+    static addBitmap(target:any, res:string, x:number = 0, y:number = 0, width:number = 0, height:number = 0, isButton:boolean = false):egret.Bitmap {
         var temp:egret.Bitmap = new egret.Bitmap();
         temp.texture = RES.getRes(res);
         if (width != 0) {
@@ -132,8 +132,9 @@ class Tool {
     }
 
     //添加文字行
-    static addTextField(target:any, x:number, y:number, width:number, height:number, size:number, color:number, text:string):egret.TextField {
+    static addTextField(target:any, x:number, y:number, width:number, height:number, size:number, color:number, text:any):egret.TextField {
         var temp:egret.TextField = new egret.TextField();
+        temp.fontFamily = "Microsoft YaHei";
         temp.x = Math.floor(x * GameData.scaleSmall);
         temp.y = Math.floor(y * GameData.scaleSmall);
         if (width != 0) {
@@ -144,7 +145,7 @@ class Tool {
         temp.textColor = color;
         temp.bold = true;
         temp.size = Math.floor(size * GameData.scaleSmall);
-        temp.text = text;
+        temp.text = text+"";
         target.addChild(temp);
         return temp;
     }

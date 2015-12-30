@@ -5,9 +5,15 @@ class Hero extends egret.DisplayObjectContainer {
     public show:egret.MovieClip;//角色皮肤
     public data:any;//静态数据
 
+    public bloodMax:number = 1;//当前最大血量
+    public blood:number = 1;//血量
+    public powerMax:number = 1;//当前最大法力值
+    public power:number = 1;//法力值
+    public expMax:number = 1;//当前最大经验值
+    public exp:number = 1;//经验值
+    public level:number = 1;//当前等级
     private offsetX:number = 0;//当前皮肤的偏移值
     private offsetY:number = 0;
-    private blood:number = 1;//血量
     private toward:number = 1;//当前的朝向,其中1为向左。-1为向右
     private attackCD:number = 0;//普通攻击的冷却时间
     private hitCD:number = 0;//被攻击时的冷却时间
@@ -42,7 +48,12 @@ class Hero extends egret.DisplayObjectContainer {
     public init(name):void {
         this._name = name;
         this.data = getHero(this._name);
+        this.bloodMax = this.data.blood;
         this.blood = this.data.blood;
+        this.powerMax = this.data.power;
+        this.power = this.data.power;
+        this.expMax = this.data.exp;
+        this.exp = 0;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;

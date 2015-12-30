@@ -13,8 +13,7 @@ var World = (function (_super) {
     var d = __define,c=World;p=c.prototype;
     //��ʼ����Դ
     p.init = function () {
-        World.Scene = new egret.DisplayObjectContainer();
-        this.addChild(World.Scene);
+        CtrlScene.getInstance();
         this.createWorldSystem();
         World.P2World = this.world;
         this.addEventListener(egret.Event.ENTER_FRAME, this.flash, this); //����ÿһ֡�����ݴ���
@@ -30,6 +29,7 @@ var World = (function (_super) {
     };
     //ÿһ֡�����ݴ�����������ͬ������
     p.flash = function () {
+        CtrlScene.getInstance().syncFun();
         this.world.step(this.world_speed); //ʹ����ϵͳ��ǰ����һ��ʱ��
         if (UIManage.target != null && typeof (UIManage.target.syncDisplay) == "function")
             UIManage.target.syncDisplay();

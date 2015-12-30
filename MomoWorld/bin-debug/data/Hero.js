@@ -3,9 +3,15 @@ var Hero = (function (_super) {
     __extends(Hero, _super);
     function Hero(name) {
         _super.call(this);
+        this.bloodMax = 1; //��ǰ����Ѫ��
+        this.blood = 1; //Ѫ��
+        this.powerMax = 1; //��ǰ��������ֵ
+        this.power = 1; //����ֵ
+        this.expMax = 1; //��ǰ��������ֵ
+        this.exp = 1; //����ֵ
+        this.level = 1; //��ǰ�ȼ�
         this.offsetX = 0; //��ǰƤ����ƫ��ֵ
         this.offsetY = 0;
-        this.blood = 1; //Ѫ��
         this.toward = 1; //��ǰ�ĳ���,����1Ϊ������-1Ϊ����
         this.attackCD = 0; //��ͨ��������ȴʱ��
         this.hitCD = 0; //������ʱ����ȴʱ��
@@ -36,7 +42,12 @@ var Hero = (function (_super) {
     p.init = function (name) {
         this._name = name;
         this.data = getHero(this._name);
+        this.bloodMax = this.data.blood;
         this.blood = this.data.blood;
+        this.powerMax = this.data.power;
+        this.power = this.data.power;
+        this.expMax = this.data.exp;
+        this.exp = 0;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;
