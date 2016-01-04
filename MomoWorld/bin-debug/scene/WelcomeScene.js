@@ -15,6 +15,7 @@ var WelcomeScene = (function (_super) {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
+        this._name = "欢迎页面";
         this.background = Tool.addBitmap(this, "map_welcome_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
         this.tureHeight = this.background.height;
@@ -23,6 +24,7 @@ var WelcomeScene = (function (_super) {
         this.showBody = [];
         this.addChild(Hero.getInstance());
         this.y = -180;
+        CtrlScene.getInstance().ctrlDaily("show");
     };
     //同步素材
     p.syncDisplay = function () {

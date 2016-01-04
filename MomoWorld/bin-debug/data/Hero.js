@@ -22,6 +22,7 @@ var Hero = (function (_super) {
         this.actionType = ""; //�˶�״̬
         this.mcType = ""; //��ʾ��ǰ����������
         this.isDie = false; //��ʾ�Ƿ��Ѿ�����
+        this.isLevelUp = false; //��ʾ��������
         this.isWalking = false; //��ʾ��ǰ�Ƿ����ڱ���
         this.isHitting = false; //��ʾ��ǰ�Ƿ����ڱ�����
         this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,�����������Ķ����޵�
@@ -73,6 +74,10 @@ var Hero = (function (_super) {
             this.body.position[0] = P2Tool.getP2Num(UIManage.target.tureWidth - 25);
         if (this.isWalking == true)
             this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed) * this.toward;
+        if (this.isLevelUp) {
+            this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
+            this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
+        }
         //ͬ������
         var parent = UIManage.target;
         if (bodyX > GameData.gameWidth / 2 && bodyX < parent.measuredWidth - GameData.gameWidth / 2)
@@ -127,7 +132,6 @@ var Hero = (function (_super) {
                     this.action("hit");
                     var power = temp.data.stand.powerBase + Math.floor(Math.random() * temp.data.stand.powerSpace);
                     this.blood -= power;
-                    console.log("Hero blood   " + this.blood);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -138,7 +142,6 @@ var Hero = (function (_super) {
                     this.action("hit");
                     var power = temp.data.attack.powerBase + Math.floor(Math.random() * temp.data.attack.powerSpace);
                     this.blood -= power;
-                    console.log("Hero blood   " + this.blood);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -152,6 +155,7 @@ var Hero = (function (_super) {
         this.actionType = type;
         if (type == "RightDown" || type == "LeftDown") {
             this.toward = 1;
+            this.isAttack = false;
             this.isWalking = true;
             if (type == "RightDown")
                 this.toward = -1;
@@ -160,6 +164,7 @@ var Hero = (function (_super) {
         else if (type == "AttackDown") {
             this.attackCD = 0;
             this.isAttack = true;
+            this.isWalking = false;
             this.setMoveClip("attack");
         }
         else if (type == "SkillDown") {
@@ -190,7 +195,22 @@ var Hero = (function (_super) {
             this.isAttack = false;
             this.isWalking = false;
         }
-        //�����Ƿ�������ͼ
+        else if (type == "levelUp") {
+            this.isLevelUp = true;
+            this.level++;
+            this.power = this.powerMax;
+            this.blood = this.bloodMax;
+            this.expMax += this.data.expSpace;
+            this.show2 = Tool.addMoveClip(this, "hero_levelUp", "hero_levelUp", 0, 0, 1, 1, true);
+            this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
+            this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
+            this.show2.addEventListener(egret.Event.COMPLETE, function () {
+                this.removeChild(this.show2);
+                this.isLevelUp = false;
+                this.show2 = null;
+            }, this);
+        }
+        //�����Ƿ�������ͼ������
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
             console.log("UpDown");
             UIManage.getInstance().hideWelcome();

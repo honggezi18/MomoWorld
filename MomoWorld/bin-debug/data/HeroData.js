@@ -6,7 +6,8 @@ var hero1 = {
     name: "hero1",
     blood: 500,
     power: 200,
-    exp: 1000,
+    exp: 155,
+    expSpace: 200,
     stand: {
         offsetX: -10,
         offsetY: -17.5
@@ -26,7 +27,7 @@ var hero1 = {
         powerBase: 50,
         powerSpace: 20,
         speed: 20,
-        CD: 25
+        CD: 10
     },
     skill: {
         offsetX: -2,
@@ -43,5 +44,9 @@ var hero1 = {
     die: {
         offsetX: 0,
         offsetY: -6
+    },
+    levelUp: {
+        offsetX: 0,
+        offsetY: -80
     },
 };

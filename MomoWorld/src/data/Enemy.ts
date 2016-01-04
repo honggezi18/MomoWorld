@@ -148,6 +148,11 @@ class Enemy extends egret.DisplayObjectContainer {
         else if (type == "die") {
             this.isDie = true;
             this.setMoveClip("die");
+            Hero.getInstance().exp += this.data.exp;
+            if (Hero.getInstance().exp >= Hero.getInstance().expMax) {
+                Hero.getInstance().exp -= Hero.getInstance().expMax;
+                Hero.getInstance().action("levelUp");
+            }
         }
 
 

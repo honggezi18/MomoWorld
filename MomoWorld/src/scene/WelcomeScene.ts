@@ -4,6 +4,7 @@ class WelcomeScene extends egret.DisplayObjectContainer {
     private ground:p2.Body;//场景的地板刚体
     private showBody:Array<p2.Body>;//需要同步数据的刚体
 
+    public _name:string;//当前关卡名字
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public tureWidth:number = 0;
@@ -19,6 +20,7 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
         this.width = GameData.gameWidth;
         this.height = GameData.gameHeight;
+        this._name = "欢迎页面";
 
         this.background = Tool.addBitmap(this, "map_welcome_png", 0, 0, 0, 0, true);
         this.tureWidth = this.background.width;
@@ -28,6 +30,8 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         this.showBody = [];
         this.addChild(Hero.getInstance());
         this.y = -180;
+
+        CtrlScene.getInstance().ctrlDaily("show");
     }
 
     //同步素材

@@ -96,7 +96,7 @@ class Tool {
     }
 
     //添加按钮的函数
-    static addBitmap(target:any, res:string, x:number = 0, y:number = 0, width:number = 0, height:number = 0, isButton:boolean = false):egret.Bitmap {
+    static addBitmap(target:any, res:string, x:number = 0, y:number = 0, width:number = 0, height:number = 0, isButton:boolean = false, isCenter:boolean = false):egret.Bitmap {
         var temp:egret.Bitmap = new egret.Bitmap();
         temp.texture = RES.getRes(res);
         if (width != 0) {
@@ -112,6 +112,10 @@ class Tool {
             temp.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, target.onTouchEnd, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_END, target.onTouchEnd, target);
             temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target);//被移除时消除消息的监听
+        }
+        if (isCenter) {
+            temp.anchorOffsetX = temp.width / 2;
+            temp.anchorOffsetY = temp.height / 2;
         }
         return temp;
     }
@@ -145,7 +149,7 @@ class Tool {
         temp.textColor = color;
         temp.bold = true;
         temp.size = Math.floor(size * GameData.scaleSmall);
-        temp.text = text+"";
+        temp.text = text + "";
         target.addChild(temp);
         return temp;
     }

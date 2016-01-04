@@ -4,13 +4,11 @@ class ShengDiScene extends egret.DisplayObjectContainer {
     public role:egret.DisplayObjectContainer;//角色层
     public item:egret.DisplayObjectContainer;//物品层
 
-
     public _name:string;//当前关卡名字
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public absoluteY:number = 0;//标示点击的绝对坐标，即相对于背景的坐标
     public tureWidth:number = 0;
     public tureHeight:number = 0;
-
 
     constructor() {
         super();
@@ -78,7 +76,9 @@ class ShengDiScene extends egret.DisplayObjectContainer {
             }
         }
 
+
         Hero.getInstance().syncFun();//同步英雄
+        CtrlScene.getInstance().syncFun();//同步操作面板
         for (var i = 0; i < GameData.enemyArray.length; i++) GameData.enemyArray[i].syncFun();
         for (var i = 0; i < GameData.bulletArray.length; i++) GameData.bulletArray[i].syncFun();
         for (var i = 0; i < GameData.itemArray.length; i++) GameData.itemArray[i].syncFun();
@@ -87,6 +87,7 @@ class ShengDiScene extends egret.DisplayObjectContainer {
     //触屏按下
     public onTouchStart(e:egret.TouchEvent):void {
         console.log("onTouchStart");
+        //Hero.getInstance().action("levelUp");
         //new Item("thing1", P2Tool.getEgretNum(Hero.getInstance().body.position[0]), P2Tool.getEgretY(Hero.getInstance().body.position[1]));
     }
 

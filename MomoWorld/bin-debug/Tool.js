@@ -95,12 +95,13 @@ var Tool = (function () {
         }, target);
     };
     //���Ӱ�ť�ĺ���
-    Tool.addBitmap = function (target, res, x, y, width, height, isButton) {
+    Tool.addBitmap = function (target, res, x, y, width, height, isButton, isCenter) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
         if (width === void 0) { width = 0; }
         if (height === void 0) { height = 0; }
         if (isButton === void 0) { isButton = false; }
+        if (isCenter === void 0) { isCenter = false; }
         var temp = new egret.Bitmap();
         temp.texture = RES.getRes(res);
         if (width != 0) {
@@ -116,6 +117,10 @@ var Tool = (function () {
             temp.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, target.onTouchEnd, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_END, target.onTouchEnd, target);
             temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target); //���Ƴ�ʱ������Ϣ�ļ���
+        }
+        if (isCenter) {
+            temp.anchorOffsetX = temp.width / 2;
+            temp.anchorOffsetY = temp.height / 2;
         }
         return temp;
     };

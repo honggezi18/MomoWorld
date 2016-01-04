@@ -6,6 +6,7 @@ var getEnemy = function (name) {
 var enemy1 = {
     name: "enemy1",
     blood: 500,
+    exp: 50,//当前怪物的经验值
 
     stand: {
         offsetX: -15,

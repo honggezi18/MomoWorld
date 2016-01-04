@@ -3,6 +3,7 @@ class Hero extends egret.DisplayObjectContainer {
     static instance;
     public body:p2.Body;//角色刚体
     public show:egret.MovieClip;//角色皮肤
+    public show2:egret.MovieClip;//辅助皮肤
     public data:any;//静态数据
 
     public bloodMax:number = 1;//当前最大血量
@@ -26,6 +27,7 @@ class Hero extends egret.DisplayObjectContainer {
     private mcType:string = "";//标示当前动画的类型
 
     private isDie:boolean = false;//标示是否已经死亡
+    private isLevelUp:boolean = false;//标示正在升级
     private isWalking:boolean = false;//标示当前是否正在奔跑
     private isHitting:boolean = false;//标示当前是否正在被攻击
     private isMissing:boolean = false;//标示当前是否闪避状态,即被攻击后的短暂无敌
@@ -79,6 +81,10 @@ class Hero extends egret.DisplayObjectContainer {
         if (this.body.position[0] < P2Tool.getP2Num(25))this.body.position[0] = P2Tool.getP2Num(25);
         if (this.body.position[0] > P2Tool.getP2Num(UIManage.target.tureWidth - 25))this.body.position[0] = P2Tool.getP2Num(UIManage.target.tureWidth - 25);
         if (this.isWalking == true)this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed) * this.toward;
+        if (this.isLevelUp) {//升级时的皮肤同步
+            this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
+            this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
+        }
 
         //同步场景
         var parent = UIManage.target;
@@ -134,7 +140,6 @@ class Hero extends egret.DisplayObjectContainer {
                     this.action("hit");
                     var power:number = temp.data.stand.powerBase + Math.floor(Math.random() * temp.data.stand.powerSpace);
                     this.blood -= power;
-                    console.log("Hero blood   " + this.blood);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -145,7 +150,6 @@ class Hero extends egret.DisplayObjectContainer {
                     this.action("hit");
                     var power:number = temp.data.attack.powerBase + Math.floor(Math.random() * temp.data.attack.powerSpace);
                     this.blood -= power;
-                    console.log("Hero blood   " + this.blood);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -162,6 +166,7 @@ class Hero extends egret.DisplayObjectContainer {
 
         if (type == "RightDown" || type == "LeftDown") {
             this.toward = 1;
+            this.isAttack = false;
             this.isWalking = true;
             if (type == "RightDown")this.toward = -1;
             this.setMoveClip("walk");
@@ -169,6 +174,7 @@ class Hero extends egret.DisplayObjectContainer {
         else if (type == "AttackDown") {
             this.attackCD = 0;
             this.isAttack = true;
+            this.isWalking = false;
             this.setMoveClip("attack");
         }
         else if (type == "SkillDown") {
@@ -199,9 +205,23 @@ class Hero extends egret.DisplayObjectContainer {
             this.isAttack = false;
             this.isWalking = false;
         }
+        else if (type == "levelUp") {//升级
+            this.isLevelUp = true;
+            this.level++;
+            this.power = this.powerMax;
+            this.blood = this.bloodMax;
+            this.expMax += this.data.expSpace;
+            this.show2 = Tool.addMoveClip(this, "hero_levelUp", "hero_levelUp", 0, 0, 1, 1, true);
+            this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
+            this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
+            this.show2.addEventListener(egret.Event.COMPLETE, function () {
+                this.removeChild(this.show2);
+                this.isLevelUp = false;
+                this.show2 = null;
+            }, this);
+        }
 
-
-        //检测是否进入地图
+        //检测是否进入地图传输门
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
             console.log("UpDown");
             UIManage.getInstance().hideWelcome();

@@ -5,6 +5,7 @@ var getEnemy = function (name) {
 var enemy1 = {
     name: "enemy1",
     blood: 500,
+    exp: 50,
     stand: {
         offsetX: -15,
         offsetY: -25,

@@ -6,7 +6,8 @@ var hero1 = {
     name: "hero1",
     blood: 500,
     power: 200,
-    exp: 1000,
+    exp: 155,
+    expSpace: 200,//每次升级后增加的经验增长
     stand: {
         offsetX: -10,
         offsetY: -17.5
@@ -29,7 +30,7 @@ var hero1 = {
         powerBase: 50,//碰撞攻击的基本数值
         powerSpace: 20,//浮动值
         speed: 20,//普通攻击的移动速度
-        CD: 25
+        CD: 10
     },
 
     skill: {
@@ -49,5 +50,10 @@ var hero1 = {
     die: {
         offsetX: 0,
         offsetY: -6
+    },
+
+    levelUp: {
+        offsetX: 0,
+        offsetY: -80
     },
 };

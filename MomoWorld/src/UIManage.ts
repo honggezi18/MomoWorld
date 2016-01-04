@@ -38,6 +38,7 @@ class UIManage {
         this.welcomeScene = new WelcomeScene();
         this.registerAndroidEvent(this.welcomeScene);
         UIManage.target = this.welcomeScene;
+        CtrlScene.getInstance().showCtrl("welcome");
         World.instance.addChildAt(UIManage.target, 0);
     }
 
@@ -68,7 +69,6 @@ class UIManage {
         else console.log("mapScene   had   not  instance");
     }
 
-
     //显示圣地地图页面
     public showShengDiScene():void {
         console.log("showShengDi");
@@ -77,8 +77,8 @@ class UIManage {
         this.registerAndroidEvent(this.shengDiScene);
         UIManage.target = this.shengDiScene;
         World.instance.addChildAt(UIManage.target, 0);
-
         CtrlScene.getInstance().showTop();
+        CtrlScene.getInstance().showCtrl();
     }
 
     //隐藏圣地地图页面
@@ -96,8 +96,8 @@ class UIManage {
         window['keyConfirm'] = target.control;//确定
         window['keyMenu'] = target.control;//菜单
         window['keyJump'] = target.control;//弹跳
-        window['keySkill'] = target.control;//技能
-        window['keyGet'] = target.control;//捡取
+        window['keySkill1'] = target.control;//技能
+        window['keySkill2'] = target.control;//捡取
         window['keyAttack'] = target.control;//攻击
         window['keyLeft'] = target.control;//左
         window['keyUp'] = target.control;//上
