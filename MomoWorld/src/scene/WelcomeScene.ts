@@ -30,8 +30,6 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         this.showBody = [];
         this.addChild(Hero.getInstance());
         this.y = -180;
-
-        CtrlScene.getInstance().ctrlDaily("show");
     }
 
     //同步素材
@@ -42,18 +40,16 @@ class WelcomeScene extends egret.DisplayObjectContainer {
 
     //触屏按下
     public onTouchStart(e:egret.TouchEvent):void {
-        console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
+        //console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
         this.absoluteX = e.stageX - this.x;
         this.absoluteY = e.stageY - this.y;
-        if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)console.log("select   每日任务");
+        if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)CtrlScene.getInstance().ctrlDaily("show");
         if (315 < this.absoluteX && this.absoluteX < 350 && 190 < this.absoluteY && this.absoluteY < 280)console.log("select   达成成就");
         if (480 < this.absoluteX && this.absoluteX < 540 && 135 < this.absoluteY && this.absoluteY < 250)console.log("select   技能升级");
         if (110 < this.absoluteX && this.absoluteX < 175 && 325 < this.absoluteY && this.absoluteY < 395)console.log("select   武器商店");
         if (245 < this.absoluteX && this.absoluteX < 305 && 325 < this.absoluteY && this.absoluteY < 395)console.log("select   药水商店");
         if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)console.log("select   武器升级");
         if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)console.log("select   我的储物箱");
-
-        //this.showBody.push(P2Tool.createBox(this, World.P2World, this.absoluteX, this.absoluteY, 30, 30, "testColor_png", false));
     }
 
     //触屏松开

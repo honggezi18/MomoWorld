@@ -1,4 +1,4 @@
-//物品掉落类攻击
+//物品掉落类
 class Item {
     public show:egret.Bitmap;
     public data:any;//静态数据

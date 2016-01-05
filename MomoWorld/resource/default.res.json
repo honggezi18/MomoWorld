@@ -33,7 +33,7 @@
 		"name":"item"
 	},
 	{
-		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png",
+		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png",
 		"name":"ctrl"
 	}],
 	"resources":[
@@ -386,5 +386,10 @@
 		"name":"over_png",
 		"type":"image",
 		"url":"assets/ctrl/daily/over.png"
+	},
+	{
+		"name":"daily_icon1_png",
+		"type":"image",
+		"url":"assets/ctrl/daily/daily_icon1.png"
 	}]
 }

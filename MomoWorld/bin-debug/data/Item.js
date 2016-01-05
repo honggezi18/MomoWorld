@@ -1,4 +1,4 @@
-//��Ʒ�����๥��
+//��Ʒ������
 var Item = (function () {
     //���캯��
     function Item(name, x, y) {

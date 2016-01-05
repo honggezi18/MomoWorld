@@ -86,6 +86,7 @@ class ShengDiScene extends egret.DisplayObjectContainer {
 
     //触屏按下
     public onTouchStart(e:egret.TouchEvent):void {
+        e.stopImmediatePropagation();
         console.log("onTouchStart");
         //Hero.getInstance().action("levelUp");
         //new Item("thing1", P2Tool.getEgretNum(Hero.getInstance().body.position[0]), P2Tool.getEgretY(Hero.getInstance().body.position[1]));
@@ -93,6 +94,7 @@ class ShengDiScene extends egret.DisplayObjectContainer {
 
     //触屏松开
     public onTouchEnd(e:egret.TouchEvent):void {
+        e.stopImmediatePropagation();
         //console.log("onTouchEnd     x    " + e.stageX + "    y    " + e.stageY);
     }
 

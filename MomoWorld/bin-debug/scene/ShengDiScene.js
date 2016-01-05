@@ -71,12 +71,14 @@ var ShengDiScene = (function (_super) {
     };
     //触屏按下
     p.onTouchStart = function (e) {
+        e.stopImmediatePropagation();
         console.log("onTouchStart");
         //Hero.getInstance().action("levelUp");
         //new Item("thing1", P2Tool.getEgretNum(Hero.getInstance().body.position[0]), P2Tool.getEgretY(Hero.getInstance().body.position[1]));
     };
     //触屏松开
     p.onTouchEnd = function (e) {
+        e.stopImmediatePropagation();
         //console.log("onTouchEnd     x    " + e.stageX + "    y    " + e.stageY);
     };
     p.onRemove = function (e) {

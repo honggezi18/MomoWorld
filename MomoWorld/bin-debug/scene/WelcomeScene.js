@@ -24,7 +24,6 @@ var WelcomeScene = (function (_super) {
         this.showBody = [];
         this.addChild(Hero.getInstance());
         this.y = -180;
-        CtrlScene.getInstance().ctrlDaily("show");
     };
     //同步素材
     p.syncDisplay = function () {
@@ -34,11 +33,11 @@ var WelcomeScene = (function (_super) {
     };
     //触屏按下
     p.onTouchStart = function (e) {
-        console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
+        //console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
         this.absoluteX = e.stageX - this.x;
         this.absoluteY = e.stageY - this.y;
         if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)
-            console.log("select   每日任务");
+            CtrlScene.getInstance().ctrlDaily("show");
         if (315 < this.absoluteX && this.absoluteX < 350 && 190 < this.absoluteY && this.absoluteY < 280)
             console.log("select   达成成就");
         if (480 < this.absoluteX && this.absoluteX < 540 && 135 < this.absoluteY && this.absoluteY < 250)
@@ -51,7 +50,6 @@ var WelcomeScene = (function (_super) {
             console.log("select   武器升级");
         if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)
             console.log("select   我的储物箱");
-        //this.showBody.push(P2Tool.createBox(this, World.P2World, this.absoluteX, this.absoluteY, 30, 30, "testColor_png", false));
     };
     //触屏松开
     p.onTouchEnd = function (e) {

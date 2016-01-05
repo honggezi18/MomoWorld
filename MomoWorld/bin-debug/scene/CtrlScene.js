@@ -3,10 +3,10 @@ var CtrlScene = (function (_super) {
     __extends(CtrlScene, _super);
     function CtrlScene() {
         _super.call(this);
+        this.showing = "empty"; //标示正在显示着什么面板
         //顶部素材
         this.isTop = false; //标示是否显示顶部
         this.isCtrl = false;
-        this.dailyItemNum = 1; //任务项目的数量
         if (CtrlScene.instance == null)
             CtrlScene.instance = this;
         else
@@ -66,13 +66,19 @@ var CtrlScene = (function (_super) {
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
             this.expText = Tool.addTextField(this, 460, 415, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
+            this.ctrlDaily("show");
         }
     };
     //对每日任务界面的
     p.ctrlDaily = function (type) {
         if (type == "show") {
+            if (this.showing != "empty")
+                return; //若已经在显示着面板
+            this.dailyData = daily;
+            this.showing = "daily";
             this.dailyBtn = [];
             this.dailyGift = [];
+            this.dailyIcon = [];
             this.dailyItems = [];
             this.dailyDetail = [];
             this.dailyContainer = new egret.DisplayObjectContainer();
@@ -83,21 +89,57 @@ var CtrlScene = (function (_super) {
             this.dailyContainer.x = this.width / 2;
             this.dailyContainer.y = this.height / 2;
             this.dailyBackground = Tool.addBitmap(this.dailyContainer, "daily_background_png", this.dailyContainer.width / 2, this.dailyContainer.height / 2, 500, 350, false, true);
-            this.dailyItemContainer = new egret.DisplayObjectContainer();
-            this.dailyItemContainer.width = 470;
-            this.dailyItemContainer.height = 250;
-            this.dailyItemContainer.x = 17;
-            this.dailyItemContainer.y = 80;
-            this.dailyContainer.addChild(this.dailyItemContainer);
-            for (var i = 0; i < this.dailyItemNum; i++) {
-                this.dailyItems.push(Tool.addBitmap(this.dailyItemContainer, "daily_item_png", this.width / 2 + 2, this.height / 2, 470, 80, false, true));
-                this.dailyBtn.push(Tool.addBitmap(this.dailyItemContainer, "daily_get_png", this.width / 2, this.height / 2, 100, 30, false, true));
-                this.dailyGift.push(Tool.addTextField(this.dailyItemContainer, 50, 50, 0, 0, 30, 0x000000, "奖励"));
-                this.dailyDetail.push(Tool.addTextField(this.dailyItemContainer, 50, 50, 0, 0, 30, 0x000000, "详细信息"));
+            this.dailyBackground.touchEnabled = true;
+            this.dailyBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                if (e.stageX > 600 && e.stageX < 630 && e.stageY > 75 && e.stageY < 100)
+                    this.ctrlDaily("hide");
+            }, this);
+            this.dailyItemGroup = new eui.Group();
+            this.dailyItemGroup.touchEnabled = true;
+            this.dailyItemGroup.width = 470;
+            this.dailyItemGroup.height = 85 * this.dailyData.items.length;
+            this.dailyItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < this.dailyData.items.length; i++) {
+                this.dailyItems.push(Tool.addBitmap(this.dailyItemGroup, "daily_item_png", 2, i * 85, 470, 80));
+                this.dailyBtn.push(Tool.addBitmap(this.dailyItemGroup, "daily_get_png", 355, i * 85 + 40, 100, 30));
+                this.dailyIcon.push(Tool.addBitmap(this.dailyItemGroup, "daily_icon1_png", 12, i * 85 + 15, 50, 50));
+                this.dailyGift.push(Tool.addTextField(this.dailyItemGroup, 120, i * 85 + 42, 0, 0, 20, 0x000000, this.dailyData.items[i].gift));
+                this.dailyDetail.push(Tool.addTextField(this.dailyItemGroup, 80, i * 85 + 8, 0, 0, 20, 0x000000, this.dailyData.items[i].detail));
+                this.dailyGift[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.dailyDetail[i].textAlign = egret.HorizontalAlign.LEFT;
             }
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            scroll.width = 470;
+            scroll.height = 260;
+            scroll.x = 17;
+            scroll.y = 70;
+            this.dailyContainer.addChild(scroll);
+            tempGroup.addChild(this.dailyItemGroup);
             this.addChild(this.dailyContainer);
+            this.dailyContainer.scaleX = 0;
+            this.dailyContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.dailyContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }
         else if (type == "hide") {
+            if (this.showing == "empty")
+                return;
+            var tw = egret.Tween.get(this.dailyContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.dailyContainer);
+                this.dailyBackground = null;
+                this.dailyContainer = null;
+                this.dailyItemGroup = null;
+                this.dailyDetail = null;
+                this.dailyItems = null;
+                this.dailyGift = null;
+                this.dailyBtn = null;
+                this.showing = "empty";
+            }, this);
         }
     };
     //同步函数

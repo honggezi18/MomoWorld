@@ -21,6 +21,9 @@
 		{
 			"name": "res"
 		},
+		{
+			"name": "eui"
+		},
     {
       "name": "p2",
       "path": "../p2Physics"
