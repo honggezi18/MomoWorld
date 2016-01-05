@@ -38,6 +38,24 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private dailyBtn:Array<egret.Bitmap>;//每一项的按钮
     private dailyData:any;//每日任务的数据
 
+    //成就界面
+    private achievementContainer:egret.DisplayObjectContainer;//成就显示容器
+    private achievementItemGroup:eui.Group;//成就显示容器
+    private achievementBackground:egret.Bitmap;//背景
+    private achievementItems:Array<egret.Bitmap>;//显示的项目
+    private achievementIcon:Array<egret.Bitmap>;//成就的图标
+    private achievementDetail:Array<egret.TextField>;//成就详情
+    private achievementGift:Array<egret.TextField>;//成就奖励
+    private achievementBtn:Array<egret.Bitmap>;//每一项的按钮
+    private achievementData:any;//成就的数据
+
+    //能力界面
+    private abilityContainer:egret.DisplayObjectContainer;//成就显示容器
+    private abilityBackground:egret.Bitmap;//背景
+    private abilityIcon:Array<egret.Bitmap>;//各个图标
+    private abilityText:Array<egret.TextField>;//各个信息
+    private abilityData:any;//成就的数据
+
 
     public static getInstance():CtrlScene {
         if (CtrlScene.instance == null)CtrlScene.instance = new CtrlScene();
@@ -100,11 +118,132 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
             this.expText = Tool.addTextField(this, 460, 415, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
-            this.ctrlDaily("show");
         }
     }
 
-    //对每日任务界面的
+    //能力面板
+    public ctrlAbility(type:string):void {
+        if (type == "show") {
+            if (this.showing != "empty")return;//若已经在显示着面板
+            this.abilityData = ability;
+            this.showing = "ability";
+            this.abilityIcon = [];
+            this.abilityText = [];
+            this.abilityContainer = new egret.DisplayObjectContainer();
+            this.abilityContainer.width = 500;
+            this.abilityContainer.height = 350;
+            this.abilityContainer.anchorOffsetX = this.abilityContainer.width / 2;
+            this.abilityContainer.anchorOffsetY = this.abilityContainer.height / 2;
+            this.abilityContainer.x = this.width / 2;
+            this.abilityContainer.y = this.height / 2;
+
+            this.abilityBackground = Tool.addBitmap(this.abilityContainer, "ability_background_png", this.abilityContainer.width / 2, this.abilityContainer.height / 2, 500, 350, false, true);
+            this.abilityBackground.touchEnabled = true;
+            this.abilityBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                console.log("x  " + e.stageX + "   y   " + e.stageY);
+                if (e.stageX > 600 && e.stageX < 630 && e.stageY > 75 && e.stageY < 100)this.ctrlAhievement("hide");
+            }, this);
+
+            for (var i = 0; i < 5; i++) {
+                this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.items[i].icon, 13, i * 85 + 15, 50, 50));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, 120, i * 85 + 42, 0, 0, 20, 0x000000, this.abilityData.items[i].gift));
+                this.abilityText[i].textAlign = egret.HorizontalAlign.LEFT;
+            }
+
+
+
+            var tw = egret.Tween.get(this.abilityContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            if (this.showing == "empty")return;
+            var tw = egret.Tween.get(this.abilityContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.abilityContainer);
+                this.abilityBackground = null;
+                this.abilityIcon = null;
+                this.abilityText = null;
+                this.abilityData = null;
+                this.showing = "empty";
+            }, this);
+        }
+    }
+
+    //成就面板
+    public ctrlAhievement(type:string):void {
+        if (type == "show") {
+            if (this.showing != "empty")return;//若已经在显示着面板
+            this.achievementData = achievement;
+            this.showing = "achievement";
+            this.achievementBtn = [];
+            this.achievementGift = [];
+            this.achievementIcon = [];
+            this.achievementItems = [];
+            this.achievementDetail = [];
+            this.achievementContainer = new egret.DisplayObjectContainer();
+            this.achievementContainer.width = 500;
+            this.achievementContainer.height = 350;
+            this.achievementContainer.anchorOffsetX = this.achievementContainer.width / 2;
+            this.achievementContainer.anchorOffsetY = this.achievementContainer.height / 2;
+            this.achievementContainer.x = this.width / 2;
+            this.achievementContainer.y = this.height / 2;
+            this.achievementBackground = Tool.addBitmap(this.achievementContainer, "achievement_background_png", this.achievementContainer.width / 2, this.achievementContainer.height / 2, 500, 350, false, true);
+            this.achievementBackground.touchEnabled = true;
+            this.achievementBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.stageX > 600 && e.stageX < 630 && e.stageY > 75 && e.stageY < 100)this.ctrlAhievement("hide");
+            }, this);
+
+            this.achievementItemGroup = new eui.Group();
+            this.achievementItemGroup.touchEnabled = true;
+            this.achievementItemGroup.width = 470;
+            this.achievementItemGroup.height = 85 * this.achievementData.items.length;
+            this.achievementItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < this.achievementData.items.length; i++) {
+                this.achievementItems.push(Tool.addBitmap(this.achievementItemGroup, "achievement_item_png", 2, i * 85, 470, 80));
+                this.achievementBtn.push(Tool.addBitmap(this.achievementItemGroup, "achievement_get_png", 355, i * 85 + 40, 100, 30));
+                this.achievementIcon.push(Tool.addBitmap(this.achievementItemGroup, this.achievementData.items[i].icon, 13, i * 85 + 15, 50, 50));
+                this.achievementGift.push(Tool.addTextField(this.achievementItemGroup, 120, i * 85 + 42, 0, 0, 20, 0x000000, this.achievementData.items[i].gift));
+                this.achievementDetail.push(Tool.addTextField(this.achievementItemGroup, 80, i * 85 + 8, 0, 0, 20, 0x000000, this.achievementData.items[i].detail));
+                this.achievementGift[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.achievementDetail[i].textAlign = egret.HorizontalAlign.LEFT;
+            }
+
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            scroll.width = 470;
+            scroll.height = 260;
+            scroll.x = 17;
+            scroll.y = 70;
+            this.achievementContainer.addChild(scroll);
+            tempGroup.addChild(this.achievementItemGroup);
+            this.addChild(this.achievementContainer);
+
+            this.achievementContainer.scaleX = 0;
+            this.achievementContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.achievementContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            if (this.showing == "empty")return;
+            var tw = egret.Tween.get(this.achievementContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.achievementContainer);
+                this.achievementBackground = null;
+                this.achievementContainer = null;
+                this.achievementItemGroup = null;
+                this.achievementDetail = null;
+                this.achievementItems = null;
+                this.achievementGift = null;
+                this.achievementBtn = null;
+                this.showing = "empty";
+            }, this);
+        }
+    }
+
+    //对每日任务界面的操作
     public ctrlDaily(type:string):void {
         if (type == "show") {
             if (this.showing != "empty")return;//若已经在显示着面板
@@ -136,7 +275,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             for (var i = 0; i < this.dailyData.items.length; i++) {
                 this.dailyItems.push(Tool.addBitmap(this.dailyItemGroup, "daily_item_png", 2, i * 85, 470, 80));
                 this.dailyBtn.push(Tool.addBitmap(this.dailyItemGroup, "daily_get_png", 355, i * 85 + 40, 100, 30));
-                this.dailyIcon.push(Tool.addBitmap(this.dailyItemGroup, "daily_icon1_png", 12, i * 85 + 15, 50, 50));
+                this.dailyIcon.push(Tool.addBitmap(this.dailyItemGroup, this.dailyData.items[i].icon, 13, i * 85 + 15, 50, 50));
                 this.dailyGift.push(Tool.addTextField(this.dailyItemGroup, 120, i * 85 + 42, 0, 0, 20, 0x000000, this.dailyData.items[i].gift));
                 this.dailyDetail.push(Tool.addTextField(this.dailyItemGroup, 80, i * 85 + 8, 0, 0, 20, 0x000000, this.dailyData.items[i].detail));
                 this.dailyGift[i].textAlign = egret.HorizontalAlign.LEFT;

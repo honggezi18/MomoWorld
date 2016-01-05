@@ -21,17 +21,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CtrlScene.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CtrlScene.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3337989">
-              <caret line="135" column="67" selection-start-line="135" selection-start-column="67" selection-end-line="135" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding>
                 <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
+                <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
+                <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />
@@ -41,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CtrlData.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CtrlData.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.8631285">
+              <caret line="44" column="87" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -54,8 +56,8 @@
       <file leaf-file-name="default.res.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resource/default.res.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.793104">
-              <caret line="390" column="31" selection-start-line="390" selection-start-column="16" selection-end-line="390" selection-end-column="31" />
+            <state vertical-scroll-proportion="-171.96552">
+              <caret line="615" column="31" selection-start-line="615" selection-start-column="31" selection-end-line="615" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -105,8 +107,8 @@
         <option value="$PROJECT_DIR$/egretProperties.json" />
         <option value="$PROJECT_DIR$/src/scene/ShengDiScene.ts" />
         <option value="$PROJECT_DIR$/src/UIManage.ts" />
-        <option value="$PROJECT_DIR$/src/scene/WelcomeScene.ts" />
         <option value="$PROJECT_DIR$/src/data/Item.ts" />
+        <option value="$PROJECT_DIR$/src/scene/WelcomeScene.ts" />
         <option value="$PROJECT_DIR$/src/scene/CtrlScene.ts" />
         <option value="$PROJECT_DIR$/src/data/CtrlData.ts" />
       </list>
@@ -311,7 +313,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11165577" sideWeight="0.49462366" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -321,7 +323,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22797927" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22797927" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11165577" sideWeight="0.50537634" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -364,7 +366,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -704,14 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0418994">
-          <caret line="45" column="78" selection-start-line="45" selection-start-column="78" selection-end-line="45" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UIManage.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2877095">
@@ -729,35 +723,47 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resource/default.res.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.793104">
-          <caret line="390" column="31" selection-start-line="390" selection-start-column="16" selection-end-line="390" selection-end-column="31" />
+        <state vertical-scroll-proportion="-171.96552">
+          <caret line="615" column="31" selection-start-line="615" selection-start-column="31" selection-end-line="615" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
+    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-          <folding />
+        <state vertical-scroll-proportion="0.53072625">
+          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+          <folding>
+            <element signature="n#!!block;n#init#0;n#WelcomeScene#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3337989">
-          <caret line="135" column="67" selection-start-line="135" selection-start-column="67" selection-end-line="135" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding>
             <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
+            <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
+            <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#onRemove#0;n#CtrlScene#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8631285">
+          <caret line="44" column="87" selection-start-line="44" selection-start-column="87" selection-end-line="44" selection-end-column="87" />
+          <folding />
         </state>
       </provider>
     </entry>
