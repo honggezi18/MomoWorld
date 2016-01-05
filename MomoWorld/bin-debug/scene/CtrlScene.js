@@ -66,6 +66,7 @@ var CtrlScene = (function (_super) {
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
             this.expText = Tool.addTextField(this, 460, 415, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
+            this.ctrlAbility("show");
         }
     };
     //能力面板
@@ -78,24 +79,40 @@ var CtrlScene = (function (_super) {
             this.abilityIcon = [];
             this.abilityText = [];
             this.abilityContainer = new egret.DisplayObjectContainer();
-            this.abilityContainer.width = 500;
-            this.abilityContainer.height = 350;
+            this.abilityContainer.width = 700;
+            this.abilityContainer.height = 420;
             this.abilityContainer.anchorOffsetX = this.abilityContainer.width / 2;
             this.abilityContainer.anchorOffsetY = this.abilityContainer.height / 2;
             this.abilityContainer.x = this.width / 2;
             this.abilityContainer.y = this.height / 2;
-            this.abilityBackground = Tool.addBitmap(this.abilityContainer, "ability_background_png", this.abilityContainer.width / 2, this.abilityContainer.height / 2, 500, 350, false, true);
+            this.abilityBackground = Tool.addBitmap(this.abilityContainer, "ability_background_png", 0, 0, this.abilityContainer.width, this.abilityContainer.height);
             this.abilityBackground.touchEnabled = true;
             this.abilityBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                 console.log("x  " + e.stageX + "   y   " + e.stageY);
                 if (e.stageX > 600 && e.stageX < 630 && e.stageY > 75 && e.stageY < 100)
                     this.ctrlAhievement("hide");
             }, this);
+            this.abilitySkill = Tool.addTextField(this.abilityContainer, 120, 60, 0, 0, 18, 0xffffff, "剩余技能点:" + "30");
+            this.abilityBody = Tool.addTextField(this.abilityContainer, 455, 60, 0, 0, 18, 0xffffff, "剩余属性值:" + "30");
             for (var i = 0; i < 5; i++) {
-                this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.items[i].icon, 13, i * 85 + 15, 50, 50));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, 120, i * 85 + 42, 0, 0, 20, 0x000000, this.abilityData.items[i].gift));
-                this.abilityText[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill1[i].icon, i * 80 + 187, 150, 60, 60, false, true));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 0, 15, 0xff0000, this.abilityData.skill1[i].level + "/30"));
+                this.abilityText[i].textAlign = egret.HorizontalAlign.RIGHT;
             }
+            for (var i = 0; i < 5; i++) {
+                this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill2[i].icon, i * 80 + 187, 220, 60, 60, false, true));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 0, 15, 0xff0000, this.abilityData.skill2[i].level + "/30"));
+                this.abilityText[i + 5].textAlign = egret.HorizontalAlign.RIGHT;
+            }
+            for (var i = 0; i < 5; i++) {
+                this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png", i * 80 + 187, 290, 60, 60, false, true));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 0, 15, 0xff0000, this.abilityData.data[i].level + "/30"));
+                this.abilityText[i + 10].textAlign = egret.HorizontalAlign.RIGHT;
+            }
+            this.addChild(this.abilityContainer);
+            this.abilityContainer.scaleX = 0;
+            this.abilityContainer.scaleY = 0;
+            this.abilityContainer.cacheAsBitmap = true;
             var tw = egret.Tween.get(this.abilityContainer);
             tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }
