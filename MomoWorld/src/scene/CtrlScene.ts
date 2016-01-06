@@ -50,12 +50,17 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private achievementData:any;//成就的数据
 
     //能力界面
-    private abilityContainer:egret.DisplayObjectContainer;//成就显示容器
+    private abilityContainer:egret.DisplayObjectContainer;//能力显示容器
+    private abilityDetailContainer:egret.DisplayObjectContainer;//能力详细信息显示容器
     private abilityBackground:egret.Bitmap;//背景
-    private abilitySkill:egret.TextField;//剩余技能点
-    private abilityBody:egret.TextField;//剩余属性点
+    private abilityDetailIcon:egret.Bitmap;//详细页面图标
     private abilityIcon:Array<egret.Bitmap>;//各个图标
+    private abilityBody:egret.TextField;//剩余属性点
+    private abilitySkill:egret.TextField;//剩余技能点
+    private abilityDetailLevel:egret.TextField;//详细页面的等级
     private abilityText:Array<egret.TextField>;//各个信息
+    private abilityIndex:number = 0;//成就的选项下标
+    private abilityIsDetail:boolean = false;//标示是否在显示详细面板
     private abilityData:any;//成就的数据
 
 
@@ -120,6 +125,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
             this.expText = Tool.addTextField(this, 460, 415, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
+            Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
             this.ctrlAbility("show");
         }
     }
@@ -143,36 +149,45 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.abilityBackground = Tool.addBitmap(this.abilityContainer, "ability_background_png", 0, 0, this.abilityContainer.width, this.abilityContainer.height);
             this.abilityBackground.touchEnabled = true;
             this.abilityBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
-                console.log("x  " + e.stageX + "   y   " + e.stageY);
-                if (e.stageX > 600 && e.stageX < 630 && e.stageY > 75 && e.stageY < 100)this.ctrlAhievement("hide");
+                if (this.abilityIsDetail)return;
+                if (e.stageX > 270 && e.stageX < 425 && e.stageY > 360 && e.stageY < 390)this.ctrlAbility("hide");
+                for (var y = 0; y < 3; y++) {
+                    for (var x = 0; x < 5; x++) {
+                        this.abilityIndex = y * 5 + x;
+                        if (e.localX > (158 + 80 * x) && e.localX < (217 + 80 * x) && e.localY > (120 + y * 70) && e.localY < (180 + y * 70)) {
+                            this.ctrlAbility("showDetail");
+                            return;
+                        }
+                    }
+                }
             }, this);
 
-            this.abilitySkill = Tool.addTextField(this.abilityContainer, 120, 60, 0, 0, 18, 0xffffff, "剩余技能点:" + "30");
-            this.abilityBody = Tool.addTextField(this.abilityContainer, 455, 60, 0, 0, 18, 0xffffff, "剩余属性值:" + "30");
+            this.abilitySkill = Tool.addTextField(this.abilityContainer, 120, 60, 0, 0, 18, 0xffffff, "剩余技能点:" + GameData.skillNum);
+            this.abilityBody = Tool.addTextField(this.abilityContainer, 455, 60, 0, 0, 18, 0xffffff, "剩余属性值:" + GameData.bodyNum);
 
             for (var i = 0; i < 5; i++) {
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill1[i].icon, i * 80 + 187, 150, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 0, 15, 0xff0000, this.abilityData.skill1[i].level + "/30"));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 0, 15, 0xff0000, this.abilityData.skill1[i].level + "/" + this.abilityData.skill1[i].maxLevel));
                 this.abilityText[i].textAlign = egret.HorizontalAlign.RIGHT;
             }
 
             for (var i = 0; i < 5; i++) {
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill2[i].icon, i * 80 + 187, 220, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 0, 15, 0xff0000, this.abilityData.skill2[i].level + "/30"));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 0, 15, 0xff0000, this.abilityData.skill2[i].level + "/" + this.abilityData.skill2[i].maxLevel));
                 this.abilityText[i + 5].textAlign = egret.HorizontalAlign.RIGHT;
             }
 
             for (var i = 0; i < 5; i++) {
+                this.abilityData.data[i].state = Math.floor(this.abilityData.data[i].level / (this.abilityData.data[i].maxLevel / 5)) + 1;
+                if (this.abilityData.data[i].state > 5)this.abilityData.data[i].state = 5;
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png", i * 80 + 187, 290, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 0, 15, 0xff0000, this.abilityData.data[i].level + "/30"));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 0, 15, 0xff0000, this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel));
                 this.abilityText[i + 10].textAlign = egret.HorizontalAlign.RIGHT;
             }
-
 
             this.addChild(this.abilityContainer);
             this.abilityContainer.scaleX = 0;
             this.abilityContainer.scaleY = 0;
-            this.abilityContainer.cacheAsBitmap = true;
             var tw = egret.Tween.get(this.abilityContainer);
             tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
         }
@@ -187,6 +202,86 @@ class CtrlScene extends egret.DisplayObjectContainer {
                 this.abilityData = null;
                 this.showing = "empty";
             }, this);
+        }
+        else if (type == "showDetail") {//升级某项技能
+            this.abilityIsDetail = true;
+            this.abilityDetailContainer = new egret.DisplayObjectContainer();
+            this.abilityDetailContainer.width = 300;
+            this.abilityDetailContainer.height = 180;
+            this.abilityDetailContainer.anchorOffsetX = 300 / 2;
+            this.abilityDetailContainer.anchorOffsetY = 180 / 2;
+            this.abilityDetailContainer.x = this.abilityContainer.width / 2;
+            this.abilityDetailContainer.y = this.abilityContainer.height / 2;
+            this.abilityContainer.addChild(this.abilityDetailContainer);
+            var background = Tool.addBitmap(this.abilityDetailContainer, "ability_detail_png", 0, 0, 300, 180);
+            var intruction = Tool.addTextField(this.abilityDetailContainer, 120, 60, 150, 90, 15, 0xffffff, "简介");
+            this.abilityDetailLevel = Tool.addTextField(this.abilityDetailContainer, 25, 130, 90, 20, 20, 0xffffff, "Level:" + this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3));
+            if (this.abilityIndex < 5) intruction.text = this.abilityData.skill1[this.abilityIndex].intruction;
+            else if (this.abilityIndex < 10)intruction.text = this.abilityData.skill2[this.abilityIndex - 5].intruction;
+            else if (this.abilityIndex < 15)intruction.text = this.abilityData.data[this.abilityIndex - 10].intruction;
+            intruction.textAlign = egret.HorizontalAlign.LEFT;
+
+            this.abilityDetailIcon = new egret.Bitmap();
+            this.abilityDetailIcon.texture = this.abilityIcon[this.abilityIndex].texture;
+            this.abilityDetailContainer.addChild(this.abilityDetailIcon);
+            this.abilityDetailIcon.width = 50;
+            this.abilityDetailIcon.height = 50;
+            this.abilityDetailIcon.x = 40;
+            this.abilityDetailIcon.y = 65;
+
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.localX > 40 && e.localX < 85 && e.localY > 85 && e.localY < 110)this.ctrlAbility("levelUp");
+                else if (e.localX > 215 && e.localX < 280 && e.localY > 5 && e.localY < 35)this.ctrlAbility("hideDetail");
+            }, this);
+
+            this.abilityDetailContainer.scaleX = 0;
+            this.abilityDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.abilityDetailContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+
+        }
+        else if (type == "hideDetail") {//升级某项技能
+            if (!this.abilityIsDetail)return;
+            this.abilityIsDetail = false;
+            var tw = egret.Tween.get(this.abilityDetailContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.abilityContainer.removeChild(this.abilityDetailContainer);
+                this.abilityDetailContainer = null;
+                this.abilityDetailLevel = null;
+                this.showing = "ability";
+            }, this);
+        }
+        else if (type == "levelUp") {//升级某项技能
+            if (this.abilityIndex < 5) {//升级单攻
+                if (GameData.skillNum > 0 && this.abilityData.skill1[this.abilityIndex].level < this.abilityData.skill1[this.abilityIndex].maxLevel) {
+                    GameData.skillNum--;
+                    this.abilityData.skill1[this.abilityIndex].level++;
+                    this.abilityText[this.abilityIndex].text = this.abilityData.skill1[this.abilityIndex].level + "/" + this.abilityData.skill1[this.abilityIndex].maxLevel;
+                }
+            }
+            else if (this.abilityIndex < 10) {//升级群攻
+                if (GameData.skillNum > 0 && this.abilityData.skill2[this.abilityIndex - 5].level < this.abilityData.skill2[this.abilityIndex - 5].maxLevel) {
+                    GameData.skillNum--;
+                    this.abilityData.skill2[this.abilityIndex - 5].level++;
+                    this.abilityText[this.abilityIndex].text = this.abilityData.skill2[this.abilityIndex - 5].level + "/" + this.abilityData.skill2[this.abilityIndex - 5].maxLevel;
+                }
+            }
+            else if (this.abilityIndex < 15) {//升级属性
+                var i = this.abilityIndex - 10;
+                if (GameData.bodyNum > 0 && this.abilityData.data[i].level < this.abilityData.data[i].maxLevel) {
+                    GameData.bodyNum--;
+                    this.abilityData.data[i].level++;
+                    this.abilityData.data[i].state = Math.floor(this.abilityData.data[i].level / (this.abilityData.data[i].maxLevel / 5)) + 1;
+                    if (this.abilityData.data[i].state > 5)this.abilityData.data[i].state = 5;
+                    this.abilityIcon[this.abilityIndex].texture = RES.getRes(this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png");
+                    this.abilityDetailIcon.texture = RES.getRes(this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png");
+                    this.abilityText[this.abilityIndex].text = this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel;
+                }
+            }
+            this.abilityDetailLevel.text = "Level:" + this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3);
+            this.abilityBody.text = "剩余属性值:" + GameData.bodyNum;
+            this.abilitySkill.text = "剩余技能点:" + GameData.skillNum;
         }
     }
 

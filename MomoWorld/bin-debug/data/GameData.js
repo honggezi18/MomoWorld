@@ -16,16 +16,21 @@ var GameData = (function () {
     GameData.saveData = function () {
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     };
+    //固态数据///////////////////////////////
     GameData.gameWidth = 800;
     GameData.gameHeight = 480;
     GameData.scaleSmall = 1;
     GameData.bodyWidth = 25; //所有角色的刚体宽度
+    //暂存数据///////////////////////////////
     GameData.mapIndex = -1; //标示当前选中的地图
     GameData.difficulty = 0; //标示当前的游戏难度
-    GameData.heroIndex = 1; //选择的角色
+    GameData.itemArray = []; //物品数组
     GameData.enemyArray = []; //敌人数组
     GameData.bulletArray = []; //子弹数组
-    GameData.itemArray = []; //物品数组
+    //动态数据，需保存的数据///////////////////////////////
+    GameData.skillNum = 50; //剩余的技能点数
+    GameData.bodyNum = 50; //剩余的技能点数
+    GameData.heroIndex = 1; //选择的角色
     GameData.MapState = [
         {
             "name": "map0",
