@@ -34,21 +34,24 @@
       <file leaf-file-name="CtrlScene.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23896499">
-              <caret line="217" column="96" selection-start-line="217" selection-start-column="96" selection-end-line="217" selection-end-column="96" />
+            <state vertical-scroll-proportion="0.273743">
+              <caret line="268" column="10" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
               <folding>
+                <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#6259#10163#0" expanded="false" />
-                <element signature="e#10197#10691#0" expanded="false" />
-                <element signature="e#10391#10673#0" expanded="false" />
-                <element signature="e#13299#13802#0" expanded="false" />
+                <element signature="e#6945#10100#0" expanded="false" />
+                <element signature="e#10134#10729#0" expanded="false" />
+                <element signature="e#10769#13348#0" expanded="false" />
+                <element signature="e#13388#13899#0" expanded="false" />
+                <element signature="n#!!block;n#ctrlAbility#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#16305#19689#0" expanded="false" />
+                <element signature="e#24398#27782#0" expanded="false" />
+                <element signature="e#27816#28481#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#20482#23537#0" expanded="false" />
+                <element signature="e#28575#31630#0" expanded="false" />
                 <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />
@@ -58,64 +61,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tool.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Tool.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="138" column="11" selection-start-line="138" selection-start-column="11" selection-end-line="138" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CtrlData.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="75" selection-start-line="45" selection-start-column="75" selection-end-line="45" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HeroData.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/HeroData.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
               <folding>
-                <element signature="e#30#67#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameData.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-              <folding>
-                <element signature="e#648#1678#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Hero.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/Hero.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!block;n#getInstance#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#constructor#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#init#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#syncFun#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#checkHit#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#action#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#mcOver#0;n#Hero#0" expanded="false" />
-                <element signature="n#!!block;n#setMoveClip#0;n#Hero#0" expanded="false" />
+                <element signature="e#22#606#0" expanded="false" />
+                <element signature="e#627#1241#0" expanded="false" />
+                <element signature="e#1258#3067#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -165,10 +119,10 @@
         <option value="$PROJECT_DIR$/src/scene/ShengDiScene.ts" />
         <option value="$PROJECT_DIR$/src/UIManage.ts" />
         <option value="$PROJECT_DIR$/src/data/Item.ts" />
-        <option value="$PROJECT_DIR$/src/scene/WelcomeScene.ts" />
         <option value="$PROJECT_DIR$/src/data/SaveData.ts" />
-        <option value="$PROJECT_DIR$/src/data/CtrlData.ts" />
         <option value="$PROJECT_DIR$/src/data/GameData.ts" />
+        <option value="$PROJECT_DIR$/src/scene/WelcomeScene.ts" />
+        <option value="$PROJECT_DIR$/src/data/CtrlData.ts" />
         <option value="$PROJECT_DIR$/src/scene/CtrlScene.ts" />
       </list>
     </option>
@@ -389,8 +343,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1874" height="1096" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11165577" sideWeight="0.49462366" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -399,7 +353,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22797927" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22797927" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11165577" sideWeight="0.50537634" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -424,7 +378,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -683,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53072625">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Bullet.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -764,22 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tool.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="138" column="11" selection-start-line="138" selection-start-column="11" selection-end-line="138" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="75" selection-start-line="45" selection-start-column="75" selection-end-line="45" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -800,23 +731,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tool.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.8547485">
+          <caret line="138" column="11" selection-start-line="138" selection-start-column="11" selection-end-line="138" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
+          <folding>
+            <element signature="e#22#606#0" expanded="false" />
+            <element signature="e#627#1241#0" expanded="false" />
+            <element signature="e#1258#3067#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23896499">
-          <caret line="217" column="96" selection-start-line="217" selection-start-column="96" selection-end-line="217" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.273743">
+          <caret line="268" column="10" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
           <folding>
+            <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#6259#10163#0" expanded="false" />
-            <element signature="e#10197#10691#0" expanded="false" />
-            <element signature="e#10391#10673#0" expanded="false" />
-            <element signature="e#13299#13802#0" expanded="false" />
+            <element signature="e#6945#10100#0" expanded="false" />
+            <element signature="e#10134#10729#0" expanded="false" />
+            <element signature="e#10769#13348#0" expanded="false" />
+            <element signature="e#13388#13899#0" expanded="false" />
+            <element signature="n#!!block;n#ctrlAbility#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#16305#19689#0" expanded="false" />
+            <element signature="e#24398#27782#0" expanded="false" />
+            <element signature="e#27816#28481#0" expanded="false" />
             <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#20482#23537#0" expanded="false" />
+            <element signature="e#28575#31630#0" expanded="false" />
             <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />

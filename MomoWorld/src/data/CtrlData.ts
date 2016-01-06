@@ -11,7 +11,6 @@ var daily = {
     ]
 };
 
-
 var achievement = {
     date: "0001",//记录当前游戏日期
     items: [
@@ -44,5 +43,15 @@ var ability = {
         {icon: "ability_attack", type: "普攻", name: "普攻", intruction: "普攻简介", state: 1, level: 0, maxLevel: 30},
         {icon: "ability_defense1_", type: "物抗", name: "物抗", intruction: "物抗简介", state: 1, level: 0, maxLevel: 30},
         {icon: "ability_defense2_", type: "法抗", name: "法抗", intruction: "法抗简介", state: 1, level: 0, maxLevel: 30},
+    ]
+};
+
+var drupShop = {
+    items: [
+        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost:  30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost:  30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost:  30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost:  30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost:  30, ques: 5, state: "go"},
     ]
 };

@@ -42,3 +42,12 @@ var ability = {
         { icon: "ability_defense2_", type: "法抗", name: "法抗", intruction: "法抗简介", state: 1, level: 0, maxLevel: 30 },
     ]
 };
+var drupShop = {
+    items: [
+        { icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go" },
+    ]
+};

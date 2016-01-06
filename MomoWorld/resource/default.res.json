@@ -33,7 +33,7 @@
 		"name":"item"
 	},
 	{
-		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png",
+		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png,drupShop_background_png,drupShop_item_png,drupShop_detail_png",
 		"name":"ctrl"
 	}],
 	"resources":[
@@ -671,5 +671,20 @@
 		"name":"ability_detail_png",
 		"type":"image",
 		"url":"assets/ctrl/ability/ability_detail.png"
+	},
+	{
+		"name":"drupShop_background_png",
+		"type":"image",
+		"url":"assets/ctrl/drupShop/drupShop_background.png"
+	},
+	{
+		"name":"drupShop_item_png",
+		"type":"image",
+		"url":"assets/ctrl/drupShop/drupShop_item.png"
+	},
+	{
+		"name":"drupShop_detail_png",
+		"type":"image",
+		"url":"assets/ctrl/drupShop/drupShop_detail.png"
 	}]
 }
