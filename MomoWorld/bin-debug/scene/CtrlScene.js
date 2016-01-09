@@ -13,6 +13,8 @@ var CtrlScene = (function (_super) {
         this.drupShopDrupNum = 1; //商品的数量
         this.drupShopIndex = 0; //商品的选项下标
         this.drupShopIsDetail = false; //标示是否在显示详细面板
+        this.weaponShopIndex = 0; //商品的选项下标
+        this.weaponShopIsDetail = false; //标示是否在显示详细面板
         if (CtrlScene.instance == null)
             CtrlScene.instance = this;
         else
@@ -165,16 +167,26 @@ var CtrlScene = (function (_super) {
             var tw = egret.Tween.get(this.drupShopContainer);
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.drupShopContainer);
+                this.drupShopDetailContainer = null;
+                this.drupShopDrupNumText = null;
                 this.drupShopBackground = null;
                 this.drupShopContainer = null;
                 this.drupShopItemGroup = null;
-                this.drupShopInfo = null;
+                this.drupShopIsDetail = null;
+                this.drupShopDrupNum = null;
+                this.drupShopIndex = null;
                 this.drupShopItems = null;
+                this.drupShopIcon = null;
                 this.drupShopName = null;
+                this.drupShopInfo = null;
+                this.drupShopCost = null;
+                this.drupShopData = null;
+                this.drupShopSum = null;
                 this.showing = "empty";
             }, this);
         }
         else if (type == "showDetail") {
+            this.drupShopDrupNum = 1;
             this.drupShopIsDetail = true;
             this.drupShopDetailContainer = new egret.DisplayObjectContainer();
             this.drupShopDetailContainer.width = 300;
@@ -219,6 +231,8 @@ var CtrlScene = (function (_super) {
                     if (this.drupShopSum.textColor == 0xff0000)
                         this.showTip("金币不足");
                     else {
+                        this.showTip("购买成功");
+                        this.ctrlDrupShop("hideDetail");
                     }
                 }
                 else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165)
@@ -237,7 +251,8 @@ var CtrlScene = (function (_super) {
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.drupShopContainer.removeChild(this.drupShopDetailContainer);
                 this.drupShopDetailContainer = null;
-                this.drupShopDetailLevel = null;
+                this.drupShopDrupNumText = null;
+                this.drupShopSum = null;
                 this.showing = "drupShop";
             }, this);
         }
@@ -255,6 +270,146 @@ var CtrlScene = (function (_super) {
                 this.drupShopSum.textColor = 0xffffff;
             else
                 this.drupShopSum.textColor = 0xff0000;
+        }
+    };
+    //武器商店面板
+    p.ctrlWeaponShop = function (type, num) {
+        if (num === void 0) { num = 1; }
+        if (type == "show") {
+            if (this.showing != "empty")
+                return; //若已经在显示着面板
+            this.weaponShopData = weaponShop;
+            this.showing = "weaponShop";
+            this.weaponShopItems = [];
+            this.weaponShopIcon = [];
+            this.weaponShopName = [];
+            this.weaponShopInfo = [];
+            this.weaponShopCost = [];
+            this.weaponShopContainer = new egret.DisplayObjectContainer();
+            this.weaponShopContainer.width = 500;
+            this.weaponShopContainer.height = 400;
+            this.weaponShopContainer.anchorOffsetX = this.weaponShopContainer.width / 2;
+            this.weaponShopContainer.anchorOffsetY = this.weaponShopContainer.height / 2;
+            this.weaponShopContainer.x = this.width / 2;
+            this.weaponShopContainer.y = 210;
+            this.weaponShopBackground = Tool.addBitmap(this.weaponShopContainer, "weaponShop_background_png", 0, 0, 550, 400);
+            this.weaponShopBackground.touchEnabled = true;
+            this.weaponShopBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                if (e.localX > 200 && e.localX < 260 && e.localY > 345 && e.localY < 385)
+                    this.ctrlWeaponShop("hide");
+            }, this);
+            this.weaponShopItemGroup = new eui.Group();
+            this.weaponShopItemGroup.touchEnabled = true;
+            this.weaponShopItemGroup.width = 370;
+            this.weaponShopItemGroup.height = 70 * this.weaponShopData.items.length;
+            this.weaponShopItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < this.weaponShopData.items.length; i++) {
+                this.weaponShopItems.push(Tool.addBitmap(this.weaponShopItemGroup, "weaponShop_item_png", 0, i * 70, 370, 65));
+                this.weaponShopIcon.push(Tool.addBitmap(this.weaponShopItemGroup, this.weaponShopData.items[i].icon, 17, i * 70 + 10, 40, 40));
+                this.weaponShopName.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, this.weaponShopData.items[i].name));
+                this.weaponShopCost.push(Tool.addTextField(this.weaponShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, this.weaponShopData.items[i].cost));
+                this.weaponShopInfo.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, this.weaponShopData.items[i].info));
+                this.weaponShopName[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.weaponShopInfo[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.weaponShopIcon[i].touchEnabled = true;
+                this.weaponShopIcon[i].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                    for (var a = 0; a < this.weaponShopIcon.length; a++) {
+                        if (e.target == this.weaponShopIcon[a]) {
+                            this.weaponShopIndex = a;
+                            this.ctrlWeaponShop("showDetail");
+                            return;
+                        }
+                    }
+                }, this);
+            }
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.x = 47;
+            scroll.y = 105;
+            scroll.width = 370;
+            scroll.height = 210;
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            this.weaponShopContainer.addChild(scroll);
+            tempGroup.addChild(this.weaponShopItemGroup);
+            this.addChild(this.weaponShopContainer);
+            this.weaponShopContainer.scaleX = 0;
+            this.weaponShopContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.weaponShopContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            if (this.showing == "empty")
+                return;
+            var tw = egret.Tween.get(this.weaponShopContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.weaponShopContainer);
+                this.weaponShopDetailContainer = null;
+                this.weaponShopweaponNumText = null;
+                this.weaponShopBackground = null;
+                this.weaponShopContainer = null;
+                this.weaponShopItemGroup = null;
+                this.weaponShopIsDetail = null;
+                this.weaponShopweaponNum = null;
+                this.weaponShopIndex = null;
+                this.weaponShopItems = null;
+                this.weaponShopIcon = null;
+                this.weaponShopName = null;
+                this.weaponShopInfo = null;
+                this.weaponShopCost = null;
+                this.weaponShopData = null;
+                this.weaponShopSum = null;
+                this.showing = "empty";
+            }, this);
+        }
+        else if (type == "showDetail") {
+            this.weaponShopIsDetail = true;
+            this.weaponShopDetailContainer = new egret.DisplayObjectContainer();
+            this.weaponShopDetailContainer.width = 300;
+            this.weaponShopDetailContainer.height = 180;
+            this.weaponShopDetailContainer.anchorOffsetX = 300 / 2;
+            this.weaponShopDetailContainer.anchorOffsetY = 180 / 2;
+            this.weaponShopDetailContainer.x = this.weaponShopContainer.width / 2;
+            this.weaponShopDetailContainer.y = this.weaponShopContainer.height / 2;
+            this.weaponShopContainer.addChild(this.weaponShopDetailContainer);
+            var background = Tool.addBitmap(this.weaponShopDetailContainer, "weaponShop_detail_png", 0, 0, 300, 180);
+            var icon = Tool.addBitmap(this.weaponShopDetailContainer, this.weaponShopData.items[this.weaponShopIndex].icon, 27, 33, 50, 50);
+            var weaponName = Tool.addTextField(this.weaponShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].name);
+            var intruction = Tool.addTextField(this.weaponShopDetailContainer, 90, 50, 195, 70, 15, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].info);
+            var cost = Tool.addTextField(this.weaponShopDetailContainer, 90, 28, 130, 16, 16, 0xffffff, "售价:" + this.weaponShopData.items[this.weaponShopIndex].cost);
+            cost.textAlign = egret.HorizontalAlign.LEFT;
+            intruction.textAlign = egret.HorizontalAlign.LEFT;
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
+                    if (this.weaponShopSum.textColor == 0xff0000)
+                        this.showTip("金币不足");
+                    else {
+                        this.showTip("购买成功");
+                        this.ctrlWeaponShop("hideDetail");
+                    }
+                }
+                else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165)
+                    this.ctrlWeaponShop("hideDetail");
+            }, this);
+            this.weaponShopDetailContainer.scaleX = 0;
+            this.weaponShopDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.weaponShopDetailContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hideDetail") {
+            if (!this.weaponShopIsDetail)
+                return;
+            this.weaponShopIsDetail = false;
+            var tw = egret.Tween.get(this.weaponShopDetailContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.weaponShopContainer.removeChild(this.weaponShopDetailContainer);
+                this.weaponShopDetailContainer = null;
+                this.weaponShopweaponNumText = null;
+                this.weaponShopSum = null;
+                this.showing = "weaponShop";
+            }, this);
         }
     };
     //能力面板

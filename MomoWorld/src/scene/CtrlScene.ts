@@ -82,6 +82,20 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private drupShopIsDetail:boolean = false;//标示是否在显示详细面板
     private drupShopData:any;//药店数据
 
+    //武器商店素材
+    private weaponShopContainer:egret.DisplayObjectContainer;//药店显示容器
+    private weaponShopDetailContainer:egret.DisplayObjectContainer;//药品弹框显示容器
+    private weaponShopItemGroup:eui.Group;//成就显示容器
+    private weaponShopBackground:egret.Bitmap;//背景
+    private weaponShopItems:Array<egret.Bitmap>;//商品项背景
+    private weaponShopIcon:Array<egret.Bitmap>;//各个图标
+    private weaponShopName:Array<egret.TextField>;//商品名
+    private weaponShopInfo:Array<egret.TextField>;//商品信息
+    private weaponShopCost:Array<egret.TextField>;//商品价格
+    private weaponShopIndex:number = 0;//商品的选项下标
+    private weaponShopIsDetail:boolean = false;//标示是否在显示详细面板
+    private weaponShopData:any;//药店数据
+
 
     public static getInstance():CtrlScene {
         if (CtrlScene.instance == null)CtrlScene.instance = new CtrlScene();
@@ -337,6 +351,147 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.drupShopSum.text = "总额:" + sum;
             if (sum < GameData.goldNum)this.drupShopSum.textColor = 0xffffff;
             else this.drupShopSum.textColor = 0xff0000;
+        }
+    }
+
+    //武器商店面板
+    public ctrlWeaponShop(type:string, num:number = 1):void {
+        if (type == "show") {
+            if (this.showing != "empty")return;//若已经在显示着面板
+            this.weaponShopData = weaponShop;
+            this.showing = "weaponShop";
+            this.weaponShopItems = [];
+            this.weaponShopIcon = [];
+            this.weaponShopName = [];
+            this.weaponShopInfo = [];
+            this.weaponShopCost = [];
+            this.weaponShopContainer = new egret.DisplayObjectContainer();
+            this.weaponShopContainer.width = 500;
+            this.weaponShopContainer.height = 400;
+            this.weaponShopContainer.anchorOffsetX = this.weaponShopContainer.width / 2;
+            this.weaponShopContainer.anchorOffsetY = this.weaponShopContainer.height / 2;
+            this.weaponShopContainer.x = this.width / 2;
+            this.weaponShopContainer.y = 210;
+
+            this.weaponShopBackground = Tool.addBitmap(this.weaponShopContainer, "weaponShop_background_png", 0, 0, 550, 400);
+            this.weaponShopBackground.touchEnabled = true;
+            this.weaponShopBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.localX > 200 && e.localX < 260 && e.localY > 345 && e.localY < 385)this.ctrlWeaponShop("hide");
+            }, this);
+
+            this.weaponShopItemGroup = new eui.Group();
+            this.weaponShopItemGroup.touchEnabled = true;
+            this.weaponShopItemGroup.width = 370;
+            this.weaponShopItemGroup.height = 70 * this.weaponShopData.items.length;
+            this.weaponShopItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < this.weaponShopData.items.length; i++) {
+                this.weaponShopItems.push(Tool.addBitmap(this.weaponShopItemGroup, "weaponShop_item_png", 0, i * 70, 370, 65));
+                this.weaponShopIcon.push(Tool.addBitmap(this.weaponShopItemGroup, this.weaponShopData.items[i].icon, 17, i * 70 + 10, 40, 40));
+                this.weaponShopName.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, this.weaponShopData.items[i].name));
+                this.weaponShopCost.push(Tool.addTextField(this.weaponShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, this.weaponShopData.items[i].cost));
+                this.weaponShopInfo.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, this.weaponShopData.items[i].info));
+                this.weaponShopName[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.weaponShopInfo[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.weaponShopIcon[i].touchEnabled = true;
+                this.weaponShopIcon[i].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                    for (var a = 0; a < this.weaponShopIcon.length; a++) {
+                        if (e.target == this.weaponShopIcon[a]) {
+                            this.weaponShopIndex = a;
+                            this.ctrlWeaponShop("showDetail");
+                            return;
+                        }
+                    }
+                }, this);
+            }
+
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.x = 47;
+            scroll.y = 105;
+            scroll.width = 370;
+            scroll.height = 210;
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            this.weaponShopContainer.addChild(scroll);
+            tempGroup.addChild(this.weaponShopItemGroup);
+            this.addChild(this.weaponShopContainer);
+
+            this.weaponShopContainer.scaleX = 0;
+            this.weaponShopContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.weaponShopContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            if (this.showing == "empty")return;
+            var tw = egret.Tween.get(this.weaponShopContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.weaponShopContainer);
+                this.weaponShopDetailContainer = null;
+                this.weaponShopweaponNumText = null;
+                this.weaponShopBackground = null;
+                this.weaponShopContainer = null;
+                this.weaponShopItemGroup = null;
+                this.weaponShopIsDetail = null;
+                this.weaponShopweaponNum = null;
+                this.weaponShopIndex = null;
+                this.weaponShopItems = null;
+                this.weaponShopIcon = null;
+                this.weaponShopName = null;
+                this.weaponShopInfo = null;
+                this.weaponShopCost = null;
+                this.weaponShopData = null;
+                this.weaponShopSum = null;
+                this.showing = "empty";
+            }, this);
+        }
+        else if (type == "showDetail") {//购买某商品
+            this.weaponShopIsDetail = true;
+            this.weaponShopDetailContainer = new egret.DisplayObjectContainer();
+            this.weaponShopDetailContainer.width = 300;
+            this.weaponShopDetailContainer.height = 180;
+            this.weaponShopDetailContainer.anchorOffsetX = 300 / 2;
+            this.weaponShopDetailContainer.anchorOffsetY = 180 / 2;
+            this.weaponShopDetailContainer.x = this.weaponShopContainer.width / 2;
+            this.weaponShopDetailContainer.y = this.weaponShopContainer.height / 2;
+            this.weaponShopContainer.addChild(this.weaponShopDetailContainer);
+
+            var background = Tool.addBitmap(this.weaponShopDetailContainer, "weaponShop_detail_png", 0, 0, 300, 180);
+            var icon = Tool.addBitmap(this.weaponShopDetailContainer, this.weaponShopData.items[this.weaponShopIndex].icon, 27, 33, 50, 50);
+            var weaponName = Tool.addTextField(this.weaponShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].name);
+            var intruction = Tool.addTextField(this.weaponShopDetailContainer, 90, 50, 195, 70, 15, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].info);
+            var cost = Tool.addTextField(this.weaponShopDetailContainer, 90, 28, 130, 16, 16, 0xffffff, "售价:" + this.weaponShopData.items[this.weaponShopIndex].cost);
+            cost.textAlign = egret.HorizontalAlign.LEFT;
+            intruction.textAlign = egret.HorizontalAlign.LEFT;
+
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
+                    if (this.weaponShopSum.textColor == 0xff0000)this.showTip("金币不足");
+                    else {
+                        this.showTip("购买成功");
+                        this.ctrlWeaponShop("hideDetail");
+                    }
+                }
+                else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165) this.ctrlWeaponShop("hideDetail");
+            }, this);
+
+            this.weaponShopDetailContainer.scaleX = 0;
+            this.weaponShopDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.weaponShopDetailContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+        }
+        else if (type == "hideDetail") {//升级某项技能
+            if (!this.weaponShopIsDetail)return;
+            this.weaponShopIsDetail = false;
+            var tw = egret.Tween.get(this.weaponShopDetailContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.weaponShopContainer.removeChild(this.weaponShopDetailContainer);
+                this.weaponShopDetailContainer = null;
+                this.weaponShopweaponNumText = null;
+                this.weaponShopSum = null;
+                this.showing = "weaponShop";
+            }, this);
         }
     }
 

@@ -1,6 +1,11 @@
 //工具类
 class Tool {
 
+    //输出当前点击的坐标
+    static logPosition(e:egret.TouchEvent):void{
+        console.log("x  " + e.localX + "  y   " + e.localY);
+    }
+
     //深度赋值
     static deepCopy(source) {
         var result = {};

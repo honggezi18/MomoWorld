@@ -3,6 +3,10 @@ var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
+    //������ǰ����������
+    Tool.logPosition = function (e) {
+        console.log("x  " + e.localX + "  y   " + e.localY);
+    };
     //���ȸ�ֵ
     Tool.deepCopy = function (source) {
         var result = {};

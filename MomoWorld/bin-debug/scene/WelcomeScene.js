@@ -33,7 +33,6 @@ var WelcomeScene = (function (_super) {
     };
     //触屏按下
     p.onTouchStart = function (e) {
-        //console.log("stageX  " + e.stageX + "   stageY  " + e.stageY + "  nowX    " + (e.stageX - this.x) + " nowY  " + (e.stageY - this.y));
         this.absoluteX = e.stageX - this.x;
         this.absoluteY = e.stageY - this.y;
         if (175 < this.absoluteX && this.absoluteX < 245 && 200 < this.absoluteY && this.absoluteY < 280)
@@ -43,7 +42,7 @@ var WelcomeScene = (function (_super) {
         if (480 < this.absoluteX && this.absoluteX < 540 && 135 < this.absoluteY && this.absoluteY < 250)
             CtrlScene.getInstance().ctrlAbility("show");
         if (110 < this.absoluteX && this.absoluteX < 175 && 325 < this.absoluteY && this.absoluteY < 395)
-            console.log("select   武器商店");
+            CtrlScene.getInstance().ctrlWeaponShop("show");
         if (245 < this.absoluteX && this.absoluteX < 305 && 325 < this.absoluteY && this.absoluteY < 395)
             CtrlScene.getInstance().ctrlDrupShop("show");
         if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)
