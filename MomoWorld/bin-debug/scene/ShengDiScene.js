@@ -27,10 +27,10 @@ var ShengDiScene = (function (_super) {
         this.addChild(this.item);
         this.role.addChild(Hero.getInstance());
         this.y = -180;
-        //for (var i = 0; i < 10; i++) {
-        //    GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
-        //    this.role.addChild(GameData.enemyArray[i]);
-        //}
+        for (var i = 0; i < 10; i++) {
+            GameData.enemyArray.push(new Enemy("1", i / 2 * 400 + 100));
+            this.role.addChild(GameData.enemyArray[i]);
+        }
     };
     //同步素材//先清空，再同步
     p.syncDisplay = function () {

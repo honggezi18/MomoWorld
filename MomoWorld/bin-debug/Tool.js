@@ -176,7 +176,7 @@ var Tool = (function () {
     //�Զ���ȫλ��,ǰ�油��
     Tool.setZero = function (num, length) {
         var str = "";
-        if (num.toString().length >= length) {
+        if (num.toString().length > length + 1) {
             for (var i = 0; i < length; i++)
                 str += "9";
             return str;

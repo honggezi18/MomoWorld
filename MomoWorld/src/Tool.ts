@@ -175,7 +175,7 @@ class Tool {
     //自动补全位数,前面补零
     static setZero(num:number, length:number):string {
         var str = "";
-        if (num.toString().length >= length) {
+        if (num.toString().length > length + 1) {
             for (var i = 0; i < length; i++)str += "9";
             return str;
         }

@@ -4,11 +4,15 @@ var CtrlScene = (function (_super) {
     function CtrlScene() {
         _super.call(this);
         this.showing = "empty"; //标示正在显示着什么面板
+        this.isTip = false; //标示是否在显示提示
         //顶部素材
         this.isTop = false; //标示是否显示顶部
         this.isCtrl = false;
         this.abilityIndex = 0; //成就的选项下标
         this.abilityIsDetail = false; //标示是否在显示详细面板
+        this.drupShopDrupNum = 1; //商品的数量
+        this.drupShopIndex = 0; //商品的选项下标
+        this.drupShopIsDetail = false; //标示是否在显示详细面板
         if (CtrlScene.instance == null)
             CtrlScene.instance = this;
         else
@@ -71,8 +75,26 @@ var CtrlScene = (function (_super) {
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
     };
+    //显示提示信息
+    p.showTip = function (info) {
+        if (this.isTip)
+            return;
+        if (this.tipInfo == null)
+            this.tipInfo = Tool.addTextField(this, 200, 240, 400, 30, 30, 0xff0000, "提示信息");
+        this.setChildIndex(this.tipInfo, 99);
+        this.isTip = true;
+        this.tipInfo.y = 200;
+        this.tipInfo.alpha = 1.2;
+        this.tipInfo.text = info;
+        var tw = egret.Tween.get(this.tipInfo);
+        tw.to({ y: this.tipInfo.y - 150, alpha: 0.3 }, 800).call(function () {
+            this.tipInfo.alpha = 0;
+            this.isTip = false;
+        }, this);
+    };
     //药品商店面板
-    p.ctrlDrupShop = function (type) {
+    p.ctrlDrupShop = function (type, num) {
+        if (num === void 0) { num = 1; }
         if (type == "show") {
             if (this.showing != "empty")
                 return; //若已经在显示着面板
@@ -109,6 +131,16 @@ var CtrlScene = (function (_super) {
                 this.drupShopInfo.push(Tool.addTextField(this.drupShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, this.drupShopData.items[i].info));
                 this.drupShopName[i].textAlign = egret.HorizontalAlign.LEFT;
                 this.drupShopInfo[i].textAlign = egret.HorizontalAlign.LEFT;
+                this.drupShopIcon[i].touchEnabled = true;
+                this.drupShopIcon[i].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                    for (var a = 0; a < this.drupShopIcon.length; a++) {
+                        if (e.target == this.drupShopIcon[a]) {
+                            this.drupShopIndex = a;
+                            this.ctrlDrupShop("showDetail");
+                            return;
+                        }
+                    }
+                }, this);
             }
             //设置滑动组件
             var tempGroup = new eui.Group();
@@ -141,6 +173,88 @@ var CtrlScene = (function (_super) {
                 this.drupShopName = null;
                 this.showing = "empty";
             }, this);
+        }
+        else if (type == "showDetail") {
+            this.drupShopIsDetail = true;
+            this.drupShopDetailContainer = new egret.DisplayObjectContainer();
+            this.drupShopDetailContainer.width = 300;
+            this.drupShopDetailContainer.height = 180;
+            this.drupShopDetailContainer.anchorOffsetX = 300 / 2;
+            this.drupShopDetailContainer.anchorOffsetY = 180 / 2;
+            this.drupShopDetailContainer.x = this.drupShopContainer.width / 2;
+            this.drupShopDetailContainer.y = this.drupShopContainer.height / 2;
+            this.drupShopContainer.addChild(this.drupShopDetailContainer);
+            var background = Tool.addBitmap(this.drupShopDetailContainer, "drupShop_detail_png", 0, 0, 300, 180);
+            var icon = Tool.addBitmap(this.drupShopDetailContainer, this.drupShopData.items[this.drupShopIndex].icon, 27, 33, 50, 50);
+            var drupName = Tool.addTextField(this.drupShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, this.drupShopData.items[this.drupShopIndex].name);
+            var intruction = Tool.addTextField(this.drupShopDetailContainer, 90, 25, 90, 90, 15, 0xffffff, this.drupShopData.items[this.drupShopIndex].info);
+            var cost = Tool.addTextField(this.drupShopDetailContainer, 190, 70, 60, 15, 15, 0xffffff, "单价:" + this.drupShopData.items[this.drupShopIndex].cost);
+            this.drupShopSum = Tool.addTextField(this.drupShopDetailContainer, 190, 95, 100, 15, 15, 0xffffff, "总额:" + this.drupShopData.items[this.drupShopIndex].cost);
+            this.drupShopDrupNumText = new eui.EditableText();
+            this.drupShopDrupNumText.x = 215;
+            this.drupShopDrupNumText.y = 40;
+            this.drupShopDrupNumText.width = 40;
+            this.drupShopDrupNumText.size = 15;
+            this.drupShopDrupNumText.height = 15;
+            this.drupShopDrupNumText.textColor = 0xffffff;
+            this.drupShopDrupNumText.textAlign = egret.HorizontalAlign.CENTER;
+            this.drupShopDrupNumText.text = "01";
+            this.drupShopDetailContainer.addChild(this.drupShopDrupNumText);
+            this.drupShopDrupNumText.addEventListener(egret.Event.FOCUS_OUT, function () {
+                var temp = parseInt(this.drupShopDrupNumText.text);
+                console.log("temp  " + temp);
+                this.ctrlDrupShop("update", temp);
+            }, this);
+            cost.textAlign = egret.HorizontalAlign.LEFT;
+            intruction.textAlign = egret.HorizontalAlign.LEFT;
+            this.drupShopSum.textAlign = egret.HorizontalAlign.LEFT;
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                console.log("x   " + e.localX, "   y   " + e.localY);
+                if (e.localX > 188 && e.localX < 203 && e.localY > 40 && e.localY < 58)
+                    this.ctrlDrupShop("update", --this.drupShopDrupNum);
+                else if (e.localX > 267 && e.localX < 283 && e.localY > 40 && e.localY < 58)
+                    this.ctrlDrupShop("update", ++this.drupShopDrupNum);
+                else if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
+                    if (this.drupShopSum.textColor == 0xff0000)
+                        this.showTip("金币不足");
+                    else {
+                    }
+                }
+                else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165)
+                    this.ctrlDrupShop("hideDetail");
+            }, this);
+            this.drupShopDetailContainer.scaleX = 0;
+            this.drupShopDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.drupShopDetailContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hideDetail") {
+            if (!this.drupShopIsDetail)
+                return;
+            this.drupShopIsDetail = false;
+            var tw = egret.Tween.get(this.drupShopDetailContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.drupShopContainer.removeChild(this.drupShopDetailContainer);
+                this.drupShopDetailContainer = null;
+                this.drupShopDetailLevel = null;
+                this.showing = "drupShop";
+            }, this);
+        }
+        else if (type == "update") {
+            console.log("update" + num);
+            this.drupShopDrupNum = num;
+            if (this.drupShopDrupNum < 1)
+                this.drupShopDrupNum = 1;
+            else if (this.drupShopDrupNum > 99)
+                this.drupShopDrupNum = 99;
+            this.drupShopDrupNumText.text = Tool.setZero(this.drupShopDrupNum, 2);
+            var sum = this.drupShopData.items[this.drupShopIndex].cost * this.drupShopDrupNum;
+            this.drupShopSum.text = "总额:" + sum;
+            if (sum < GameData.goldNum)
+                this.drupShopSum.textColor = 0xffffff;
+            else
+                this.drupShopSum.textColor = 0xff0000;
         }
     };
     //能力面板
