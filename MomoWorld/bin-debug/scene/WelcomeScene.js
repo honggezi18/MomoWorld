@@ -48,7 +48,7 @@ var WelcomeScene = (function (_super) {
         if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)
             console.log("select   武器升级");
         if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)
-            console.log("select   我的储物箱");
+            CtrlScene.getInstance().ctrlBag("show");
     };
     //触屏松开
     p.onTouchEnd = function (e) {

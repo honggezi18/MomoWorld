@@ -65,3 +65,17 @@ var weaponShop = {
         {icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go"},
     ]
 };
+
+var bag = {
+    items: [
+        {icon: "achievement_icon1_png", name: "武器1", info: "攻击力+100", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器2", info: "攻击力+200", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器3", info: "攻击力+300", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器4", info: "攻击力+400", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器4", info: "攻击力+400", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器4", info: "攻击力+400", cost: 30, ques: 5, state: "go"},
+        {icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go"},
+    ]
+};

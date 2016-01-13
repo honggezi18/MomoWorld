@@ -48,7 +48,7 @@ class WelcomeScene extends egret.DisplayObjectContainer {
         if (110 < this.absoluteX && this.absoluteX < 175 && 325 < this.absoluteY && this.absoluteY < 395)CtrlScene.getInstance().ctrlWeaponShop("show");
         if (245 < this.absoluteX && this.absoluteX < 305 && 325 < this.absoluteY && this.absoluteY < 395)CtrlScene.getInstance().ctrlDrupShop("show");
         if (165 < this.absoluteX && this.absoluteX < 220 && 470 < this.absoluteY && this.absoluteY < 550)console.log("select   武器升级");
-        if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)console.log("select   我的储物箱");
+        if (5 < this.absoluteX && this.absoluteX < 100 && 425 < this.absoluteY && this.absoluteY < 550)CtrlScene.getInstance().ctrlBag("show");
     }
 
     //触屏松开
@@ -96,7 +96,6 @@ class WelcomeScene extends egret.DisplayObjectContainer {
             //Hero.getInstance().action("GetDown");
         }
     }
-
 
 
 }

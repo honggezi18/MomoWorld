@@ -29,6 +29,7 @@ var GameData = (function () {
     GameData.bulletArray = []; //子弹数组
     //动态数据，需保存的数据///////////////////////////////
     GameData.goldNum = 500; //用户剩余的金币
+    GameData.diamondNum = 500; //用户剩余的金币
     GameData.skillNum = 50; //剩余的技能点数
     GameData.bodyNum = 50; //剩余的技能点数
     GameData.heroIndex = 1; //选择的角色

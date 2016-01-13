@@ -17,6 +17,7 @@ class GameData {
 
     //动态数据，需保存的数据///////////////////////////////
     static goldNum:number = 500;//用户剩余的金币
+    static diamondNum:number = 500;//用户剩余的金币
     static skillNum:number = 50;//剩余的技能点数
     static bodyNum:number = 50;//剩余的技能点数
     static heroIndex:number = 1;//选择的角色

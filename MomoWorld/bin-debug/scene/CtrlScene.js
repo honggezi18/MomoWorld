@@ -15,6 +15,8 @@ var CtrlScene = (function (_super) {
         this.drupShopIsDetail = false; //标示是否在显示详细面板
         this.weaponShopIndex = 0; //商品的选项下标
         this.weaponShopIsDetail = false; //标示是否在显示详细面板
+        this.bagIndex = 0; //商品的选项下标
+        this.bagIsDetail = false; //标示是否在显示详细面板
         if (CtrlScene.instance == null)
             CtrlScene.instance = this;
         else
@@ -76,6 +78,7 @@ var CtrlScene = (function (_super) {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
+        this.ctrlBag("show");
     };
     //显示提示信息
     p.showTip = function (info) {
@@ -93,6 +96,149 @@ var CtrlScene = (function (_super) {
             this.tipInfo.alpha = 0;
             this.isTip = false;
         }, this);
+    };
+    //我的背包面板
+    p.ctrlBag = function (type, num) {
+        if (num === void 0) { num = 1; }
+        if (type == "show") {
+            if (this.showing != "empty")
+                return; //若已经在显示着面板
+            this.bagData = bag;
+            this.showing = "bag";
+            this.bagItems = [];
+            this.bagIcon = [];
+            this.bagContainer = new egret.DisplayObjectContainer();
+            this.bagContainer.width = 430;
+            this.bagContainer.height = 320;
+            this.bagContainer.anchorOffsetX = this.bagContainer.width / 2;
+            this.bagContainer.anchorOffsetY = this.bagContainer.height / 2;
+            this.bagContainer.x = this.width / 2;
+            this.bagContainer.y = 210;
+            this.bagBackground = Tool.addBitmap(this.bagContainer, "bag_background_png", 0, 0, 430, 320);
+            this.bagGoldNum = Tool.addTextField(this.bagContainer, 340, 285, 80, 18, 18, 0x000000, GameData.goldNum);
+            this.bagDiamondNum = Tool.addTextField(this.bagContainer, 215, 285, 90, 18, 18, 0x000000, GameData.diamondNum);
+            this.bagGoldNum.textAlign = egret.HorizontalAlign.LEFT;
+            this.bagDiamondNum.textAlign = egret.HorizontalAlign.LEFT;
+            this.bagBackground.touchEnabled = true;
+            this.bagBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                Tool.logPosition(e);
+                if (e.localX > 390 && e.localX < 420 && e.localY > 10 && e.localY < 40)
+                    this.ctrlBag("hide");
+            }, this);
+            this.bagItemGroup = new eui.Group();
+            this.bagItemGroup.touchEnabled = true;
+            this.bagItemGroup.width = 400;
+            this.bagItemGroup.height = 70 * 5;
+            this.bagItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < 5; i++) {
+                this.bagItems.push(Tool.addBitmap(this.bagItemGroup, "bag_item_png", 0, i * 70, 400, 65));
+                for (var a = 0; a < 7; a++) {
+                    var index = i * 7 + a;
+                    if (this.bagData.items[index] == null)
+                        break;
+                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData.items[index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagIcon[index].touchEnabled = true;
+                    this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                        for (var b = 0; b < this.bagIcon.length; b++) {
+                            if (e.target == this.bagIcon[b]) {
+                                this.bagIndex = b;
+                                this.ctrlBag("showDetail");
+                                return;
+                            }
+                        }
+                    }, this);
+                }
+            }
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.x = 15;
+            scroll.y = 58;
+            scroll.width = 400;
+            scroll.height = 210;
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            this.bagContainer.addChild(scroll);
+            tempGroup.addChild(this.bagItemGroup);
+            this.addChild(this.bagContainer);
+            this.bagContainer.scaleX = 0;
+            this.bagContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.bagContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            if (this.showing == "empty")
+                return;
+            var tw = egret.Tween.get(this.bagContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.bagContainer);
+                this.bagDetailContainer = null;
+                this.bagweaponNumText = null;
+                this.bagBackground = null;
+                this.bagContainer = null;
+                this.bagItemGroup = null;
+                this.bagIsDetail = null;
+                this.bagweaponNum = null;
+                this.bagIndex = null;
+                this.bagItems = null;
+                this.bagIcon = null;
+                this.bagName = null;
+                this.bagInfo = null;
+                this.bagCost = null;
+                this.bagData = null;
+                this.bagSum = null;
+                this.showing = "empty";
+            }, this);
+        }
+        else if (type == "showDetail") {
+            this.bagIsDetail = true;
+            this.bagDetailContainer = new egret.DisplayObjectContainer();
+            this.bagDetailContainer.width = 300;
+            this.bagDetailContainer.height = 150;
+            this.bagDetailContainer.anchorOffsetX = 300 / 2;
+            this.bagDetailContainer.anchorOffsetY = 150 / 2;
+            this.bagDetailContainer.x = this.bagContainer.width / 2;
+            this.bagDetailContainer.y = this.bagContainer.height / 2;
+            this.bagContainer.addChild(this.bagDetailContainer);
+            var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail_png", 0, 0, 300, 150);
+            var icon = Tool.addBitmap(this.bagDetailContainer, this.bagData.items[this.bagIndex].icon, 28, 30, 50, 50);
+            var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, this.bagData.items[this.bagIndex].name);
+            var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, this.bagData.items[this.bagIndex].info);
+            var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + this.bagData.items[this.bagIndex].cost);
+            itemName.textAlign = egret.HorizontalAlign.LEFT;
+            cost.textAlign = egret.HorizontalAlign.LEFT;
+            intruction.textAlign = egret.HorizontalAlign.LEFT;
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
+                    if (this.bagSum.textColor == 0xff0000)
+                        this.showTip("金币不足");
+                    else {
+                        this.showTip("购买成功");
+                        this.ctrlBag("hideDetail");
+                    }
+                }
+                else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165)
+                    this.ctrlBag("hideDetail");
+            }, this);
+            this.bagDetailContainer.scaleX = 0;
+            this.bagDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.bagDetailContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hideDetail") {
+            if (!this.bagIsDetail)
+                return;
+            this.bagIsDetail = false;
+            var tw = egret.Tween.get(this.bagDetailContainer);
+            tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.bagContainer.removeChild(this.bagDetailContainer);
+                this.bagDetailContainer = null;
+                this.bagweaponNumText = null;
+                this.bagSum = null;
+                this.showing = "bag";
+            }, this);
+        }
     };
     //药品商店面板
     p.ctrlDrupShop = function (type, num) {
