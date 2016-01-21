@@ -1,12 +1,20 @@
-//¹¤¾ßÀà
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class Tool {
 
-    //Êä³öµ±Ç°µã»÷µÄ×ø±ê
+    //é‡Šæ”¾æŸå¯¹è±¡å†…å­˜
+    static clearItem(obj) {
+        if (obj != null && obj.parent != null)obj.parent.removeChild(obj);
+        egret.Tween.removeTweens(obj);
+        obj = null;
+        return null;
+    }
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     static logPosition(e:egret.TouchEvent):void{
         console.log("x  " + e.localX + "  y   " + e.localY);
     }
 
-    //Éî¶È¸³Öµ
+    //ï¿½ï¿½È¸ï¿½Öµ
     static deepCopy(source) {
         var result = {};
         for (var key in source) {
@@ -15,7 +23,7 @@ class Tool {
         return result;
     }
 
-    //Ìí¼ÓÖ¡¶¯»­µÄº¯Êı
+    //ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½
     static addMoveClip(target:any, res:string, type:string, x:number = 0, y:number = 0, scale:number = 1, time:number = -1, isCenter:boolean = false):egret.MovieClip {
         var data = RES.getRes(res + "_json");
         var txtr = RES.getRes(res + "_png");
@@ -32,22 +40,22 @@ class Tool {
         return mc;
     }
 
-    //»ñÈ¡Á½µã¼äµÄ¾àÀë
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
     static getDistance(obj1:any, obj2:any):number {
-        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2));//ÇóÁ½µã¼äµÄ¾àÀë
+        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
     }
 
-    //»ñÈ¡»¡¶ÈÖµ
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Öµ
     static getRadian(angle:number):number {
-        return Math.PI * angle / 180;//½Ç¶È×ª»¯Îª»¡¶È
+        return Math.PI * angle / 180;//ï¿½Ç¶ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
     }
 
-    //»ñÈ¡½Ç¶ÈÖµ
+    //ï¿½ï¿½È¡ï¿½Ç¶ï¿½Öµ
     static getAngle(radian:number):number {
-        return radian * 180 / Math.PI;//½Ç¶È×ª»¯Îª»¡¶È
+        return radian * 180 / Math.PI;//ï¿½Ç¶ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
     }
 
-    //Çå³ıËùÓĞ¼ÆÊ±Æ÷
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¼ï¿½Ê±ï¿½ï¿½
     static clearTimeout():void {
         var end = setTimeout(function () {
         }, 1);
@@ -56,7 +64,7 @@ class Tool {
         console.log("clearTimer");
     }
 
-    //Çå³ıÑ­»·¼ÆÊ±Æ÷
+    //ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     static clearInterval():void {
         var end = setInterval(function () {
         }, 1);
@@ -65,7 +73,7 @@ class Tool {
         console.log("clearInterval");
     }
 
-    //µ¯¿òÏÔÊ¾Ğ§¹û
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ğ§ï¿½ï¿½
     static addShowScaleEffect(obj):void {
         obj.visible = true;
         obj.scaleX = 0.3;
@@ -76,7 +84,7 @@ class Tool {
         }, 1000, egret.Ease.elasticOut);
     }
 
-    //Ìí¼Ó°´ÏÂÊ±µÄ·Å´óËõĞ¡Ğ§¹û
+    //ï¿½ï¿½Ó°ï¿½ï¿½ï¿½Ê±ï¿½Ä·Å´ï¿½ï¿½ï¿½Ğ¡Ğ§ï¿½ï¿½
     static addTouchScaleEffect(obj, target, fun:Function):void {
         obj.touchEnabled = true;
         obj.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
@@ -100,7 +108,7 @@ class Tool {
         }, target);
     }
 
-    //Ìí¼Ó°´Å¥µÄº¯Êı
+    //ï¿½ï¿½Ó°ï¿½Å¥ï¿½Äºï¿½ï¿½ï¿½
     static addBitmap(target:any, res:string, x:number = 0, y:number = 0, width:number = 0, height:number = 0, isButton:boolean = false, isCenter:boolean = false):egret.Bitmap {
         var temp:egret.Bitmap = new egret.Bitmap();
         temp.texture = RES.getRes(res);
@@ -116,7 +124,7 @@ class Tool {
             temp.addEventListener(egret.TouchEvent.TOUCH_BEGIN, target.onTouchStart, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, target.onTouchEnd, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_END, target.onTouchEnd, target);
-            temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target);//±»ÒÆ³ıÊ±Ïû³ıÏûÏ¢µÄ¼àÌı
+            temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target);//ï¿½ï¿½ï¿½Æ³ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ä¼ï¿½ï¿½ï¿½
         }
         if (isCenter) {
             temp.anchorOffsetX = temp.width / 2;
@@ -125,7 +133,7 @@ class Tool {
         return temp;
     }
 
-    //Ìí¼ÓÎ»Í¼ÎÄ×ÖµÄº¯Êı
+    //ï¿½ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ÖµÄºï¿½ï¿½ï¿½
     static addBitmapText(target:any, res:string, x:number, y:number, scale:number, text:string):egret.BitmapText {
         var temp:egret.BitmapText = new egret.BitmapText();
         temp.font = RES.getRes(res);
@@ -140,7 +148,7 @@ class Tool {
         return temp;
     }
 
-    //Ìí¼ÓÎÄ×ÖĞĞ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     static addTextField(target:any, x:number, y:number, width:number, height:number, size:number, color:number, text:any):egret.TextField {
         var temp:egret.TextField = new egret.TextField();
         temp.fontFamily = "Microsoft YaHei";
@@ -159,25 +167,25 @@ class Tool {
         return temp;
     }
 
-    //ÉèÖÃ±¾µØ´æ´¢µÄ±äÁ¿
+    //ï¿½ï¿½ï¿½Ã±ï¿½ï¿½Ø´æ´¢ï¿½Ä±ï¿½ï¿½ï¿½
     static setLocal(name:string, value:any):void {
-        localStorage.setItem(name, value);//ÉèÖÃbÎª"isaac"
+        localStorage.setItem(name, value);//ï¿½ï¿½ï¿½ï¿½bÎª"isaac"
     }
 
-    //»ñÈ¡±¾µØ´æ´¢µÄ±äÁ¿
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø´æ´¢ï¿½Ä±ï¿½ï¿½ï¿½
     static getLocal(name:string):any {
-        var data = localStorage.getItem(name);//»ñÈ¡bµÄÖµ
+        var data = localStorage.getItem(name);//ï¿½ï¿½È¡bï¿½ï¿½Öµ
         return data;
     }
 
-    //¼ì²â±¾µØ´æ´¢µÄ±äÁ¿
+    //ï¿½ï¿½â±¾ï¿½Ø´æ´¢ï¿½Ä±ï¿½ï¿½ï¿½
     static checkLocal(name:string):boolean {
         var b = localStorage.getItem(name);
         if (b == null || b == "")return false;
         else return true;
     }
 
-    //×Ô¶¯²¹È«Î»Êı,Ç°Ãæ²¹Áã
+    //ï¿½Ô¶ï¿½ï¿½ï¿½È«Î»ï¿½ï¿½,Ç°ï¿½æ²¹ï¿½ï¿½
     static setZero(num:number, length:number):string {
         var str = "";
         if (num.toString().length > length + 1) {
@@ -188,7 +196,7 @@ class Tool {
         return str + num.toString();
     }
 
-    //É¾³ıÊı×éÖĞµÄÌØ¶¨ÔªËØ
+    //É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½Ø¶ï¿½Ôªï¿½ï¿½
     static removeOne(array, index):void {
         if (index >= 0 && index < array.length) {
             for (var i = index; i < array.length; i++) {

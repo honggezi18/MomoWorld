@@ -3,11 +3,19 @@ var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
-    //������ǰ����������
+    //释放某对象内存
+    Tool.clearItem = function (obj) {
+        if (obj != null && obj.parent != null)
+            obj.parent.removeChild(obj);
+        egret.Tween.removeTweens(obj);
+        obj = null;
+        return null;
+    };
+    //�����ǰ��������
     Tool.logPosition = function (e) {
         console.log("x  " + e.localX + "  y   " + e.localY);
     };
-    //���ȸ�ֵ
+    //��ȸ�ֵ
     Tool.deepCopy = function (source) {
         var result = {};
         for (var key in source) {
@@ -15,7 +23,7 @@ var Tool = (function () {
         }
         return result;
     };
-    //����֡�����ĺ���
+    //���֡�����ĺ���
     Tool.addMoveClip = function (target, res, type, x, y, scale, time, isCenter) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
@@ -36,9 +44,9 @@ var Tool = (function () {
         mc.play(time);
         return mc;
     };
-    //��ȡ�������ľ���
+    //��ȡ�����ľ���
     Tool.getDistance = function (obj1, obj2) {
-        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2)); //���������ľ���
+        return Math.sqrt(Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2)); //�������ľ���
     };
     //��ȡ����ֵ
     Tool.getRadian = function (angle) {
@@ -48,7 +56,7 @@ var Tool = (function () {
     Tool.getAngle = function (radian) {
         return radian * 180 / Math.PI; //�Ƕ�ת��Ϊ����
     };
-    //�������м�ʱ��
+    //������м�ʱ��
     Tool.clearTimeout = function () {
         var end = setTimeout(function () {
         }, 1);
@@ -57,7 +65,7 @@ var Tool = (function () {
             clearTimeout(i);
         console.log("clearTimer");
     };
-    //����ѭ����ʱ��
+    //���ѭ����ʱ��
     Tool.clearInterval = function () {
         var end = setInterval(function () {
         }, 1);
@@ -76,7 +84,7 @@ var Tool = (function () {
             scaleY: 1
         }, 1000, egret.Ease.elasticOut);
     };
-    //���Ӱ���ʱ�ķŴ���СЧ��
+    //��Ӱ���ʱ�ķŴ���СЧ��
     Tool.addTouchScaleEffect = function (obj, target, fun) {
         obj.touchEnabled = true;
         obj.addEventListener(egret.TouchEvent.TOUCH_BEGIN, function () {
@@ -98,7 +106,7 @@ var Tool = (function () {
             }, 50).call(fun, target);
         }, target);
     };
-    //���Ӱ�ť�ĺ���
+    //��Ӱ�ť�ĺ���
     Tool.addBitmap = function (target, res, x, y, width, height, isButton, isCenter) {
         if (x === void 0) { x = 0; }
         if (y === void 0) { y = 0; }
@@ -120,7 +128,7 @@ var Tool = (function () {
             temp.addEventListener(egret.TouchEvent.TOUCH_BEGIN, target.onTouchStart, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, target.onTouchEnd, target);
             temp.addEventListener(egret.TouchEvent.TOUCH_END, target.onTouchEnd, target);
-            temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target); //���Ƴ�ʱ������Ϣ�ļ���
+            temp.addEventListener(egret.Event.REMOVED_FROM_STAGE, target.onRemove, target); //���Ƴ�ʱ�����Ϣ�ļ���
         }
         if (isCenter) {
             temp.anchorOffsetX = temp.width / 2;
@@ -128,7 +136,7 @@ var Tool = (function () {
         }
         return temp;
     };
-    //����λͼ���ֵĺ���
+    //���λͼ���ֵĺ���
     Tool.addBitmapText = function (target, res, x, y, scale, text) {
         var temp = new egret.BitmapText();
         temp.font = RES.getRes(res);
@@ -142,7 +150,7 @@ var Tool = (function () {
         target.addChild(temp);
         return temp;
     };
-    //����������
+    //���������
     Tool.addTextField = function (target, x, y, width, height, size, color, text) {
         var temp = new egret.TextField();
         temp.fontFamily = "Microsoft YaHei";
@@ -169,7 +177,7 @@ var Tool = (function () {
         var data = localStorage.getItem(name); //��ȡb��ֵ
         return data;
     };
-    //���Ȿ�ش洢�ı���
+    //��Ȿ�ش洢�ı���
     Tool.checkLocal = function (name) {
         var b = localStorage.getItem(name);
         if (b == null || b == "")

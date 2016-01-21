@@ -61,7 +61,7 @@ var weaponShop = {
     ]
 };
 var bag = {
-    items: [
+    Equip: [
         { icon: "achievement_icon1_png", name: "武器1", info: "攻击力+100", cost: 30, ques: 5, state: "go" },
         { icon: "achievement_icon1_png", name: "武器2", info: "攻击力+200", cost: 30, ques: 5, state: "go" },
         { icon: "achievement_icon1_png", name: "武器3", info: "攻击力+300", cost: 30, ques: 5, state: "go" },
@@ -71,5 +71,38 @@ var bag = {
         { icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
         { icon: "achievement_icon1_png", name: "武器4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
         { icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
-    ]
+    ],
+    Item: [
+        { icon: "achievement_icon2_png", name: "物品1", info: "攻击力+100", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品2", info: "攻击力+200", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品3", info: "攻击力+300", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon2_png", name: "物品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+    ],
+    Piece: [
+        { icon: "achievement_icon3_png", name: "碎片1", info: "攻击力+100", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片2", info: "攻击力+200", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片3", info: "攻击力+300", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon3_png", name: "碎片5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+    ],
+    Use: [
+        { icon: "achievement_icon4_png", name: "消耗品1", info: "攻击力+100", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品2", info: "攻击力+200", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品3", info: "攻击力+300", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品4", info: "攻击力+400", cost: 30, ques: 5, state: "go" },
+        { icon: "achievement_icon4_png", name: "消耗品5", info: "攻击力+500", cost: 30, ques: 5, state: "go" },
+    ],
 };

@@ -15,6 +15,7 @@ var CtrlScene = (function (_super) {
         this.drupShopIsDetail = false; //标示是否在显示详细面板
         this.weaponShopIndex = 0; //商品的选项下标
         this.weaponShopIsDetail = false; //标示是否在显示详细面板
+        this.bagBtnIndex = "Equip"; //背包选择卡的下标
         this.bagIndex = 0; //商品的选项下标
         this.bagIsDetail = false; //标示是否在显示详细面板
         if (CtrlScene.instance == null)
@@ -115,15 +116,51 @@ var CtrlScene = (function (_super) {
             this.bagContainer.x = this.width / 2;
             this.bagContainer.y = 210;
             this.bagBackground = Tool.addBitmap(this.bagContainer, "bag_background_png", 0, 0, 430, 320);
+            this.bag_btnEquip = Tool.addBitmap(this.bagContainer, "bag_btnEquip1_png", 30, 10, 80, 35);
+            this.bag_btnItem = Tool.addBitmap(this.bagContainer, "bag_btnItem0_png", 120, 10, 80, 35);
+            this.bag_btnPiece = Tool.addBitmap(this.bagContainer, "bag_btnPiece0_png", 210, 10, 80, 35);
+            this.bag_btnUse = Tool.addBitmap(this.bagContainer, "bag_btnUse0_png", 300, 10, 80, 35);
             this.bagGoldNum = Tool.addTextField(this.bagContainer, 340, 285, 80, 18, 18, 0x000000, GameData.goldNum);
             this.bagDiamondNum = Tool.addTextField(this.bagContainer, 215, 285, 90, 18, 18, 0x000000, GameData.diamondNum);
             this.bagGoldNum.textAlign = egret.HorizontalAlign.LEFT;
             this.bagDiamondNum.textAlign = egret.HorizontalAlign.LEFT;
             this.bagBackground.touchEnabled = true;
+            this.bag_btnEquip.touchEnabled = true;
+            this.bag_btnItem.touchEnabled = true;
+            this.bag_btnPiece.touchEnabled = true;
+            this.bag_btnUse.touchEnabled = true;
             this.bagBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
-                Tool.logPosition(e);
+                e.stopImmediatePropagation();
                 if (e.localX > 390 && e.localX < 420 && e.localY > 10 && e.localY < 40)
                     this.ctrlBag("hide");
+            }, this);
+            this.bag_btnEquip.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                e.stopImmediatePropagation();
+                if (this.bagBtnIndex == "Equip")
+                    return;
+                this.bagBtnIndex = "Equip";
+                this.ctrlBag("changeBtn");
+            }, this);
+            this.bag_btnItem.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                e.stopImmediatePropagation();
+                if (this.bagBtnIndex == "Item")
+                    return;
+                this.bagBtnIndex = "Item";
+                this.ctrlBag("changeBtn");
+            }, this);
+            this.bag_btnPiece.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                e.stopImmediatePropagation();
+                if (this.bagBtnIndex == "Piece")
+                    return;
+                this.bagBtnIndex = "Piece";
+                this.ctrlBag("changeBtn");
+            }, this);
+            this.bag_btnUse.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                e.stopImmediatePropagation();
+                if (this.bagBtnIndex == "Use")
+                    return;
+                this.bagBtnIndex = "Use";
+                this.ctrlBag("changeBtn");
             }, this);
             this.bagItemGroup = new eui.Group();
             this.bagItemGroup.touchEnabled = true;
@@ -134,9 +171,9 @@ var CtrlScene = (function (_super) {
                 this.bagItems.push(Tool.addBitmap(this.bagItemGroup, "bag_item_png", 0, i * 70, 400, 65));
                 for (var a = 0; a < 7; a++) {
                     var index = i * 7 + a;
-                    if (this.bagData.items[index] == null)
+                    if (this.bagData[this.bagBtnIndex][index] == null)
                         break;
-                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData.items[index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData[this.bagBtnIndex][index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                         for (var b = 0; b < this.bagIcon.length; b++) {
@@ -190,6 +227,35 @@ var CtrlScene = (function (_super) {
                 this.showing = "empty";
             }, this);
         }
+        else if (type == "changeBtn") {
+            console.log("changeBtn");
+            this.bag_btnEquip.texture = RES.getRes("bag_btnEquip0_png");
+            this.bag_btnItem.texture = RES.getRes("bag_btnItem0_png");
+            this.bag_btnPiece.texture = RES.getRes("bag_btnPiece0_png");
+            this.bag_btnUse.texture = RES.getRes("bag_btnUse0_png");
+            this["bag_btn" + this.bagBtnIndex].texture = RES.getRes("bag_btn" + this.bagBtnIndex + "1_png");
+            for (var i = 0; i < this.bagIcon.length; i++)
+                Tool.clearItem(this.bagIcon[i]);
+            this.bagIcon.length = 0;
+            for (var i = 0; i < 5; i++) {
+                for (var a = 0; a < 7; a++) {
+                    var index = i * 7 + a;
+                    if (this.bagData[this.bagBtnIndex][index] == null)
+                        break;
+                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData[this.bagBtnIndex][index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagIcon[index].touchEnabled = true;
+                    this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                        for (var b = 0; b < this.bagIcon.length; b++) {
+                            if (e.target == this.bagIcon[b]) {
+                                this.bagIndex = b;
+                                this.ctrlBag("showDetail");
+                                return;
+                            }
+                        }
+                    }, this);
+                }
+            }
+        }
         else if (type == "showDetail") {
             this.bagIsDetail = true;
             this.bagDetailContainer = new egret.DisplayObjectContainer();
@@ -201,10 +267,10 @@ var CtrlScene = (function (_super) {
             this.bagDetailContainer.y = this.bagContainer.height / 2;
             this.bagContainer.addChild(this.bagDetailContainer);
             var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail_png", 0, 0, 300, 150);
-            var icon = Tool.addBitmap(this.bagDetailContainer, this.bagData.items[this.bagIndex].icon, 28, 30, 50, 50);
-            var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, this.bagData.items[this.bagIndex].name);
-            var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, this.bagData.items[this.bagIndex].info);
-            var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + this.bagData.items[this.bagIndex].cost);
+            var icon = Tool.addBitmap(this.bagDetailContainer, this.bagData[this.bagBtnIndex][this.bagIndex].icon, 28, 30, 50, 50);
+            var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, this.bagData[this.bagBtnIndex][this.bagIndex].name);
+            var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, this.bagData[this.bagBtnIndex][this.bagIndex].info);
+            var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + this.bagData[this.bagBtnIndex][this.bagIndex].cost);
             itemName.textAlign = egret.HorizontalAlign.LEFT;
             cost.textAlign = egret.HorizontalAlign.LEFT;
             intruction.textAlign = egret.HorizontalAlign.LEFT;
