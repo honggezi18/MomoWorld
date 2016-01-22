@@ -5,6 +5,7 @@ var CtrlScene = (function (_super) {
         _super.call(this);
         this.showing = "empty"; //标示正在显示着什么面板
         this.isTip = false; //标示是否在显示提示
+        this.sureAnswer = false; //弹框返回的信息
         //顶部素材
         this.isTop = false; //标示是否显示顶部
         this.isCtrl = false;
@@ -98,6 +99,47 @@ var CtrlScene = (function (_super) {
             this.isTip = false;
         }, this);
     };
+    //显示确定弹框
+    p.showSure = function (info, fun) {
+        if (this.sureContainer != null)
+            return;
+        this.sureContainer = new egret.DisplayObjectContainer();
+        this.sureContainer.width = 300;
+        this.sureContainer.height = 150;
+        this.sureContainer.anchorOffsetX = 300 / 2;
+        this.sureContainer.anchorOffsetY = 150 / 2;
+        this.sureContainer.x = GameData.gameWidth / 2;
+        this.sureContainer.y = GameData.gameHeight / 2;
+        this.addChild(this.sureContainer);
+        var background = Tool.addBitmap(this.sureContainer, "bag_sureBackground_png", 0, 0, 300, 150);
+        var tempText = Tool.addTextField(this.sureContainer, 15, 20, 270, 70, 20, 0x000000, info);
+        tempText.verticalAlign = egret.VerticalAlign.MIDDLE;
+        background.touchEnabled = true;
+        background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+            var isHide = false;
+            if (e.localX > 30 && e.localX < 110 && e.localY > 110 && e.localY < 140) {
+                this.sureAnswer = true;
+                isHide = true;
+            }
+            else if (e.localX > 190 && e.localX < 275 && e.localY > 110 && e.localY < 140) {
+                this.sureAnswer = false;
+                isHide = true;
+            }
+            if (isHide) {
+                egret.Tween.get(this.sureContainer).to({
+                    scaleX: 0,
+                    scaleY: 0
+                }, 500, egret.Ease.backIn).call(function () {
+                    this.sureContainer = Tool.clearItem(this.sureContainer);
+                    fun();
+                }, this);
+            }
+        }, this);
+        this.sureContainer.scaleX = 0;
+        this.sureContainer.scaleY = 0;
+        var tw = egret.Tween.get(this.sureContainer);
+        tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+    };
     //我的背包面板
     p.ctrlBag = function (type, num) {
         if (num === void 0) { num = 1; }
@@ -106,8 +148,9 @@ var CtrlScene = (function (_super) {
                 return; //若已经在显示着面板
             this.bagData = bag;
             this.showing = "bag";
-            this.bagItems = [];
             this.bagIcon = [];
+            this.bagItems = [];
+            this.bagItemNum = [];
             this.bagContainer = new egret.DisplayObjectContainer();
             this.bagContainer.width = 430;
             this.bagContainer.height = 320;
@@ -174,6 +217,10 @@ var CtrlScene = (function (_super) {
                     if (this.bagData[this.bagBtnIndex][index] == null)
                         break;
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData[this.bagBtnIndex][index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, this.bagData[this.bagBtnIndex][index].num + ""));
+                    this.bagItemNum[index].stroke = 1;
+                    this.bagItemNum[index].visible = false;
+                    this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                         for (var b = 0; b < this.bagIcon.length; b++) {
@@ -229,20 +276,32 @@ var CtrlScene = (function (_super) {
         }
         else if (type == "changeBtn") {
             console.log("changeBtn");
+            this.bagGoldNum.text = GameData.goldNum + "";
+            this.bagDiamondNum.text = GameData.diamondNum + "";
             this.bag_btnEquip.texture = RES.getRes("bag_btnEquip0_png");
             this.bag_btnItem.texture = RES.getRes("bag_btnItem0_png");
             this.bag_btnPiece.texture = RES.getRes("bag_btnPiece0_png");
             this.bag_btnUse.texture = RES.getRes("bag_btnUse0_png");
             this["bag_btn" + this.bagBtnIndex].texture = RES.getRes("bag_btn" + this.bagBtnIndex + "1_png");
-            for (var i = 0; i < this.bagIcon.length; i++)
+            for (var i = 0; i < this.bagIcon.length; i++) {
                 Tool.clearItem(this.bagIcon[i]);
+                Tool.clearItem(this.bagItemNum[i]);
+            }
             this.bagIcon.length = 0;
+            this.bagItemNum.length = 0;
             for (var i = 0; i < 5; i++) {
                 for (var a = 0; a < 7; a++) {
                     var index = i * 7 + a;
                     if (this.bagData[this.bagBtnIndex][index] == null)
                         break;
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, this.bagData[this.bagBtnIndex][index].icon, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, this.bagData[this.bagBtnIndex][index].num + ""));
+                    this.bagItemNum[index].stroke = 1;
+                    if (this.bagBtnIndex == "Equip")
+                        this.bagItemNum[index].visible = false;
+                    else
+                        this.bagItemNum[index].visible = true;
+                    this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                         for (var b = 0; b < this.bagIcon.length; b++) {
@@ -266,25 +325,70 @@ var CtrlScene = (function (_super) {
             this.bagDetailContainer.x = this.bagContainer.width / 2;
             this.bagDetailContainer.y = this.bagContainer.height / 2;
             this.bagContainer.addChild(this.bagDetailContainer);
-            var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail_png", 0, 0, 300, 150);
+            var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail" + this.bagBtnIndex + "_png", 0, 0, 300, 150);
             var icon = Tool.addBitmap(this.bagDetailContainer, this.bagData[this.bagBtnIndex][this.bagIndex].icon, 28, 30, 50, 50);
             var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, this.bagData[this.bagBtnIndex][this.bagIndex].name);
             var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, this.bagData[this.bagBtnIndex][this.bagIndex].info);
             var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + this.bagData[this.bagBtnIndex][this.bagIndex].cost);
+            if (this.bagBtnIndex != "Equip") {
+                var numText = Tool.addTextField(this.bagDetailContainer, 62, 75, 20, 15, 15, 0x000000, this.bagData[this.bagBtnIndex][this.bagIndex].num + "");
+                numText.textAlign = egret.HorizontalAlign.RIGHT;
+                numText.stroke = 1;
+                this.bagSaleNum = new eui.EditableText();
+                this.bagSaleNum.x = 133;
+                this.bagSaleNum.y = 113;
+                this.bagSaleNum.width = 35;
+                this.bagSaleNum.height = 20;
+                this.bagSaleNum.size = 20;
+                this.bagSaleNum.textColor = 0x000000;
+                this.bagSaleNum.textAlign = egret.HorizontalAlign.CENTER;
+                this.bagSaleNum.text = "1";
+                this.bagDetailContainer.addChild(this.bagSaleNum);
+                this.bagSaleNum.addEventListener(egret.Event.FOCUS_OUT, function () {
+                    var temp = parseInt(this.bagSaleNum.text);
+                    if (temp > this.bagData[this.bagBtnIndex][this.bagIndex].num)
+                        this.bagSaleNum.text = "" + this.bagData[this.bagBtnIndex][this.bagIndex].num;
+                }, this);
+            }
             itemName.textAlign = egret.HorizontalAlign.LEFT;
             cost.textAlign = egret.HorizontalAlign.LEFT;
             intruction.textAlign = egret.HorizontalAlign.LEFT;
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
-                if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
-                    if (this.bagSum.textColor == 0xff0000)
-                        this.showTip("金币不足");
-                    else {
-                        this.showTip("购买成功");
-                        this.ctrlBag("hideDetail");
+                if (e.localX > 20 && e.localX < 100 && e.localY > 110 && e.localY < 140) {
+                    this.showSure("确定卖出吗？", function () {
+                        if (this.sureAnswer) {
+                            console.log("卖出成功");
+                            if (this.bagBtnIndex == "Equip") {
+                                GameData.goldNum += this.bagData[this.bagBtnIndex][this.bagIndex].cost;
+                                Tool.removeOne(this.bagData[this.bagBtnIndex], this.bagIndex);
+                            }
+                            else {
+                                GameData.goldNum += this.bagData[this.bagBtnIndex][this.bagIndex].cost * parseInt(this.bagSaleNum.text);
+                                this.bagData[this.bagBtnIndex][this.bagIndex].num -= parseInt(this.bagSaleNum.text);
+                                if (this.bagData[this.bagBtnIndex][this.bagIndex].num == 0)
+                                    Tool.removeOne(this.bagData[this.bagBtnIndex], this.bagIndex);
+                            }
+                            GameData.saveData(); //保存数据
+                            this.ctrlBag("changeBtn"); //刷新数据
+                            this.ctrlBag("hideDetail");
+                        }
+                    }.bind(this));
+                }
+                else if (e.localX > 110 && e.localX < 190 && e.localY > 110 && e.localY < 140) {
+                    if (this.bagBtnIndex == "Equip")
+                        console.log("装备成功");
+                    else if (this.bagBtnIndex == "Piece")
+                        console.log("合成成功");
+                    else if (this.bagBtnIndex == "Use" || this.bagBtnIndex == "Item") {
+                        var tempNum = parseInt(this.bagSaleNum.text);
+                        if (e.localX > 110 && e.localX < 130 && tempNum > 1)
+                            this.bagSaleNum.text = "" + (tempNum - 1);
+                        else if (e.localX > 170 && e.localX < 190 && tempNum < this.bagData[this.bagBtnIndex][this.bagIndex].num)
+                            this.bagSaleNum.text = "" + (tempNum + 1);
                     }
                 }
-                else if (e.localX > 190 && e.localX < 260 && e.localY > 135 && e.localY < 165)
+                else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140)
                     this.ctrlBag("hideDetail");
             }, this);
             this.bagDetailContainer.scaleX = 0;
