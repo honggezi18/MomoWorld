@@ -104,5 +104,9 @@ var bag = {
         { icon: "achievement_icon4_png", name: "消耗品5", info: "攻击力+500", cost: 30, num: 5 },
         { icon: "achievement_icon4_png", name: "消耗品4", info: "攻击力+400", cost: 30, num: 5 },
         { icon: "achievement_icon4_png", name: "消耗品5", info: "攻击力+500", cost: 30, num: 5 },
-    ],
+    ]
+};
+var data = {
+    occupation: "弓箭手",
+    boold: "弓箭手",
 };

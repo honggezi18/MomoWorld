@@ -9,9 +9,9 @@ class Tool {
         return null;
     }
 
-    //�����ǰ��������
+    //输出当前点击的坐标
     static logPosition(e:egret.TouchEvent):void{
-        console.log("x  " + e.localX + "  y   " + e.localY);
+        console.log("localX  " + e.localX + "  localY   " + e.localY+"stageX " + e.stageX + "  stageY   " + e.stageY);
     }
 
     //��ȸ�ֵ

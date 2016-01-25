@@ -80,7 +80,7 @@ var CtrlScene = (function (_super) {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlBag("show");
+        this.ctrlData("show");
     };
     //显示提示信息
     p.showTip = function (info) {
@@ -139,6 +139,51 @@ var CtrlScene = (function (_super) {
         this.sureContainer.scaleY = 0;
         var tw = egret.Tween.get(this.sureContainer);
         tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+    };
+    //显示玩家信息弹框
+    p.ctrlData = function (type) {
+        if (type == "show") {
+            if (this.dataContainer != null)
+                return;
+            this.dataContainer = new egret.DisplayObjectContainer();
+            this.dataContainer.width = 500;
+            this.dataContainer.height = 480;
+            this.dataContainer.anchorOffsetX = 500 / 2;
+            this.dataContainer.anchorOffsetY = 480 / 2;
+            this.dataContainer.x = GameData.gameWidth / 2;
+            this.dataContainer.y = GameData.gameHeight / 2 - 50;
+            this.addChild(this.dataContainer);
+            var i = 0;
+            var background = Tool.addBitmap(this.dataContainer, "data_background_png", 0, 0, 500, 480);
+            //玩家数值显示
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "职业:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "等级:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "血量:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法量:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "物攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "物抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "攻速:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "移速:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            //玩家装备显示//设置坐标数组，装备名数组，根据数组名检查装备，再显示图标，即装备种类固定数组下标，这样连接图标的点击响应
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
+                Tool.logPosition(e);
+                if (e.localX > 455 && e.localX < 470 && e.localY > 65 && e.localY < 85)
+                    this.ctrlData("hide");
+            }, this);
+            this.dataContainer.scaleX = 0;
+            this.dataContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.dataContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            console.log("hide");
+            egret.Tween.get(this.dataContainer).to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.dataContainer = Tool.clearItem(this.dataContainer);
+            });
+        }
     };
     //我的背包面板
     p.ctrlBag = function (type, num) {
