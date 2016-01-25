@@ -24,8 +24,8 @@
       <file leaf-file-name="CtrlScene.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3628049">
-              <caret line="295" column="43" selection-start-line="295" selection-start-column="43" selection-end-line="295" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.50762194">
+              <caret line="300" column="23" selection-start-line="300" selection-start-column="23" selection-end-line="300" selection-end-column="23" />
               <folding>
                 <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
@@ -894,8 +894,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3628049">
-          <caret line="295" column="43" selection-start-line="295" selection-start-column="43" selection-end-line="295" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.50762194">
+          <caret line="300" column="23" selection-start-line="300" selection-start-column="23" selection-end-line="300" selection-end-column="23" />
           <folding>
             <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
