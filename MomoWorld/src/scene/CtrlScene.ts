@@ -123,7 +123,12 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
     //玩家信息页面
     private dataContainer:egret.DisplayObjectContainer;//药品弹框显示容器
-    private dataBackground:egret.Bitmap;//背景
+
+    //武器升级页面
+    private weaponContainer:egret.DisplayObjectContainer;//武器升级页面显示容器
+    private weaponBackground:egret.Bitmap;//武器升级背景图
+    private weaponExpbar:egret.Bitmap;//武器经验条
+    private weaponState:number = 0;//武器升级面板状态
 
 
     public static getInstance():CtrlScene {
@@ -189,7 +194,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlData("show");
+        this.ctrlWeapon("show");
     }
 
     //显示提示信息
@@ -252,6 +257,64 @@ class CtrlScene extends egret.DisplayObjectContainer {
         this.sureContainer.scaleY = 0;
         var tw = egret.Tween.get(this.sureContainer);
         tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+    }
+
+    //显示武器升级页面
+    public ctrlWeapon(type:string, index:number = 0):void {
+        if (type == "show") {
+            if (this.weaponContainer != null)return;
+            this.weaponContainer = new egret.DisplayObjectContainer();
+            this.weaponContainer.width = 500;
+            this.weaponContainer.height = 300;
+            this.weaponContainer.anchorOffsetX = 500 / 2;
+            this.weaponContainer.anchorOffsetY = 300 / 2;
+            this.weaponContainer.x = GameData.gameWidth / 2;
+            this.weaponContainer.y = GameData.gameHeight / 2;
+            this.addChild(this.weaponContainer);
+
+            this.weaponState = 1;
+            this.weaponBackground = Tool.addBitmap(this.weaponContainer, "weapon_background" + this.weaponState + "_png", 0, 0, 500, 300);
+            this.weaponExpbar = Tool.addBitmap(this.weaponContainer, "weapon_expbar_png", 224, 47, 95, 25);
+            var tempText = Tool.addTextField(this.weaponContainer, 192, 48, 30, 25, 25, 0x000000, "30");
+            tempText.stroke = 1;
+
+            this.weaponBackground.touchEnabled = true;
+            this.weaponBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.localX > 465 && e.localX < 500 && e.localY > 0 && e.localY < 50)this.ctrlWeapon("hide");
+                else if (e.localX > 195 && e.localX < 305 && e.localY > 95 && e.localY < 225)this.ctrlWeapon("select");
+                else if (this.weaponState > 0) {//已经选择升级的武器
+                    if (e.localX > 175 && e.localX < 320 && e.localY > 240 && e.localY < 285)this.ctrlWeapon("levelUp");
+                    else if (e.localX > 42 && e.localX < 102 && e.localY > 40 && e.localY < 105)this.ctrlWeapon("input", 1);
+                    else if (e.localX > 400 && e.localX < 460 && e.localY > 40 && e.localY < 105)this.ctrlWeapon("input", 2);
+                    else if (e.localX > 42 && e.localX < 102 && e.localY > 200 && e.localY < 265)this.ctrlWeapon("input", 3);
+                    else if (e.localX > 400 && e.localX < 460 && e.localY > 200 && e.localY < 265)this.ctrlWeapon("input", 4);
+                }
+            }, this);
+            this.weaponContainer.alpha = 0;
+            var tw = egret.Tween.get(this.weaponContainer);
+            tw.to({alpha: 1}, 500, egret.Ease.backOut);
+        }
+        else if (type == "hide") {
+            console.log("hide");
+            egret.Tween.get(this.weaponContainer).to({alpha: 0}, 500, egret.Ease.backIn).call(function () {
+                this.weaponContainer = Tool.clearItem(this.weaponContainer);
+            }, this);
+        }
+        else if (type == "select") {//选择武器
+            console.log("select");
+            this.weaponBackground.texture = RES.getRes("weapon_background" + this.weaponState + "_png");
+
+
+        }
+        else if (type == "input") {//选择升级材料
+            console.log("index   " + index);
+
+        }
+        else if (type == "levelUp") {//武器升级
+            console.log("levelUp");
+        }
+
+
     }
 
     //显示玩家信息弹框

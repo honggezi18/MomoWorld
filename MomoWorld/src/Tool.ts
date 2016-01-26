@@ -11,7 +11,7 @@ class Tool {
 
     //输出当前点击的坐标
     static logPosition(e:egret.TouchEvent):void{
-        console.log("localX  " + e.localX + "  localY   " + e.localY+"stageX " + e.stageX + "  stageY   " + e.stageY);
+        console.log("localX  " + e.localX + "  localY   " + e.localY+"     stageX " + e.stageX + "  stageY   " + e.stageY);
     }
 
     //��ȸ�ֵ

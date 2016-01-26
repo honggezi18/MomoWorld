@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png",
+		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png,weapon_background3_png,weapon_expbar_png",
 		"name":"worldMap"
 	},
 	{
@@ -33,7 +33,7 @@
 		"name":"item"
 	},
 	{
-		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png,drupShop_background_png,drupShop_item_png,drupShop_detail_png,weaponShop_detail_png,weaponShop_item_png,weaponShop_background_png,bag_background_png,bag_item_png,bag_btnEquip0_png,bag_btnEquip1_png,bag_btnItem0_png,bag_btnItem1_png,bag_btnPiece0_png,bag_btnPiece1_png,bag_btnUse0_png,bag_btnUse1_png,bag_detailEquip_png,bag_detailItem_png,bag_detailPiece_png,bag_detailUse_png,bag_sureBackground_png,data_background_png",
+		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png,drupShop_background_png,drupShop_item_png,drupShop_detail_png,weaponShop_detail_png,weaponShop_item_png,weaponShop_background_png,bag_background_png,bag_item_png,bag_btnEquip0_png,bag_btnEquip1_png,bag_btnItem0_png,bag_btnItem1_png,bag_btnPiece0_png,bag_btnPiece1_png,bag_btnUse0_png,bag_btnUse1_png,bag_detailEquip_png,bag_detailItem_png,bag_detailPiece_png,bag_detailUse_png,bag_sureBackground_png,data_background_png,weapon_background0_png,weapon_background1_png,weapon_background2_png",
 		"name":"ctrl"
 	}],
 	"resources":[
@@ -781,5 +781,30 @@
 		"name":"data_background_png",
 		"type":"image",
 		"url":"assets/ctrl/data/data_background.png"
+	},
+	{
+		"name":"weapon_background0_png",
+		"type":"image",
+		"url":"assets/ctrl/weapon/weapon_background0.png"
+	},
+	{
+		"name":"weapon_background1_png",
+		"type":"image",
+		"url":"assets/ctrl/weapon/weapon_background1.png"
+	},
+	{
+		"name":"weapon_background2_png",
+		"type":"image",
+		"url":"assets/ctrl/weapon/weapon_background2.png"
+	},
+	{
+		"name":"weapon_background3_png",
+		"type":"image",
+		"url":"assets/ctrl/weapon/weapon_background3.png"
+	},
+	{
+		"name":"weapon_expbar_png",
+		"type":"image",
+		"url":"assets/ctrl/weapon/weapon_expbar.png"
 	}]
 }
