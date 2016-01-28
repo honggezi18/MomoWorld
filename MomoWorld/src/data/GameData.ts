@@ -23,7 +23,8 @@ class GameData {
     static heroIndex:number = 1;//选择的角色
 
     //state中0为未开放，1为普通，2为困难，3为地狱
-    static MapState:Array<number> = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0];//10个
+    //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个
+    static MapState:Array<number> = [3, 2, 1, 0, 0, 0, 0, 0, 0, 0];//10个
 
 
     //重置参数

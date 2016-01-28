@@ -6,32 +6,47 @@ var getEnemy = function (name) {
 var enemy1 = {
     name: "enemy1",
     blood: 500,
-    exp: 50,//µ±Ç°¹ÖÎïµÄ¾­ÑéÖµ
+    exp: 50,//ç»éªŒå€¼
+    dropItem: [//æ‰è½çš„ç‰©å“,è¯å“ï¼Œè£…å¤‡
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+        {type: "Item", id: 0, change: 0.5},
+        //{type: "Drup", id: 1, change: 0.5},
+        //{type: "Euqipment", id: 1, change: 0.5},
+    ],
 
     stand: {
         offsetX: -15,
         offsetY: -25,
-        halfWidth: 65,//Åö×²Åö×²¹¥»÷µÄ°ë¾¶
+        halfWidth: 65,//ï¿½ï¿½×²ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ë¾¶
         halfHeight: 100,
-        powerBase: 5,//Åö×²¹¥»÷µÄ»ù±¾ÊıÖµ
-        powerSpace: 2,//¸¡¶¯Öµ
-        baseTime: 200,//µÈ´ı×î¶ÌÊ±¼ä
-        spaceTime: 200,//µÈ´ı×î³¤Ê±¼ä
+        powerBase: 5,//ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Öµ
+        powerSpace: 2,//ï¿½ï¿½ï¿½ï¿½Öµ
+        baseTime: 200,//ï¿½È´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+        spaceTime: 200,//ï¿½È´ï¿½ï¿½î³¤Ê±ï¿½ï¿½
     },
 
     walk: {
-        offsetX: -15,//ÏÔÊ¾ÒÆ¶¯Æ¤·ôÊ±µÄXÖáÆ«ÒÆÖµ
-        offsetY: -25,//ÏÔÊ¾ÒÆ¶¯Æ¤·ôÊ±µÄYÖáÆ«ÒÆÖµ
-        speed: 1,//ÒÆ¶¯µÄËÙ¶È
-        baseTime: 200,//µÈ´ı×î¶ÌÊ±¼ä
-        spaceTime: 200,//µÈ´ı×î³¤Ê±¼ä
+        offsetX: -15,//ï¿½ï¿½Ê¾ï¿½Æ¶ï¿½Æ¤ï¿½ï¿½Ê±ï¿½ï¿½Xï¿½ï¿½Æ«ï¿½ï¿½Öµ
+        offsetY: -25,//ï¿½ï¿½Ê¾ï¿½Æ¶ï¿½Æ¤ï¿½ï¿½Ê±ï¿½ï¿½Yï¿½ï¿½Æ«ï¿½ï¿½Öµ
+        speed: 1,//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+        baseTime: 200,//ï¿½È´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+        spaceTime: 200,//ï¿½È´ï¿½ï¿½î³¤Ê±ï¿½ï¿½
     },
 
     attack: {
         offsetX: -85,
         offsetY: -50,
-        powerBase: 10,//Åö×²¹¥»÷µÄ»ù±¾ÊıÖµ
-        powerSpace: 5,//¸¡¶¯Öµ
+        powerBase: 10,//ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Öµ
+        powerSpace: 5,//ï¿½ï¿½ï¿½ï¿½Öµ
         range: 200
     },
 

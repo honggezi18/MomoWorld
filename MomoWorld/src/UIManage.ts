@@ -22,14 +22,14 @@ class UIManage {
     //释放内存
     public clear(targer:any):void {
         this.registerAndroidEvent(World.instance);
-        if (Hero.getInstance() != null)Hero.instance = null;
+        //if (Hero.getInstance() != null)Hero.instance = null;
+        if (Hero.instance != null)Hero.instance = null;
         World.instance.removeChild(UIManage.target);
         CtrlScene.getInstance().removeAll();
-        P2Tool.clearWorld(World.P2World);
+        if (World.P2World)P2Tool.clearWorld(World.P2World);
         UIManage.target = null;
         targer = null;
     }
-
 
     //显示欢迎页面
     public showWelcome():void {

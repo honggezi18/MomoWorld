@@ -17,11 +17,13 @@ var UIManage = (function () {
     //释放内存
     p.clear = function (targer) {
         this.registerAndroidEvent(World.instance);
-        if (Hero.getInstance() != null)
+        //if (Hero.getInstance() != null)Hero.instance = null;
+        if (Hero.instance != null)
             Hero.instance = null;
         World.instance.removeChild(UIManage.target);
         CtrlScene.getInstance().removeAll();
-        P2Tool.clearWorld(World.P2World);
+        if (World.P2World)
+            P2Tool.clearWorld(World.P2World);
         UIManage.target = null;
         targer = null;
     };

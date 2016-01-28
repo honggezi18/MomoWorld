@@ -1,5 +1,10 @@
-//������
+//工具类
 class Tool {
+    static logObj(obj):void {
+        console.log("---------------");
+        for (var p in obj)console.log("p   " + p + ":" + obj[p]);
+    }
+
 
     //添加一个显示容器
     static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false):egret.DisplayObjectContainer {

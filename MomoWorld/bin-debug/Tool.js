@@ -1,8 +1,13 @@
-//������
+//工具类
 var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
+    Tool.logObj = function (obj) {
+        console.log("---------------");
+        for (var p in obj)
+            console.log("p   " + p + ":" + obj[p]);
+    };
     //添加一个显示容器
     Tool.addDisplayContainer = function (target, x, y, width, height, isCenter) {
         if (isCenter === void 0) { isCenter = false; }

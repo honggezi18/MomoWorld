@@ -10,8 +10,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private sureInfo:egret.TextField;//弹框信息
     private sureAnswer:boolean = false;//弹框返回的信息
 
-    //顶部素材
-    private isTop:boolean = false;//标示是否显示顶部
+    //顶部素材示
+    private isTop:boolean = false;//标是否显示顶部
     private topBackgorund:egret.Bitmap;//顶部的背景
     private bloodBar:egret.Bitmap;//血量条
     private powerBar:egret.Bitmap;//法力条

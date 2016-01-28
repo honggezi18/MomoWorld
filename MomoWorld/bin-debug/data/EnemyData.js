@@ -6,6 +6,17 @@ var enemy1 = {
     name: "enemy1",
     blood: 500,
     exp: 50,
+    dropItem: [
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+        { type: "Item", id: 0, change: 0.5 },
+    ],
     stand: {
         offsetX: -15,
         offsetY: -25,

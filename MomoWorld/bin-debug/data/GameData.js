@@ -36,7 +36,8 @@ var GameData = (function () {
     GameData.bodyNum = 50; //剩余的技能点数
     GameData.heroIndex = 1; //选择的角色
     //state中0为未开放，1为普通，2为困难，3为地狱
-    GameData.MapState = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //10个
+    //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个
+    GameData.MapState = [3, 2, 1, 0, 0, 0, 0, 0, 0, 0]; //10个
     return GameData;
 })();
 egret.registerClass(GameData,"GameData");

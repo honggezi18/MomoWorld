@@ -6,8 +6,8 @@ var CtrlScene = (function (_super) {
         this.showing = "empty"; //标示正在显示着什么面板
         this.isTip = false; //标示是否在显示提示
         this.sureAnswer = false; //弹框返回的信息
-        //顶部素材
-        this.isTop = false; //标示是否显示顶部
+        //顶部素材示
+        this.isTop = false; //标是否显示顶部
         this.isCtrl = false;
         this.abilityIndex = 0; //成就的选项下标
         this.abilityIsDetail = false; //标示是否在显示详细面板

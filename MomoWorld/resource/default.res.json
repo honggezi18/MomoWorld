@@ -29,7 +29,7 @@
 		"name":"num"
 	},
 	{
-		"keys":"item_thing1_png",
+		"keys":"item_item0_png,item_background_png",
 		"name":"item"
 	},
 	{
@@ -283,9 +283,9 @@
 		"url":"assets/_number/num_title.png"
 	},
 	{
-		"name":"item_thing1_png",
+		"name":"item_item0_png",
 		"type":"image",
-		"url":"assets/item/item_thing1.png"
+		"url":"assets/item/item_item0.png"
 	},
 	{
 		"name":"hero_levelUp_png",
@@ -806,5 +806,10 @@
 		"name":"weapon_expbar_png",
 		"type":"image",
 		"url":"assets/ctrl/weapon/weapon_expbar.png"
+	},
+	{
+		"name":"item_background_png",
+		"type":"image",
+		"url":"assets/item/item_background.png"
 	}]
 }
