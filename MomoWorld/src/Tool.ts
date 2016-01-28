@@ -1,6 +1,27 @@
 //������
 class Tool {
 
+    //添加一个显示容器
+    static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false):egret.DisplayObjectContainer {
+        var temp = new egret.DisplayObjectContainer();
+        target.addChild(temp);
+        temp.x = x;
+        temp.y = y;
+        temp.width = width;
+        temp.height = height;
+
+        if (isCenter) {
+            temp.scaleX = 0;
+            temp.scaleY = 0;
+            temp.x = temp.width / 2;
+            temp.y = temp.height / 2;
+            temp.anchorOffsetX = temp.width / 2;
+            temp.anchorOffsetY = temp.height / 2;
+        }
+
+        return temp;
+    }
+
     //释放某对象内存
     static clearItem(obj) {
         if (obj != null && obj.parent != null)obj.parent.removeChild(obj);
@@ -10,8 +31,8 @@ class Tool {
     }
 
     //输出当前点击的坐标
-    static logPosition(e:egret.TouchEvent):void{
-        console.log("localX  " + e.localX + "  localY   " + e.localY+"     stageX " + e.stageX + "  stageY   " + e.stageY);
+    static logPosition(e:egret.TouchEvent):void {
+        console.log("localX  " + e.localX + "  localY   " + e.localY + "     stageX " + e.stageX + "  stageY   " + e.stageY);
     }
 
     //��ȸ�ֵ

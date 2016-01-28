@@ -1,75 +1,63 @@
-//µØÍ¼Ñ¡ÔñÒ³Ãæ
+//åœ°å›¾é€‰æ‹©ç±»
 class MapScene extends egret.DisplayObjectContainer {
-    private base:egret.Bitmap;//»ù±¾µØÍ¼
-    private map0:egret.Bitmap;//µØÍ¼Ò»
-    private map1:egret.Bitmap;//µØÍ¼¶ş
-    private map2:egret.Bitmap;//µØÍ¼Èı
-    private map3:egret.Bitmap;//µØÍ¼ËÄ
-    private map4:egret.Bitmap;//µØÍ¼Îå
-    private map5:egret.Bitmap;//µØÍ¼Áù
-    private map6:egret.Bitmap;//µØÍ¼Æß
-    private map7:egret.Bitmap;//µØÍ¼°Ë
-    private map8:egret.Bitmap;//µØÍ¼¾Å
-    private map9:egret.Bitmap;//µØÍ¼Ê®
-    private back:egret.Bitmap;//·µ»ØÊ×Ò³
+    private base:egret.Bitmap;//å½©è‰²åŸºç¡€åœ°å›¾
+    private map0:egret.Bitmap;//åœ£åœ°
+    private map1:egret.Bitmap;//æ°´ä¸‹ä¸–ç•Œ
+    private map2:egret.Bitmap;//å†°å³°é›ªåŸŸ
+    private map3:egret.Bitmap;//åŸƒå¾·å°”æ–¯å¦
+    private map4:egret.Bitmap;//æ­¦é™µ
+    private map5:egret.Bitmap;//å°¼å“ˆæ²™æ¼ 
+    private map6:egret.Bitmap;//ç±³çº³å°”æ£®æ—
+    private map7:egret.Bitmap;//æ—¶é—´ç¥æ®¿
+    private map8:egret.Bitmap;//æ—¶é—´é™æ­¢ä¹‹æ¹–
+    private map9:egret.Bitmap;//å…‹é‡Œè’‚äºšæ–¯
+    private back:egret.Bitmap;//è¿”å›æŒ‰é’®
 
-    private select:egret.DisplayObjectContainer;//Ñ¡ÔñÄÑ¶ÈÈİÆ÷
-    private selectBox:egret.Bitmap;//Ñ¡ÔñÄÑ¶ÈµÄÑ¡Ôñ¿ò
-    private commonBtn:egret.Bitmap;//¼òµ¥ÄÑ¶È°´Å¥
-    private hardBtn:egret.Bitmap;//À§ÄÑÄÑ¶È°´Å¥
-    private ruinsBtn:egret.Bitmap;//µØÓüÄÑ¶È°´Å¥
-
-    private isSelect:boolean = false;//±êÊ¾ÏÖÔÚÊÇ·ñÔÚÏÔÊ¾ÄÑ¶ÈÑ¡Ôñ¿ò
+    private select:egret.DisplayObjectContainer;//éš¾åº¦é€‰æ‹©å®¹å™¨
+    private selectBox:egret.Bitmap;//èƒŒæ™¯ç›’å­
+    private commonBtn:egret.Bitmap;//æ™®é€šéš¾åº¦
+    private hardBtn:egret.Bitmap;//å›°éš¾æŒ‰é’®
+    private ruinsBtn:egret.Bitmap;//åœ°ç‹±æŒ‰é’®
+    private isSelect:boolean = false;//æ ‡ç¤ºæ˜¯å¦æ˜¯éš¾åº¦é€‰æ‹©é¡µé¢
 
     constructor() {
         super();
         this.init();
     }
 
-    //³õÊ¼»¯×ÊÔ´
+    //åˆå§‹åŒ–
     public init():void {
         this.width = 800;
         this.height = 480;
-
         this.base = Tool.addBitmap(this, "worldMap_base_png", 0, 0, 800, 480, true);
-        var scaleX = this.base.width / 640;
-        var scaleY = this.base.height / 470;
-        this.map0 = Tool.addBitmap(this, "worldMap_map0_disable_png", 179, 85, 0, 0, false);
-        this.map1 = Tool.addBitmap(this, "worldMap_map1_disable_png", 183, 165, 0, 0, false);
-        this.map2 = Tool.addBitmap(this, "worldMap_map2_disable_png", 244, 234, 0, 0, false);
-        this.map3 = Tool.addBitmap(this, "worldMap_map3_disable_png", 288, 123, 0, 0, false);
-        this.map4 = Tool.addBitmap(this, "worldMap_map4_disable_png", 553, 4, 0, 0, false);
-        this.map5 = Tool.addBitmap(this, "worldMap_map5_disable_png", 573, 208, 0, 0, false);
-        this.map6 = Tool.addBitmap(this, "worldMap_map6_disable_png", 343, 321, 0, 0, false);
-        this.map7 = Tool.addBitmap(this, "worldMap_map7_disable_png", 292, 404, 0, 0, false);
-        this.map8 = Tool.addBitmap(this, "worldMap_map8_disable_png", 93, 223, 0, 0, false);
-        this.map9 = Tool.addBitmap(this, "worldMap_map9.disable_png", 9, 325, 0, 0, false);
+        this.map0 = Tool.addBitmap(this, "worldMap_map0_disable_png", 179, 85);
+        this.map1 = Tool.addBitmap(this, "worldMap_map1_disable_png", 183, 165);
+        this.map2 = Tool.addBitmap(this, "worldMap_map2_disable_png", 288, 123);
+        this.map3 = Tool.addBitmap(this, "worldMap_map3_disable_png", 553, 4);
+        this.map4 = Tool.addBitmap(this, "worldMap_map4_disable_png", 573, 208);
+        this.map5 = Tool.addBitmap(this, "worldMap_map5_disable_png", 343, 321);
+        this.map6 = Tool.addBitmap(this, "worldMap_map6_disable_png", 93, 223);
+        this.map7 = Tool.addBitmap(this, "worldMap_map7_disable_png", 9, 325);
+        this.map8 = Tool.addBitmap(this, "worldMap_map8_disable_png", 244, 234);
+        this.map9 = Tool.addBitmap(this, "worldMap_map9_disable_png", 292, 404);
         this.back = Tool.addBitmap(this, "worldMap_back1_png", 670, 430, 0, 0, true);
+
+        //è®¾ç½®èƒ½å¦ç‚¹å‡»//è®¾ç½®ç°è‰²å—çš„å¤§å°
         for (var i = 0; i < 10; i++) {
-            this["map" + i].width = Math.floor(this["map" + i].measuredWidth * scaleX);
-            this["map" + i].height = Math.floor(this["map" + i].measuredHeight * scaleY);
-            if (GameData.MapState[i].state > 0) {
+            this["map" + i].width = Math.floor(this["map" + i].measuredWidth * this.base.width / 640);
+            this["map" + i].height = Math.floor(this["map" + i].measuredHeight * this.base.height / 470);
+            if (GameData.MapState[i] > 0) {
                 this["map" + i].texture = RES.getRes("worldMap_map" + i + "_png");
                 this["map" + i].visible = false;
             }
         }
 
-
-        this.select = new egret.DisplayObjectContainer();
-        this.addChild(this.select);
-        this.select.scaleX = 0;
-        this.select.scaleY = 0;
-        this.select.width = this.width;
-        this.select.height = this.height;
-        this.select.x = this.select.width / 2;
-        this.select.y = this.select.height / 2;
-        this.select.anchorOffsetX = this.select.width / 2;
-        this.select.anchorOffsetY = this.select.height / 2;
-
-        this.selectBox = Tool.addBitmap(this.select, "worldMap_box_png", 0, 0, 0, 0, false);
-        this.commonBtn = Tool.addBitmap(this.select, "worldMap_common1_png", 435, 180, 0, 0, false);
-        this.hardBtn = Tool.addBitmap(this.select, "worldMap_hard0_png", 435, 240, 0, 0, false);
-        this.ruinsBtn = Tool.addBitmap(this.select, "worldMap_ruin0_png", 435, 300, 0, 0, false);
+        //è®¾ç½®éš¾åº¦é€‰æ‹©æ¡†
+        this.select = Tool.addDisplayContainer(this, 0, 0, this.width, this.height, true);
+        this.selectBox = Tool.addBitmap(this.select, "worldMap_box_png", 0, 0);
+        this.commonBtn = Tool.addBitmap(this.select, "worldMap_common1_png", 435, 180);
+        this.hardBtn = Tool.addBitmap(this.select, "worldMap_hard0_png", 435, 240);
+        this.ruinsBtn = Tool.addBitmap(this.select, "worldMap_ruin0_png", 435, 300);
         this.selectBox.x = (this.width - this.selectBox.width) / 2;
         this.selectBox.y = (this.height - this.selectBox.height) / 2;
 
@@ -85,14 +73,14 @@ class MapScene extends egret.DisplayObjectContainer {
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
     }
 
-    //¿ØÖÆÄÑ¶ÈÑ¡Ôñ¿òµÄ³öÏÖºÍÏûÊ§
+    //æ˜¾ç¤ºéš¾åº¦é€‰æ‹©åŠå…¶æŒ‰é’®çš„æ˜¾ç¤º
     public ctrlSelect():void {
         if (this.isSelect == false) {
             this.commonBtn.touchEnabled = true;
             this.hardBtn.touchEnabled = true;
             this.ruinsBtn.touchEnabled = true;
-            if (GameData.MapState[GameData.mapIndex].state > 1)this.ruinsBtn.texture = RES.getRes("worldMap_hard1_png");
-            if (GameData.MapState[GameData.mapIndex].state > 2)this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
+            if (GameData.MapState[GameData.mapIndex] > 1)this.ruinsBtn.texture = RES.getRes("worldMap_hard1_png");
+            if (GameData.MapState[GameData.mapIndex] > 2)this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
 
             this.isSelect = true;
             this.select.visible = true;
@@ -114,19 +102,19 @@ class MapScene extends egret.DisplayObjectContainer {
         }
     }
 
-    //´¥ÆÁ°´ÏÂ
+    //éš¾åº¦é€‰æ‹©æŒ‰é’®ç‚¹å‡»å“åº”
     public onTouchStart(e:egret.TouchEvent):void {
         e.stopImmediatePropagation();
-        if (this.isSelect) {//Ñ¡ÔñÄÑ¶È
+        if (this.isSelect) {//Ñ¡ï¿½ï¿½ï¿½Ñ¶ï¿½
             if (e.target == this.commonBtn)this.commonBtn.texture = RES.getRes("worldMap_common2_png");
-            else if (e.target == this.hardBtn && GameData.MapState[GameData.mapIndex].state > 1)this.hardBtn.texture = RES.getRes("worldMap_hard2_png");
-            else if (e.target == this.ruinsBtn && GameData.MapState[GameData.mapIndex].state > 2)this.ruinsBtn.texture = RES.getRes("worldMap_ruin2_png");
+            else if (e.target == this.hardBtn && GameData.MapState[GameData.mapIndex] > 1)this.hardBtn.texture = RES.getRes("worldMap_hard2_png");
+            else if (e.target == this.ruinsBtn && GameData.MapState[GameData.mapIndex] > 2)this.ruinsBtn.texture = RES.getRes("worldMap_ruin2_png");
             return;
         }
 
         if (e.target == this.back)this.back.texture = RES.getRes("worldMap_back2_png");
 
-        //Ñ¡ÔñµØÍ¼
+        //Ñ¡ï¿½ï¿½ï¿½Í¼
         if (205 < e.stageX && e.stageX < 273 && 140 < e.stageY && e.stageY < 170)GameData.mapIndex = 0;
         else if (195 < e.stageX && e.stageX < 300 && 210 < e.stageY && e.stageY < 235)GameData.mapIndex = 1;
         else if (285 < e.stageX && e.stageX < 390 && 315 < e.stageY && e.stageY < 340)GameData.mapIndex = 2;
@@ -137,24 +125,24 @@ class MapScene extends egret.DisplayObjectContainer {
         else if (305 < e.stageX && e.stageX < 410 && 412 < e.stageY && e.stageY < 437)GameData.mapIndex = 7;
         else if (180 < e.stageX && e.stageX < 285 && 360 < e.stageY && e.stageY < 390)GameData.mapIndex = 8;
         else if (45 < e.stageX && e.stageX < 150 && 420 < e.stageY && e.stageY < 445)GameData.mapIndex = 9;
-        if (GameData.mapIndex != -1 && GameData.MapState[GameData.mapIndex].state > 0) {//ÉèÖÃµØÍ¼ÑùÊ½
+        if (GameData.mapIndex != -1 && GameData.MapState[GameData.mapIndex] > 0) {//ï¿½ï¿½ï¿½Ãµï¿½Í¼ï¿½ï¿½Ê½
             this["map" + GameData.mapIndex].visible = true;
         }
     }
 
-    //´¥ÆÁËÉ¿ª
+    //éš¾åº¦é€‰æ‹©æŒ‰é’®ç‚¹å‡»å“åº”
     public onTouchEnd(e:egret.TouchEvent):void {
         e.stopImmediatePropagation();
         if (this.isSelect) {
-            if (e.target == this.commonBtn) {//ÉèÖÃ°´Å¥µÄÑùÊ½
+            if (e.target == this.commonBtn) {//ï¿½ï¿½ï¿½Ã°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ê½
                 GameData.difficulty = 1;
                 this.commonBtn.texture = RES.getRes("worldMap_common1_png");
             }
-            else if (e.target == this.hardBtn && GameData.MapState[GameData.mapIndex].state > 1) {
+            else if (e.target == this.hardBtn && GameData.MapState[GameData.mapIndex] > 1) {
                 GameData.difficulty = 2;
                 this.hardBtn.texture = RES.getRes("worldMap_hard1_png");
             }
-            else if (e.target == this.ruinsBtn && GameData.MapState[GameData.mapIndex].state > 2) {
+            else if (e.target == this.ruinsBtn && GameData.MapState[GameData.mapIndex] > 2) {
                 GameData.difficulty = 3;
                 this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
             }
@@ -169,8 +157,8 @@ class MapScene extends egret.DisplayObjectContainer {
         }
 
 
-        //µã»÷µØÍ¼ºóËÉ¿ª£¬»Ö¸´µØÍ¼ÑùÊ½
-        if (GameData.mapIndex != -1 && GameData.MapState[GameData.mapIndex].state > 0) {
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ê½
+        if (GameData.mapIndex != -1 && GameData.MapState[GameData.mapIndex] > 0) {
             this["map" + GameData.mapIndex].visible = false;
             this.ctrlSelect();
         }

@@ -3,6 +3,25 @@ var Tool = (function () {
     function Tool() {
     }
     var d = __define,c=Tool;p=c.prototype;
+    //添加一个显示容器
+    Tool.addDisplayContainer = function (target, x, y, width, height, isCenter) {
+        if (isCenter === void 0) { isCenter = false; }
+        var temp = new egret.DisplayObjectContainer();
+        target.addChild(temp);
+        temp.x = x;
+        temp.y = y;
+        temp.width = width;
+        temp.height = height;
+        if (isCenter) {
+            temp.scaleX = 0;
+            temp.scaleY = 0;
+            temp.x = temp.width / 2;
+            temp.y = temp.height / 2;
+            temp.anchorOffsetX = temp.width / 2;
+            temp.anchorOffsetY = temp.height / 2;
+        }
+        return temp;
+    };
     //释放某对象内存
     Tool.clearItem = function (obj) {
         if (obj != null && obj.parent != null)

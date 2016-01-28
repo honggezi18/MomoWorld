@@ -22,61 +22,8 @@ class GameData {
     static bodyNum:number = 50;//剩余的技能点数
     static heroIndex:number = 1;//选择的角色
 
-
-
-
-    static MapState = [//地图信息
-        {//state中0为未开放，1为普通，2为困难，3为地狱
-            "name": "map0",
-            "state": 1,
-            "item": [""],
-        },
-        {
-            "name": "map1",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map2",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map3",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map4",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map5",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map6",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map7",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map8",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map9",
-            "state": 0,
-            "item": [""],
-        }
-    ];
+    //state中0为未开放，1为普通，2为困难，3为地狱
+    static MapState:Array<number> = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0];//10个
 
 
     //重置参数
@@ -87,6 +34,7 @@ class GameData {
 
     //加载数据
     static loadData():void {
+        console.log("loadData");
         if (Tool.checkLocal("MapState")) {//加载地图
             GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
@@ -94,6 +42,7 @@ class GameData {
 
     //保存数据//角色数据//基本数据（金币数）
     static saveData():void {
+        console.log("saveData");
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     }
 

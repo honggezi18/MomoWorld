@@ -8,12 +8,14 @@ var GameData = (function () {
     };
     //加载数据
     GameData.loadData = function () {
+        console.log("loadData");
         if (Tool.checkLocal("MapState")) {
             GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
     };
     //保存数据//角色数据//基本数据（金币数）
     GameData.saveData = function () {
+        console.log("saveData");
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     };
     //固态数据///////////////////////////////
@@ -33,58 +35,8 @@ var GameData = (function () {
     GameData.skillNum = 50; //剩余的技能点数
     GameData.bodyNum = 50; //剩余的技能点数
     GameData.heroIndex = 1; //选择的角色
-    GameData.MapState = [
-        {
-            "name": "map0",
-            "state": 1,
-            "item": [""],
-        },
-        {
-            "name": "map1",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map2",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map3",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map4",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map5",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map6",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map7",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map8",
-            "state": 0,
-            "item": [""],
-        },
-        {
-            "name": "map9",
-            "state": 0,
-            "item": [""],
-        }
-    ];
+    //state中0为未开放，1为普通，2为困难，3为地狱
+    GameData.MapState = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //10个
     return GameData;
 })();
 egret.registerClass(GameData,"GameData");
