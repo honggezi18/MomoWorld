@@ -33,9 +33,9 @@ class Main extends egret.DisplayObjectContainer {
             GameData.loadData();
             GameData.reset();
             this.stage.addChild(new World());
-            UIManage.getInstance().showWelcome();
+            //UIManage.getInstance().showWelcome();
             //UIManage.getInstance().showShengDiScene();
-            //UIManage.getInstance().showMap();
+            UIManage.getInstance().showMap();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);

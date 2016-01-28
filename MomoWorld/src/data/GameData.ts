@@ -21,6 +21,10 @@ class GameData {
     static skillNum:number = 50;//剩余的技能点数
     static bodyNum:number = 50;//剩余的技能点数
     static heroIndex:number = 1;//选择的角色
+
+
+
+
     static MapState = [//地图信息
         {//state中0为未开放，1为普通，2为困难，3为地狱
             "name": "map0",
