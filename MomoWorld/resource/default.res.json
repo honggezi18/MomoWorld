@@ -1,7 +1,7 @@
 {
 	"groups":[
 	{
-		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png,weapon_background3_png,weapon_expbar_png",
+		"keys":"worldMap_map9_png,worldMap_point_png,worldMap_base_png,worldMap_map1_png,worldMap_map2_png,worldMap_map3_png,worldMap_map4_png,worldMap_map5_png,worldMap_map6_png,worldMap_map7_png,worldMap_map8_png,worldMap_map4_disable_png,worldMap_map5_disable_png,worldMap_map6_disable_png,worldMap_map7_disable_png,worldMap_map8_disable_png,worldMap_map9_disable_png,worldMap_map1_disable_png,worldMap_map2_disable_png,worldMap_map3_disable_png,worldMap_ruin0_png,worldMap_ruin1_png,worldMap_ruin2_png,worldMap_common0_png,worldMap_common1_png,worldMap_common2_png,worldMap_hard0_png,worldMap_hard1_png,worldMap_hard2_png,worldMap_box_png,worldMap_map0_png,worldMap_map0_disable_png,worldMap_back1_png,worldMap_back2_png,weapon_background3_png,weapon_expbar_png,worldMap_detail_png",
 		"name":"worldMap"
 	},
 	{
@@ -9,7 +9,7 @@
 		"name":"hero"
 	},
 	{
-		"keys":"testColor_png",
+		"keys":"other_gold_png,other_diamand_png,testColor_png",
 		"name":"other"
 	},
 	{
@@ -29,7 +29,7 @@
 		"name":"num"
 	},
 	{
-		"keys":"item_item0_png,item_background_png",
+		"keys":"item_item0_png,item_background_png,item_background1_png,item_background2_png,item_background3_png",
 		"name":"item"
 	},
 	{
@@ -211,11 +211,6 @@
 		"name":"worldMap_back2_png",
 		"type":"image",
 		"url":"assets/WorldMap/worldMap_back2.png"
-	},
-	{
-		"name":"testColor_png",
-		"type":"image",
-		"url":"assets/testColor.png"
 	},
 	{
 		"name":"map_shengdi_png",
@@ -811,5 +806,40 @@
 		"name":"item_background_png",
 		"type":"image",
 		"url":"assets/item/item_background.png"
+	},
+	{
+		"name":"worldMap_detail_png",
+		"type":"image",
+		"url":"assets/WorldMap/worldMap_detail.png"
+	},
+	{
+		"name":"item_background1_png",
+		"type":"image",
+		"url":"assets/item/item_background1.png"
+	},
+	{
+		"name":"item_background2_png",
+		"type":"image",
+		"url":"assets/item/item_background2.png"
+	},
+	{
+		"name":"item_background3_png",
+		"type":"image",
+		"url":"assets/item/item_background3.png"
+	},
+	{
+		"name":"other_gold_png",
+		"type":"image",
+		"url":"assets/other/other_gold.png"
+	},
+	{
+		"name":"other_diamand_png",
+		"type":"image",
+		"url":"assets/other/other_diamand.png"
+	},
+	{
+		"name":"testColor_png",
+		"type":"image",
+		"url":"assets/other/testColor.png"
 	}]
 }

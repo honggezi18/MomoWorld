@@ -11,5 +11,5 @@ var itemData0 = {
     type: "gold",
     cost: "25",
     info: "itme0",
-    level: "0"
+    grade: "1"
 };

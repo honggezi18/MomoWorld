@@ -33,13 +33,13 @@ var MapScene = (function (_super) {
             }
         }
         //设置难度选择框
-        this.select = Tool.addDisplayContainer(this, 0, 0, this.width, this.height, true);
+        this.select = Tool.addDisplayContainer(this, this.width / 2, this.height / 2, this.width, this.height, true, true);
         this.selectBox = Tool.addBitmap(this.select, "worldMap_box_png", this.width / 2, this.height / 2, 0, 0, false, true);
         this.commonBtn = Tool.addBitmap(this.select, "worldMap_common1_png", 435, 180);
         this.hardBtn = Tool.addBitmap(this.select, "worldMap_hard0_png", 435, 240);
         this.ruinsBtn = Tool.addBitmap(this.select, "worldMap_ruin0_png", 435, 300);
         this.mapName = Tool.addTextField(this.select, 215, 100, 150, 30, 30, 0x000000, "");
-        this.level = Tool.addTextField(this.select, 440, 90, 150, 20, 20, 0x000000, "");
+        this.level = Tool.addTextField(this.select, 438, 135, 150, 20, 20, 0x000000, "");
         this.mapName.stroke = 0.6;
         this.select.visible = false;
         this.hardBtn.touchEnabled = true;
@@ -54,6 +54,7 @@ var MapScene = (function (_super) {
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
+        this.itemList = [];
         GameData.mapIndex = 0;
         this.ctrlSelect();
     };
@@ -74,9 +75,11 @@ var MapScene = (function (_super) {
             this.level.text = "推荐等级:" + mapData["level"];
             for (var i = 0; i < mapData.dropItem.length; i++) {
                 var tempItem = mapData.dropItem[i];
-                Tool.addBitmap(this.select, "item_background_png", 230 + 60 * (i % 3), 230 + 55 * Math.floor(i / 3), 45, 45, false, true);
-                var tempBit = Tool.addBitmap(this.select, tempItem.res, 230 + 60 * (i % 3), 230 + 55 * Math.floor(i / 3), 30, 30, false, true);
-                console.log("tempItem.res  " + tempItem.res);
+                this.itemList.push(Tool.addBitmap(this.select, "item_background" + tempItem.grade + "_png", 230 + 60 * (i % 3), 230 + 55 * Math.floor(i / 3), 45, 45, false, true));
+                this.itemList.push(Tool.addBitmap(this.select, tempItem.res, 230 + 60 * (i % 3), 230 + 55 * Math.floor(i / 3), 30, 30, false, true));
+                var tempBit = this.itemList[this.itemList.length - 1];
+                tempBit.touchEnabled = true;
+                tempBit.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ctrlDetail.bind(this, tempItem), this);
             }
         }
         else {
@@ -87,6 +90,9 @@ var MapScene = (function (_super) {
                     UIManage.getInstance().hideMap();
                     UIManage.getInstance().showShengDiScene();
                 }
+                for (var i = 0; i < this.itemList.length; i++)
+                    Tool.clearItem(this.itemList);
+                this.itemList.length = 0;
             }, this);
         }
     };
@@ -136,16 +142,22 @@ var MapScene = (function (_super) {
             if (e.target == this.commonBtn) {
                 GameData.difficulty = 1;
                 this.commonBtn.texture = RES.getRes("worldMap_common1_png");
+                this.ctrlSelect();
             }
             else if (e.target == this.hardBtn && GameData.MapState[GameData.mapIndex] > 1) {
                 GameData.difficulty = 2;
                 this.hardBtn.texture = RES.getRes("worldMap_hard1_png");
+                this.ctrlSelect();
             }
             else if (e.target == this.ruinsBtn && GameData.MapState[GameData.mapIndex] > 2) {
                 GameData.difficulty = 3;
                 this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
+                this.ctrlSelect();
             }
-            this.ctrlSelect(); //点击其他地方，隐藏面板
+            else if (e.localX > 585 && e.localX < 610 && e.localY > 70 && e.localY < 95) {
+                GameData.difficulty = -1;
+                this.ctrlSelect();
+            }
             return;
         }
         //点击返回
@@ -165,6 +177,28 @@ var MapScene = (function (_super) {
         e.target.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
         e.target.removeEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
         e.target.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
+    };
+    //显示掉落物品详细信息
+    p.ctrlDetail = function (data) {
+        if (data === void 0) { data = null; }
+        if (this.detailContainer == null) {
+            this.detailContainer = Tool.addDisplayContainer(this, GameData.gameWidth / 2, GameData.gameHeight / 2, 500, 250, true, true);
+            var background = Tool.addBitmap(this.detailContainer, "worldMap_detail_png", 0, 0, 500, 250);
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ctrlDetail, this);
+            Tool.addBitmap(this.detailContainer, data.res, 90, 95, 70, 70, false, true);
+            Tool.addBitmap(this.detailContainer, "other_" + data.type + "_png", 355, 52, 25, 25, false, true);
+            Tool.addTextField(this.detailContainer, 160, 40, 0, 0, 25, 0x000000, data.name).stroke = 1;
+            Tool.addTextField(this.detailContainer, 375, 40, 0, 0, 25, 0x000000, data.cost).stroke = 0.5;
+            Tool.addTextField(this.detailContainer, 160, 82, 300, 60, 20, 0x000000, data.info).textAlign = egret.HorizontalAlign.LEFT;
+            var tw = egret.Tween.get(this.detailContainer);
+            tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
+        }
+        else {
+            egret.Tween.get(this.detailContainer).to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
+                this.detailContainer = Tool.clearItem(this.detailContainer);
+            }, this);
+        }
     };
     return MapScene;
 })(egret.DisplayObjectContainer);

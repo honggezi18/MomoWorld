@@ -36,6 +36,7 @@ class GameData {
     //加载数据
     static loadData():void {
         console.log("loadData");
+        return;
         if (Tool.checkLocal("MapState")) {//加载地图
             GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
@@ -44,6 +45,7 @@ class GameData {
     //保存数据//角色数据//基本数据（金币数）
     static saveData():void {
         console.log("saveData");
+        return;
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     }
 

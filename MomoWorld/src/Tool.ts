@@ -7,7 +7,7 @@ class Tool {
 
 
     //添加一个显示容器
-    static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false):egret.DisplayObjectContainer {
+    static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false,isScale:boolean = false):egret.DisplayObjectContainer {
         var temp = new egret.DisplayObjectContainer();
         target.addChild(temp);
         temp.x = x;
@@ -16,12 +16,12 @@ class Tool {
         temp.height = height;
 
         if (isCenter) {
-            temp.scaleX = 0;
-            temp.scaleY = 0;
-            temp.x = temp.width / 2;
-            temp.y = temp.height / 2;
             temp.anchorOffsetX = temp.width / 2;
             temp.anchorOffsetY = temp.height / 2;
+        }
+        if (isScale) {
+            temp.scaleX = 0;
+            temp.scaleY = 0;
         }
 
         return temp;
@@ -31,7 +31,6 @@ class Tool {
     static clearItem(obj) {
         if (obj != null && obj.parent != null)obj.parent.removeChild(obj);
         egret.Tween.removeTweens(obj);
-        obj = null;
         return null;
     }
 

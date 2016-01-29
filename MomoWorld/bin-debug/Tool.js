@@ -9,8 +9,9 @@ var Tool = (function () {
             console.log("p   " + p + ":" + obj[p]);
     };
     //添加一个显示容器
-    Tool.addDisplayContainer = function (target, x, y, width, height, isCenter) {
+    Tool.addDisplayContainer = function (target, x, y, width, height, isCenter, isScale) {
         if (isCenter === void 0) { isCenter = false; }
+        if (isScale === void 0) { isScale = false; }
         var temp = new egret.DisplayObjectContainer();
         target.addChild(temp);
         temp.x = x;
@@ -18,12 +19,12 @@ var Tool = (function () {
         temp.width = width;
         temp.height = height;
         if (isCenter) {
-            temp.scaleX = 0;
-            temp.scaleY = 0;
-            temp.x = temp.width / 2;
-            temp.y = temp.height / 2;
             temp.anchorOffsetX = temp.width / 2;
             temp.anchorOffsetY = temp.height / 2;
+        }
+        if (isScale) {
+            temp.scaleX = 0;
+            temp.scaleY = 0;
         }
         return temp;
     };
@@ -32,7 +33,6 @@ var Tool = (function () {
         if (obj != null && obj.parent != null)
             obj.parent.removeChild(obj);
         egret.Tween.removeTweens(obj);
-        obj = null;
         return null;
     };
     //输出当前点击的坐标

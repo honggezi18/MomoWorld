@@ -11,6 +11,7 @@
 var getMap = function (index) {
     //获取enemy掉落物品信息
     var data = window["mapData" + index];
+    data.dropItem.length = [];
     for (var i = 0; i < data.enemy.length; i++) {
         var enemy = getEnemy(data.enemy[i].id);
         for (var a = 0; a < enemy.dropItem.length; a++) {
