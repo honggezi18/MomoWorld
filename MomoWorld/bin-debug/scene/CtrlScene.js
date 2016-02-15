@@ -81,7 +81,7 @@ var CtrlScene = (function (_super) {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlWeapon("show");
+        this.ctrlAbility("show");
     };
     //显示提示信息
     p.showTip = function (info) {
@@ -866,16 +866,18 @@ var CtrlScene = (function (_super) {
                     }
                 }
             }, this);
+            this.abilitySelectBox1 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", 187, 150, 75, 75, false, true);
+            this.abilitySelectBox2 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", 187, 220, 75, 75, false, true);
             this.abilitySkill = Tool.addTextField(this.abilityContainer, 120, 60, 0, 0, 18, 0xffffff, "剩余技能点:" + GameData.skillNum);
             this.abilityBody = Tool.addTextField(this.abilityContainer, 455, 60, 0, 0, 18, 0xffffff, "剩余属性值:" + GameData.bodyNum);
             for (var i = 0; i < 5; i++) {
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill1[i].icon, i * 80 + 187, 150, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 0, 15, 0xff0000, this.abilityData.skill1[i].level + "/" + this.abilityData.skill1[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 15, 15, 0xff0000, this.abilityData.skill1[i].level + "/" + this.abilityData.skill1[i].maxLevel));
                 this.abilityText[i].textAlign = egret.HorizontalAlign.RIGHT;
             }
             for (var i = 0; i < 5; i++) {
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill2[i].icon, i * 80 + 187, 220, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 0, 15, 0xff0000, this.abilityData.skill2[i].level + "/" + this.abilityData.skill2[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 15, 15, 0xff0000, this.abilityData.skill2[i].level + "/" + this.abilityData.skill2[i].maxLevel));
                 this.abilityText[i + 5].textAlign = egret.HorizontalAlign.RIGHT;
             }
             for (var i = 0; i < 5; i++) {
@@ -883,12 +885,14 @@ var CtrlScene = (function (_super) {
                 if (this.abilityData.data[i].state > 5)
                     this.abilityData.data[i].state = 5;
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png", i * 80 + 187, 290, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 0, 15, 0xff0000, this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 15, 15, 0xff0000, this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel));
                 this.abilityText[i + 10].textAlign = egret.HorizontalAlign.RIGHT;
             }
             this.addChild(this.abilityContainer);
             this.abilityContainer.scaleX = 0;
             this.abilityContainer.scaleY = 0;
+            this.abilityContainer.setChildIndex(this.abilitySelectBox1, 99);
+            this.abilityContainer.setChildIndex(this.abilitySelectBox2, 99);
             var tw = egret.Tween.get(this.abilityContainer);
             tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }
@@ -924,6 +928,7 @@ var CtrlScene = (function (_super) {
             this.abilityDetailContainer.y = this.abilityContainer.height / 2;
             this.abilityContainer.addChild(this.abilityDetailContainer);
             var background = Tool.addBitmap(this.abilityDetailContainer, "ability_detail_png", 0, 0, 300, 180);
+            var state = Tool.addTextField(this.abilityDetailContainer, 15, 10, 70, 22, 22, 0xffffff, "携  带");
             var intruction = Tool.addTextField(this.abilityDetailContainer, 120, 60, 150, 90, 15, 0xffffff, "简介");
             this.abilityDetailLevel = Tool.addTextField(this.abilityDetailContainer, 25, 130, 90, 20, 20, 0xffffff, "Level:" + this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3));
             if (this.abilityIndex < 5)

@@ -21,6 +21,9 @@ class GameData {
     static skillNum:number = 50;//剩余的技能点数
     static bodyNum:number = 50;//剩余的技能点数
     static heroIndex:number = 1;//选择的角色
+    static skill1Index:number = 0;//技能下标一
+    static skill2Index:number = 0;//技能下标一
+
 
     //state中0为未开放，1为普通，2为困难，3为地狱
     //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个
@@ -36,7 +39,7 @@ class GameData {
     //加载数据
     static loadData():void {
         console.log("loadData");
-        return;
+        //return;
         if (Tool.checkLocal("MapState")) {//加载地图
             GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
@@ -45,7 +48,7 @@ class GameData {
     //保存数据//角色数据//基本数据（金币数）
     static saveData():void {
         console.log("saveData");
-        return;
+        //return;
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     }
 

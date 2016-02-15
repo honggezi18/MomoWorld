@@ -9,7 +9,7 @@ var GameData = (function () {
     //加载数据
     GameData.loadData = function () {
         console.log("loadData");
-        return;
+        //return;
         if (Tool.checkLocal("MapState")) {
             GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));
         }
@@ -17,7 +17,7 @@ var GameData = (function () {
     //保存数据//角色数据//基本数据（金币数）
     GameData.saveData = function () {
         console.log("saveData");
-        return;
+        //return;
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
     };
     //固态数据///////////////////////////////
