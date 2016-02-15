@@ -29,7 +29,7 @@
 		"name":"num"
 	},
 	{
-		"keys":"item_item0_png,item_background_png,item_background1_png,item_background2_png,item_background3_png",
+		"keys":"item_background_png,item_background1_png,item_background2_png,item_background3_png,item_item0_png,item_equipment0_png,item_drup0_png",
 		"name":"item"
 	},
 	{
@@ -276,11 +276,6 @@
 		"name":"num_title_png",
 		"type":"image",
 		"url":"assets/_number/num_title.png"
-	},
-	{
-		"name":"item_item0_png",
-		"type":"image",
-		"url":"assets/item/item_item0.png"
 	},
 	{
 		"name":"hero_levelUp_png",
@@ -841,5 +836,20 @@
 		"name":"testColor_png",
 		"type":"image",
 		"url":"assets/other/testColor.png"
+	},
+	{
+		"name":"item_item0_png",
+		"type":"image",
+		"url":"assets/item/item/item_item0.png"
+	},
+	{
+		"name":"item_equipment0_png",
+		"type":"image",
+		"url":"assets/item/equipment/item_equipment0.png"
+	},
+	{
+		"name":"item_drup0_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup0.png"
 	}]
 }

@@ -1,7 +1,7 @@
 //地图选择类
 class MapScene extends egret.DisplayObjectContainer {
     private base:egret.Bitmap;//彩色基础地图
-    private map0:egret.Bitmap;//圣地灰色
+    private map0:egret.Bitmap;//圣地
     private map1:egret.Bitmap;//水下世界
     private map2:egret.Bitmap;//冰峰雪域
     private map3:egret.Bitmap;//埃德尔斯坦
@@ -21,10 +21,9 @@ class MapScene extends egret.DisplayObjectContainer {
     private ruinsBtn:egret.Bitmap;//地狱按钮
     private mapName:egret.TextField;//地图名
     private level:egret.TextField;//进入推进等级
-    private itemList;//物品掉落列表
+    private itemList = [];//物品掉落列表
 
-
-    //详细信息面板元素
+    //掉落物品详细信息面板元素
     private detailContainer:egret.DisplayObjectContainer;
 
     constructor() {
@@ -70,7 +69,6 @@ class MapScene extends egret.DisplayObjectContainer {
         this.mapName = Tool.addTextField(this.select, 215, 100, 150, 30, 30, 0x000000, "");
         this.level = Tool.addTextField(this.select, 438, 135, 150, 20, 20, 0x000000, "");
         this.mapName.stroke = 0.6;
-
         this.select.visible = false;
         this.hardBtn.touchEnabled = true;
         this.ruinsBtn.touchEnabled = true;
@@ -84,21 +82,18 @@ class MapScene extends egret.DisplayObjectContainer {
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
-
-        this.itemList = [];
-
-        GameData.mapIndex = 0;
-        this.ctrlSelect();
     }
 
-    //难度选择页面相关操作
+    //难度选择页面相关操作//难度选择页面一直存在，无需回收
     public ctrlSelect():void {
+        if (this.detailContainer)return;//若显示的详细页面，则不再响应点击事件
         if (!this.select.visible) {//显示选择页面
-            //显示难度按钮
-            GameData.difficulty = -1;
+            GameData.difficulty = -1; //未选择难度
             this.select.visible = true;
             if (GameData.MapState[GameData.mapIndex] > 1)this.hardBtn.texture = RES.getRes("worldMap_hard1_png");
+            else this.hardBtn.texture = RES.getRes("worldMap_hard0_png");
             if (GameData.MapState[GameData.mapIndex] > 2)this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
+            else this.ruinsBtn.texture = RES.getRes("worldMap_ruin0_png");
             egret.Tween.get(this.select).to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
 
             //显示地图信息
@@ -114,18 +109,16 @@ class MapScene extends egret.DisplayObjectContainer {
                 tempBit.addEventListener(egret.TouchEvent.TOUCH_TAP, this.ctrlDetail.bind(this, tempItem), this);
             }
         }
-        else {//进行选择
-            GameData.mapIndex = -1;//初始化地图选择
+        else {//隐藏选择面板
             egret.Tween.get(this.select).to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
                 this.select.visible = false;
                 if (GameData.difficulty > 0) {//选择了难度后，跳到战区页面，否则直接隐藏
                     UIManage.getInstance().hideMap();
                     UIManage.getInstance().showShengDiScene();
                 }
-                for (var i = 0; i < this.itemList.length; i++)Tool.clearItem(this.itemList);
+                else GameData.mapIndex = -1;//未选择进入，重置地图选择
+                for (var i = 0; i < this.itemList.length; i++)Tool.clearItem(this.itemList[i]);//清空信息列表
                 this.itemList.length = 0;
-
-
             }, this);
         }
     }

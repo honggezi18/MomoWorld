@@ -1,18 +1,12 @@
-var getEnemy = function (index) {
-    return window["enemy" + index];
+var getBoss = function (index) {
+    return window["boss" + index];
 };
-var enemy1 = {
+var boss1 = {
     name: "enemy1",
     blood: 500,
     exp: 50,
     dropItem: [
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Item", id: 0, change: 0.5 },
-        { type: "Drup", id: 0, change: 0.5 },
+        { type: "Equipment", id: 0, change: 0.5 },
     ],
     stand: {
         offsetX: -15,

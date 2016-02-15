@@ -3,6 +3,7 @@ var MapScene = (function (_super) {
     __extends(MapScene, _super);
     function MapScene() {
         _super.call(this);
+        this.itemList = []; //物品掉落列表
         this.init();
     }
     var d = __define,c=MapScene;p=c.prototype;
@@ -54,20 +55,22 @@ var MapScene = (function (_super) {
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchStart, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this);
         this.ruinsBtn.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
-        this.itemList = [];
-        GameData.mapIndex = 0;
-        this.ctrlSelect();
     };
-    //难度选择页面相关操作
+    //难度选择页面相关操作//难度选择页面一直存在，无需回收
     p.ctrlSelect = function () {
+        if (this.detailContainer)
+            return; //若显示的详细页面，则不再响应点击事件
         if (!this.select.visible) {
-            //显示难度按钮
-            GameData.difficulty = -1;
+            GameData.difficulty = -1; //未选择难度
             this.select.visible = true;
             if (GameData.MapState[GameData.mapIndex] > 1)
                 this.hardBtn.texture = RES.getRes("worldMap_hard1_png");
+            else
+                this.hardBtn.texture = RES.getRes("worldMap_hard0_png");
             if (GameData.MapState[GameData.mapIndex] > 2)
                 this.ruinsBtn.texture = RES.getRes("worldMap_ruin1_png");
+            else
+                this.ruinsBtn.texture = RES.getRes("worldMap_ruin0_png");
             egret.Tween.get(this.select).to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
             //显示地图信息
             var mapData = getMap(GameData.mapIndex);
@@ -83,15 +86,16 @@ var MapScene = (function (_super) {
             }
         }
         else {
-            GameData.mapIndex = -1; //初始化地图选择
             egret.Tween.get(this.select).to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.select.visible = false;
                 if (GameData.difficulty > 0) {
                     UIManage.getInstance().hideMap();
                     UIManage.getInstance().showShengDiScene();
                 }
+                else
+                    GameData.mapIndex = -1; //未选择进入，重置地图选择
                 for (var i = 0; i < this.itemList.length; i++)
-                    Tool.clearItem(this.itemList);
+                    Tool.clearItem(this.itemList[i]); //清空信息列表
                 this.itemList.length = 0;
             }, this);
         }

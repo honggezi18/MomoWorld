@@ -17,7 +17,9 @@ var game_file_list = [
 	"bin-debug/World.js",
 	"bin-debug/data/BulletData.js",
 	"bin-debug/data/CtrlData.js",
+	"bin-debug/data/DrupData.js",
 	"bin-debug/data/EnemyData.js",
+	"bin-debug/data/EquipmentData.js",
 	"bin-debug/data/GameData.js",
 	"bin-debug/data/HeroData.js",
 	"bin-debug/data/ItemData.js",
@@ -31,6 +33,7 @@ var game_file_list = [
 	"bin-debug/scene/MapScene.js",
 	"bin-debug/scene/ShengDiScene.js",
 	"bin-debug/scene/WelcomeScene.js",
+	"bin-debug/data/BossData.js",
 	//----auto game_file_list end----
 ];
 

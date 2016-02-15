@@ -14,10 +14,17 @@ var getMap = function (index) {
     //获取enemy掉落物品信息
     var data = window["mapData" + index];
     data.dropItem.length = [];
+
     for (var i = 0; i < data.enemy.length; i++) {
         var enemy = getEnemy(data.enemy[i].id);
         for (var a = 0; a < enemy.dropItem.length; a++) {
             data.dropItem.push(window["get" + enemy.dropItem[a].type](enemy.dropItem[a].id));
+        }
+    }
+    for (var i = 0; i < data.boss.length; i++) {
+        var boss = getBoss(data.boss[i].id);
+        for (var a = 0; a < boss.dropItem.length; a++) {
+            data.dropItem.push(window["get" + boss.dropItem[a].type](boss.dropItem[a].id));
         }
     }
     return data;
@@ -31,6 +38,17 @@ var mapData0 = {
     enemyNum: 10,
     dropItem: [],
     enemy: [{id: 1, num: 15}],
+    boss: [{id: 1, chance: 0.2}]
+};
+
+//实际数据，最终转化为字符串来标示
+var mapData1 = {
+    name: "水底世界",
+    res: "map_shengdi_png",
+    level: "05~10",
+    enemyNum: 10,
+    dropItem: [],
+    enemy: [],
     boss: [{id: 1, chance: 0.2}]
 };
 
