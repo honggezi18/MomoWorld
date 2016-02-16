@@ -72,8 +72,8 @@ var CtrlScene = (function (_super) {
         if (type == "war") {
             this.blood = Tool.addBitmap(this, "ctrl_blood_png", 190, 445, 50, 50, true, true);
             this.power = Tool.addBitmap(this, "ctrl_power_png", 260, 445, 50, 50, true, true);
-            this.skill1 = Tool.addBitmap(this, "ctrl_skill1_png", 540, 445, 50, 50, true, true);
-            this.skill2 = Tool.addBitmap(this, "ctrl_skill2_png", 610, 445, 50, 50, true, true);
+            this.skill1 = Tool.addBitmap(this, ability.skill1[GameData.skill1Index].icon, 540, 445, 50, 50, true, true);
+            this.skill2 = Tool.addBitmap(this, ability.skill2[GameData.skill2Index].icon, 610, 445, 50, 50, true, true);
         }
         else if (type == "welcome") {
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
@@ -866,26 +866,35 @@ var CtrlScene = (function (_super) {
                     }
                 }
             }, this);
-            this.abilitySelectBox1 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", 187, 150, 75, 75, false, true);
-            this.abilitySelectBox2 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", 187, 220, 75, 75, false, true);
+            this.abilitySelectBox1 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", GameData.skill1Index * 80 + 187, 150, 75, 75, false, true);
+            this.abilitySelectBox2 = Tool.addBitmap(this.abilityContainer, "ability_selectBox_png", GameData.skill2Index * 80 + 187, 220, 75, 75, false, true);
             this.abilitySkill = Tool.addTextField(this.abilityContainer, 120, 60, 0, 0, 18, 0xffffff, "剩余技能点:" + GameData.skillNum);
             this.abilityBody = Tool.addTextField(this.abilityContainer, 455, 60, 0, 0, 18, 0xffffff, "剩余属性值:" + GameData.bodyNum);
+            //解析技能状态
+            var abilityNum1 = 0;
+            var abilitySum1 = 0;
             for (var i = 0; i < 5; i++) {
+                abilityNum1 = Math.floor(GameData.skill1State[i]);
+                abilitySum1 = Math.floor((GameData.skill1State[i] - abilityNum1) * 100);
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill1[i].icon, i * 80 + 187, 150, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 15, 15, 0xff0000, this.abilityData.skill1[i].level + "/" + this.abilityData.skill1[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 162, 50, 15, 15, 0xff0000, abilityNum1 + "/" + abilitySum1));
                 this.abilityText[i].textAlign = egret.HorizontalAlign.RIGHT;
             }
             for (var i = 0; i < 5; i++) {
+                abilityNum1 = Math.floor(GameData.skill2State[i]);
+                abilitySum1 = Math.floor((GameData.skill2State[i] - abilityNum1) * 100);
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.skill2[i].icon, i * 80 + 187, 220, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 15, 15, 0xff0000, this.abilityData.skill2[i].level + "/" + this.abilityData.skill2[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 232, 50, 15, 15, 0xff0000, abilityNum1 + "/" + abilitySum1));
                 this.abilityText[i + 5].textAlign = egret.HorizontalAlign.RIGHT;
             }
             for (var i = 0; i < 5; i++) {
-                this.abilityData.data[i].state = Math.floor(this.abilityData.data[i].level / (this.abilityData.data[i].maxLevel / 5)) + 1;
+                abilityNum1 = Math.floor(GameData.abilityState[i]);
+                abilitySum1 = Math.floor((GameData.abilityState[i] - abilityNum1) * 100);
+                this.abilityData.data[i].state = Math.floor(abilityNum1 / (abilitySum1 / 5)) + 1;
                 if (this.abilityData.data[i].state > 5)
                     this.abilityData.data[i].state = 5;
                 this.abilityIcon.push(Tool.addBitmap(this.abilityContainer, this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png", i * 80 + 187, 290, 60, 60, false, true));
-                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 15, 15, 0xff0000, this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel));
+                this.abilityText.push(Tool.addTextField(this.abilityContainer, i * 80 + 163, 302, 50, 15, 15, 0xff0000, abilityNum1 + "/" + abilitySum1));
                 this.abilityText[i + 10].textAlign = egret.HorizontalAlign.RIGHT;
             }
             this.addChild(this.abilityContainer);
@@ -899,6 +908,7 @@ var CtrlScene = (function (_super) {
         else if (type == "hide") {
             if (this.showing == "empty")
                 return;
+            GameData.saveData();
             var tw = egret.Tween.get(this.abilityContainer);
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.abilityContainer);
@@ -928,7 +938,7 @@ var CtrlScene = (function (_super) {
             this.abilityDetailContainer.y = this.abilityContainer.height / 2;
             this.abilityContainer.addChild(this.abilityDetailContainer);
             var background = Tool.addBitmap(this.abilityDetailContainer, "ability_detail_png", 0, 0, 300, 180);
-            var state = Tool.addTextField(this.abilityDetailContainer, 15, 10, 70, 22, 22, 0xffffff, "携  带");
+            this.abilityState = Tool.addTextField(this.abilityDetailContainer, 15, 10, 70, 22, 22, 0xff0000, "携带中");
             var intruction = Tool.addTextField(this.abilityDetailContainer, 120, 60, 150, 90, 15, 0xffffff, "简介");
             this.abilityDetailLevel = Tool.addTextField(this.abilityDetailContainer, 25, 130, 90, 20, 20, 0xffffff, "Level:" + this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3));
             if (this.abilityIndex < 5)
@@ -945,10 +955,35 @@ var CtrlScene = (function (_super) {
             this.abilityDetailIcon.height = 50;
             this.abilityDetailIcon.x = 40;
             this.abilityDetailIcon.y = 65;
+            //动态修改技能状态说明
+            if (this.abilityIndex > 9)
+                this.abilityState.text = "属  性";
+            else if (this.abilityIndex != GameData.skill1Index && this.abilityIndex != GameData.skill2Index) {
+                var tempNum = parseInt(this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3));
+                if (tempNum == 0)
+                    this.abilityState.text = "未激活";
+                else
+                    this.abilityState.text = "携  带";
+            }
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                 if (e.localX > 40 && e.localX < 85 && e.localY > 85 && e.localY < 110)
                     this.ctrlAbility("levelUp");
+                else if (e.localX > 15 && e.localX < 90 && e.localY > 5 && e.localY < 30) {
+                    if (this.abilityIndex > 9)
+                        return;
+                    if (parseInt(this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3)) == 0)
+                        return;
+                    else if (this.abilityIndex < 5) {
+                        GameData.skill1Index = this.abilityIndex;
+                        this.abilitySelectBox1.x = this.abilityIcon[this.abilityIndex].x;
+                    }
+                    else if (this.abilityIndex < 10) {
+                        GameData.skill2Index = this.abilityIndex - 5;
+                        this.abilitySelectBox2.x = this.abilityIcon[this.abilityIndex].x;
+                    }
+                    this.ctrlAbility("hideDetail");
+                }
                 else if (e.localX > 215 && e.localX < 280 && e.localY > 5 && e.localY < 35)
                     this.ctrlAbility("hideDetail");
             }, this);
@@ -970,31 +1005,39 @@ var CtrlScene = (function (_super) {
             }, this);
         }
         else if (type == "levelUp") {
+            var abilityNum1 = 0;
+            var abilitySum1 = 0;
+            if (this.abilityState.text == "未激活")
+                this.abilityState.text = "携带";
             if (this.abilityIndex < 5) {
-                if (GameData.skillNum > 0 && this.abilityData.skill1[this.abilityIndex].level < this.abilityData.skill1[this.abilityIndex].maxLevel) {
+                abilityNum1 = Math.floor(GameData.skill1State[this.abilityIndex]);
+                abilitySum1 = Math.floor((GameData.skill1State[this.abilityIndex] - abilityNum1) * 100);
+                if (GameData.skillNum > 0 && abilityNum1 < abilitySum1) {
                     GameData.skillNum--;
-                    this.abilityData.skill1[this.abilityIndex].level++;
-                    this.abilityText[this.abilityIndex].text = this.abilityData.skill1[this.abilityIndex].level + "/" + this.abilityData.skill1[this.abilityIndex].maxLevel;
+                    GameData.skill1State[this.abilityIndex]++;
+                    this.abilityText[this.abilityIndex].text = (abilityNum1 + 1) + "/" + abilitySum1;
                 }
             }
             else if (this.abilityIndex < 10) {
-                if (GameData.skillNum > 0 && this.abilityData.skill2[this.abilityIndex - 5].level < this.abilityData.skill2[this.abilityIndex - 5].maxLevel) {
+                abilityNum1 = Math.floor(GameData.skill2State[this.abilityIndex - 5]);
+                abilitySum1 = Math.floor((GameData.skill2State[this.abilityIndex - 5] - abilityNum1) * 100);
+                if (GameData.skillNum > 0 && abilityNum1 < abilitySum1) {
                     GameData.skillNum--;
-                    this.abilityData.skill2[this.abilityIndex - 5].level++;
-                    this.abilityText[this.abilityIndex].text = this.abilityData.skill2[this.abilityIndex - 5].level + "/" + this.abilityData.skill2[this.abilityIndex - 5].maxLevel;
+                    GameData.skill2State[this.abilityIndex - 5]++;
+                    this.abilityText[this.abilityIndex].text = (abilityNum1 + 1) + "/" + abilitySum1;
                 }
             }
             else if (this.abilityIndex < 15) {
                 var i = this.abilityIndex - 10;
-                if (GameData.bodyNum > 0 && this.abilityData.data[i].level < this.abilityData.data[i].maxLevel) {
+                abilityNum1 = Math.floor(GameData.abilityState[i]);
+                abilitySum1 = Math.floor((GameData.abilityState[i] - abilityNum1) * 100);
+                if (GameData.bodyNum > 0 && abilityNum1 < abilitySum1) {
                     GameData.bodyNum--;
-                    this.abilityData.data[i].level++;
-                    this.abilityData.data[i].state = Math.floor(this.abilityData.data[i].level / (this.abilityData.data[i].maxLevel / 5)) + 1;
-                    if (this.abilityData.data[i].state > 5)
-                        this.abilityData.data[i].state = 5;
-                    this.abilityIcon[this.abilityIndex].texture = RES.getRes(this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png");
-                    this.abilityDetailIcon.texture = RES.getRes(this.abilityData.data[i].icon + this.abilityData.data[i].state + "_png");
-                    this.abilityText[this.abilityIndex].text = this.abilityData.data[i].level + "/" + this.abilityData.data[i].maxLevel;
+                    GameData.abilityState[i]++;
+                    var tempState = Math.floor(abilityNum1 / (abilitySum1 / 5)) + 1;
+                    this.abilityIcon[this.abilityIndex].texture = RES.getRes(this.abilityData.data[i].icon + tempState + "_png");
+                    this.abilityDetailIcon.texture = RES.getRes(this.abilityData.data[i].icon + tempState + "_png");
+                    this.abilityText[this.abilityIndex].text = (abilityNum1 + 1) + "/" + abilitySum1;
                 }
             }
             this.abilityDetailLevel.text = "Level:" + this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3);

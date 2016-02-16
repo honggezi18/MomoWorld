@@ -24,25 +24,25 @@ var achievement = {
 
 var ability = {
     skill1: [//图标，相连的技能，技能名，简介，当前状态
-        {icon: "ability_skill1_1_png", skill: "技能1", name: "单攻技能1", intruction: "单攻技能1简介", level: 0, maxLevel: 25},
-        {icon: "ability_skill1_2_png", skill: "技能2", name: "单攻技能2", intruction: "单攻技能2简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill1_3_png", skill: "技能3", name: "单攻技能3", intruction: "单攻技能3简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill1_4_png", skill: "技能4", name: "单攻技能4", intruction: "单攻技能4简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill1_5_png", skill: "技能5", name: "单攻技能5", intruction: "单攻技能5简介", level: 0, maxLevel: 30},
+        {icon: "ability_skill1_1_png", skill: "技能1", name: "单攻技能1", intruction: "单攻技能1简介"},
+        {icon: "ability_skill1_2_png", skill: "技能2", name: "单攻技能2", intruction: "单攻技能2简介"},
+        {icon: "ability_skill1_3_png", skill: "技能3", name: "单攻技能3", intruction: "单攻技能3简介"},
+        {icon: "ability_skill1_4_png", skill: "技能4", name: "单攻技能4", intruction: "单攻技能4简介"},
+        {icon: "ability_skill1_5_png", skill: "技能5", name: "单攻技能5", intruction: "单攻技能5简介"},
     ],
     skill2: [
-        {icon: "ability_skill2_1_png", skill: "技能1", name: "群攻技能1", intruction: "群攻技能1简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill2_2_png", skill: "技能2", name: "群攻技能2", intruction: "群攻技能2简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill2_3_png", skill: "技能3", name: "群攻技能3", intruction: "群攻技能3简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill2_4_png", skill: "技能4", name: "群攻技能4", intruction: "群攻技能4简介", level: 0, maxLevel: 30},
-        {icon: "ability_skill2_5_png", skill: "技能5", name: "群攻技能5", intruction: "群攻技能5简介", level: 0, maxLevel: 30},
+        {icon: "ability_skill2_1_png", skill: "技能1", name: "群攻技能1", intruction: "群攻技能1简介"},
+        {icon: "ability_skill2_2_png", skill: "技能2", name: "群攻技能2", intruction: "群攻技能2简介"},
+        {icon: "ability_skill2_3_png", skill: "技能3", name: "群攻技能3", intruction: "群攻技能3简介"},
+        {icon: "ability_skill2_4_png", skill: "技能4", name: "群攻技能4", intruction: "群攻技能4简介"},
+        {icon: "ability_skill2_5_png", skill: "技能5", name: "群攻技能5", intruction: "群攻技能5简介"},
     ],
     data: [
-        {icon: "ability_boold", type: "血量", name: "血量", intruction: "血量简介", state: 1, level: 0, maxLevel: 30},
-        {icon: "ability_power", type: "法力", name: "法力", intruction: "法力简介", state: 1, level: 0, maxLevel: 30},
-        {icon: "ability_attack", type: "普攻", name: "普攻", intruction: "普攻简介", state: 1, level: 0, maxLevel: 30},
-        {icon: "ability_defense1_", type: "物抗", name: "物抗", intruction: "物抗简介", state: 1, level: 0, maxLevel: 30},
-        {icon: "ability_defense2_", type: "法抗", name: "法抗", intruction: "法抗简介", state: 1, level: 0, maxLevel: 30},
+        {icon: "ability_boold", type: "血量", name: "血量", intruction: "血量简介"},
+        {icon: "ability_power", type: "法力", name: "法力", intruction: "法力简介"},
+        {icon: "ability_attack", type: "普攻", name: "普攻", intruction: "普攻简介"},
+        {icon: "ability_defense1_", type: "物抗", name: "物抗", intruction: "物抗简介"},
+        {icon: "ability_defense2_", type: "法抗", name: "法抗", intruction: "法抗简介"},
     ]
 };
 
