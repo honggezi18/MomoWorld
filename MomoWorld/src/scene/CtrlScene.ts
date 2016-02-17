@@ -1035,12 +1035,13 @@ class CtrlScene extends egret.DisplayObjectContainer {
             GameData.saveData();
             var tw = egret.Tween.get(this.abilityContainer);
             tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
-                this.removeChild(this.abilityContainer);
+                this.abilityContainer = Tool.clearItem(this.abilityContainer);
                 this.abilityDetailContainer = null;
                 this.abilityDetailLevel = null;
                 this.abilityBackground = null;
                 this.abilityDetailIcon = null;
-                this.abilityContainer = null;
+                this.abilitySelectBox1 = null;
+                this.abilitySelectBox2 = null;
                 this.abilityIsDetail = null;
                 this.abilitySkill = null;
                 this.abilityIndex = null;
@@ -1080,7 +1081,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
             //动态修改技能状态说明
             if (this.abilityIndex > 9)this.abilityState.text = "属  性";
-            else if (this.abilityIndex != GameData.skill1Index && this.abilityIndex != GameData.skill2Index) {
+            else if (this.abilityIndex != GameData.skill1Index && this.abilityIndex != GameData.skill2Index + 5) {
                 var tempNum = parseInt(this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3));
                 if (tempNum == 0)this.abilityState.text = "未激活";
                 else this.abilityState.text = "携  带";
@@ -1088,8 +1089,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
-                if (e.localX > 40 && e.localX < 85 && e.localY > 85 && e.localY < 110)this.ctrlAbility("levelUp");
-                else if (e.localX > 15 && e.localX < 90 && e.localY > 5 && e.localY < 30) {//携带技能
+                if (e.localX > 40 && e.localX < 90 && e.localY > 70 && e.localY < 114)this.ctrlAbility("levelUp");
+                else if (e.localX > 15 && e.localX < 90 && e.localY > 5 && e.localY < 40) {//携带技能
                     if (this.abilityIndex > 9)return;
                     if (parseInt(this.abilityText[this.abilityIndex].text.substr(0, this.abilityText[this.abilityIndex].text.length - 3)) == 0)return;
                     else if (this.abilityIndex < 5) {
@@ -1103,7 +1104,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
                     this.ctrlAbility("hideDetail");
                 }
-                else if (e.localX > 215 && e.localX < 280 && e.localY > 5 && e.localY < 35)this.ctrlAbility("hideDetail");
+                else if (e.localX > 215 && e.localX < 280 && e.localY > 10 && e.localY < 35)this.ctrlAbility("hideDetail");
             }, this);
 
             this.abilityDetailContainer.scaleX = 0;
@@ -1117,9 +1118,9 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.abilityIsDetail = false;
             var tw = egret.Tween.get(this.abilityDetailContainer);
             tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
-                this.abilityContainer.removeChild(this.abilityDetailContainer);
-                this.abilityDetailContainer = null;
+                this.abilityDetailContainer = Tool.clearItem(this.abilityDetailContainer);
                 this.abilityDetailLevel = null;
+                this.abilityState = null;
                 this.showing = "ability";
             }, this);
         }

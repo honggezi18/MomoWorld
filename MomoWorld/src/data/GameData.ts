@@ -53,6 +53,8 @@ class GameData {
         if (Tool.checkLocal("abilityState"))GameData["abilityState"] = JSON.parse(Tool.getLocal("abilityState"));//加载地图
         if (Tool.checkLocal("skillNum"))GameData["skillNum"] = JSON.parse(Tool.getLocal("skillNum"));//加载地图
         if (Tool.checkLocal("bodyNum"))GameData["bodyNum"] = JSON.parse(Tool.getLocal("bodyNum"));//加载地图
+        if (Tool.checkLocal("skill1Index"))GameData["skill1Index"] = JSON.parse(Tool.getLocal("skill1Index"));//加载地图
+        if (Tool.checkLocal("skill2Index"))GameData["skill2Index"] = JSON.parse(Tool.getLocal("skill2Index"));//加载地图
 
     }
 
@@ -66,6 +68,8 @@ class GameData {
         Tool.setLocal("abilityState", JSON.stringify(GameData["abilityState"]));
         Tool.setLocal("skillNum", JSON.stringify(GameData["skillNum"]));
         Tool.setLocal("bodyNum", JSON.stringify(GameData["bodyNum"]));
+        Tool.setLocal("skill1Index", JSON.stringify(GameData["skill1Index"]));
+        Tool.setLocal("skill2Index", JSON.stringify(GameData["skill2Index"]));
     }
 
 

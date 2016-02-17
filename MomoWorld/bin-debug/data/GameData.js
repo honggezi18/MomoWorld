@@ -23,6 +23,10 @@ var GameData = (function () {
             GameData["skillNum"] = JSON.parse(Tool.getLocal("skillNum")); //加载地图
         if (Tool.checkLocal("bodyNum"))
             GameData["bodyNum"] = JSON.parse(Tool.getLocal("bodyNum")); //加载地图
+        if (Tool.checkLocal("skill1Index"))
+            GameData["skill1Index"] = JSON.parse(Tool.getLocal("skill1Index")); //加载地图
+        if (Tool.checkLocal("skill2Index"))
+            GameData["skill2Index"] = JSON.parse(Tool.getLocal("skill2Index")); //加载地图
     };
     //保存数据//角色数据//基本数据（金币数）
     GameData.saveData = function () {
@@ -34,6 +38,8 @@ var GameData = (function () {
         Tool.setLocal("abilityState", JSON.stringify(GameData["abilityState"]));
         Tool.setLocal("skillNum", JSON.stringify(GameData["skillNum"]));
         Tool.setLocal("bodyNum", JSON.stringify(GameData["bodyNum"]));
+        Tool.setLocal("skill1Index", JSON.stringify(GameData["skill1Index"]));
+        Tool.setLocal("skill2Index", JSON.stringify(GameData["skill2Index"]));
     };
     //固态数据///////////////////////////////
     GameData.gameWidth = 800;
