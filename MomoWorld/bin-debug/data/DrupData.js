@@ -12,5 +12,6 @@ var drupData0 = {
     type: "gold",
     cost: "25",
     info: "drup0",
-    grade: "1"
+    grade: "1",
+    func: "boold" //药品的功能
 };

@@ -21,13 +21,21 @@ class GameData {
     static skillNum:number = 50;//剩余的技能点数
     static bodyNum:number = 50;//剩余的技能点数
     static heroIndex:number = 1;//选择的角色
-    static skill1Index:number = 0;//技能下标一
-    static skill2Index:number = 0;//技能下标一
 
+
+    //能力面板数据
     //主角属性,保存格式，当前值+“。”+最大值
     static skill1State = [1.25, 0.30, 0.30, 0.30, 0.30];
     static skill2State = [1.25, 0.30, 0.30, 0.30, 0.30];
     static abilityState = [0.30, 0.30, 0.30, 0.30, 0.30];
+    static skill1Index:number = 0;//技能下标一
+    static skill2Index:number = 0;//技能下标一
+
+    //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量
+    static bag_Equipment = [0.0, 0.0, 0.0, 0.0,];
+    static bag_Piece = [0.0, 0.0, 0.0, 0.0,];
+    static bag_Item = [0.0, 0.0,];
+    static bag_Drup = [0.0, 0.0, 0.0, 0.0,];
 
 
     //state中0为未开放，1为普通，2为困难，3为地狱
@@ -47,7 +55,7 @@ class GameData {
         //return;
         if (Tool.checkLocal("MapState"))GameData["MapState"] = JSON.parse(Tool.getLocal("MapState"));//加载地图
 
-        //保存技能点
+        //加载能力面板数据
         if (Tool.checkLocal("skill1State"))GameData["skill1State"] = JSON.parse(Tool.getLocal("skill1State"));//加载地图
         if (Tool.checkLocal("skill2State"))GameData["skill2State"] = JSON.parse(Tool.getLocal("skill2State"));//加载地图
         if (Tool.checkLocal("abilityState"))GameData["abilityState"] = JSON.parse(Tool.getLocal("abilityState"));//加载地图
@@ -56,6 +64,13 @@ class GameData {
         if (Tool.checkLocal("skill1Index"))GameData["skill1Index"] = JSON.parse(Tool.getLocal("skill1Index"));//加载地图
         if (Tool.checkLocal("skill2Index"))GameData["skill2Index"] = JSON.parse(Tool.getLocal("skill2Index"));//加载地图
 
+        //加载我的背包数据
+        //if (Tool.checkLocal("bag_Equipment"))GameData["bag_Equipment"] = JSON.parse(Tool.getLocal("bag_Equipment"));//加载地图
+        //if (Tool.checkLocal("bag_Piece"))GameData["bag_Piece"] = JSON.parse(Tool.getLocal("bag_Piece"));//加载地图
+        //if (Tool.checkLocal("bag_Item"))GameData["bag_Item"] = JSON.parse(Tool.getLocal("bag_Item"));//加载地图
+        //if (Tool.checkLocal("bag_Drup"))GameData["bag_Drup"] = JSON.parse(Tool.getLocal("bag_Drup"));//加载地图
+
+
     }
 
     //保存数据//角色数据//基本数据（金币数）
@@ -63,6 +78,8 @@ class GameData {
         console.log("saveData");
         //return;
         Tool.setLocal("MapState", JSON.stringify(GameData["MapState"]));
+
+        //保存能力面板数据
         Tool.setLocal("skill1State", JSON.stringify(GameData["skill1State"]));
         Tool.setLocal("skill2State", JSON.stringify(GameData["skill2State"]));
         Tool.setLocal("abilityState", JSON.stringify(GameData["abilityState"]));
@@ -70,6 +87,14 @@ class GameData {
         Tool.setLocal("bodyNum", JSON.stringify(GameData["bodyNum"]));
         Tool.setLocal("skill1Index", JSON.stringify(GameData["skill1Index"]));
         Tool.setLocal("skill2Index", JSON.stringify(GameData["skill2Index"]));
+
+        //保存我的背包数据
+        Tool.setLocal("bag_Equipment", JSON.stringify(GameData["bag_Equipment"]));
+        Tool.setLocal("bag_Piece", JSON.stringify(GameData["bag_Piece"]));
+        Tool.setLocal("bag_Item", JSON.stringify(GameData["bag_Item"]));
+        Tool.setLocal("bag_Drup", JSON.stringify(GameData["bag_Drup"]));
+
+
     }
 
 

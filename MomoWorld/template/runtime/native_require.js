@@ -25,6 +25,7 @@ var game_file_list = [
 	"bin-debug/data/HeroData.js",
 	"bin-debug/data/ItemData.js",
 	"bin-debug/data/MapData.js",
+	"bin-debug/data/PieceData.js",
 	"bin-debug/role/Bullet.js",
 	"bin-debug/role/Enemy.js",
 	"bin-debug/role/Hero.js",
