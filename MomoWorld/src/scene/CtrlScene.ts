@@ -108,12 +108,13 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private bagContainer:egret.DisplayObjectContainer;//药店显示容器
     private bagDetailContainer:egret.DisplayObjectContainer;//药品弹框显示容器
     private bagItemGroup:eui.Group;//成就显示容器
-    //private bagSaleNum:eui.EditableText;//出售的物品个数
     private bagBackground:egret.Bitmap;//背景
     private bag_btnEquipment:egret.Bitmap;//装备选择卡
     private bag_btnItem:egret.Bitmap;//物品选择卡
     private bag_btnPiece:egret.Bitmap;//碎片选择卡
-    private bag_btnDrup:egret.Bitmap;//碎片选择卡
+    private bag_btnDrup:egret.Bitmap;//药品选择卡
+    private bagSelectBox1:egret.Bitmap;//物品携带标示框1//MOMO
+    private bagSelectBox2:egret.Bitmap;//物品携带标示框2
     private bagItems:Array<egret.Bitmap>;//商品项背景
     private bagIcon:Array<egret.Bitmap>;//各个图标
     private bagItemNum:Array<egret.TextField>;//标示物品个数
@@ -371,7 +372,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
     }
 
     //我的背包面板
-    public ctrlBag(type:string, num:number = 1):void {
+    public ctrlBag(type:string):void {
         if (type == "show") {
             if (this.showing != "empty")return;//若已经在显示着面板
             //this.bagData = bag;
@@ -449,6 +450,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     var id = Math.floor(GameData["bag_" + this.bagBtnName][index]);
                     var num = Math.floor((GameData["bag_" + this.bagBtnName][index] - id) * 100);
                     var data = window["get" + this.bagBtnName](id);
+                    console.log("num  " + num);
 
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 14 + a * 55.2, i * 70 + 12, 40, 40));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
@@ -540,7 +542,6 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     if (this.bagBtnName == "Equipment")this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].stroke = 1;
-                    this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {//添加点击响应
@@ -567,44 +568,39 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.bagDetailContainer.y = this.bagContainer.height / 2;
             this.bagContainer.addChild(this.bagDetailContainer);
 
-
-            var id = Math.floor(GameData["bag_" + this.bagBtnName][num]);
-            var num = Math.floor((GameData["bag_" + this.bagBtnName][num] - id) * 100);
+            var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
+            var num = Math.floor((GameData["bag_" + this.bagBtnName][this.bagIndex] - id) * 100);
             var data = window["get" + this.bagBtnName](id);
 
-
             var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail" + this.bagBtnName + "_png", 0, 0, 300, 150);
-            var icon = Tool.addBitmap(this.bagDetailContainer, data.res, 28, 30, 50, 50);
-            var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, data.name);
-            var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, data.info);
-            var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + data.cost);
-
-
-
-            itemName.textAlign = egret.HorizontalAlign.LEFT;
-            cost.textAlign = egret.HorizontalAlign.LEFT;
-            intruction.textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addBitmap(this.bagDetailContainer, data.res, 28, 30, 50, 50);
+            Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, data.name).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, data.info).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + data.cost).textAlign = egret.HorizontalAlign.LEFT;
 
             background.touchEnabled = true;
-            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent,cost:number,num:number) {
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
                 if (e.localX > 20 && e.localX < 100 && e.localY > 110 && e.localY < 140) {//卖出
-                    this.showSure("确定全部卖出吗？", function () {//MOMO
+                    this.showSure("确定全部卖出吗？", function (cost:number, num:number) {
+                        var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
+                        var num = Math.floor((GameData["bag_" + this.bagBtnName][this.bagIndex] - id) * 100);
+                        var data = window["get" + this.bagBtnName](id);
+
                         if (this.sureAnswer) {
                             console.log("卖出成功");
                             if (this.bagBtnName == "Equipment") {
-                                GameData.goldNum += cost;
-                                Tool.removeOne(this.bagData[this.bagBtnName], this.bagIndex);
+                                GameData.goldNum += data.cost;
+                                GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
                             }
                             else {
-                                GameData.goldNum += cost * num;
-                                Tool.removeOne(this.bagData[this.bagBtnName], this.bagIndex);
+                                GameData.goldNum += data.cost * num;
+                                GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
                             }
-
                             GameData.saveData();//保存数据
                             this.ctrlBag("changeBtn");//刷新数据
                             this.ctrlBag("hideDetail");
                         }
-                    }.bind(this,cost,num));
+                    }.bind(this));
                 }
                 else if (e.localX > 110 && e.localX < 190 && e.localY > 110 && e.localY < 140) {
                     if (this.bagBtnName == "Equipment")console.log("装备成功");

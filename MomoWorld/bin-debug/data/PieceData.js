@@ -9,7 +9,7 @@ var pieceData0 = {
     res: "item_piece0_png",
     name: "piece0",
     type: "gold",
-    cost: "25",
+    cost: 25,
     info: "piece0",
-    grade: "1"
+    grade: 1
 };

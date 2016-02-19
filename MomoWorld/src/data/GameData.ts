@@ -69,6 +69,8 @@ class GameData {
         //if (Tool.checkLocal("bag_Piece"))GameData["bag_Piece"] = JSON.parse(Tool.getLocal("bag_Piece"));//加载地图
         //if (Tool.checkLocal("bag_Item"))GameData["bag_Item"] = JSON.parse(Tool.getLocal("bag_Item"));//加载地图
         //if (Tool.checkLocal("bag_Drup"))GameData["bag_Drup"] = JSON.parse(Tool.getLocal("bag_Drup"));//加载地图
+        //if (Tool.checkLocal("goldNum"))GameData["goldNum"] = parseInt(Tool.getLocal("goldNum"));//加载地图
+        //if (Tool.checkLocal("diamondNum"))GameData["diamondNum"] = parseInt(Tool.getLocal("diamondNum"));//加载地图
 
 
     }
@@ -93,6 +95,8 @@ class GameData {
         Tool.setLocal("bag_Piece", JSON.stringify(GameData["bag_Piece"]));
         Tool.setLocal("bag_Item", JSON.stringify(GameData["bag_Item"]));
         Tool.setLocal("bag_Drup", JSON.stringify(GameData["bag_Drup"]));
+        Tool.setLocal("goldNum", GameData["goldNum"]);
+        Tool.setLocal("diamondNum", GameData["diamondNum"]);
 
 
     }

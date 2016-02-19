@@ -246,8 +246,7 @@ var CtrlScene = (function (_super) {
         }
     };
     //我的背包面板
-    p.ctrlBag = function (type, num) {
-        if (num === void 0) { num = 1; }
+    p.ctrlBag = function (type) {
         if (type == "show") {
             if (this.showing != "empty")
                 return; //若已经在显示着面板
@@ -326,6 +325,7 @@ var CtrlScene = (function (_super) {
                     var id = Math.floor(GameData["bag_" + this.bagBtnName][index]);
                     var num = Math.floor((GameData["bag_" + this.bagBtnName][index] - id) * 100);
                     var data = window["get" + this.bagBtnName](id);
+                    console.log("num  " + num);
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 14 + a * 55.2, i * 70 + 12, 40, 40));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     this.bagItemNum[index].stroke = 1;
@@ -413,7 +413,6 @@ var CtrlScene = (function (_super) {
                     if (this.bagBtnName == "Equipment")
                         this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].stroke = 1;
-                    this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
@@ -438,52 +437,30 @@ var CtrlScene = (function (_super) {
             this.bagDetailContainer.x = this.bagContainer.width / 2;
             this.bagDetailContainer.y = this.bagContainer.height / 2;
             this.bagContainer.addChild(this.bagDetailContainer);
-            var id = Math.floor(GameData["bag_" + this.bagBtnName][num]);
-            var num = Math.floor((GameData["bag_" + this.bagBtnName][num] - id) * 100);
+            var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
+            var num = Math.floor((GameData["bag_" + this.bagBtnName][this.bagIndex] - id) * 100);
             var data = window["get" + this.bagBtnName](id);
             var background = Tool.addBitmap(this.bagDetailContainer, "bag_detail" + this.bagBtnName + "_png", 0, 0, 300, 150);
-            var icon = Tool.addBitmap(this.bagDetailContainer, data.res, 28, 30, 50, 50);
-            var itemName = Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, data.name);
-            var intruction = Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, data.info);
-            var cost = Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + data.cost);
-            if (this.bagBtnName != "Equipment") {
-                var numText = Tool.addTextField(this.bagDetailContainer, 62, 75, 20, 15, 15, 0x000000, num + "");
-                numText.textAlign = egret.HorizontalAlign.RIGHT;
-                numText.stroke = 1;
-                this.bagSaleNum = new eui.EditableText();
-                this.bagSaleNum.x = 133;
-                this.bagSaleNum.y = 113;
-                this.bagSaleNum.width = 35;
-                this.bagSaleNum.height = 20;
-                this.bagSaleNum.size = 20;
-                this.bagSaleNum.textColor = 0x000000;
-                this.bagSaleNum.textAlign = egret.HorizontalAlign.CENTER;
-                this.bagSaleNum.text = "1";
-                this.bagDetailContainer.addChild(this.bagSaleNum);
-                this.bagSaleNum.addEventListener(egret.Event.FOCUS_OUT, function () {
-                    var temp = parseInt(this.bagSaleNum.text);
-                    if (temp > this.bagData[this.bagBtnName][this.bagIndex].num)
-                        this.bagSaleNum.text = "" + this.bagData[this.bagBtnName][this.bagIndex].num;
-                }, this);
-            }
-            itemName.textAlign = egret.HorizontalAlign.LEFT;
-            cost.textAlign = egret.HorizontalAlign.LEFT;
-            intruction.textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addBitmap(this.bagDetailContainer, data.res, 28, 30, 50, 50);
+            Tool.addTextField(this.bagDetailContainer, 100, 23, 80, 20, 16, 0x000000, data.name).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.bagDetailContainer, 97, 47, 180, 41, 12, 0x000000, data.info).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.bagDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + data.cost).textAlign = egret.HorizontalAlign.LEFT;
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                 if (e.localX > 20 && e.localX < 100 && e.localY > 110 && e.localY < 140) {
-                    this.showSure("确定卖出吗？", function () {
+                    this.showSure("确定全部卖出吗？", function (cost, num) {
+                        var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
+                        var num = Math.floor((GameData["bag_" + this.bagBtnName][this.bagIndex] - id) * 100);
+                        var data = window["get" + this.bagBtnName](id);
                         if (this.sureAnswer) {
                             console.log("卖出成功");
                             if (this.bagBtnName == "Equipment") {
-                                GameData.goldNum += this.bagData[this.bagBtnName][this.bagIndex].cost;
-                                Tool.removeOne(this.bagData[this.bagBtnName], this.bagIndex);
+                                GameData.goldNum += data.cost;
+                                GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
                             }
                             else {
-                                GameData.goldNum += this.bagData[this.bagBtnName][this.bagIndex].cost * parseInt(this.bagSaleNum.text);
-                                this.bagData[this.bagBtnName][this.bagIndex].num -= parseInt(this.bagSaleNum.text);
-                                if (this.bagData[this.bagBtnName][this.bagIndex].num == 0)
-                                    Tool.removeOne(this.bagData[this.bagBtnName], this.bagIndex);
+                                GameData.goldNum += data.cost * num;
+                                GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
                             }
                             GameData.saveData(); //保存数据
                             this.ctrlBag("changeBtn"); //刷新数据
@@ -496,13 +473,8 @@ var CtrlScene = (function (_super) {
                         console.log("装备成功");
                     else if (this.bagBtnName == "Piece")
                         console.log("合成成功");
-                    else if (this.bagBtnName == "Drup" || this.bagBtnName == "Item") {
-                        var tempNum = parseInt(this.bagSaleNum.text);
-                        if (e.localX > 110 && e.localX < 130 && tempNum > 1)
-                            this.bagSaleNum.text = "" + (tempNum - 1);
-                        else if (e.localX > 170 && e.localX < 190 && tempNum < this.bagData[this.bagBtnName][this.bagIndex].num)
-                            this.bagSaleNum.text = "" + (tempNum + 1);
-                    }
+                    else if (this.bagBtnName == "Drup")
+                        console.log("使用成功");
                 }
                 else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140)
                     this.ctrlBag("hideDetail");
