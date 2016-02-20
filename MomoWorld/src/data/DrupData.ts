@@ -19,3 +19,13 @@ var drupData0 = {
     grade: 1,
     func: "boold"//药品的功能
 };
+
+var drupData1 = {
+    res: "item_drup1_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power"//药品的功能
+};

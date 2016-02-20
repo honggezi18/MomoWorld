@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d19fa72-ad9f-472c-8f03-83bb263e2d66" name="Default" comment="" />
+    <list default="true" id="74c5a95b-d3e1-4539-868f-1d4f115004fc" name="Default" comment="" />
     <ignored path="MomoWorld.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,162 +21,183 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameData.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MapData.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/MapData.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CtrlScene.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51758087">
-              <caret line="115" column="55" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.31569967">
+              <caret line="185" column="8" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="8" />
               <folding>
-                <element signature="e#5409#5422#0" expanded="false" />
+                <element signature="e#5393#5406#0" expanded="false" />
                 <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
                 <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
-                <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#8426#8869#0" expanded="false" />
-                <element signature="e#8906#9367#0" expanded="false" />
+                <element signature="e#8990#9451#0" expanded="false" />
                 <element signature="n#!!block;n#showTip#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#9889#9968#0" expanded="false" />
+                <element signature="e#9973#10052#0" expanded="false" />
                 <element signature="n#!!block;n#showSure#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#11307#11632#0" expanded="false" />
-                <element signature="e#11364#11444#0" expanded="false" />
-                <element signature="e#11487#11610#0" expanded="false" />
+                <element signature="e#10969#11727#0" expanded="false" />
+                <element signature="e#11096#11186#0" expanded="false" />
+                <element signature="e#11278#11365#0" expanded="false" />
+                <element signature="e#11391#11716#0" expanded="false" />
+                <element signature="e#11448#11528#0" expanded="false" />
+                <element signature="e#11571#11694#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlWeapon#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#11959#14178#0" expanded="false" />
-                <element signature="e#13051#14000#0" expanded="false" />
-                <element signature="e#13331#13986#0" expanded="false" />
-                <element signature="e#14212#14463#0" expanded="false" />
-                <element signature="e#14353#14445#0" expanded="false" />
-                <element signature="e#14499#14658#0" expanded="false" />
-                <element signature="e#14693#14758#0" expanded="false" />
-                <element signature="e#14795#14848#0" expanded="false" />
+                <element signature="e#12043#14262#0" expanded="false" />
+                <element signature="e#13135#14084#0" expanded="false" />
+                <element signature="e#13415#14070#0" expanded="false" />
+                <element signature="e#14296#14547#0" expanded="false" />
+                <element signature="e#14437#14529#0" expanded="false" />
+                <element signature="e#14583#14742#0" expanded="false" />
+                <element signature="e#14777#14842#0" expanded="false" />
+                <element signature="e#14879#14932#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlData#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#14941#17675#0" expanded="false" />
-                <element signature="e#17282#17444#0" expanded="false" />
-                <element signature="e#17709#17960#0" expanded="false" />
-                <element signature="e#17860#17948#0" expanded="false" />
-                <element signature="e#18098#18109#0" expanded="false" />
-                <element signature="e#20034#20204#0" expanded="false" />
-                <element signature="e#20323#20533#0" expanded="false" />
-                <element signature="e#20647#20847#0" expanded="false" />
-                <element signature="e#20962#21164#0" expanded="false" />
-                <element signature="e#21278#21478#0" expanded="false" />
-                <element signature="e#24151#25068#0" expanded="false" />
-                <element signature="e#24341#25050#0" expanded="false" />
-                <element signature="e#25107#27602#0" expanded="false" />
-                <element signature="e#25741#25857#0" expanded="false" />
-                <element signature="e#27178#27551#0" expanded="false" />
-                <element signature="e#27258#27529#0" expanded="false" />
-                <element signature="e#27321#27503#0" expanded="false" />
-                <element signature="e#31259#31768#0" expanded="false" />
-                <element signature="e#31495#31750#0" expanded="false" />
+                <element signature="e#15025#17759#0" expanded="false" />
+                <element signature="e#17366#17528#0" expanded="false" />
+                <element signature="e#17793#18044#0" expanded="false" />
+                <element signature="e#17944#18032#0" expanded="false" />
+                <element signature="n#!!block;n#ctrlBag#0;n#CtrlScene#0" expanded="false" />
+                <element signature="e#18133#24466#0" expanded="false" />
+                <element signature="e#18182#18193#0" expanded="false" />
+                <element signature="e#20029#20199#0" expanded="false" />
+                <element signature="e#20318#20528#0" expanded="false" />
+                <element signature="e#20642#20842#0" expanded="false" />
+                <element signature="e#20957#21159#0" expanded="false" />
+                <element signature="e#21273#21473#0" expanded="false" />
+                <element signature="e#23035#23408#0" expanded="false" />
+                <element signature="e#23115#23386#0" expanded="false" />
+                <element signature="e#23178#23360#0" expanded="false" />
+                <element signature="e#24500#25417#0" expanded="false" />
+                <element signature="e#24690#25399#0" expanded="false" />
+                <element signature="e#25456#28931#0" expanded="false" />
+                <element signature="e#26090#26206#0" expanded="false" />
+                <element signature="e#27540#27913#0" expanded="false" />
+                <element signature="e#27620#27891#0" expanded="false" />
+                <element signature="e#27683#27865#0" expanded="false" />
+                <element signature="e#28971#33049#0" expanded="false" />
+                <element signature="e#30623#31820#0" expanded="false" />
+                <element signature="e#30710#31789#0" expanded="false" />
+                <element signature="e#31036#31767#0" expanded="false" />
+                <element signature="e#31151#31340#0" expanded="false" />
+                <element signature="e#31374#31569#0" expanded="false" />
+                <element signature="e#33089#33598#0" expanded="false" />
+                <element signature="e#33325#33580#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlDrupShop#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#31877#35564#0" expanded="false" />
-                <element signature="e#32930#33061#0" expanded="false" />
-                <element signature="e#33436#34856#0" expanded="false" />
-                <element signature="e#34481#34834#0" expanded="false" />
-                <element signature="e#34554#34816#0" expanded="false" />
-                <element signature="e#34618#34794#0" expanded="false" />
-                <element signature="e#35598#36596#0" expanded="false" />
-                <element signature="e#35793#36578#0" expanded="false" />
-                <element signature="e#36636#40465#0" expanded="false" />
-                <element signature="e#38829#39009#0" expanded="false" />
-                <element signature="e#39353#40204#0" expanded="false" />
-                <element signature="e#39806#40062#0" expanded="false" />
-                <element signature="e#39918#40044#0" expanded="false" />
-                <element signature="e#40505#41057#0" expanded="false" />
-                <element signature="e#40756#41039#0" expanded="false" />
-                <element signature="e#41093#41687#0" expanded="false" />
+                <element signature="e#33707#37394#0" expanded="false" />
+                <element signature="e#34760#34891#0" expanded="false" />
+                <element signature="e#35266#36686#0" expanded="false" />
+                <element signature="e#36311#36664#0" expanded="false" />
+                <element signature="e#36384#36646#0" expanded="false" />
+                <element signature="e#36448#36624#0" expanded="false" />
+                <element signature="e#37428#38426#0" expanded="false" />
+                <element signature="e#37623#38408#0" expanded="false" />
+                <element signature="e#38466#42295#0" expanded="false" />
+                <element signature="e#40659#40839#0" expanded="false" />
+                <element signature="e#41183#42034#0" expanded="false" />
+                <element signature="e#41636#41892#0" expanded="false" />
+                <element signature="e#41748#41874#0" expanded="false" />
+                <element signature="e#42335#42887#0" expanded="false" />
+                <element signature="e#42586#42869#0" expanded="false" />
+                <element signature="e#42923#43517#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlWeaponShop#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#41798#45603#0" expanded="false" />
-                <element signature="e#42895#43028#0" expanded="false" />
-                <element signature="e#43417#44883#0" expanded="false" />
-                <element signature="e#44500#44861#0" expanded="false" />
-                <element signature="e#44575#44843#0" expanded="false" />
-                <element signature="e#44641#44821#0" expanded="false" />
-                <element signature="e#45637#46673#0" expanded="false" />
-                <element signature="e#45834#46655#0" expanded="false" />
-                <element signature="e#46713#49123#0" expanded="false" />
-                <element signature="e#48361#48856#0" expanded="false" />
-                <element signature="e#48452#48712#0" expanded="false" />
-                <element signature="e#48566#48694#0" expanded="false" />
-                <element signature="e#49163#49735#0" expanded="false" />
-                <element signature="e#49420#49717#0" expanded="false" />
+                <element signature="e#43628#47433#0" expanded="false" />
+                <element signature="e#44725#44858#0" expanded="false" />
+                <element signature="e#45247#46713#0" expanded="false" />
+                <element signature="e#46330#46691#0" expanded="false" />
+                <element signature="e#46405#46673#0" expanded="false" />
+                <element signature="e#46471#46651#0" expanded="false" />
+                <element signature="e#47467#48503#0" expanded="false" />
+                <element signature="e#47664#48485#0" expanded="false" />
+                <element signature="e#48543#50953#0" expanded="false" />
+                <element signature="e#50191#50686#0" expanded="false" />
+                <element signature="e#50282#50542#0" expanded="false" />
+                <element signature="e#50396#50524#0" expanded="false" />
+                <element signature="e#50993#51565#0" expanded="false" />
+                <element signature="e#51250#51547#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlAbility#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#49825#54591#0" expanded="false" />
-                <element signature="e#50811#51447#0" expanded="false" />
-                <element signature="e#51021#51433#0" expanded="false" />
-                <element signature="e#51071#51415#0" expanded="false" />
-                <element signature="e#51270#51393#0" expanded="false" />
-                <element signature="e#52169#52723#0" expanded="false" />
-                <element signature="e#52765#53323#0" expanded="false" />
-                <element signature="e#53365#54155#0" expanded="false" />
-                <element signature="e#54625#55585#0" expanded="false" />
-                <element signature="e#54852#55567#0" expanded="false" />
-                <element signature="e#55625#59604#0" expanded="false" />
-                <element signature="e#57825#58104#0" expanded="false" />
-                <element signature="e#58248#59345#0" expanded="false" />
-                <element signature="e#58455#59207#0" expanded="false" />
-                <element signature="e#58720#58899#0" expanded="false" />
-                <element signature="e#58953#59136#0" expanded="false" />
-                <element signature="e#59644#60148#0" expanded="false" />
-                <element signature="e#59892#60130#0" expanded="false" />
-                <element signature="e#60185#62638#0" expanded="false" />
-                <element signature="e#60379#60886#0" expanded="false" />
-                <element signature="e#60647#60872#0" expanded="false" />
-                <element signature="e#60932#61451#0" expanded="false" />
-                <element signature="e#61208#61437#0" expanded="false" />
-                <element signature="e#61497#62337#0" expanded="false" />
-                <element signature="e#61782#62323#0" expanded="false" />
+                <element signature="e#51655#56421#0" expanded="false" />
+                <element signature="e#52641#53277#0" expanded="false" />
+                <element signature="e#52851#53263#0" expanded="false" />
+                <element signature="e#52901#53245#0" expanded="false" />
+                <element signature="e#53100#53223#0" expanded="false" />
+                <element signature="e#53999#54553#0" expanded="false" />
+                <element signature="e#54595#55153#0" expanded="false" />
+                <element signature="e#55195#55985#0" expanded="false" />
+                <element signature="e#56455#57415#0" expanded="false" />
+                <element signature="e#56682#57397#0" expanded="false" />
+                <element signature="e#57455#61434#0" expanded="false" />
+                <element signature="e#59655#59934#0" expanded="false" />
+                <element signature="e#60078#61175#0" expanded="false" />
+                <element signature="e#60285#61037#0" expanded="false" />
+                <element signature="e#60550#60729#0" expanded="false" />
+                <element signature="e#60783#60966#0" expanded="false" />
+                <element signature="e#61474#61978#0" expanded="false" />
+                <element signature="e#61722#61960#0" expanded="false" />
+                <element signature="e#62015#64468#0" expanded="false" />
+                <element signature="e#62209#62716#0" expanded="false" />
+                <element signature="e#62477#62702#0" expanded="false" />
+                <element signature="e#62762#63281#0" expanded="false" />
+                <element signature="e#63038#63267#0" expanded="false" />
+                <element signature="e#63327#64167#0" expanded="false" />
+                <element signature="e#63612#64153#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#62731#66115#0" expanded="false" />
-                <element signature="e#63944#64076#0" expanded="false" />
-                <element signature="e#64472#65390#0" expanded="false" />
-                <element signature="e#66149#66814#0" expanded="false" />
-                <element signature="e#66347#66796#0" expanded="false" />
+                <element signature="e#64561#67945#0" expanded="false" />
+                <element signature="e#65774#65906#0" expanded="false" />
+                <element signature="e#66302#67220#0" expanded="false" />
+                <element signature="e#67979#68644#0" expanded="false" />
+                <element signature="e#68177#68626#0" expanded="false" />
                 <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#66908#69963#0" expanded="false" />
-                <element signature="e#67977#68104#0" expanded="false" />
-                <element signature="e#68458#69274#0" expanded="false" />
-                <element signature="e#69997#70608#0" expanded="false" />
-                <element signature="e#70189#70590#0" expanded="false" />
+                <element signature="e#68738#71793#0" expanded="false" />
+                <element signature="e#69807#69934#0" expanded="false" />
+                <element signature="e#70288#71104#0" expanded="false" />
+                <element signature="e#71827#72438#0" expanded="false" />
+                <element signature="e#72019#72420#0" expanded="false" />
                 <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#70679#71357#0" expanded="false" />
-                <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#71490#72000#0" expanded="false" />
-                <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />
-                <element signature="e#72131#72618#0" expanded="false" />
-                <element signature="n#!!block;n#onRemove#0;n#CtrlScene#0" expanded="false" />
+                <element signature="e#72509#73187#0" expanded="false" />
+                <element signature="e#73320#73830#0" expanded="false" />
+                <element signature="e#73961#74448#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeroData.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/HeroData.ts">
+      <file leaf-file-name="CtrlData.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="default.res.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resource/default.res.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.25">
+              <caret line="865" column="32" selection-start-line="865" selection-start-column="16" selection-end-line="865" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DrupData.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/DrupData.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameData.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -184,60 +205,13 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="CSS File" />
-        <option value="TypeScript File" />
-      </list>
-    </option>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/world.ts" />
-        <option value="$PROJECT_DIR$/resource/assets/enemy/enemy2.json" />
-        <option value="$PROJECT_DIR$/src/data.ts" />
-        <option value="$PROJECT_DIR$/src/MomoEvent.css" />
-        <option value="$PROJECT_DIR$/src/MomoEvent.ts" />
-        <option value="$PROJECT_DIR$/resource/assets/enemy/enemy1.json" />
-        <option value="$PROJECT_DIR$/resource/assets/hero/hero.json" />
-        <option value="$PROJECT_DIR$/src/ShengDi/ShengDiData.ts" />
-        <option value="$PROJECT_DIR$/src/P2Tool.ts" />
-        <option value="$PROJECT_DIR$/src/GameData.ts" />
-        <option value="$PROJECT_DIR$/src/data/Number.ts" />
-        <option value="$PROJECT_DIR$/src/data/_Number.ts" />
-        <option value="$PROJECT_DIR$/src/data/Num.ts" />
-        <option value="$PROJECT_DIR$/src/ShengDi/ShengDiScene.ts" />
-        <option value="$PROJECT_DIR$/src/data/BulletData.ts" />
-        <option value="$PROJECT_DIR$/src/data/Bullet.ts" />
-        <option value="$PROJECT_DIR$/src/World.ts" />
-        <option value="$PROJECT_DIR$/src/data/Enemy.ts" />
-        <option value="$PROJECT_DIR$/src/data/HeroData.ts" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/data/Hero.ts" />
-        <option value="$PROJECT_DIR$/egretProperties.json" />
-        <option value="$PROJECT_DIR$/src/data/Item.ts" />
-        <option value="$PROJECT_DIR$/src/data/SaveData.ts" />
-        <option value="$PROJECT_DIR$/src/scene/ShengDiScene.ts" />
-        <option value="$PROJECT_DIR$/src/scene/WelcomeScene.ts" />
-        <option value="$PROJECT_DIR$/libs/modules/egret/egret.d.ts" />
-        <option value="$PROJECT_DIR$/src/UIManage.ts" />
-        <option value="$PROJECT_DIR$/src/data/DropData.ts" />
-        <option value="$PROJECT_DIR$/src/data/BosssData.ts" />
-        <option value="$PROJECT_DIR$/src/data/BossData.ts" />
-        <option value="$PROJECT_DIR$/src/data/EnemyData.ts" />
-        <option value="$PROJECT_DIR$/src/data/MapData.ts" />
-        <option value="$PROJECT_DIR$/src/scene/MapScene.ts" />
-        <option value="$PROJECT_DIR$/src/Main.ts" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Tool.ts" />
-        <option value="$PROJECT_DIR$/resource/default.res.json" />
-        <option value="$PROJECT_DIR$/src/data/CtrlData.ts" />
-        <option value="$PROJECT_DIR$/src/data/ItemData.ts" />
-        <option value="$PROJECT_DIR$/src/data/EquipmentData.ts" />
         <option value="$PROJECT_DIR$/src/data/DrupData.ts" />
-        <option value="$PROJECT_DIR$/src/data/PieceData.ts" />
         <option value="$PROJECT_DIR$/src/data/GameData.ts" />
         <option value="$PROJECT_DIR$/src/scene/CtrlScene.ts" />
       </list>
@@ -374,660 +348,224 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="FullScreen" value="false" />
-    <property name="typescript-compiler-editor-notification" value="false" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="ignore_missing_gitignore" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/data" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src\data" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src\scene" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/role" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src\data" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src\scene" />
-      <recent name="C:\Users\Administrator\Desktop\MomoWorld\MomoWorld\src\ShengDi" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <method />
-    </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="JsTestDriver-test-runner" factoryName="JsTestDriver">
-      <setting name="configLocationType" value="CONFIG_FILE" />
-      <setting name="settingsFile" value="" />
-      <setting name="serverType" value="INTERNAL" />
-      <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" value="" />
-      <option name="executablePath" />
-      <option name="filePath" />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
-      <method />
-    </configuration>
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="typescript-compiler-editor-notification" value="false" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9d19fa72-ad9f-472c-8f03-83bb263e2d66" name="Default" comment="" />
-      <created>1446454363528</created>
+      <changelist id="74c5a95b-d3e1-4539-868f-1d4f115004fc" name="Default" comment="" />
+      <created>1455967450025</created>
       <option name="number" value="Default" />
-      <updated>1446454363528</updated>
+      <updated>1455967450025</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="51" y="23" width="1229" height="1001" extended-state="6" />
+    <frame x="51" y="23" width="1229" height="1001" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14486755" sideWeight="0.49462366" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15645695" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18880351" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11165577" sideWeight="0.50537634" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24559586" sideWeight="0.50217867" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32601535" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32563257" sideWeight="0.49782136" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11165577" sideWeight="0.50537634" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24559586" sideWeight="0.50217867" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17384106" sideWeight="0.49462366" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2750275" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/scene/MapScene.ts</url>
-          <line>102</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/scene/CtrlScene.ts</url>
-          <line>448</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="26" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/MapScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/MapScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/MapScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource/assets/enemy/enemy2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05970149">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource/assets/enemy/enemy1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.0">
-          <caret line="134" column="13" selection-start-line="134" selection-start-column="13" selection-end-line="134" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/role/Num.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25174826">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27219796">
-          <caret line="30" column="83" selection-start-line="30" selection-start-column="83" selection-end-line="30" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/role/Enemy.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="150" column="52" selection-start-line="150" selection-start-column="52" selection-end-line="150" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/P2Tool.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36312848">
-          <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/BulletData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/World.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44692737">
-          <caret line="16" column="29" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/modules/p2/p2.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3393855">
-          <caret line="1318" column="8" selection-start-line="1318" selection-start-column="8" selection-end-line="1318" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/egretProperties.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23289666">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/role/Bullet.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45704466">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/role/Item.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UIManage.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36133122">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/role/Hero.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.17908083">
-          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../Publish/egret-rubbish/egret-rubbish/src/scene/GameScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36133122">
-          <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/ShengDiScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3312203">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/modules/egret/egret.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12177" column="46" selection-start-line="12177" selection-start-column="20" selection-end-line="12177" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/EnemyData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031404957">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/BossData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.062809914">
-          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9735537">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tool.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1608154">
-          <caret line="200" column="38" selection-start-line="200" selection-start-column="38" selection-end-line="200" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/WelcomeScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3227633">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource/default.res.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33089313">
-          <caret line="743" column="6" selection-start-line="743" selection-start-column="6" selection-end-line="743" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8171589">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.25">
+          <caret line="865" column="32" selection-start-line="865" selection-start-column="16" selection-end-line="865" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scene/MapScene.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57383966">
-          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!block;n#constructor#0;n#MapScene#0" expanded="false" />
-            <element signature="n#!!block;n#init#0;n#MapScene#0" expanded="false" />
-            <element signature="e#2174#2584#0" expanded="false" />
-            <element signature="e#2427#2574#0" expanded="false" />
-            <element signature="e#8682#9639#0" expanded="false" />
-            <element signature="e#8745#8913#0" expanded="false" />
-            <element signature="e#9005#9169#0" expanded="false" />
-            <element signature="e#9262#9427#0" expanded="false" />
-            <element signature="e#9517#9609#0" expanded="false" />
-            <element signature="e#9691#9864#0" expanded="false" />
-            <element signature="n#!!block;n#onRemove#0;n#MapScene#0" expanded="false" />
-            <element signature="e#11688#11918#0" expanded="false" />
-            <element signature="e#11808#11900#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/MapData.ts">
+    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/ItemData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1068917">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/HeroData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/PieceData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34739804">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data/DrupData.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4275668">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/EquipmentData.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34739804">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/GameData.ts">
+    <entry file="file://$PROJECT_DIR$/src/data/CtrlData.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/scene/CtrlScene.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51758087">
-          <caret line="115" column="55" selection-start-line="115" selection-start-column="55" selection-end-line="115" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.31569967">
+          <caret line="185" column="8" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="8" />
           <folding>
-            <element signature="e#5409#5422#0" expanded="false" />
+            <element signature="e#5393#5406#0" expanded="false" />
             <element signature="n#!!block;n#getInstance#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#constructor#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#removeAll#0;n#CtrlScene#0" expanded="false" />
             <element signature="n#!!block;n#showTop#0;n#CtrlScene#0" expanded="false" />
-            <element signature="n#!!block;n#showCtrl#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#8426#8869#0" expanded="false" />
-            <element signature="e#8906#9367#0" expanded="false" />
+            <element signature="e#8990#9451#0" expanded="false" />
             <element signature="n#!!block;n#showTip#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#9889#9968#0" expanded="false" />
+            <element signature="e#9973#10052#0" expanded="false" />
             <element signature="n#!!block;n#showSure#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#11307#11632#0" expanded="false" />
-            <element signature="e#11364#11444#0" expanded="false" />
-            <element signature="e#11487#11610#0" expanded="false" />
+            <element signature="e#10969#11727#0" expanded="false" />
+            <element signature="e#11096#11186#0" expanded="false" />
+            <element signature="e#11278#11365#0" expanded="false" />
+            <element signature="e#11391#11716#0" expanded="false" />
+            <element signature="e#11448#11528#0" expanded="false" />
+            <element signature="e#11571#11694#0" expanded="false" />
             <element signature="n#!!block;n#ctrlWeapon#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#11959#14178#0" expanded="false" />
-            <element signature="e#13051#14000#0" expanded="false" />
-            <element signature="e#13331#13986#0" expanded="false" />
-            <element signature="e#14212#14463#0" expanded="false" />
-            <element signature="e#14353#14445#0" expanded="false" />
-            <element signature="e#14499#14658#0" expanded="false" />
-            <element signature="e#14693#14758#0" expanded="false" />
-            <element signature="e#14795#14848#0" expanded="false" />
+            <element signature="e#12043#14262#0" expanded="false" />
+            <element signature="e#13135#14084#0" expanded="false" />
+            <element signature="e#13415#14070#0" expanded="false" />
+            <element signature="e#14296#14547#0" expanded="false" />
+            <element signature="e#14437#14529#0" expanded="false" />
+            <element signature="e#14583#14742#0" expanded="false" />
+            <element signature="e#14777#14842#0" expanded="false" />
+            <element signature="e#14879#14932#0" expanded="false" />
             <element signature="n#!!block;n#ctrlData#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#14941#17675#0" expanded="false" />
-            <element signature="e#17282#17444#0" expanded="false" />
-            <element signature="e#17709#17960#0" expanded="false" />
-            <element signature="e#17860#17948#0" expanded="false" />
-            <element signature="e#18098#18109#0" expanded="false" />
-            <element signature="e#20034#20204#0" expanded="false" />
-            <element signature="e#20323#20533#0" expanded="false" />
-            <element signature="e#20647#20847#0" expanded="false" />
-            <element signature="e#20962#21164#0" expanded="false" />
-            <element signature="e#21278#21478#0" expanded="false" />
-            <element signature="e#24151#25068#0" expanded="false" />
-            <element signature="e#24341#25050#0" expanded="false" />
-            <element signature="e#25107#27602#0" expanded="false" />
-            <element signature="e#25741#25857#0" expanded="false" />
-            <element signature="e#27178#27551#0" expanded="false" />
-            <element signature="e#27258#27529#0" expanded="false" />
-            <element signature="e#27321#27503#0" expanded="false" />
-            <element signature="e#31259#31768#0" expanded="false" />
-            <element signature="e#31495#31750#0" expanded="false" />
+            <element signature="e#15025#17759#0" expanded="false" />
+            <element signature="e#17366#17528#0" expanded="false" />
+            <element signature="e#17793#18044#0" expanded="false" />
+            <element signature="e#17944#18032#0" expanded="false" />
+            <element signature="n#!!block;n#ctrlBag#0;n#CtrlScene#0" expanded="false" />
+            <element signature="e#18133#24466#0" expanded="false" />
+            <element signature="e#18182#18193#0" expanded="false" />
+            <element signature="e#20029#20199#0" expanded="false" />
+            <element signature="e#20318#20528#0" expanded="false" />
+            <element signature="e#20642#20842#0" expanded="false" />
+            <element signature="e#20957#21159#0" expanded="false" />
+            <element signature="e#21273#21473#0" expanded="false" />
+            <element signature="e#23035#23408#0" expanded="false" />
+            <element signature="e#23115#23386#0" expanded="false" />
+            <element signature="e#23178#23360#0" expanded="false" />
+            <element signature="e#24500#25417#0" expanded="false" />
+            <element signature="e#24690#25399#0" expanded="false" />
+            <element signature="e#25456#28931#0" expanded="false" />
+            <element signature="e#26090#26206#0" expanded="false" />
+            <element signature="e#27540#27913#0" expanded="false" />
+            <element signature="e#27620#27891#0" expanded="false" />
+            <element signature="e#27683#27865#0" expanded="false" />
+            <element signature="e#28971#33049#0" expanded="false" />
+            <element signature="e#30623#31820#0" expanded="false" />
+            <element signature="e#30710#31789#0" expanded="false" />
+            <element signature="e#31036#31767#0" expanded="false" />
+            <element signature="e#31151#31340#0" expanded="false" />
+            <element signature="e#31374#31569#0" expanded="false" />
+            <element signature="e#33089#33598#0" expanded="false" />
+            <element signature="e#33325#33580#0" expanded="false" />
             <element signature="n#!!block;n#ctrlDrupShop#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#31877#35564#0" expanded="false" />
-            <element signature="e#32930#33061#0" expanded="false" />
-            <element signature="e#33436#34856#0" expanded="false" />
-            <element signature="e#34481#34834#0" expanded="false" />
-            <element signature="e#34554#34816#0" expanded="false" />
-            <element signature="e#34618#34794#0" expanded="false" />
-            <element signature="e#35598#36596#0" expanded="false" />
-            <element signature="e#35793#36578#0" expanded="false" />
-            <element signature="e#36636#40465#0" expanded="false" />
-            <element signature="e#38829#39009#0" expanded="false" />
-            <element signature="e#39353#40204#0" expanded="false" />
-            <element signature="e#39806#40062#0" expanded="false" />
-            <element signature="e#39918#40044#0" expanded="false" />
-            <element signature="e#40505#41057#0" expanded="false" />
-            <element signature="e#40756#41039#0" expanded="false" />
-            <element signature="e#41093#41687#0" expanded="false" />
+            <element signature="e#33707#37394#0" expanded="false" />
+            <element signature="e#34760#34891#0" expanded="false" />
+            <element signature="e#35266#36686#0" expanded="false" />
+            <element signature="e#36311#36664#0" expanded="false" />
+            <element signature="e#36384#36646#0" expanded="false" />
+            <element signature="e#36448#36624#0" expanded="false" />
+            <element signature="e#37428#38426#0" expanded="false" />
+            <element signature="e#37623#38408#0" expanded="false" />
+            <element signature="e#38466#42295#0" expanded="false" />
+            <element signature="e#40659#40839#0" expanded="false" />
+            <element signature="e#41183#42034#0" expanded="false" />
+            <element signature="e#41636#41892#0" expanded="false" />
+            <element signature="e#41748#41874#0" expanded="false" />
+            <element signature="e#42335#42887#0" expanded="false" />
+            <element signature="e#42586#42869#0" expanded="false" />
+            <element signature="e#42923#43517#0" expanded="false" />
             <element signature="n#!!block;n#ctrlWeaponShop#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#41798#45603#0" expanded="false" />
-            <element signature="e#42895#43028#0" expanded="false" />
-            <element signature="e#43417#44883#0" expanded="false" />
-            <element signature="e#44500#44861#0" expanded="false" />
-            <element signature="e#44575#44843#0" expanded="false" />
-            <element signature="e#44641#44821#0" expanded="false" />
-            <element signature="e#45637#46673#0" expanded="false" />
-            <element signature="e#45834#46655#0" expanded="false" />
-            <element signature="e#46713#49123#0" expanded="false" />
-            <element signature="e#48361#48856#0" expanded="false" />
-            <element signature="e#48452#48712#0" expanded="false" />
-            <element signature="e#48566#48694#0" expanded="false" />
-            <element signature="e#49163#49735#0" expanded="false" />
-            <element signature="e#49420#49717#0" expanded="false" />
+            <element signature="e#43628#47433#0" expanded="false" />
+            <element signature="e#44725#44858#0" expanded="false" />
+            <element signature="e#45247#46713#0" expanded="false" />
+            <element signature="e#46330#46691#0" expanded="false" />
+            <element signature="e#46405#46673#0" expanded="false" />
+            <element signature="e#46471#46651#0" expanded="false" />
+            <element signature="e#47467#48503#0" expanded="false" />
+            <element signature="e#47664#48485#0" expanded="false" />
+            <element signature="e#48543#50953#0" expanded="false" />
+            <element signature="e#50191#50686#0" expanded="false" />
+            <element signature="e#50282#50542#0" expanded="false" />
+            <element signature="e#50396#50524#0" expanded="false" />
+            <element signature="e#50993#51565#0" expanded="false" />
+            <element signature="e#51250#51547#0" expanded="false" />
             <element signature="n#!!block;n#ctrlAbility#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#49825#54591#0" expanded="false" />
-            <element signature="e#50811#51447#0" expanded="false" />
-            <element signature="e#51021#51433#0" expanded="false" />
-            <element signature="e#51071#51415#0" expanded="false" />
-            <element signature="e#51270#51393#0" expanded="false" />
-            <element signature="e#52169#52723#0" expanded="false" />
-            <element signature="e#52765#53323#0" expanded="false" />
-            <element signature="e#53365#54155#0" expanded="false" />
-            <element signature="e#54625#55585#0" expanded="false" />
-            <element signature="e#54852#55567#0" expanded="false" />
-            <element signature="e#55625#59604#0" expanded="false" />
-            <element signature="e#57825#58104#0" expanded="false" />
-            <element signature="e#58248#59345#0" expanded="false" />
-            <element signature="e#58455#59207#0" expanded="false" />
-            <element signature="e#58720#58899#0" expanded="false" />
-            <element signature="e#58953#59136#0" expanded="false" />
-            <element signature="e#59644#60148#0" expanded="false" />
-            <element signature="e#59892#60130#0" expanded="false" />
-            <element signature="e#60185#62638#0" expanded="false" />
-            <element signature="e#60379#60886#0" expanded="false" />
-            <element signature="e#60647#60872#0" expanded="false" />
-            <element signature="e#60932#61451#0" expanded="false" />
-            <element signature="e#61208#61437#0" expanded="false" />
-            <element signature="e#61497#62337#0" expanded="false" />
-            <element signature="e#61782#62323#0" expanded="false" />
+            <element signature="e#51655#56421#0" expanded="false" />
+            <element signature="e#52641#53277#0" expanded="false" />
+            <element signature="e#52851#53263#0" expanded="false" />
+            <element signature="e#52901#53245#0" expanded="false" />
+            <element signature="e#53100#53223#0" expanded="false" />
+            <element signature="e#53999#54553#0" expanded="false" />
+            <element signature="e#54595#55153#0" expanded="false" />
+            <element signature="e#55195#55985#0" expanded="false" />
+            <element signature="e#56455#57415#0" expanded="false" />
+            <element signature="e#56682#57397#0" expanded="false" />
+            <element signature="e#57455#61434#0" expanded="false" />
+            <element signature="e#59655#59934#0" expanded="false" />
+            <element signature="e#60078#61175#0" expanded="false" />
+            <element signature="e#60285#61037#0" expanded="false" />
+            <element signature="e#60550#60729#0" expanded="false" />
+            <element signature="e#60783#60966#0" expanded="false" />
+            <element signature="e#61474#61978#0" expanded="false" />
+            <element signature="e#61722#61960#0" expanded="false" />
+            <element signature="e#62015#64468#0" expanded="false" />
+            <element signature="e#62209#62716#0" expanded="false" />
+            <element signature="e#62477#62702#0" expanded="false" />
+            <element signature="e#62762#63281#0" expanded="false" />
+            <element signature="e#63038#63267#0" expanded="false" />
+            <element signature="e#63327#64167#0" expanded="false" />
+            <element signature="e#63612#64153#0" expanded="false" />
             <element signature="n#!!block;n#ctrlAhievement#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#62731#66115#0" expanded="false" />
-            <element signature="e#63944#64076#0" expanded="false" />
-            <element signature="e#64472#65390#0" expanded="false" />
-            <element signature="e#66149#66814#0" expanded="false" />
-            <element signature="e#66347#66796#0" expanded="false" />
+            <element signature="e#64561#67945#0" expanded="false" />
+            <element signature="e#65774#65906#0" expanded="false" />
+            <element signature="e#66302#67220#0" expanded="false" />
+            <element signature="e#67979#68644#0" expanded="false" />
+            <element signature="e#68177#68626#0" expanded="false" />
             <element signature="n#!!block;n#ctrlDaily#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#66908#69963#0" expanded="false" />
-            <element signature="e#67977#68104#0" expanded="false" />
-            <element signature="e#68458#69274#0" expanded="false" />
-            <element signature="e#69997#70608#0" expanded="false" />
-            <element signature="e#70189#70590#0" expanded="false" />
+            <element signature="e#68738#71793#0" expanded="false" />
+            <element signature="e#69807#69934#0" expanded="false" />
+            <element signature="e#70288#71104#0" expanded="false" />
+            <element signature="e#71827#72438#0" expanded="false" />
+            <element signature="e#72019#72420#0" expanded="false" />
             <element signature="n#!!block;n#syncFun#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#70679#71357#0" expanded="false" />
-            <element signature="n#!!block;n#onTouchStart#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#71490#72000#0" expanded="false" />
-            <element signature="n#!!block;n#onTouchEnd#0;n#CtrlScene#0" expanded="false" />
-            <element signature="e#72131#72618#0" expanded="false" />
-            <element signature="n#!!block;n#onRemove#0;n#CtrlScene#0" expanded="false" />
+            <element signature="e#72509#73187#0" expanded="false" />
+            <element signature="e#73320#73830#0" expanded="false" />
+            <element signature="e#73961#74448#0" expanded="false" />
           </folding>
         </state>
       </provider>

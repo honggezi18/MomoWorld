@@ -35,7 +35,9 @@ class GameData {
     static bag_Equipment = [0.0, 0.0, 0.0, 0.0,];
     static bag_Piece = [0.0, 0.0, 0.0, 0.0,];
     static bag_Item = [0.0, 0.0,];
-    static bag_Drup = [0.0, 0.0, 0.0, 0.0,];
+    static bag_Drup = [0.0, 0.0, 1.0, 0.0,];
+    static bag_BooldId:number = -1;//携带的红瓶ID
+    static bag_PowerId:number = -1;//携带的蓝瓶ID
 
 
     //state中0为未开放，1为普通，2为困难，3为地狱
@@ -71,8 +73,8 @@ class GameData {
         //if (Tool.checkLocal("bag_Drup"))GameData["bag_Drup"] = JSON.parse(Tool.getLocal("bag_Drup"));//加载地图
         //if (Tool.checkLocal("goldNum"))GameData["goldNum"] = parseInt(Tool.getLocal("goldNum"));//加载地图
         //if (Tool.checkLocal("diamondNum"))GameData["diamondNum"] = parseInt(Tool.getLocal("diamondNum"));//加载地图
-
-
+        //if (Tool.checkLocal("bag_BooldId"))GameData["bag_BooldId"] = parseInt(Tool.getLocal("bag_BooldId"));//加载地图
+        //if (Tool.checkLocal("bag_PowerId"))GameData["bag_PowerId"] = parseInt(Tool.getLocal("bag_PowerId"));//加载地图
     }
 
     //保存数据//角色数据//基本数据（金币数）
@@ -97,7 +99,8 @@ class GameData {
         Tool.setLocal("bag_Drup", JSON.stringify(GameData["bag_Drup"]));
         Tool.setLocal("goldNum", GameData["goldNum"]);
         Tool.setLocal("diamondNum", GameData["diamondNum"]);
-
+        Tool.setLocal("bag_BooldId", GameData["bag_BooldId"]);
+        Tool.setLocal("bag_PowerId", GameData["bag_PowerId"]);
 
     }
 

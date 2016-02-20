@@ -113,8 +113,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private bag_btnItem:egret.Bitmap;//物品选择卡
     private bag_btnPiece:egret.Bitmap;//碎片选择卡
     private bag_btnDrup:egret.Bitmap;//药品选择卡
-    private bagSelectBox1:egret.Bitmap;//物品携带标示框1//MOMO
-    private bagSelectBox2:egret.Bitmap;//物品携带标示框2
+    private bagBooldBox:egret.Bitmap;//红瓶携带框
+    private bagPowerBox:egret.Bitmap;//蓝瓶携带框
     private bagItems:Array<egret.Bitmap>;//商品项背景
     private bagIcon:Array<egret.Bitmap>;//各个图标
     private bagItemNum:Array<egret.TextField>;//标示物品个数
@@ -186,8 +186,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
         this.jump = Tool.addBitmap(this, "ctrl_jump_png", 750, 445, 50, 50, true, true);
 
         if (type == "war") {
-            this.blood = Tool.addBitmap(this, "ctrl_blood_png", 190, 445, 50, 50, true, true);
-            this.power = Tool.addBitmap(this, "ctrl_power_png", 260, 445, 50, 50, true, true);
+            if(getDrup(GameData.bag_BooldId))this.blood = Tool.addBitmap(this, getDrup(GameData.bag_BooldId).res, 190, 445, 50, 50, true, true);
+            if(getDrup(GameData.bag_PowerId))this.power = Tool.addBitmap(this, getDrup(GameData.bag_PowerId).res, 260, 445, 50, 50, true, true);
             this.skill1 = Tool.addBitmap(this, ability.skill1[GameData.skill1Index].icon, 540, 445, 50, 50, true, true);
             this.skill2 = Tool.addBitmap(this, ability.skill2[GameData.skill2Index].icon, 610, 445, 50, 50, true, true);
         }
@@ -380,7 +380,6 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.bagIcon = [];
             this.bagItems = [];
             this.bagItemNum = [];
-            //this.bagNameList = ["bag_Equipment", "bag_Piece", "bag_Item", "bag_Drup"];
             this.bagContainer = new egret.DisplayObjectContainer();
             this.bagContainer.width = 430;
             this.bagContainer.height = 320;
@@ -452,7 +451,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     var data = window["get" + this.bagBtnName](id);
                     console.log("num  " + num);
 
-                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 34 + a * 55.2, i * 70 + 32, 40, 40, false, true));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     this.bagItemNum[index].stroke = 1;
                     this.bagItemNum[index].visible = false;
@@ -487,6 +486,12 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.bagContainer.scaleY = 0;
             var tw = egret.Tween.get(this.bagContainer);
             tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+
+            //生成药瓶选择框
+            this.bagBooldBox = Tool.addBitmap(this.bagItemGroup, "bag_bloodBox_png", 0, 0, 65, 60, false, true);
+            this.bagPowerBox = Tool.addBitmap(this.bagItemGroup, "bag_powerBox_png", 0, 0, 65, 60, false, true);
+            this.bagBooldBox.visible = false;
+            this.bagPowerBox.visible = false;
         }
         else if (type == "hide") {
             if (this.showing == "empty")return;
@@ -538,7 +543,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     var num = Math.floor((GameData["bag_" + this.bagBtnName][index] - id) * 100);
                     var data = window["get" + this.bagBtnName](id);
 
-                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 14 + a * 55.2, i * 70 + 12, 40, 40));
+                    this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 34 + a * 55.2, i * 70 + 32, 40, 40, false, true));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     if (this.bagBtnName == "Equipment")this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].stroke = 1;
@@ -555,6 +560,25 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     }, this);
                 }
             }
+
+            //判断当前是否是药品栏，进行药瓶携带框的视图调整
+            this.bagBooldBox.visible = false;
+            this.bagPowerBox.visible = false;
+            if (this.bagBtnName !== "Drup")return;
+            GameData.bag_Drup.forEach(function (item, index) {
+                if (GameData.bag_BooldId == Math.floor(item)) {
+                    this.bagItemGroup.setChildIndex(this.bagBooldBox, 99);
+                    this.bagBooldBox.visible = true;
+                    this.bagBooldBox.x = 34 + index % 7 * 55.2;
+                    this.bagBooldBox.y = Math.floor(index / 7) * 70 + 32;
+                }
+                else if (GameData.bag_PowerId == Math.floor(item)) {
+                    this.bagItemGroup.setChildIndex(this.bagPowerBox, 99);
+                    this.bagPowerBox.visible = true;
+                    this.bagPowerBox.x = 34 + index % 7 * 55.2;
+                    this.bagPowerBox.y = Math.floor(index / 7) * 70 + 32;
+                }
+            }, this)
 
         }
         else if (type == "showDetail") {//显示物品详细信息
@@ -605,7 +629,15 @@ class CtrlScene extends egret.DisplayObjectContainer {
                 else if (e.localX > 110 && e.localX < 190 && e.localY > 110 && e.localY < 140) {
                     if (this.bagBtnName == "Equipment")console.log("装备成功");
                     else if (this.bagBtnName == "Piece")console.log("合成成功");
-                    else if (this.bagBtnName == "Drup") console.log("使用成功");
+                    else if (this.bagBtnName == "Drup") {//通过药品类型判断携带还是使用
+                        var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
+                        var data2 = window["get" + this.bagBtnName](id);
+                        if (data2.func == "boold") GameData.bag_BooldId = id;
+                        else if (data2.func == "power")GameData.bag_PowerId = id;
+                        else console.log("使用成功");
+                        this.ctrlBag("hideDetail");
+                        this.ctrlBag("changeBtn");
+                    }
                 }
                 else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140) this.ctrlBag("hideDetail");
             }, this);

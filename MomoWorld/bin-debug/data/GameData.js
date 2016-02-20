@@ -32,10 +32,10 @@ var GameData = (function () {
         //if (Tool.checkLocal("bag_Piece"))GameData["bag_Piece"] = JSON.parse(Tool.getLocal("bag_Piece"));//加载地图
         //if (Tool.checkLocal("bag_Item"))GameData["bag_Item"] = JSON.parse(Tool.getLocal("bag_Item"));//加载地图
         //if (Tool.checkLocal("bag_Drup"))GameData["bag_Drup"] = JSON.parse(Tool.getLocal("bag_Drup"));//加载地图
-        if (Tool.checkLocal("goldNum"))
-            GameData["goldNum"] = parseInt(Tool.getLocal("goldNum")); //加载地图
-        if (Tool.checkLocal("diamondNum"))
-            GameData["diamondNum"] = parseInt(Tool.getLocal("diamondNum")); //加载地图
+        //if (Tool.checkLocal("goldNum"))GameData["goldNum"] = parseInt(Tool.getLocal("goldNum"));//加载地图
+        //if (Tool.checkLocal("diamondNum"))GameData["diamondNum"] = parseInt(Tool.getLocal("diamondNum"));//加载地图
+        //if (Tool.checkLocal("bag_BooldId"))GameData["bag_BooldId"] = parseInt(Tool.getLocal("bag_BooldId"));//加载地图
+        //if (Tool.checkLocal("bag_PowerId"))GameData["bag_PowerId"] = parseInt(Tool.getLocal("bag_PowerId"));//加载地图
     };
     //保存数据//角色数据//基本数据（金币数）
     GameData.saveData = function () {
@@ -57,6 +57,8 @@ var GameData = (function () {
         Tool.setLocal("bag_Drup", JSON.stringify(GameData["bag_Drup"]));
         Tool.setLocal("goldNum", GameData["goldNum"]);
         Tool.setLocal("diamondNum", GameData["diamondNum"]);
+        Tool.setLocal("bag_BooldId", GameData["bag_BooldId"]);
+        Tool.setLocal("bag_PowerId", GameData["bag_PowerId"]);
     };
     //固态数据///////////////////////////////
     GameData.gameWidth = 800;
@@ -86,7 +88,9 @@ var GameData = (function () {
     GameData.bag_Equipment = [0.0, 0.0, 0.0, 0.0,];
     GameData.bag_Piece = [0.0, 0.0, 0.0, 0.0,];
     GameData.bag_Item = [0.0, 0.0,];
-    GameData.bag_Drup = [0.0, 0.0, 0.0, 0.0,];
+    GameData.bag_Drup = [0.0, 0.0, 1.0, 0.0,];
+    GameData.bag_BooldId = -1; //携带的红瓶ID
+    GameData.bag_PowerId = -1; //携带的蓝瓶ID
     //state中0为未开放，1为普通，2为困难，3为地狱
     //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个
     GameData.MapState = [3, 2, 1, 0, 0, 0, 0, 0, 0, 0]; //10个
