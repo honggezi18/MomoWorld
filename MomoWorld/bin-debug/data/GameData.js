@@ -85,12 +85,17 @@ var GameData = (function () {
     GameData.skill1Index = 0; //技能下标一
     GameData.skill2Index = 0; //技能下标一
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量
-    GameData.bag_Equipment = [0.0, 0.0, 0.0, 0.0,];
+    GameData.bag_Equipment = [0, 0, 0, 0];
     GameData.bag_Piece = [0.0, 0.0, 0.0, 0.0,];
     GameData.bag_Item = [0.0, 0.0,];
     GameData.bag_Drup = [0.0, 0.0, 1.0, 0.0,];
     GameData.bag_BooldId = -1; //携带的红瓶ID
     GameData.bag_PowerId = -1; //携带的蓝瓶ID
+    //玩家信息
+    GameData.data_Equipment = {
+        ring: [],
+        weapon: [],
+    };
     //state中0为未开放，1为普通，2为困难，3为地狱
     //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个
     GameData.MapState = [3, 2, 1, 0, 0, 0, 0, 0, 0, 0]; //10个

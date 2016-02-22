@@ -14,5 +14,6 @@ var equipmentData0 = {
     type: "gold",
     cost: 25,
     info: "itme0",
-    grade: 1
+    grade: 1,
+    _type: "weapon"//武器类型
 };

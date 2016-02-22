@@ -32,13 +32,19 @@ class GameData {
     static skill2Index:number = 0;//技能下标一
 
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量
-    static bag_Equipment = [0.0, 0.0, 0.0, 0.0,];
+    static bag_Equipment = [0, 0, 0, 0];
     static bag_Piece = [0.0, 0.0, 0.0, 0.0,];
     static bag_Item = [0.0, 0.0,];
     static bag_Drup = [0.0, 0.0, 1.0, 0.0,];
     static bag_BooldId:number = -1;//携带的红瓶ID
     static bag_PowerId:number = -1;//携带的蓝瓶ID
 
+    //玩家信息
+    static data_Equipment = {//携带的装备ID
+        ring : [],
+        weapon:[],
+
+    };
 
     //state中0为未开放，1为普通，2为困难，3为地狱
     //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个

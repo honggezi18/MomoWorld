@@ -367,30 +367,34 @@ var CtrlScene = (function (_super) {
             this.bagPowerBox.visible = false;
         }
         else if (type == "hide") {
+            if (this.bagDetailContainer)
+                return;
             if (this.showing == "empty")
                 return;
             var tw = egret.Tween.get(this.bagContainer);
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.bagContainer);
                 this.bagDetailContainer = null;
-                this.bagweaponNumText = null;
                 this.bagBackground = null;
                 this.bagContainer = null;
                 this.bagItemGroup = null;
                 this.bagIsDetail = null;
-                this.bagweaponNum = null;
                 this.bagIndex = null;
                 this.bagItems = null;
                 this.bagIcon = null;
-                this.bagName = null;
-                this.bagInfo = null;
-                this.bagCost = null;
-                this.bagData = null;
-                this.bagSum = null;
+                this.bag_btnEquipment = null;
+                this.bag_btnItem = null;
+                this.bagBooldBox = null;
+                this.bag_btnPiece = null;
+                this.bagItemNum = null;
+                this.bagDiamondNum = null;
+                this.bagBtnName = null;
                 this.showing = "empty";
             }, this);
         }
         else if (type == "changeBtn") {
+            if (this.bagDetailContainer)
+                return;
             console.log("changeBtn");
             this.bagGoldNum.text = GameData.goldNum + "";
             this.bagDiamondNum.text = GameData.diamondNum + "";
@@ -453,6 +457,8 @@ var CtrlScene = (function (_super) {
             }, this);
         }
         else if (type == "showDetail") {
+            if (this.bagDetailContainer)
+                return;
             this.bagIsDetail = true;
             this.bagDetailContainer = new egret.DisplayObjectContainer();
             this.bagDetailContainer.width = 300;
@@ -494,8 +500,9 @@ var CtrlScene = (function (_super) {
                     }.bind(this));
                 }
                 else if (e.localX > 110 && e.localX < 190 && e.localY > 110 && e.localY < 140) {
-                    if (this.bagBtnName == "Equipment")
-                        console.log("装备成功");
+                    if (this.bagBtnName == "Equipment") {
+                        this.showTip("装备成功");
+                    }
                     else if (this.bagBtnName == "Piece")
                         console.log("合成成功");
                     else if (this.bagBtnName == "Drup") {
@@ -507,6 +514,7 @@ var CtrlScene = (function (_super) {
                             GameData.bag_PowerId = id;
                         else
                             console.log("使用成功");
+                        this.showTip("携带成功");
                         this.ctrlBag("hideDetail");
                         this.ctrlBag("changeBtn");
                     }
@@ -527,8 +535,6 @@ var CtrlScene = (function (_super) {
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.bagContainer.removeChild(this.bagDetailContainer);
                 this.bagDetailContainer = null;
-                this.bagweaponNumText = null;
-                this.bagSum = null;
                 this.showing = "bag";
             }, this);
         }
