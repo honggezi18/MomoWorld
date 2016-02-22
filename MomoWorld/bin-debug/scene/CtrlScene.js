@@ -83,7 +83,7 @@ var CtrlScene = (function (_super) {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlBag("show");
+        this.ctrlDrupShop("show");
     };
     //显示提示信息
     p.showTip = function (info) {
