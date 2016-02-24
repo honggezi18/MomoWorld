@@ -46,25 +46,9 @@ var ability = {
     ]
 };
 
-var drupShop = {
-    items: [
-        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "药品1", info: "恢复HP50", cost: 30, ques: 5, state: "go"},
-    ]
-};
+var drupShop = [0, 0, 0, 0, 1];
+var weaponShop = [0, 0, 0, 0];
 
-var weaponShop = {
-    items: [
-        {icon: "achievement_icon1_png", name: "武器1", info: "攻击力+100", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "武器2", info: "攻击力+200", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "武器3", info: "攻击力+300", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "武器4", info: "攻击力+400", cost: 30, ques: 5, state: "go"},
-        {icon: "achievement_icon1_png", name: "武器5", info: "攻击力+500", cost: 30, ques: 5, state: "go"},
-    ]
-};
 
 var data = {
     occupation: "弓箭手",

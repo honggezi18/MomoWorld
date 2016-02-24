@@ -83,7 +83,7 @@ var CtrlScene = (function (_super) {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlDrupShop("show");
+        this.ctrlWeaponShop("show");
     };
     //显示提示信息
     p.showTip = function (info) {
@@ -326,7 +326,6 @@ var CtrlScene = (function (_super) {
                     var id = Math.floor(GameData["bag_" + this.bagBtnName][index]);
                     var num = Math.floor((GameData["bag_" + this.bagBtnName][index] - id) * 100);
                     var data = window["get" + this.bagBtnName](id);
-                    console.log("num  " + num);
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 34 + a * 55.2, i * 70 + 32, 40, 40, false, true));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     this.bagItemNum[index].stroke = 1;
@@ -508,15 +507,24 @@ var CtrlScene = (function (_super) {
                     else if (this.bagBtnName == "Drup") {
                         var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
                         var data2 = window["get" + this.bagBtnName](id);
-                        if (data2.func == "boold")
+                        if (data2.func == "boold") {
+                            this.bagBooldBox.visible = true;
                             GameData.bag_BooldId = id;
-                        else if (data2.func == "power")
+                            this.bagBooldBox.x = 34 + this.bagIndex % 7 * 55.2;
+                            this.bagBooldBox.y = Math.floor(this.bagIndex / 7) * 70 + 32;
+                            this.bagItemGroup.setChildIndex(this.bagBooldBox, 99);
+                        }
+                        else if (data2.func == "power") {
+                            this.bagPowerBox.visible = true;
                             GameData.bag_PowerId = id;
+                            this.bagPowerBox.x = 34 + this.bagIndex % 7 * 55.2;
+                            this.bagPowerBox.y = Math.floor(this.bagIndex / 7) * 70 + 32;
+                            this.bagItemGroup.setChildIndex(this.bagPowerBox, 99);
+                        }
                         else
                             console.log("使用成功");
                         this.showTip("携带成功");
                         this.ctrlBag("hideDetail");
-                        this.ctrlBag("changeBtn");
                     }
                 }
                 else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140)
@@ -568,14 +576,15 @@ var CtrlScene = (function (_super) {
             this.drupShopItemGroup = new eui.Group();
             this.drupShopItemGroup.touchEnabled = true;
             this.drupShopItemGroup.width = 370;
-            this.drupShopItemGroup.height = 70 * this.drupShopData.items.length;
+            this.drupShopItemGroup.height = 70 * this.drupShopData.length;
             this.drupShopItemGroup.cacheAsBitmap = true;
-            for (var i = 0; i < this.drupShopData.items.length; i++) {
+            for (var i = 0; i < this.drupShopData.length; i++) {
+                var tempDrup = getDrup(this.drupShopData[i]);
                 this.drupShopItems.push(Tool.addBitmap(this.drupShopItemGroup, "drupShop_item_png", 0, i * 70, 370, 65));
-                this.drupShopIcon.push(Tool.addBitmap(this.drupShopItemGroup, this.drupShopData.items[i].icon, 17, i * 70 + 10, 40, 40));
-                this.drupShopName.push(Tool.addTextField(this.drupShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, this.drupShopData.items[i].name));
-                this.drupShopCost.push(Tool.addTextField(this.drupShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, this.drupShopData.items[i].cost));
-                this.drupShopInfo.push(Tool.addTextField(this.drupShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, this.drupShopData.items[i].info));
+                this.drupShopIcon.push(Tool.addBitmap(this.drupShopItemGroup, tempDrup.res, 17, i * 70 + 10, 40, 40));
+                this.drupShopName.push(Tool.addTextField(this.drupShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, tempDrup.name));
+                this.drupShopCost.push(Tool.addTextField(this.drupShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, tempDrup.cost));
+                this.drupShopInfo.push(Tool.addTextField(this.drupShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, tempDrup.info));
                 this.drupShopName[i].textAlign = egret.HorizontalAlign.LEFT;
                 this.drupShopInfo[i].textAlign = egret.HorizontalAlign.LEFT;
                 this.drupShopIcon[i].touchEnabled = true;
@@ -607,6 +616,8 @@ var CtrlScene = (function (_super) {
             tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }
         else if (type == "hide") {
+            if (this.drupShopDetailContainer)
+                return;
             if (this.showing == "empty")
                 return;
             var tw = egret.Tween.get(this.drupShopContainer);
@@ -631,6 +642,8 @@ var CtrlScene = (function (_super) {
             }, this);
         }
         else if (type == "showDetail") {
+            if (this.drupShopDetailContainer)
+                return;
             this.drupShopDrupNum = 1;
             this.drupShopIsDetail = true;
             this.drupShopDetailContainer = new egret.DisplayObjectContainer();
@@ -641,12 +654,13 @@ var CtrlScene = (function (_super) {
             this.drupShopDetailContainer.x = this.drupShopContainer.width / 2;
             this.drupShopDetailContainer.y = this.drupShopContainer.height / 2;
             this.drupShopContainer.addChild(this.drupShopDetailContainer);
+            var tempDrup = getDrup(this.drupShopData[this.drupShopIndex]);
             var background = Tool.addBitmap(this.drupShopDetailContainer, "drupShop_detail_png", 0, 0, 300, 180);
-            var icon = Tool.addBitmap(this.drupShopDetailContainer, this.drupShopData.items[this.drupShopIndex].icon, 27, 33, 50, 50);
-            var drupName = Tool.addTextField(this.drupShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, this.drupShopData.items[this.drupShopIndex].name);
-            var intruction = Tool.addTextField(this.drupShopDetailContainer, 90, 25, 90, 90, 15, 0xffffff, this.drupShopData.items[this.drupShopIndex].info);
-            var cost = Tool.addTextField(this.drupShopDetailContainer, 190, 70, 60, 15, 15, 0xffffff, "单价:" + this.drupShopData.items[this.drupShopIndex].cost);
-            this.drupShopSum = Tool.addTextField(this.drupShopDetailContainer, 190, 95, 100, 15, 15, 0xffffff, "总额:" + this.drupShopData.items[this.drupShopIndex].cost);
+            var icon = Tool.addBitmap(this.drupShopDetailContainer, tempDrup.res, 27, 33, 50, 50);
+            var drupName = Tool.addTextField(this.drupShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, tempDrup.name);
+            var intruction = Tool.addTextField(this.drupShopDetailContainer, 90, 25, 90, 90, 15, 0xffffff, tempDrup.info);
+            var cost = Tool.addTextField(this.drupShopDetailContainer, 190, 70, 60, 15, 15, 0xffffff, "单价:" + tempDrup.cost);
+            this.drupShopSum = Tool.addTextField(this.drupShopDetailContainer, 190, 95, 100, 15, 15, 0xffffff, "总额:" + tempDrup.cost);
             this.drupShopDrupNumText = new eui.EditableText();
             this.drupShopDrupNumText.x = 215;
             this.drupShopDrupNumText.y = 40;
@@ -659,7 +673,6 @@ var CtrlScene = (function (_super) {
             this.drupShopDetailContainer.addChild(this.drupShopDrupNumText);
             this.drupShopDrupNumText.addEventListener(egret.Event.FOCUS_OUT, function () {
                 var temp = parseInt(this.drupShopDrupNumText.text);
-                console.log("temp  " + temp);
                 this.ctrlDrupShop("update", temp);
             }, this);
             cost.textAlign = egret.HorizontalAlign.LEFT;
@@ -667,7 +680,6 @@ var CtrlScene = (function (_super) {
             this.drupShopSum.textAlign = egret.HorizontalAlign.LEFT;
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
-                console.log("x   " + e.localX, "   y   " + e.localY);
                 if (e.localX > 188 && e.localX < 203 && e.localY > 40 && e.localY < 58)
                     this.ctrlDrupShop("update", --this.drupShopDrupNum);
                 else if (e.localX > 267 && e.localX < 283 && e.localY > 40 && e.localY < 58)
@@ -676,6 +688,21 @@ var CtrlScene = (function (_super) {
                     if (this.drupShopSum.textColor == 0xff0000)
                         this.showTip("金币不足");
                     else {
+                        var sum = parseInt(this.drupShopSum.text.substr(3, this.drupShopSum.text.length));
+                        var isHad = false;
+                        for (var i = 0; i < GameData.bag_Drup.length; i++) {
+                            if (this.drupShopData[this.drupShopIndex] == Math.floor(GameData.bag_Drup[i])) {
+                                GameData.bag_Drup[i] += this.drupShopDrupNum * 0.01;
+                                isHad = true;
+                                break;
+                            }
+                        }
+                        if (!isHad) {
+                            var item = this.drupShopData[this.drupShopIndex] + this.drupShopDrupNum * 0.01;
+                            GameData.bag_Drup.push(item);
+                        }
+                        GameData.goldNum -= sum;
+                        GameData.saveData();
                         this.showTip("购买成功");
                         this.ctrlDrupShop("hideDetail");
                     }
@@ -709,7 +736,7 @@ var CtrlScene = (function (_super) {
             else if (this.drupShopDrupNum > 99)
                 this.drupShopDrupNum = 99;
             this.drupShopDrupNumText.text = Tool.setZero(this.drupShopDrupNum, 2);
-            var sum = this.drupShopData.items[this.drupShopIndex].cost * this.drupShopDrupNum;
+            var sum = getDrup(this.drupShopData[this.drupShopIndex]).cost * this.drupShopDrupNum;
             this.drupShopSum.text = "总额:" + sum;
             if (sum < GameData.goldNum)
                 this.drupShopSum.textColor = 0xffffff;
@@ -746,14 +773,15 @@ var CtrlScene = (function (_super) {
             this.weaponShopItemGroup = new eui.Group();
             this.weaponShopItemGroup.touchEnabled = true;
             this.weaponShopItemGroup.width = 370;
-            this.weaponShopItemGroup.height = 70 * this.weaponShopData.items.length;
+            this.weaponShopItemGroup.height = 70 * this.weaponShopData.length;
             this.weaponShopItemGroup.cacheAsBitmap = true;
-            for (var i = 0; i < this.weaponShopData.items.length; i++) {
+            for (var i = 0; i < this.weaponShopData.length; i++) {
+                var temp = getEquipment(this.weaponShopData[i]);
                 this.weaponShopItems.push(Tool.addBitmap(this.weaponShopItemGroup, "weaponShop_item_png", 0, i * 70, 370, 65));
-                this.weaponShopIcon.push(Tool.addBitmap(this.weaponShopItemGroup, this.weaponShopData.items[i].icon, 17, i * 70 + 10, 40, 40));
-                this.weaponShopName.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, this.weaponShopData.items[i].name));
-                this.weaponShopCost.push(Tool.addTextField(this.weaponShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, this.weaponShopData.items[i].cost));
-                this.weaponShopInfo.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, this.weaponShopData.items[i].info));
+                this.weaponShopIcon.push(Tool.addBitmap(this.weaponShopItemGroup, temp.res, 17, i * 70 + 10, 40, 40));
+                this.weaponShopName.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 8, 0, 0, 20, 0x000000, temp.name));
+                this.weaponShopCost.push(Tool.addTextField(this.weaponShopItemGroup, 290, i * 70 + 10, 0, 0, 18, 0x000000, temp.cost));
+                this.weaponShopInfo.push(Tool.addTextField(this.weaponShopItemGroup, 80, i * 70 + 38, 0, 0, 15, 0x000000, temp.info));
                 this.weaponShopName[i].textAlign = egret.HorizontalAlign.LEFT;
                 this.weaponShopInfo[i].textAlign = egret.HorizontalAlign.LEFT;
                 this.weaponShopIcon[i].touchEnabled = true;
@@ -785,18 +813,18 @@ var CtrlScene = (function (_super) {
             tw.to({ scaleX: 1, scaleY: 1 }, 500, egret.Ease.backOut);
         }
         else if (type == "hide") {
+            if (this.weaponShopDetailContainer)
+                return;
             if (this.showing == "empty")
                 return;
             var tw = egret.Tween.get(this.weaponShopContainer);
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.weaponShopContainer);
                 this.weaponShopDetailContainer = null;
-                this.weaponShopweaponNumText = null;
                 this.weaponShopBackground = null;
                 this.weaponShopContainer = null;
                 this.weaponShopItemGroup = null;
                 this.weaponShopIsDetail = null;
-                this.weaponShopweaponNum = null;
                 this.weaponShopIndex = null;
                 this.weaponShopItems = null;
                 this.weaponShopIcon = null;
@@ -804,11 +832,13 @@ var CtrlScene = (function (_super) {
                 this.weaponShopInfo = null;
                 this.weaponShopCost = null;
                 this.weaponShopData = null;
-                this.weaponShopSum = null;
+                this.weaponShopSum = null; //Momo
                 this.showing = "empty";
             }, this);
         }
         else if (type == "showDetail") {
+            if (this.weaponShopDetailContainer)
+                return;
             this.weaponShopIsDetail = true;
             this.weaponShopDetailContainer = new egret.DisplayObjectContainer();
             this.weaponShopDetailContainer.width = 300;
@@ -818,19 +848,25 @@ var CtrlScene = (function (_super) {
             this.weaponShopDetailContainer.x = this.weaponShopContainer.width / 2;
             this.weaponShopDetailContainer.y = this.weaponShopContainer.height / 2;
             this.weaponShopContainer.addChild(this.weaponShopDetailContainer);
+            var temp = getEquipment(this.weaponShopData[this.weaponShopIndex]);
             var background = Tool.addBitmap(this.weaponShopDetailContainer, "weaponShop_detail_png", 0, 0, 300, 180);
-            var icon = Tool.addBitmap(this.weaponShopDetailContainer, this.weaponShopData.items[this.weaponShopIndex].icon, 27, 33, 50, 50);
-            var weaponName = Tool.addTextField(this.weaponShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].name);
-            var intruction = Tool.addTextField(this.weaponShopDetailContainer, 90, 50, 195, 70, 15, 0xffffff, this.weaponShopData.items[this.weaponShopIndex].info);
-            var cost = Tool.addTextField(this.weaponShopDetailContainer, 90, 28, 130, 16, 16, 0xffffff, "售价:" + this.weaponShopData.items[this.weaponShopIndex].cost);
-            cost.textAlign = egret.HorizontalAlign.LEFT;
+            var icon = Tool.addBitmap(this.weaponShopDetailContainer, temp.res, 27, 33, 50, 50);
+            var weaponName = Tool.addTextField(this.weaponShopDetailContainer, 12, 98, 80, 20, 16, 0xffffff, temp.name);
+            var intruction = Tool.addTextField(this.weaponShopDetailContainer, 90, 50, 195, 70, 15, 0xffffff, temp.info);
+            this.weaponShopSum = Tool.addTextField(this.weaponShopDetailContainer, 90, 28, 130, 16, 16, 0xffffff, "售价:" + temp.cost);
+            this.weaponShopSum.textAlign = egret.HorizontalAlign.LEFT;
             intruction.textAlign = egret.HorizontalAlign.LEFT;
+            var sum = parseInt(this.weaponShopSum.text.substr(3, this.weaponShopSum.text.length));
+            if (GameData.goldNum < sum)
+                this.weaponShopSum.textColor = 0xff0000;
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e) {
                 if (e.localX > 40 && e.localX < 135 && e.localY > 105 && e.localY < 165) {
                     if (this.weaponShopSum.textColor == 0xff0000)
                         this.showTip("金币不足");
                     else {
+                        GameData.goldNum -= parseInt(this.weaponShopSum.text.substr(3, this.weaponShopSum.text.length));
+                        GameData.bag_Equipment.push(this.weaponShopData[this.weaponShopIndex]);
                         this.showTip("购买成功");
                         this.ctrlWeaponShop("hideDetail");
                     }
@@ -851,7 +887,6 @@ var CtrlScene = (function (_super) {
             tw.to({ scaleX: 0, scaleY: 0 }, 500, egret.Ease.backIn).call(function () {
                 this.weaponShopContainer.removeChild(this.weaponShopDetailContainer);
                 this.weaponShopDetailContainer = null;
-                this.weaponShopweaponNumText = null;
                 this.weaponShopSum = null;
                 this.showing = "weaponShop";
             }, this);
