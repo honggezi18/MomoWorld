@@ -1,13 +1,16 @@
 //Momo在信息页面实现装备武器
 //Momo实现hero属性数据的变化
-//操作层页面
 //实现卸下装备功能
 //判断该位置是否装备道具
 //实现卸下后，装备返回背包，以及从背包中实现装备道具
 //搭建装备选择页面
-//实现装备选择页面中着装装备Momo
+//实现从装备选择框着装装备
+//装备等级的显示
+//内存回收
+//点击约束
 
 
+//操作层页面
 class CtrlScene extends egret.DisplayObjectContainer {
     private static instance;
     private tipInfo:egret.TextField;//提示信息
@@ -143,6 +146,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private dataAddItems:any;//保存选中的Icon信息
     private dataAddIcon:any;//保存选中的Icon信息
     private dataSelectObj:any;//保存选中的Icon信息
+    private dataAddType:string;//添加的装备类型
     private dataOldY:number;//旧的点击值，用于判断点击和滑动
 
     //武器升级页面
@@ -340,7 +344,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
     //显示玩家信息弹框
     public ctrlData(type:string, detailType:number = 0):void {
         if (type == "show") {
-            this.ctrlData("showAdd");
+            //this.ctrlData("showAdd");
             //return;
 
             if (this.dataContainer != null)return;
@@ -375,12 +379,14 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     GameData.data_Equipment["ring"].forEach(function (value2, index2) {
                         if (value2 == -1)return;
                         heroState[value][index2].id = value2;
+                        Tool.addBitmap(this.dataContainer, "item_background" + getEquipment(value2).grade + "_png", heroState[value][index2].x, heroState[value][index2].y, 50, 50, false, true);
                         Tool.addBitmap(this.dataContainer, getEquipment(value2).res, heroState[value][index2].x, heroState[value][index2].y, 40, 40, false, true);
                     }.bind(this));
                 }
                 else {
                     if (GameData.data_Equipment[value] == -1)continue;
                     heroState[value].id = GameData.data_Equipment[value];
+                    Tool.addBitmap(this.dataContainer, "item_background" + getEquipment(GameData.data_Equipment[value]).grade + "_png", heroState[value].x, heroState[value].y, 50, 50, false, true);
                     Tool.addBitmap(this.dataContainer, getEquipment(GameData.data_Equipment[value]).res, heroState[value].x, heroState[value].y, 40, 40, false, true);
                 }
             }
@@ -388,35 +394,40 @@ class CtrlScene extends egret.DisplayObjectContainer {
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
                 if (e.localX > 475 && e.localX < 500 && e.localY > 0 && e.localY < 25)this.ctrlData("hide");
                 else {
+                    if (this.dataAddContainer || this.dataDetailContainer)return;
                     for (value in heroState) {
                         if (value == "ring") {
                             for (var i = 0; i < heroState[value].length; i++) {
                                 if (e.localX > heroState[value][i].x - 25 && e.localX < heroState[value][i].x + 25 && e.localY > heroState[value][i].y - 25 && e.localY < heroState[value][i].y + 25) {
-                                    if (heroState[value][i].id == -1) {
-                                        this.showTip("尚未装备该位置");
-                                        return;
-                                    }
                                     this.dataSelectObj = {};
-                                    this.dataSelectObj.id = heroState[value][i].id;
                                     this.dataSelectObj.x = heroState[value][i].x;
                                     this.dataSelectObj.y = heroState[value][i].y;
                                     this.dataSelectObj._type = value;
                                     this.dataSelectObj._index = i;
+
+                                    if (heroState[value][i].id == -1) {
+                                        this.dataAddType = "ring";
+                                        this.ctrlData("showAdd");
+                                        return;
+                                    }
+                                    else this.dataSelectObj.id = heroState[value][i].id;
                                     this.ctrlData("showDetail");
                                     return;
                                 }
                             }
                         }
                         else if (e.localX > heroState[value].x - 25 && e.localX < heroState[value].x + 25 && e.localY > heroState[value].y - 25 && e.localY < heroState[value].y + 25) {
-                            if (heroState[value].id == -1) {
-                                this.showTip("尚未装备该位置");
-                                return;
-                            }
                             this.dataSelectObj = {};
-                            this.dataSelectObj.id = heroState[value].id;
                             this.dataSelectObj.x = heroState[value].x;
                             this.dataSelectObj.y = heroState[value].y;
                             this.dataSelectObj._type = value;
+
+                            if (heroState[value].id == -1) {
+                                this.dataAddType = value;
+                                this.ctrlData("showAdd");
+                                return;
+                            }
+                            else this.dataSelectObj.id = heroState[value].id;
                             this.ctrlData("showDetail");
                             return;
                         }
@@ -432,14 +443,24 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
         }
         else if (type == "hide") {
+            if (this.dataAddContainer || this.dataDetailContainer)return;
             egret.Tween.get(this.dataContainer).to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.dataContainer);
                 this.dataContainer = null;
+                this.dataAddContainer = null;
+                this.dataDetailContainer = null;
+                this.dataAddData = null;
+                this.dataAddItems = null;
+                this.dataAddIcon = null;
+                this.dataSelectObj = null;
+                this.dataContainer = null;
+                this.dataAddType = null;
+                this.dataOldY = null;
                 this.showing = "empty";
             }, this);
         }
         else if (type == "showAdd") {
-            if (this.dataDetailContainer)return;
+            if (this.dataAddContainer)return;
             this.dataAddItems = [];
             this.dataAddIcon = [];
             this.dataAddContainer = new egret.DisplayObjectContainer();
@@ -457,15 +478,18 @@ class CtrlScene extends egret.DisplayObjectContainer {
             }, this);
 
             //获取符合的装备,//筛选符合的装备
-            this.dataAddData = [{id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1},
-                {id: 100, level: 1}];
+            this.dataAddData = [];
+            var tempEquip;
+            for (var i = 0; i < GameData.bag_Equipment.length; i++) {
+                tempEquip = getEquipment(GameData.bag_Equipment[i]);
+                if (tempEquip._type == this.dataAddType) {
+                    this.dataAddData.push({
+                        id: GameData.bag_Equipment[i],
+                        grade: tempEquip.grade
+                    })
+                }
+            }
+
             var dataAddItemGroup = new eui.Group();
             dataAddItemGroup.touchEnabled = true;
             dataAddItemGroup.width = this.dataAddContainer.width;
@@ -473,19 +497,16 @@ class CtrlScene extends egret.DisplayObjectContainer {
             dataAddItemGroup.cacheAsBitmap = true;
             for (var i = 0; i < this.dataAddData.length; i++) {
                 var tempEquip = getEquipment(this.dataAddData[i].id);
-                this.dataAddItems.push(Tool.addBitmap(dataAddItemGroup, "item_background" + tempEquip.level + "_png", dataAddItemGroup.width / 2, i * 60 + 40, 50, 50, false, true));
-                this.dataAddIcon.push(Tool.addBitmap(dataAddItemGroup, tempEquip.res, dataAddItemGroup.width / 2, i * 60 + 30, 50, 50, false, true));
+                this.dataAddItems.push(Tool.addBitmap(dataAddItemGroup, "item_background" + tempEquip.grade + "_png", dataAddItemGroup.width / 2, i * 60 + 32, 60, 58, false, true));
+                this.dataAddIcon.push(Tool.addBitmap(dataAddItemGroup, tempEquip.res, dataAddItemGroup.width / 2, i * 60 + 32, 50, 50, false, true));
                 this.dataAddIcon[i].touchEnabled = true;
                 this.dataAddIcon[i].addEventListener(egret.TouchEvent.TOUCH_BEGIN, function (e:egret.TouchEvent) {
                     this.dataOldY = e.stageY;
                 }, this);
-
                 this.dataAddIcon[i].addEventListener(egret.TouchEvent.TOUCH_END, function (e:egret.TouchEvent) {
                     if (Math.abs(e.stageY - this.dataOldY) < 10) {//短暂的点击，用于点击Icon
                         for (var a = 0; a < this.dataAddData.length; a++) {
                             if (e.target == this.dataAddIcon[a]) {//显示详细信息
-                                console.log("select ID   " + this.dataAddData[a].id);
-                                this.dataSelectObj = {};
                                 this.dataSelectObj.id = this.dataAddData[a].id;
                                 this.ctrlData("showDetail", 1);
                                 return;
@@ -508,12 +529,12 @@ class CtrlScene extends egret.DisplayObjectContainer {
             tempGroup.addChild(dataAddItemGroup);
             this.addChild(this.dataAddContainer);
 
-            var tw = egret.Tween.get(this.dataAddContainer);
-            tw.to({x: 100}, 500);
+            this.swapChildren(this.dataAddContainer, this.dataContainer);
+            egret.Tween.get(this.dataAddContainer).to({x: 100}, 500, egret.Ease.backOut);
         }
         else if (type == "hideAdd") {
             var tw = egret.Tween.get(this.dataAddContainer);
-            tw.to({x:200}, 500, egret.Ease.backIn).call(function () {
+            tw.to({x: 200}, 500, egret.Ease.backIn).call(function () {
                 this.removeChild(this.dataAddContainer);
                 this.dataAddContainer = null;
                 this.dataAddItems = null;
@@ -531,9 +552,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.dataDetailContainer.y = this.dataContainer.height / 2;
             this.dataContainer.addChild(this.dataDetailContainer);
 
-            console.log("id   " + this.dataSelectObj.id);
             var equipData = getEquipment(this.dataSelectObj.id);
-
             var background = Tool.addBitmap(this.dataDetailContainer, "data_detailScene" + detailType + "_png", 0, 0, 300, 150);
             Tool.addBitmap(this.dataDetailContainer, equipData.res, 28, 30, 50, 50);
             Tool.addTextField(this.dataDetailContainer, 100, 23, 80, 20, 16, 0x000000, equipData.name).textAlign = egret.HorizontalAlign.LEFT;
@@ -542,7 +561,6 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
-                //卸下装备
                 if (e.localX > 20 && e.localX < 100 && e.localY > 110 && e.localY < 140) {
                     if (detailType == 0) {
                         var item:any;
@@ -560,6 +578,14 @@ class CtrlScene extends egret.DisplayObjectContainer {
                                     GameData.data_Equipment[this.dataSelectObj._type] = -1;
                                 }
                                 this.dataContainer.removeChildAt(i);
+                                break;
+                            }
+                        }
+                        //删除等级背景
+                        for (var i = 0; i < this.dataContainer.$children.length; i++) {
+                            item = this.dataContainer.getChildAt(i);
+                            if (item.x == this.dataSelectObj.x && item.y == this.dataSelectObj.y) {
+                                this.dataContainer.removeChildAt(i);
                                 this.ctrlData("hideDetail");
                                 return;
                             }
@@ -567,8 +593,29 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     }
                     else if (detailType == 1) {
                         this.showTip("装备成功！");
-                        return;
+                        this.ctrlData("hideAdd");
                         this.ctrlData("hideDetail");
+                        console.log("_type  " + this.dataSelectObj._type);
+                        if (this.dataSelectObj._type == "ring") {
+                            heroState["ring"][this.dataSelectObj._index].id = this.dataSelectObj.id;
+                            GameData.data_Equipment["ring"][this.dataSelectObj._index] = this.dataSelectObj.id;
+                        }
+                        else {
+                            heroState[this.dataSelectObj._type].id = this.dataSelectObj.id;
+                            GameData.data_Equipment[this.dataSelectObj._type] = this.dataSelectObj.id;
+                        }
+
+                        for (var i = 0; i < GameData.bag_Equipment.length; i++) {
+                            if (GameData.bag_Equipment[i] == this.dataSelectObj.id) {
+                                GameData.bag_Equipment.splice(i, 1);
+                                break;
+                            }
+                        }
+
+                        var temp1 = Tool.addBitmap(this.dataContainer, "item_background" + getEquipment(this.dataSelectObj.id).grade + "_png", this.dataSelectObj.x, this.dataSelectObj.y, 50, 50, false, true);
+                        var temp2 = Tool.addBitmap(this.dataContainer, getEquipment(this.dataSelectObj.id).res, this.dataSelectObj.x, this.dataSelectObj.y, 40, 40, false, true);
+                        this.dataContainer.setChildIndex(temp2, 2);
+                        this.dataContainer.setChildIndex(temp1, 2);
                     }
                 }
                 else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140) this.ctrlData("hideDetail");
@@ -577,7 +624,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.dataDetailContainer.scaleX = 0;
             this.dataDetailContainer.scaleY = 0;
             var tw = egret.Tween.get(this.dataDetailContainer);
-            tw.to({scaleX: 1, scaleY: 1}, 500);
+            tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
         }
         else if (type == "hideDetail") {//升级某项技能
             var tw = egret.Tween.get(this.dataDetailContainer);
