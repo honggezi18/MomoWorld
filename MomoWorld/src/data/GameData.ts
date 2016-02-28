@@ -41,9 +41,16 @@ class GameData {
 
     //玩家信息
     static data_Equipment = {//携带的装备ID
-        ring : [],
-        weapon:[],
-
+        cloak: 100,//披风
+        clothes: 200,//上衣
+        earring: 300,//耳环
+        glove: 400,//右边武器
+        hat: 500,//帽子
+        ring: [600, 600, 600, 600, 600, 600],//戒指
+        shield: 700,//右边武器
+        shoe: 800,//鞋子
+        trouser: 900,//裤子
+        weapon: 1000,//左边武器
     };
 
     //state中0为未开放，1为普通，2为困难，3为地狱

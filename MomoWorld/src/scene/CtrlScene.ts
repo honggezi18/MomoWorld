@@ -1,4 +1,13 @@
+//Momo在信息页面实现装备武器
+//Momo实现hero属性数据的变化
 //操作层页面
+//实现卸下装备功能
+//判断该位置是否装备道具
+//实现卸下后，装备返回背包，以及从背包中实现装备道具
+//搭建装备选择页面
+//实现装备选择页面中着装装备Momo
+
+
 class CtrlScene extends egret.DisplayObjectContainer {
     private static instance;
     private tipInfo:egret.TextField;//提示信息
@@ -128,6 +137,13 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
     //玩家信息页面
     private dataContainer:egret.DisplayObjectContainer;//药品弹框显示容器
+    private dataAddContainer:egret.DisplayObjectContainer;//着装装备的显示容器
+    private dataDetailContainer:egret.DisplayObjectContainer;//装备详细信息页面容器
+    private dataAddData:any;//保存选中的Icon信息
+    private dataAddItems:any;//保存选中的Icon信息
+    private dataAddIcon:any;//保存选中的Icon信息
+    private dataSelectObj:any;//保存选中的Icon信息
+    private dataOldY:number;//旧的点击值，用于判断点击和滑动
 
     //武器升级页面
     private weaponContainer:egret.DisplayObjectContainer;//武器升级页面显示容器
@@ -198,7 +214,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlWeaponShop("show");
+        this.ctrlData("show");
     }
 
     //显示提示信息
@@ -322,58 +338,260 @@ class CtrlScene extends egret.DisplayObjectContainer {
     }
 
     //显示玩家信息弹框
-    public ctrlData(type:string):void {
+    public ctrlData(type:string, detailType:number = 0):void {
         if (type == "show") {
+            this.ctrlData("showAdd");
+            //return;
+
             if (this.dataContainer != null)return;
             this.dataContainer = new egret.DisplayObjectContainer();
             this.dataContainer.width = 500;
-            this.dataContainer.height = 480;
+            this.dataContainer.height = 400;
             this.dataContainer.anchorOffsetX = 500 / 2;
-            this.dataContainer.anchorOffsetY = 480 / 2;
+            this.dataContainer.anchorOffsetY = 400 / 2;
             this.dataContainer.x = GameData.gameWidth / 2;
-            this.dataContainer.y = GameData.gameHeight / 2 - 50;
+            this.dataContainer.y = GameData.gameHeight / 2 - 35;
             this.addChild(this.dataContainer);
 
             var i:number = 0;
-            var background = Tool.addBitmap(this.dataContainer, "data_background_png", 0, 0, 500, 480);
+            var background = Tool.addBitmap(this.dataContainer, "data_background_png", 0, 0, 500, 400);
 
             //玩家数值显示
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "职业:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "等级:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "血量:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法量:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "物攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "物抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "法抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "攻速:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 290, 100 + 30 * (i++), 170, 20, 20, 0x000000, "移速:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "职业:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "等级:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "血量:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法量:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "攻速:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "移速:" + i).textAlign = egret.HorizontalAlign.LEFT;
 
             //玩家装备显示//设置坐标数组，装备名数组，根据数组名检查装备，再显示图标，即装备种类固定数组下标，这样连接图标的点击响应
-
-
+            var value;
+            for (value in GameData.data_Equipment) {
+                if (value == "ring") {
+                    GameData.data_Equipment["ring"].forEach(function (value2, index2) {
+                        if (value2 == -1)return;
+                        heroState[value][index2].id = value2;
+                        Tool.addBitmap(this.dataContainer, getEquipment(value2).res, heroState[value][index2].x, heroState[value][index2].y, 40, 40, false, true);
+                    }.bind(this));
+                }
+                else {
+                    if (GameData.data_Equipment[value] == -1)continue;
+                    heroState[value].id = GameData.data_Equipment[value];
+                    Tool.addBitmap(this.dataContainer, getEquipment(GameData.data_Equipment[value]).res, heroState[value].x, heroState[value].y, 40, 40, false, true);
+                }
+            }
             background.touchEnabled = true;
             background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
-                Tool.logPosition(e);
-                if (e.localX > 455 && e.localX < 470 && e.localY > 65 && e.localY < 85)this.ctrlData("hide");
+                if (e.localX > 475 && e.localX < 500 && e.localY > 0 && e.localY < 25)this.ctrlData("hide");
+                else {
+                    for (value in heroState) {
+                        if (value == "ring") {
+                            for (var i = 0; i < heroState[value].length; i++) {
+                                if (e.localX > heroState[value][i].x - 25 && e.localX < heroState[value][i].x + 25 && e.localY > heroState[value][i].y - 25 && e.localY < heroState[value][i].y + 25) {
+                                    if (heroState[value][i].id == -1) {
+                                        this.showTip("尚未装备该位置");
+                                        return;
+                                    }
+                                    this.dataSelectObj = {};
+                                    this.dataSelectObj.id = heroState[value][i].id;
+                                    this.dataSelectObj.x = heroState[value][i].x;
+                                    this.dataSelectObj.y = heroState[value][i].y;
+                                    this.dataSelectObj._type = value;
+                                    this.dataSelectObj._index = i;
+                                    this.ctrlData("showDetail");
+                                    return;
+                                }
+                            }
+                        }
+                        else if (e.localX > heroState[value].x - 25 && e.localX < heroState[value].x + 25 && e.localY > heroState[value].y - 25 && e.localY < heroState[value].y + 25) {
+                            if (heroState[value].id == -1) {
+                                this.showTip("尚未装备该位置");
+                                return;
+                            }
+                            this.dataSelectObj = {};
+                            this.dataSelectObj.id = heroState[value].id;
+                            this.dataSelectObj.x = heroState[value].x;
+                            this.dataSelectObj.y = heroState[value].y;
+                            this.dataSelectObj._type = value;
+                            this.ctrlData("showDetail");
+                            return;
+                        }
+                    }
+                }
             }, this);
 
             this.dataContainer.scaleX = 0;
             this.dataContainer.scaleY = 0;
             var tw = egret.Tween.get(this.dataContainer);
             tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
+
+
         }
         else if (type == "hide") {
-            console.log("hide");
             egret.Tween.get(this.dataContainer).to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
-                this.dataContainer = Tool.clearItem(this.dataContainer);
-            });
+                this.removeChild(this.dataContainer);
+                this.dataContainer = null;
+                this.showing = "empty";
+            }, this);
+        }
+        else if (type == "showAdd") {
+            if (this.dataDetailContainer)return;
+            this.dataAddItems = [];
+            this.dataAddIcon = [];
+            this.dataAddContainer = new egret.DisplayObjectContainer();
+            this.dataAddContainer.width = 100;
+            this.dataAddContainer.height = 400;
+            this.dataAddContainer.anchorOffsetX = this.dataAddContainer.width / 2;
+            this.dataAddContainer.anchorOffsetY = this.dataAddContainer.height / 2;
+            this.dataAddContainer.x = 200;
+            this.dataAddContainer.y = GameData.gameHeight / 2 - 35;
+
+            var dataAddBackground = Tool.addBitmap(this.dataAddContainer, "data_addScene_png", 0, 0, 100, 400);
+            dataAddBackground.touchEnabled = true;
+            dataAddBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                if (e.localX > 75 && e.localX < 100 && e.localY > 0 && e.localY < 25)this.ctrlData("hideAdd");
+            }, this);
+
+            //获取符合的装备,//筛选符合的装备
+            this.dataAddData = [{id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1},
+                {id: 100, level: 1}];
+            var dataAddItemGroup = new eui.Group();
+            dataAddItemGroup.touchEnabled = true;
+            dataAddItemGroup.width = this.dataAddContainer.width;
+            dataAddItemGroup.height = 60 * this.dataAddData.length;
+            dataAddItemGroup.cacheAsBitmap = true;
+            for (var i = 0; i < this.dataAddData.length; i++) {
+                var tempEquip = getEquipment(this.dataAddData[i].id);
+                this.dataAddItems.push(Tool.addBitmap(dataAddItemGroup, "item_background" + tempEquip.level + "_png", dataAddItemGroup.width / 2, i * 60 + 40, 50, 50, false, true));
+                this.dataAddIcon.push(Tool.addBitmap(dataAddItemGroup, tempEquip.res, dataAddItemGroup.width / 2, i * 60 + 30, 50, 50, false, true));
+                this.dataAddIcon[i].touchEnabled = true;
+                this.dataAddIcon[i].addEventListener(egret.TouchEvent.TOUCH_BEGIN, function (e:egret.TouchEvent) {
+                    this.dataOldY = e.stageY;
+                }, this);
+
+                this.dataAddIcon[i].addEventListener(egret.TouchEvent.TOUCH_END, function (e:egret.TouchEvent) {
+                    if (Math.abs(e.stageY - this.dataOldY) < 10) {//短暂的点击，用于点击Icon
+                        for (var a = 0; a < this.dataAddData.length; a++) {
+                            if (e.target == this.dataAddIcon[a]) {//显示详细信息
+                                console.log("select ID   " + this.dataAddData[a].id);
+                                this.dataSelectObj = {};
+                                this.dataSelectObj.id = this.dataAddData[a].id;
+                                this.ctrlData("showDetail", 1);
+                                return;
+                            }
+                        }
+                    }
+                }, this);
+            }
+
+            //设置滑动组件
+            var tempGroup = new eui.Group();
+            var scroll = new eui.Scroller();
+            scroll.x = tempGroup.x;
+            scroll.y = 30;
+            scroll.width = 100;
+            scroll.height = 360;
+            scroll.viewport = tempGroup;
+            scroll.touchEnabled = true;
+            this.dataAddContainer.addChild(scroll);
+            tempGroup.addChild(dataAddItemGroup);
+            this.addChild(this.dataAddContainer);
+
+            var tw = egret.Tween.get(this.dataAddContainer);
+            tw.to({x: 100}, 500);
+        }
+        else if (type == "hideAdd") {
+            var tw = egret.Tween.get(this.dataAddContainer);
+            tw.to({x:200}, 500, egret.Ease.backIn).call(function () {
+                this.removeChild(this.dataAddContainer);
+                this.dataAddContainer = null;
+                this.dataAddItems = null;
+                this.dataAddIcon = null;
+            }, this);
+        }
+        else if (type == "showDetail") {//显示物品详细信息
+            if (this.dataDetailContainer)return;
+            this.dataDetailContainer = new egret.DisplayObjectContainer();
+            this.dataDetailContainer.width = 300;
+            this.dataDetailContainer.height = 150;
+            this.dataDetailContainer.anchorOffsetX = 300 / 2;
+            this.dataDetailContainer.anchorOffsetY = 150 / 2;
+            this.dataDetailContainer.x = this.dataContainer.width / 2;
+            this.dataDetailContainer.y = this.dataContainer.height / 2;
+            this.dataContainer.addChild(this.dataDetailContainer);
+
+            console.log("id   " + this.dataSelectObj.id);
+            var equipData = getEquipment(this.dataSelectObj.id);
+
+            var background = Tool.addBitmap(this.dataDetailContainer, "data_detailScene" + detailType + "_png", 0, 0, 300, 150);
+            Tool.addBitmap(this.dataDetailContainer, equipData.res, 28, 30, 50, 50);
+            Tool.addTextField(this.dataDetailContainer, 100, 23, 80, 20, 16, 0x000000, equipData.name).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataDetailContainer, 97, 47, 180, 41, 12, 0x000000, equipData.info).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataDetailContainer, 200, 23, 130, 75, 15, 0x000000, "售价:" + equipData.cost + "金币").textAlign = egret.HorizontalAlign.LEFT;
+
+            background.touchEnabled = true;
+            background.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
+                //卸下装备
+                if (e.localX > 20 && e.localX < 100 && e.localY > 110 && e.localY < 140) {
+                    if (detailType == 0) {
+                        var item:any;
+                        for (var i = 0; i < this.dataContainer.$children.length; i++) {
+                            item = this.dataContainer.getChildAt(i);
+                            if (item.x == this.dataSelectObj.x && item.y == this.dataSelectObj.y) {
+                                if (this.dataSelectObj._type == "ring") {
+                                    GameData.bag_Equipment.push(GameData.data_Equipment["ring"][this.dataSelectObj._index]);
+                                    heroState["ring"][this.dataSelectObj._index].id = -1;
+                                    GameData.data_Equipment["ring"][this.dataSelectObj._index] = -1;
+                                }
+                                else {
+                                    GameData.bag_Equipment.push(GameData.data_Equipment[this.dataSelectObj._type]);
+                                    heroState[this.dataSelectObj._type].id = -1;
+                                    GameData.data_Equipment[this.dataSelectObj._type] = -1;
+                                }
+                                this.dataContainer.removeChildAt(i);
+                                this.ctrlData("hideDetail");
+                                return;
+                            }
+                        }
+                    }
+                    else if (detailType == 1) {
+                        this.showTip("装备成功！");
+                        return;
+                        this.ctrlData("hideDetail");
+                    }
+                }
+                else if (e.localX > 200 && e.localX < 280 && e.localY > 110 && e.localY < 140) this.ctrlData("hideDetail");
+            }, this);
+
+            this.dataDetailContainer.scaleX = 0;
+            this.dataDetailContainer.scaleY = 0;
+            var tw = egret.Tween.get(this.dataDetailContainer);
+            tw.to({scaleX: 1, scaleY: 1}, 500);
+        }
+        else if (type == "hideDetail") {//升级某项技能
+            var tw = egret.Tween.get(this.dataDetailContainer);
+            tw.to({scaleX: 0, scaleY: 0}, 500, egret.Ease.backIn).call(function () {
+                this.dataContainer.removeChild(this.dataDetailContainer);
+                this.dataDetailContainer = null;
+                this.showing = "heroState";
+            }, this);
         }
 
     }
 
     //我的背包面板
-    public ctrlBag(type:string):void {
+    public ctrlBag(type:string, sure:boolean = false):void {
         if (type == "show") {
             if (this.showing != "empty")return;//若已经在显示着面板
             //this.bagData = bag;
@@ -518,7 +736,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             }, this);
         }
         else if (type == "changeBtn") {//进行选择卡的跳转
-            if (this.bagDetailContainer)return;
+            if (this.bagDetailContainer && !sure)return;
             console.log("changeBtn");
             this.bagGoldNum.text = GameData.goldNum + "";
             this.bagDiamondNum.text = GameData.diamondNum + "";
@@ -622,15 +840,45 @@ class CtrlScene extends egret.DisplayObjectContainer {
                                 GameData.goldNum += data.cost * num;
                                 GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
                             }
-                            GameData.saveData();//保存数据
-                            this.ctrlBag("changeBtn");//刷新数据
+                            //GameData.saveData();//保存数据
+                            this.ctrlBag("changeBtn", true);//刷新数据
                             this.ctrlBag("hideDetail");
                         }
                     }.bind(this));
                 }
                 else if (e.localX > 110 && e.localX < 190 && e.localY > 110 && e.localY < 140) {
-                    if (this.bagBtnName == "Equipment") {//穿着装备，需要调整玩家信息页面
-                        this.showTip("装备成功");
+                    if (this.bagBtnName == "Equipment") {
+                        //判断当前着装情况，实现穿着装备，//在页面中去除，数据去除
+
+                        var id = Math.floor(GameData["bag_Equipment"][this.bagIndex]);
+                        var data = window["getEquipment"](id);
+
+                        if (data._type == "ring") {
+                            for (var a = 0; a < GameData.data_Equipment["ring"].length; a++) {
+                                if (GameData.data_Equipment["ring"][a] == -1) {
+                                    GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
+                                    GameData.data_Equipment["ring"][a] = id;
+                                    this.showTip("装备成功！");
+                                    GameData.saveData();//保存数据
+                                    this.ctrlBag("changeBtn", true);//刷新数据
+                                    this.ctrlBag("hideDetail");
+                                    return;
+                                }
+                            }
+                            this.showTip("请先卸下原装备");
+                        }
+                        else {
+                            if (GameData.data_Equipment[data._type] == -1) {
+                                GameData["bag_" + this.bagBtnName].splice([this.bagIndex], 1);
+                                GameData.data_Equipment[data._type] = id;
+                                this.showTip("装备成功");
+                                GameData.saveData();//保存数据
+                                this.ctrlBag("changeBtn", true);//刷新数据
+                                this.ctrlBag("hideDetail");
+                            }
+                            else this.showTip("请先卸下原装备");
+                        }
+
                     }
                     else if (this.bagBtnName == "Piece")console.log("合成成功");
                     else if (this.bagBtnName == "Drup") {//通过药品类型判断携带还是使用

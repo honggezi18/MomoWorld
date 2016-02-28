@@ -93,8 +93,16 @@ var GameData = (function () {
     GameData.bag_PowerId = -1; //携带的蓝瓶ID
     //玩家信息
     GameData.data_Equipment = {
-        ring: [],
-        weapon: [],
+        cloak: 100,
+        clothes: 200,
+        earring: 300,
+        glove: 400,
+        hat: 500,
+        ring: [600, 600, 600, 600, 600, 600],
+        shield: 700,
+        shoe: 800,
+        trouser: 900,
+        weapon: 1000,
     };
     //state中0为未开放，1为普通，2为困难，3为地狱
     //static MapState:Array<number> = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];//10个

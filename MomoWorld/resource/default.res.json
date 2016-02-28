@@ -29,11 +29,11 @@
 		"name":"num"
 	},
 	{
-		"keys":"item_background_png,item_background1_png,item_background2_png,item_background3_png,item_item0_png,item_equipment0_png,item_drup0_png,item_piece0_png,item_drup1_png",
+		"keys":"item_background_png,item_background1_png,item_background2_png,item_background3_png,item_item0_png,item_equipment0_png,item_drup0_png,item_piece0_png,item_drup1_png,item_equipment100_png,item_equipment200_png,item_equipment300_png,item_equipment400_png,item_equipment500_png,item_equipment600_png,item_equipment700_png,item_equipment800_png,item_equipment900_png,item_equipment1000_png",
 		"name":"item"
 	},
 	{
-		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png,drupShop_background_png,drupShop_item_png,drupShop_detail_png,weaponShop_detail_png,weaponShop_item_png,weaponShop_background_png,bag_background_png,bag_item_png,bag_btnEquipment0_png,bag_btnEquipment1_png,bag_btnItem0_png,bag_btnItem1_png,bag_btnPiece0_png,bag_btnPiece1_png,bag_btnDrup0_png,bag_btnDrup1_png,bag_detailEquipment_png,bag_detailItem_png,bag_detailPiece_png,bag_detailDrup_png,bag_sureBackground_png,data_background_png,weapon_background0_png,weapon_background1_png,weapon_background2_png,ability_selectBox_png,bag_powerBox_png,bag_bloodBox_png",
+		"keys":"ctrl_attack_png,ctrl_barBackground_png,ctrl_blood_png,ctrl_bloodBar_png,ctrl_expBar_png,ctrl_jump_png,ctrl_left_png,ctrl_power_png,ctrl_powerBar_png,ctrl_right_png,ctrl_skill1_png,ctrl_skill2_png,ctrl_topBackground_png,daily_background_png,daily_get_png,daily_go_png,daily_item_png,over_png,daily_icon1_png,daily_icon7_png,daily_icon8_png,daily_icon2_png,daily_icon3_png,daily_icon4_png,daily_icon5_png,daily_icon6_png,achievement_background_png,achievement_get_png,achievement_go_png,achievement_icon1_png,achievement_icon2_png,achievement_icon3_png,achievement_icon4_png,achievement_icon5_png,achievement_icon6_png,achievement_icon7_png,achievement_item_png,achievement_over_png,ability_attack1_png,ability_attack2_png,ability_attack3_png,ability_attack4_png,ability_attack5_png,ability_background_png,ability_boold1_png,ability_boold2_png,ability_boold3_png,ability_boold4_png,ability_boold5_png,ability_power1_png,ability_power2_png,ability_power3_png,ability_power4_png,ability_power5_png,ability_skill1_1_png,ability_skill1_2_png,ability_skill1_3_png,ability_skill1_4_png,ability_skill1_5_png,ability_skill2_1_png,ability_skill2_2_png,ability_skill2_3_png,ability_skill2_4_png,ability_skill2_5_png,ability_defense1_5_png,ability_defense2_1_png,ability_defense2_2_png,ability_defense2_3_png,ability_defense2_4_png,ability_defense2_5_png,ability_defense1_1_png,ability_defense1_2_png,ability_defense1_3_png,ability_defense1_4_png,ability_detail_png,drupShop_background_png,drupShop_item_png,drupShop_detail_png,weaponShop_detail_png,weaponShop_item_png,weaponShop_background_png,bag_background_png,bag_item_png,bag_btnEquipment0_png,bag_btnEquipment1_png,bag_btnItem0_png,bag_btnItem1_png,bag_btnPiece0_png,bag_btnPiece1_png,bag_btnDrup0_png,bag_btnDrup1_png,bag_detailEquipment_png,bag_detailItem_png,bag_detailPiece_png,bag_detailDrup_png,bag_sureBackground_png,data_background_png,weapon_background0_png,weapon_background1_png,weapon_background2_png,ability_selectBox_png,bag_powerBox_png,bag_bloodBox_png,data_addScene_png,data_detailScene0_png,data_detailScene1_png",
 		"name":"ctrl"
 	}],
 	"resources":[
@@ -876,5 +876,71 @@
 		"name":"item_drup1_png",
 		"type":"image",
 		"url":"assets/item/drup/item_drup1.png"
+	},
+	{
+		"name":"item_equipment100_png",
+		"type":"image",
+		"url":"assets/item/equipment/cloak/item_equipment100.png"
+	},
+	{
+		"name":"item_equipment200_png",
+		"type":"image",
+		"url":"assets/item/equipment/clothes/item_equipment200.png"
+	},
+	{
+		"name":"item_equipment300_png",
+		"type":"image",
+		"url":"assets/item/equipment/earring/item_equipment300.png"
+	},
+	{
+		"name":"item_equipment400_png",
+		"type":"image",
+		"url":"assets/item/equipment/glove/item_equipment400.png"
+	},
+	{
+		"name":"item_equipment500_png",
+		"type":"image",
+		"url":"assets/item/equipment/hat/item_equipment500.png"
+	},
+	{
+		"name":"item_equipment600_png",
+		"type":"image",
+		"url":"assets/item/equipment/ring/item_equipment600.png"
+	},
+	{
+		"name":"item_equipment700_png",
+		"type":"image",
+		"url":"assets/item/equipment/shield/item_equipment700.png"
+	},
+	{
+		"name":"item_equipment800_png",
+		"type":"image",
+		"url":"assets/item/equipment/shoe/item_equipment800.png"
+	},
+	{
+		"name":"item_equipment900_png",
+		"type":"image",
+		"url":"assets/item/equipment/trouser/item_equipment900.png"
+	},
+	{
+		"name":"item_equipment1000_png",
+		"type":"image",
+		"url":"assets/item/equipment/weapon/item_equipment1000.png"
+	},
+	{
+		"name":"data_addScene_png",
+		"scale9grid":"7,27,48,257",
+		"type":"image",
+		"url":"assets/ctrl/data/data_addScene.png"
+	},
+	{
+		"name":"data_detailScene0_png",
+		"type":"image",
+		"url":"assets/ctrl/data/data_detailScene0.png"
+	},
+	{
+		"name":"data_detailScene1_png",
+		"type":"image",
+		"url":"assets/ctrl/data/data_detailScene1.png"
 	}]
 }

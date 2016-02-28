@@ -44,7 +44,21 @@ var ability = {
 };
 var drupShop = [0, 0, 0, 0, 1];
 var weaponShop = [0, 0, 0, 0];
-var data = {
-    occupation: "弓箭手",
-    boold: "弓箭手",
+var heroState = {
+    ring: [
+        { x: 44, y: 55, id: -1 },
+        { x: 44, y: 110, id: -1 },
+        { x: 44, y: 163, id: -1 },
+        { x: 44, y: 218, id: -1 },
+        { x: 44, y: 273, id: -1 },
+        { x: 44, y: 330, id: -1 }],
+    hat: { x: 151, y: 55, id: -1 },
+    clothes: { x: 151, y: 218, id: -1 },
+    trouser: { x: 151, y: 273, id: -1 },
+    shoe: { x: 151, y: 330, id: -1 },
+    weapon: { x: 97, y: 218, id: -1 },
+    shield: { x: 257, y: 218, id: -1 },
+    earring: { x: 205, y: 163, id: -1 },
+    cloak: { x: 257, y: 273, id: -1 },
+    glove: { x: 205, y: 273, id: -1 },
 };
