@@ -29,7 +29,7 @@
 		"name":"num"
 	},
 	{
-		"keys":"item_background_png,item_background1_png,item_background2_png,item_background3_png,item_item0_png,item_drup0_png,item_piece0_png,item_drup1_png,item_equipment100_png,item_equipment200_png,item_equipment300_png,item_equipment400_png,item_equipment500_png,item_equipment600_png,item_equipment700_png,item_equipment800_png,item_equipment900_png,item_equipment1000_png,item_equipment101_png,item_equipment102_png,item_equipment103_png,item_equipment104_png,item_equipment105_png,item_equipment106_png,item_equipment107_png,item_equipment108_png,item_equipment109_png,item_equipment110_png,item_equipment111_png,item_equipment201_png,item_equipment202_png,item_equipment203_png,item_equipment204_png,item_equipment205_png,item_equipment206_png,item_equipment207_png,item_equipment208_png,item_equipment209_png,item_equipment210_png,item_equipment211_png,item_equipment301_png,item_equipment302_png,item_equipment303_png,item_equipment304_png,item_equipment305_png,item_equipment306_png,item_equipment307_png,item_equipment308_png,item_equipment309_png,item_equipment310_png,item_equipment311_png,item_equipment401_png,item_equipment402_png,item_equipment403_png,item_equipment404_png,item_equipment405_png,item_equipment406_png,item_equipment407_png,item_equipment408_png,item_equipment409_png,item_equipment410_png,item_equipment411_png,item_equipment501_png,item_equipment502_png,item_equipment503_png,item_equipment504_png,item_equipment505_png,item_equipment506_png,item_equipment507_png,item_equipment508_png,item_equipment509_png,item_equipment510_png,item_equipment511_png,item_equipment601_png,item_equipment602_png,item_equipment603_png,item_equipment604_png,item_equipment605_png,item_equipment606_png,item_equipment607_png,item_equipment608_png,item_equipment609_png,item_equipment610_png,item_equipment611_png,item_equipment701_png,item_equipment702_png,item_equipment703_png,item_equipment704_png,item_equipment705_png,item_equipment706_png,item_equipment707_png,item_equipment708_png,item_equipment709_png,item_equipment710_png,item_equipment801_png,item_equipment802_png,item_equipment803_png,item_equipment804_png,item_equipment805_png,item_equipment806_png,item_equipment807_png,item_equipment808_png,item_equipment809_png,item_equipment810_png,item_equipment901_png,item_equipment902_png,item_equipment903_png,item_equipment904_png,item_equipment905_png,item_equipment906_png,item_equipment907_png,item_equipment908_png,item_equipment909_png,item_equipment910_png,item_equipment911_png,item_equipment1001_png,item_equipment1002_png,item_equipment1003_png,item_equipment1004_png,item_equipment1005_png,item_equipment1006_png,item_equipment1007_png,item_equipment1008_png,item_equipment1009_png,item_equipment1010_png,item_equipment1011_png,item_equipment811_png,item_equipment711_png",
+		"keys":"item_background_png,item_background1_png,item_background2_png,item_background3_png,item_item0_png,item_drup0_png,item_piece0_png,item_drup1_png,item_equipment100_png,item_equipment200_png,item_equipment300_png,item_equipment400_png,item_equipment500_png,item_equipment600_png,item_equipment700_png,item_equipment800_png,item_equipment900_png,item_equipment1000_png,item_equipment101_png,item_equipment102_png,item_equipment103_png,item_equipment104_png,item_equipment105_png,item_equipment106_png,item_equipment107_png,item_equipment108_png,item_equipment109_png,item_equipment110_png,item_equipment111_png,item_equipment201_png,item_equipment202_png,item_equipment203_png,item_equipment204_png,item_equipment205_png,item_equipment206_png,item_equipment207_png,item_equipment208_png,item_equipment209_png,item_equipment210_png,item_equipment211_png,item_equipment301_png,item_equipment302_png,item_equipment303_png,item_equipment304_png,item_equipment305_png,item_equipment306_png,item_equipment307_png,item_equipment308_png,item_equipment309_png,item_equipment310_png,item_equipment311_png,item_equipment401_png,item_equipment402_png,item_equipment403_png,item_equipment404_png,item_equipment405_png,item_equipment406_png,item_equipment407_png,item_equipment408_png,item_equipment409_png,item_equipment410_png,item_equipment411_png,item_equipment501_png,item_equipment502_png,item_equipment503_png,item_equipment504_png,item_equipment505_png,item_equipment506_png,item_equipment507_png,item_equipment508_png,item_equipment509_png,item_equipment510_png,item_equipment511_png,item_equipment601_png,item_equipment602_png,item_equipment603_png,item_equipment604_png,item_equipment605_png,item_equipment606_png,item_equipment607_png,item_equipment608_png,item_equipment609_png,item_equipment610_png,item_equipment611_png,item_equipment701_png,item_equipment702_png,item_equipment703_png,item_equipment704_png,item_equipment705_png,item_equipment706_png,item_equipment707_png,item_equipment708_png,item_equipment709_png,item_equipment710_png,item_equipment801_png,item_equipment802_png,item_equipment803_png,item_equipment804_png,item_equipment805_png,item_equipment806_png,item_equipment807_png,item_equipment808_png,item_equipment809_png,item_equipment810_png,item_equipment901_png,item_equipment902_png,item_equipment903_png,item_equipment904_png,item_equipment905_png,item_equipment906_png,item_equipment907_png,item_equipment908_png,item_equipment909_png,item_equipment910_png,item_equipment911_png,item_equipment1001_png,item_equipment1002_png,item_equipment1003_png,item_equipment1004_png,item_equipment1005_png,item_equipment1006_png,item_equipment1007_png,item_equipment1008_png,item_equipment1009_png,item_equipment1010_png,item_equipment1011_png,item_equipment811_png,item_equipment711_png,item_drup2_png,item_drup3_png,item_drup4_png,item_drup5_png,item_drup6_png,item_drup7_png,item_drup8_png,item_drup9_png,item_drup10_png,item_drup11_png,item_drup12_png,item_drup13_png,item_drup14_png,item_drup15_png,item_drup16_png,item_drup17_png,item_drup18_png,item_drup19_png,item_drup20_png,item_drup21_png,item_drup22_png,item_drup23_png,item_drup24_png,item_drup25_png",
 		"name":"item"
 	},
 	{
@@ -1487,5 +1487,125 @@
 		"name":"item_equipment711_png",
 		"type":"image",
 		"url":"assets/item/equipment/shield/item_equipment711.png"
+	},
+	{
+		"name":"item_drup2_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup2.png"
+	},
+	{
+		"name":"item_drup3_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup3.png"
+	},
+	{
+		"name":"item_drup4_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup4.png"
+	},
+	{
+		"name":"item_drup5_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup5.png"
+	},
+	{
+		"name":"item_drup6_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup6.png"
+	},
+	{
+		"name":"item_drup7_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup7.png"
+	},
+	{
+		"name":"item_drup8_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup8.png"
+	},
+	{
+		"name":"item_drup9_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup9.png"
+	},
+	{
+		"name":"item_drup10_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup10.png"
+	},
+	{
+		"name":"item_drup11_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup11.png"
+	},
+	{
+		"name":"item_drup12_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup12.png"
+	},
+	{
+		"name":"item_drup13_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup13.png"
+	},
+	{
+		"name":"item_drup14_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup14.png"
+	},
+	{
+		"name":"item_drup15_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup15.png"
+	},
+	{
+		"name":"item_drup16_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup16.png"
+	},
+	{
+		"name":"item_drup17_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup17.png"
+	},
+	{
+		"name":"item_drup18_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup18.png"
+	},
+	{
+		"name":"item_drup19_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup19.png"
+	},
+	{
+		"name":"item_drup20_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup20.png"
+	},
+	{
+		"name":"item_drup21_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup21.png"
+	},
+	{
+		"name":"item_drup22_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup22.png"
+	},
+	{
+		"name":"item_drup23_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup23.png"
+	},
+	{
+		"name":"item_drup24_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup24.png"
+	},
+	{
+		"name":"item_drup25_png",
+		"type":"image",
+		"url":"assets/item/drup/item_drup25.png"
 	}]
 }

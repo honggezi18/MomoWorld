@@ -47,3 +47,243 @@ var drupData1 = {
     func: "power",
     funcNum: 100 //补充的能量值
 };
+var drupData2 = {
+    res: "item_drup2_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData3 = {
+    res: "item_drup3_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData4 = {
+    res: "item_drup4_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData5 = {
+    res: "item_drup5_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData6 = {
+    res: "item_drup6_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData7 = {
+    res: "item_drup7_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData8 = {
+    res: "item_drup8_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData9 = {
+    res: "item_drup9_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData10 = {
+    res: "item_drup10_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData11 = {
+    res: "item_drup11_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData12 = {
+    res: "item_drup12_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData13 = {
+    res: "item_drup13_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData14 = {
+    res: "item_drup14_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData15 = {
+    res: "item_drup15_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData16 = {
+    res: "item_drup16_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData17 = {
+    res: "item_drup17_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData18 = {
+    res: "item_drup18_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData19 = {
+    res: "item_drup19_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData20 = {
+    res: "item_drup20_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData21 = {
+    res: "item_drup21_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData22 = {
+    res: "item_drup22_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData23 = {
+    res: "item_drup23_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData24 = {
+    res: "item_drup24_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
+var drupData25 = {
+    res: "item_drup25_png",
+    name: "drup0",
+    type: "gold",
+    cost: 25,
+    info: "drup0",
+    grade: 1,
+    func: "power",
+    funcNum: 100 //补充的能量值
+};
