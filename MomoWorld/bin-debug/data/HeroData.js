@@ -2,6 +2,7 @@ var getHero = function (name) {
     if (name == "1")
         return hero1;
 };
+//主角模式
 var hero1 = {
     name: "hero1",
     blood: 500,
@@ -26,8 +27,8 @@ var hero1 = {
         offsetY: -17.5,
         powerBase: 50,
         powerSpace: 20,
-        speed: 20,
-        CD: 10
+        speed: 10,
+        CD: 30 //冷却时间
     },
     skill: {
         offsetX: -2,

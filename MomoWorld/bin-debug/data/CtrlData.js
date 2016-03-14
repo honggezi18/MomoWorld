@@ -38,8 +38,8 @@ var ability = {
         { icon: "ability_boold", type: "血量", name: "血量", intruction: "血量简介" },
         { icon: "ability_power", type: "法力", name: "法力", intruction: "法力简介" },
         { icon: "ability_attack", type: "普攻", name: "普攻", intruction: "普攻简介" },
-        { icon: "ability_defense1_1_png", type: "物抗", name: "物抗", intruction: "物抗简介" },
-        { icon: "ability_defense2_1_png", type: "法抗", name: "法抗", intruction: "法抗简介" },
+        { icon: "ability_defense1_", type: "物抗", name: "物抗", intruction: "物抗简介" },
+        { icon: "ability_defense2_", type: "法抗", name: "法抗", intruction: "法抗简介" },
     ]
 };
 var drupShop = [

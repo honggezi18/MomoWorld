@@ -8,7 +8,7 @@ var boss1 = {
     blood: 500,
     exp: 50,//经验值
     dropItem: [//掉落的物品,药品，装备
-        {type: "Equipment", id: 0, change: 0.5},
+        {type: "Equipment", id: 100, change: 0.5},
     ],
 
     stand: {

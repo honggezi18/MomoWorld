@@ -2,21 +2,22 @@ var getHero = function (name) {
     if (name == "1")return hero1;
 };
 
+//ä¸»è§’æ¨¡å¼
 var hero1 = {
     name: "hero1",
     blood: 500,
     power: 200,
     exp: 155,
-    expSpace: 200,//Ã¿´ÎÉı¼¶ºóÔö¼ÓµÄ¾­ÑéÔö³¤
+    expSpace: 200,//Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÓµÄ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     stand: {
         offsetX: -10,
         offsetY: -17.5
     },
 
     walk: {
-        offsetX: 5,//ÏÔÊ¾ÒÆ¶¯Æ¤·ôÊ±µÄXÖáÆ«ÒÆÖµ£¬ÕıÖµÍ¼Æ¬ÍùÇ°
-        offsetY: -22,//ÏÔÊ¾ÒÆ¶¯Æ¤·ôÊ±µÄYÖáÆ«ÒÆÖµ£¬ÕıÖµÏÂ
-        moveSpeed: 1.5,//ÒÆ¶¯µÄËÙ¶È
+        offsetX: 5,//ï¿½ï¿½Ê¾ï¿½Æ¶ï¿½Æ¤ï¿½ï¿½Ê±ï¿½ï¿½Xï¿½ï¿½Æ«ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ÖµÍ¼Æ¬ï¿½ï¿½Ç°
+        offsetY: -22,//ï¿½ï¿½Ê¾ï¿½Æ¶ï¿½Æ¤ï¿½ï¿½Ê±ï¿½ï¿½Yï¿½ï¿½Æ«ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½
+        moveSpeed: 1.5,//ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
     },
 
     jump: {
@@ -24,27 +25,27 @@ var hero1 = {
         offsetY: -17.5
     },
 
-    attack: {
+    attack: {//normalAttack
         offsetX: -12,
         offsetY: -17.5,
-        powerBase: 50,//Åö×²¹¥»÷µÄ»ù±¾ÊıÖµ
-        powerSpace: 20,//¸¡¶¯Öµ
-        speed: 20,//ÆÕÍ¨¹¥»÷µÄÒÆ¶¯ËÙ¶È
-        CD: 10
+        powerBase: 50,//baseAttackValue
+        powerSpace: 20,//
+        speed: 10,//å¼“ç®­é€Ÿåº¦
+        CD: 30//å†·å´æ—¶é—´
     },
 
     skill: {
         offsetX: -2,
         offsetY: -22.5,
-        powerBase: 50,//Åö×²¹¥»÷µÄ»ù±¾ÊıÖµ
-        powerSpace: 20,//¸¡¶¯Öµ
+        powerBase: 50,//ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Öµ
+        powerSpace: 20,//ï¿½ï¿½ï¿½ï¿½Öµ
     },
 
     hit: {
         offsetX: -13,
         offsetY: -20,
         CD: 50,
-        hitMove: 1,//±»¹¥»÷ºóÍùºóµ¯µÄĞ§¹û
+        hitMove: 1,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½óµ¯µï¿½Ğ§ï¿½ï¿½
     },
 
     die: {

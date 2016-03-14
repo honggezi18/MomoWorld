@@ -1,0 +1,13 @@
+{"file":"weapon.png","frames":{
+"item_equipment1000_png":{"x":1,"y":116,"w":30,"h":31,"offX":0,"offY":0,"sourceW":30,"sourceH":31},
+"item_equipment1001_png":{"x":37,"y":115,"w":30,"h":31,"offX":0,"offY":0,"sourceW":30,"sourceH":31},
+"item_equipment1002_png":{"x":42,"y":41,"w":36,"h":36,"offX":0,"offY":0,"sourceW":36,"sourceH":36},
+"item_equipment1003_png":{"x":80,"y":78,"w":34,"h":34,"offX":0,"offY":0,"sourceW":34,"sourceH":34},
+"item_equipment1004_png":{"x":75,"y":114,"w":34,"h":33,"offX":0,"offY":0,"sourceW":34,"sourceH":33},
+"item_equipment1005_png":{"x":42,"y":1,"w":38,"h":38,"offX":0,"offY":0,"sourceW":38,"sourceH":38},
+"item_equipment1006_png":{"x":39,"y":79,"w":34,"h":34,"offX":0,"offY":0,"sourceW":34,"sourceH":34},
+"item_equipment1007_png":{"x":1,"y":80,"w":34,"h":34,"offX":0,"offY":0,"sourceW":34,"sourceH":34},
+"item_equipment1008_png":{"x":1,"y":42,"w":36,"h":36,"offX":0,"offY":0,"sourceW":36,"sourceH":36},
+"item_equipment1009_png":{"x":82,"y":40,"w":36,"h":36,"offX":0,"offY":0,"sourceW":36,"sourceH":36},
+"item_equipment1010_png":{"x":82,"y":1,"w":37,"h":37,"offX":0,"offY":0,"sourceW":37,"sourceH":37},
+"item_equipment1011_png":{"x":1,"y":1,"w":39,"h":39,"offX":0,"offY":0,"sourceW":39,"sourceH":39}}}

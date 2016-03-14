@@ -17,7 +17,7 @@ var getDrupNum = function (index:number):number {
 var setDrupNum = function (index:number, num:number) {
     for (var i = GameData.bag_Drup.length - 1; i > -1; i--) {
         var id = Math.floor(GameData.bag_Drup[i]);
-        if (id == index){
+        if (id == index) {
             GameData.bag_Drup[i] += num * 0.01;
             return Math.floor((GameData.bag_Drup[i] - id) * 100);
         }
@@ -153,7 +153,7 @@ var drupData10 = {
     funcNum: 100//补充的能量值
 };
 
-var drupData11= {
+var drupData11 = {
     res: "item_drup11_png",
     name: "drup0",
     type: "gold",

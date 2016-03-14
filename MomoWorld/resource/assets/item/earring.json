@@ -1,0 +1,13 @@
+{"file":"earring.png","frames":{
+"item_equipment300_png":{"x":100,"y":1,"w":27,"h":30,"offX":0,"offY":0,"sourceW":27,"sourceH":30},
+"item_equipment301_png":{"x":65,"y":64,"w":31,"h":29,"offX":0,"offY":0,"sourceW":31,"sourceH":29},
+"item_equipment302_png":{"x":98,"y":64,"w":29,"h":31,"offX":0,"offY":0,"sourceW":29,"sourceH":31},
+"item_equipment303_png":{"x":1,"y":68,"w":31,"h":29,"offX":0,"offY":0,"sourceW":31,"sourceH":29},
+"item_equipment304_png":{"x":34,"y":67,"w":29,"h":30,"offX":0,"offY":0,"sourceW":29,"sourceH":30},
+"item_equipment305_png":{"x":34,"y":1,"w":30,"h":32,"offX":0,"offY":0,"sourceW":30,"sourceH":32},
+"item_equipment306_png":{"x":1,"y":35,"w":30,"h":31,"offX":0,"offY":0,"sourceW":30,"sourceH":31},
+"item_equipment307_png":{"x":65,"y":95,"w":30,"h":28,"offX":0,"offY":0,"sourceW":30,"sourceH":28},
+"item_equipment308_png":{"x":66,"y":1,"w":32,"h":30,"offX":0,"offY":0,"sourceW":32,"sourceH":30},
+"item_equipment309_png":{"x":66,"y":33,"w":33,"h":29,"offX":0,"offY":0,"sourceW":33,"sourceH":29},
+"item_equipment310_png":{"x":1,"y":1,"w":31,"h":32,"offX":0,"offY":0,"sourceW":31,"sourceH":32},
+"item_equipment311_png":{"x":33,"y":35,"w":30,"h":30,"offX":0,"offY":0,"sourceW":30,"sourceH":30}}}

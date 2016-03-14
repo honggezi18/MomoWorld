@@ -1,4 +1,4 @@
-//?????????
+//主角控制器
 class Hero extends egret.DisplayObjectContainer {
     static instance;
     public body:p2.Body;//???????
@@ -26,12 +26,13 @@ class Hero extends egret.DisplayObjectContainer {
     private actionType:string = "";//?????
     private mcType:string = "";//????????????????
 
-    private isDie:boolean = false;//?????????????
-    private isLevelUp:boolean = false;//?????????
-    private isWalking:boolean = false;//????????????????
-    private isHitting:boolean = false;//??????????????????
-    private isMissing:boolean = false;//???????????????,?????????????????
-    private isAttack:boolean = false;//??????????????????
+    private isDie:boolean = false;//表示是否处于死亡状态
+    private isLevelUp:boolean = false;//表示是否升级
+    private isWalking:boolean = false;//表示是否正在行走
+    private isHitting:boolean = false;//表示是否正在被攻击
+    private isMissing:boolean = false;//表示是否正在处于无敌状态
+    private isSkilling:boolean = false;//表示是否正在处于发动技能状态
+    private isAttack:boolean = false;//表示是否正在进行普通攻击
 
 
     public static getInstance():Hero {
@@ -46,7 +47,7 @@ class Hero extends egret.DisplayObjectContainer {
         this.init(name);
     }
 
-    //????????
+    //初始化
     public init(name):void {
         this._name = name;
         this.data = getHero(this._name);
@@ -63,14 +64,13 @@ class Hero extends egret.DisplayObjectContainer {
         this.action("stand");
     }
 
-    //???????
+    //同步函数
     public syncFun():void {
         if (this.blood < 0 && !this.isDie)this.action("die");
 
-        //????????????
-        this.checkHit();
+        this.checkHit();//检测碰撞
 
-        //??????????
+        //同步皮肤
         P2Tool.syncDisplay(this.body);
         var bodyX = P2Tool.getEgretNum(this.body.position[0]);
         var bodyY = P2Tool.getEgretY(this.body.position[1]);
@@ -109,10 +109,12 @@ class Hero extends egret.DisplayObjectContainer {
 
         }
 
-        //?????????????
+        //进行普通攻击的CD
+        if (this.attackCD > 0)this.attackCD--;
+
+        //按下攻击键不放，进行连续攻击
         if (this.isAttack) {
-            this.attackCD--;
-            if (this.attackCD < 0) {
+            if (this.attackCD < 1) {
                 this.attackCD = this.data.attack.CD;
                 GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
             }
@@ -120,7 +122,7 @@ class Hero extends egret.DisplayObjectContainer {
 
     }
 
-    //??????
+    //碰撞检测
     public checkHit():void {
         //????????
         for (var i = 0; i < GameData.itemArray.length; i++) {
@@ -158,8 +160,8 @@ class Hero extends egret.DisplayObjectContainer {
         }
     }
 
-    //????????
-    public action(type:string):void {
+    //动作实现
+    public action(type:string, other:any = null):void {
         if (this.actionType == type || this.isHitting || this.isDie)return;
         this.actionType = type;
 
@@ -171,13 +173,13 @@ class Hero extends egret.DisplayObjectContainer {
             this.setMoveClip("walk");
         }
         else if (type == "AttackDown") {
-            this.attackCD = 0;
+            if (this.attackCD > 0)return;
             this.isAttack = true;
             this.isWalking = false;
             this.setMoveClip("attack");
         }
-        else if (type == "SkillDown") {
-            this.setMoveClip("skill");
+        else if (type == "SkillDown") {//调用相应技能进行显示
+            this.setSkill(other);
         }
         else if (type == "JumpDown") {
             this.setMoveClip("jump");
@@ -204,7 +206,7 @@ class Hero extends egret.DisplayObjectContainer {
             this.isAttack = false;
             this.isWalking = false;
         }
-        else if (type == "levelUp") {//??
+        else if (type == "levelUp") {//升级
             this.isLevelUp = true;
             this.level++;
             this.power = this.powerMax;
@@ -220,23 +222,22 @@ class Hero extends egret.DisplayObjectContainer {
             }, this);
         }
 
-        //?????????????????
+        //点击向上键，进入地图选择页面
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
-            console.log("UpDown");
             UIManage.getInstance().hideWelcome();
             UIManage.getInstance().showMap();
         }
 
     }
 
-    //???????????
+    //帧动画播放完成后的回调
     public mcOver():void {
         if (this.mcType == "die") {
             World.P2World.removeBody(this.body);
         }
     }
 
-    //????????????????
+    //帧动画播放
     public setMoveClip(type:string):void {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;
@@ -265,6 +266,22 @@ class Hero extends egret.DisplayObjectContainer {
                 this.exp -= this.expMax;
                 this.action("levelUp");
             }
+        }
+    }
+
+    //角色技能的实现
+    public setSkill(index:number) {
+        console.log("setSkill   " + index);
+        this.isSkilling = true;
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
         }
     }
 }

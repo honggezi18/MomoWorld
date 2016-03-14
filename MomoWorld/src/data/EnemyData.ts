@@ -2,7 +2,6 @@ var getEnemy = function (index) {
     return window["enemy" + index];
 };
 
-
 var enemy1 = {
     name: "enemy1",
     blood: 500,

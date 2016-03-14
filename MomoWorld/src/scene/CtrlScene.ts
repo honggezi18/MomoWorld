@@ -7,7 +7,6 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
     //确定弹框
     private sureContainer:egret.DisplayObjectContainer;//确定框容器
-    private sureInfo:egret.TextField;//弹框信息
     private sureAnswer:boolean = false;//弹框返回的信息
 
     //顶部素材示
@@ -184,7 +183,11 @@ class CtrlScene extends egret.DisplayObjectContainer {
         this.powerText = Tool.addTextField(this, 350, 10, 0, 0, 15, 0x000000, "法力:" + Hero.getInstance().power + " / " + Hero.getInstance().powerMax);
         this.expText = Tool.addTextField(this, 500, 10, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
         this.level = Tool.addTextField(this, 20, 20, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
-        this.map = Tool.addTextField(this, 700, 20, 0, 0, 30, 0x000000, UIManage.target._name);
+        this.map = Tool.addTextField(this, 700, 20, 0, 0, 30, 0x000000, UIManage.target.mapData.name);
+
+        this.bloodBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
+        this.powerBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
+        this.expBar.scale9Grid = new egret.Rectangle(5, 1, 110, 16);
     }
 
     //显示操作层
@@ -1708,8 +1711,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
             else if (e.target == this.right)Hero.getInstance().action("RightDown");
             else if (e.target == this.jump)Hero.getInstance().action("JumpDown");
             else if (e.target == this.attack)Hero.getInstance().action("AttackDown");
-            else if (e.target == this.skill1)Hero.getInstance().action("SkillDown");
-            else if (e.target == this.skill2)Hero.getInstance().action("SkillDown");
+            else if (e.target == this.skill1)Hero.getInstance().action("SkillDown", GameData.skill1Index);
+            else if (e.target == this.skill2)Hero.getInstance().action("SkillDown", GameData.skill2Index + 5);
         }
     }
 

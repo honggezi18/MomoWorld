@@ -6,7 +6,7 @@ var boss1 = {
     blood: 500,
     exp: 50,
     dropItem: [
-        { type: "Equipment", id: 0, change: 0.5 },
+        { type: "Equipment", id: 100, change: 0.5 },
     ],
     stand: {
         offsetX: -15,

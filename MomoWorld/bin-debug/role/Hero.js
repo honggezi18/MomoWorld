@@ -1,4 +1,4 @@
-//?????????
+//主角控制器
 var Hero = (function (_super) {
     __extends(Hero, _super);
     function Hero(name) {
@@ -39,7 +39,7 @@ var Hero = (function (_super) {
             Hero.instance = new Hero(GameData.heroIndex);
         return Hero.instance;
     };
-    //????????
+    //初始化
     p.init = function (name) {
         this._name = name;
         this.data = getHero(this._name);
@@ -55,13 +55,12 @@ var Hero = (function (_super) {
         this.body.shapes[0].collisionMask = 1;
         this.action("stand");
     };
-    //???????
+    //同步函数
     p.syncFun = function () {
         if (this.blood < 0 && !this.isDie)
             this.action("die");
-        //????????????
-        this.checkHit();
-        //??????????
+        this.checkHit(); //检测碰撞
+        //同步皮肤
         P2Tool.syncDisplay(this.body);
         var bodyX = P2Tool.getEgretNum(this.body.position[0]);
         var bodyY = P2Tool.getEgretY(this.body.position[1]);
@@ -102,16 +101,18 @@ var Hero = (function (_super) {
             if (this.hitCD < -80)
                 this.isMissing = false;
         }
-        //?????????????
-        if (this.isAttack) {
+        //进行普通攻击的CD
+        if (this.attackCD > 0)
             this.attackCD--;
-            if (this.attackCD < 0) {
+        //按下攻击键不放，进行连续攻击
+        if (this.isAttack) {
+            if (this.attackCD < 1) {
                 this.attackCD = this.data.attack.CD;
                 GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
             }
         }
     };
-    //??????
+    //碰撞检测
     p.checkHit = function () {
         //????????
         for (var i = 0; i < GameData.itemArray.length; i++) {
@@ -148,8 +149,9 @@ var Hero = (function (_super) {
             }
         }
     };
-    //????????
-    p.action = function (type) {
+    //动作实现
+    p.action = function (type, other) {
+        if (other === void 0) { other = null; }
         if (this.actionType == type || this.isHitting || this.isDie)
             return;
         this.actionType = type;
@@ -162,13 +164,14 @@ var Hero = (function (_super) {
             this.setMoveClip("walk");
         }
         else if (type == "AttackDown") {
-            this.attackCD = 0;
+            if (this.attackCD > 0)
+                return;
             this.isAttack = true;
             this.isWalking = false;
             this.setMoveClip("attack");
         }
         else if (type == "SkillDown") {
-            this.setMoveClip("skill");
+            this.setSkill(other);
         }
         else if (type == "JumpDown") {
             this.setMoveClip("jump");
@@ -210,20 +213,19 @@ var Hero = (function (_super) {
                 this.show2 = null;
             }, this);
         }
-        //?????????????????
+        //点击向上键，进入地图选择页面
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
-            console.log("UpDown");
             UIManage.getInstance().hideWelcome();
             UIManage.getInstance().showMap();
         }
     };
-    //???????????
+    //帧动画播放完成后的回调
     p.mcOver = function () {
         if (this.mcType == "die") {
             World.P2World.removeBody(this.body);
         }
     };
-    //????????????????
+    //帧动画播放
     p.setMoveClip = function (type) {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;
@@ -254,6 +256,20 @@ var Hero = (function (_super) {
                 this.exp -= this.expMax;
                 this.action("levelUp");
             }
+        }
+    };
+    //角色技能的实现
+    p.setSkill = function (index) {
+        console.log("setSkill   " + index);
+        switch (index) {
+            case 1:
+                break;
+            case 1:
+                break;
+            case 1:
+                break;
+            case 1:
+                break;
         }
     };
     return Hero;
