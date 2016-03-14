@@ -1,7 +1,7 @@
-//游戏欢迎页面
-var ShengDiScene = (function (_super) {
-    __extends(ShengDiScene, _super);
-    function ShengDiScene() {
+//游戏战斗页面
+var WarScene = (function (_super) {
+    __extends(WarScene, _super);
+    function WarScene() {
         _super.call(this);
         this.absoluteX = 0; //标示点击的绝对坐标，即相对于背景的坐标
         this.absoluteY = 0; //标示点击的绝对坐标，即相对于背景的坐标
@@ -9,7 +9,7 @@ var ShengDiScene = (function (_super) {
         this.tureHeight = 0;
         this.init();
     }
-    var d = __define,c=ShengDiScene;p=c.prototype;
+    var d = __define,c=WarScene;p=c.prototype;
     //初始化资源
     p.init = function () {
         P2Tool.initSpace(50, new egret.Rectangle(0, 0, this.width, this.height));
@@ -120,6 +120,6 @@ var ShengDiScene = (function (_super) {
             Hero.getInstance().action("GetDown");
         }
     };
-    return ShengDiScene;
+    return WarScene;
 })(egret.DisplayObjectContainer);
-egret.registerClass(ShengDiScene,"ShengDiScene");
+egret.registerClass(WarScene,"WarScene");

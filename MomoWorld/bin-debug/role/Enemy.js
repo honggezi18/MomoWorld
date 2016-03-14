@@ -6,7 +6,7 @@ var Enemy = (function (_super) {
         this.offsetX = 0; //��ǰƤ����ƫ��ֵ
         this.offsetY = 0;
         this.blood = 1; //Ѫ��
-        this.toward = 1; //��ǰ�ĳ���,����1Ϊ������-1Ϊ����
+        this.toward = 1; //��ǰ�ĳ���,����1Ϊ����-1Ϊ����
         this.moveTime = 0; //���ߵ�ʱ��
         this.standTime = 0; //���ߵ�ʱ��
         this.hitCD = 0; //������ʱ����ȴʱ��
@@ -15,8 +15,8 @@ var Enemy = (function (_super) {
         this._name = "empty";
         this.isDie = false; //��ʾ�Ƿ��Ѿ�����
         this.isSkill = false; //��ʾ��ǰ�Ƿ��ڷ�������
-        this.isAngry = false; //��ʾ��ǰ�Ƿ���������״̬�����Ƿ񱻹�����
-        this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,�����������Ķ����޵�
+        this.isAngry = false; //��ʾ��ǰ�Ƿ�������״̬�����Ƿ񱻹�����
+        this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,����������Ķ����޵�
         this.init(name, x);
     }
     var d = __define,c=Enemy;p=c.prototype;
@@ -34,15 +34,15 @@ var Enemy = (function (_super) {
     };
     //ͬ������
     p.syncFun = function () {
-        //��������
+        //�������
         if (this.blood < 0 && !this.isDie)
             this.action("die");
         if (this.isDie)
             return;
-        this.checkHit(); //���ⱻ����
+        this.checkHit(); //��ⱻ����
         //ͬ��Ƥ��
         P2Tool.syncDisplay(this.body);
-        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward; //���������������ҵĲ�ͬ�ı�����������ƫ��ֵ
+        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward; //������������ҵĲ�ͬ�ı����������ƫ��ֵ
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         //��·������ʵ��
         if (this.actionType == "walk") {
@@ -66,7 +66,7 @@ var Enemy = (function (_super) {
                 }
                 return;
             }
-            //��ͨ����������
+            //��ͨ���������
             this.moveTime--;
             var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward; //��������Լ��
             var parentWidth = UIManage.target.tureWidth;
@@ -88,7 +88,7 @@ var Enemy = (function (_super) {
                 this.action("walk");
         }
     };
-    //���ⱻ����
+    //��ⱻ����
     p.checkHit = function () {
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet = GameData.bulletArray[i];
@@ -138,18 +138,14 @@ var Enemy = (function (_super) {
         else if (type == "die") {
             this.isDie = true;
             this.setMoveClip("die");
-            Hero.getInstance().exp += this.data.exp;
-            if (Hero.getInstance().exp >= Hero.getInstance().expMax) {
-                Hero.getInstance().exp -= Hero.getInstance().expMax;
-                Hero.getInstance().action("levelUp");
-            }
+            Hero.getInstance().setData("exp", this.data.exp);
         }
     };
     //�������Ž���
     p.mcOver = function () {
         if (this.mcType == "attack") {
             this.isMissing = false;
-            var distance = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward; //�ж��Ƿ��������󣬻����ƶ�
+            var distance = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward; //�ж��Ƿ������������ƶ�
             if (distance > this.data.attack.range || distance < 0) {
                 this.isSkill = false;
                 this.action("walk");
@@ -163,7 +159,7 @@ var Enemy = (function (_super) {
             GameData.itemArray.push(new Item(this.data.die.items[random], P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1])));
         }
     };
-    //����Ƥ�𶯻����л�
+    //����Ƥ���������л�
     p.setMoveClip = function (type) {
         var _this = this;
         this.mcType = type;

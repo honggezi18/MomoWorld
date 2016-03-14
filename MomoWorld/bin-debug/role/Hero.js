@@ -1,32 +1,32 @@
-//��ͼѡ��ҳ��
+//?????????
 var Hero = (function (_super) {
     __extends(Hero, _super);
     function Hero(name) {
         _super.call(this);
-        this.bloodMax = 1; //��ǰ����Ѫ��
-        this.blood = 1; //Ѫ��
-        this.powerMax = 1; //��ǰ��������ֵ
-        this.power = 1; //����ֵ
-        this.expMax = 1; //��ǰ��������ֵ
-        this.exp = 1; //����ֵ
-        this.level = 1; //��ǰ�ȼ�
-        this.offsetX = 0; //��ǰƤ����ƫ��ֵ
+        this.bloodMax = 1; //?????????
+        this.blood = 1; //???
+        this.powerMax = 1; //?????????
+        this.power = 1; //?????
+        this.expMax = 1; //?????????
+        this.exp = 1; //?????
+        this.level = 1; //??????
+        this.offsetX = 0; //????????????
         this.offsetY = 0;
-        this.toward = 1; //��ǰ�ĳ���,����1Ϊ������-1Ϊ����
-        this.attackCD = 0; //��ͨ��������ȴʱ��
-        this.hitCD = 0; //������ʱ����ȴʱ��
-        this.moveSpeed = 8; //��ɫ�ƶ����ٶ�
-        this.jumpPower = 5; //������
+        this.toward = 1; //????????,????1?????-1?????
+        this.attackCD = 0; //???????????????
+        this.hitCD = 0; //???????????????
+        this.moveSpeed = 8; //???????????
+        this.jumpPower = 5; //??????
         this._name = "1";
-        this.jumpState = ""; //��ʾ��ɫ��ǰ��Ծ��״̬
-        this.actionType = ""; //�˶�״̬
-        this.mcType = ""; //��ʾ��ǰ����������
-        this.isDie = false; //��ʾ�Ƿ��Ѿ�����
-        this.isLevelUp = false; //��ʾ��������
-        this.isWalking = false; //��ʾ��ǰ�Ƿ����ڱ���
-        this.isHitting = false; //��ʾ��ǰ�Ƿ����ڱ�����
-        this.isMissing = false; //��ʾ��ǰ�Ƿ�����״̬,�����������Ķ����޵�
-        this.isAttack = false; //��ʾ��ǰ�Ƿ����ڹ���״̬
+        this.jumpState = ""; //????????????????
+        this.actionType = ""; //?????
+        this.mcType = ""; //????????????????
+        this.isDie = false; //?????????????
+        this.isLevelUp = false; //?????????
+        this.isWalking = false; //????????????????
+        this.isHitting = false; //??????????????????
+        this.isMissing = false; //???????????????,?????????????????
+        this.isAttack = false; //??????????????????
         if (Hero.instance == null)
             Hero.instance = this;
         else
@@ -39,7 +39,7 @@ var Hero = (function (_super) {
             Hero.instance = new Hero(GameData.heroIndex);
         return Hero.instance;
     };
-    //��ʼ����Դ
+    //????????
     p.init = function (name) {
         this._name = name;
         this.data = getHero(this._name);
@@ -55,19 +55,19 @@ var Hero = (function (_super) {
         this.body.shapes[0].collisionMask = 1;
         this.action("stand");
     };
-    //ͬ������
+    //???????
     p.syncFun = function () {
         if (this.blood < 0 && !this.isDie)
             this.action("die");
-        //���ñ���������
+        //????????????
         this.checkHit();
-        //ͬ������Ƥ��
+        //??????????
         P2Tool.syncDisplay(this.body);
         var bodyX = P2Tool.getEgretNum(this.body.position[0]);
         var bodyY = P2Tool.getEgretY(this.body.position[1]);
         this.show.x = bodyX + this.offsetX * this.toward;
         this.show.y = bodyY + this.offsetY;
-        //�������������ƶ�
+        //???????????????
         if (this.body.position[0] < P2Tool.getP2Num(25))
             this.body.position[0] = P2Tool.getP2Num(25);
         if (this.body.position[0] > P2Tool.getP2Num(UIManage.target.tureWidth - 25))
@@ -78,11 +78,11 @@ var Hero = (function (_super) {
             this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
             this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
         }
-        //ͬ������
+        //???????
         var parent = UIManage.target;
         if (bodyX > GameData.gameWidth / 2 && bodyX < parent.measuredWidth - GameData.gameWidth / 2)
             parent.x = GameData.gameWidth / 2 - bodyX;
-        //����hero����Ծ
+        //???hero?????
         if (this.body.velocity[1] < 0 && this.jumpState == "up")
             this.jumpState = "down";
         if (this.body.velocity[1] > 0 && this.jumpState == "down") {
@@ -92,7 +92,7 @@ var Hero = (function (_super) {
                 this.action("stand");
             this.jumpState = "empty";
         }
-        //������ʱ�Ĵ���
+        //????????????
         if (this.isMissing) {
             this.hitCD--;
             if (this.hitCD < 0 && this.isHitting == true) {
@@ -102,7 +102,7 @@ var Hero = (function (_super) {
             if (this.hitCD < -80)
                 this.isMissing = false;
         }
-        //���й���ʱ�Ĵ���
+        //?????????????
         if (this.isAttack) {
             this.attackCD--;
             if (this.attackCD < 0) {
@@ -111,15 +111,15 @@ var Hero = (function (_super) {
             }
         }
     };
-    //������ײ
+    //??????
     p.checkHit = function () {
-        //������ʰ��Ʒ
+        //????????
         for (var i = 0; i < GameData.itemArray.length; i++) {
             var tempItem = GameData.itemArray[i];
             if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)
                 tempItem.pickUp();
         }
-        //���ⱻ����
+        //???????
         if (this.isMissing || this.isDie)
             return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
@@ -148,7 +148,7 @@ var Hero = (function (_super) {
             }
         }
     };
-    //��ɫ�Ķ���
+    //????????
     p.action = function (type) {
         if (this.actionType == type || this.isHitting || this.isDie)
             return;
@@ -210,20 +210,20 @@ var Hero = (function (_super) {
                 this.show2 = null;
             }, this);
         }
-        //�����Ƿ�������ͼ������
+        //?????????????????
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
             console.log("UpDown");
             UIManage.getInstance().hideWelcome();
             UIManage.getInstance().showMap();
         }
     };
-    //�������Ž���
+    //???????????
     p.mcOver = function () {
         if (this.mcType == "die") {
             World.P2World.removeBody(this.body);
         }
     };
-    //����Ƥ�𶯻����л�
+    //????????????????
     p.setMoveClip = function (type) {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;
@@ -235,6 +235,26 @@ var Hero = (function (_super) {
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         this.show.scaleX = this.toward;
+    };
+    //设置人物数值
+    p.setData = function (type, num) {
+        if (type == "blood") {
+            this.blood += num;
+            if (this.blood > this.bloodMax)
+                this.blood = this.bloodMax;
+        }
+        else if (type == "power") {
+            this.power += num;
+            if (this.power > this.powerMax)
+                this.power = this.powerMax;
+        }
+        else if (type == "exp") {
+            this.exp += num;
+            if (this.exp >= this.expMax) {
+                this.exp -= this.expMax;
+                this.action("levelUp");
+            }
+        }
     };
     return Hero;
 })(egret.DisplayObjectContainer);

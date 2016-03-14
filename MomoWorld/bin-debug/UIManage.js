@@ -66,25 +66,25 @@ var UIManage = (function () {
             console.log("mapScene   had   not  instance");
     };
     //显示圣地地图页面
-    p.showShengDiScene = function () {
-        console.log("showShengDi");
-        if (this.shengDiScene != null)
-            this.shengDiScene = null;
-        this.shengDiScene = new ShengDiScene();
-        this.registerAndroidEvent(this.shengDiScene);
-        UIManage.target = this.shengDiScene;
+    p.showWarScene = function () {
+        console.log("showWar");
+        if (this.warScene != null)
+            this.warScene = null;
+        this.warScene = new WarScene();
+        this.registerAndroidEvent(this.warScene);
+        UIManage.target = this.warScene;
         World.instance.addChildAt(UIManage.target, 0);
         CtrlScene.getInstance().showTop();
         CtrlScene.getInstance().showCtrl();
     };
     //隐藏圣地地图页面
-    p.hideShengDiScene = function () {
-        if (this.shengDiScene != null) {
-            console.log("hideShengDi");
-            this.clear(this.shengDiScene);
+    p.hideWarScene = function () {
+        if (this.warScene != null) {
+            console.log("hideWarScene");
+            this.clear(this.warScene);
         }
         else
-            console.log("shengDiScene   had   not  instance");
+            console.log("warScene   had   not  instance");
     };
     //键盘按钮的模拟
     p.registerAndroidEvent = function (target) {

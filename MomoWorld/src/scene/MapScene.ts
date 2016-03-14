@@ -114,7 +114,7 @@ class MapScene extends egret.DisplayObjectContainer {
                 this.select.visible = false;
                 if (GameData.difficulty > 0) {//选择了难度后，跳到战区页面，否则直接隐藏
                     UIManage.getInstance().hideMap();
-                    UIManage.getInstance().showShengDiScene();
+                    UIManage.getInstance().showWarScene();
                 }
                 else GameData.mapIndex = -1;//未选择进入，重置地图选择
                 for (var i = 0; i < this.itemList.length; i++)Tool.clearItem(this.itemList[i]);//清空信息列表

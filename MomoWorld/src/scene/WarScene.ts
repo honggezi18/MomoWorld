@@ -1,8 +1,10 @@
-//游戏欢迎页面
-class ShengDiScene extends egret.DisplayObjectContainer {
+//游戏战斗页面
+class WarScene extends egret.DisplayObjectContainer {
     private background:egret.Bitmap;//欢迎页面背景
     public role:egret.DisplayObjectContainer;//角色层
     public item:egret.DisplayObjectContainer;//物品层
+
+    public mapData:any;//游戏战斗场景相关信息
 
     public _name:string;//当前关卡名字
     public absoluteX:number = 0;//标示点击的绝对坐标，即相对于背景的坐标

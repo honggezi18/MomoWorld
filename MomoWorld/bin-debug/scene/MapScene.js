@@ -90,7 +90,7 @@ var MapScene = (function (_super) {
                 this.select.visible = false;
                 if (GameData.difficulty > 0) {
                     UIManage.getInstance().hideMap();
-                    UIManage.getInstance().showShengDiScene();
+                    UIManage.getInstance().showWarScene();
                 }
                 else
                     GameData.mapIndex = -1; //未选择进入，重置地图选择

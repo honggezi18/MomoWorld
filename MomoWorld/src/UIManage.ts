@@ -3,7 +3,7 @@ class UIManage {
     static instance;
     static target;//当前显示的场景
     private welcomeScene:WelcomeScene;
-    private shengDiScene:ShengDiScene;
+    private warScene:WarScene;
     private mapScene:MapScene;
 
     public static getInstance():UIManage {
@@ -70,24 +70,24 @@ class UIManage {
     }
 
     //显示圣地地图页面
-    public showShengDiScene():void {
-        console.log("showShengDi");
-        if (this.shengDiScene != null)this.shengDiScene = null;
-        this.shengDiScene = new ShengDiScene();
-        this.registerAndroidEvent(this.shengDiScene);
-        UIManage.target = this.shengDiScene;
+    public showWarScene():void {
+        console.log("showWar");
+        if (this.warScene != null)this.warScene = null;
+        this.warScene = new WarScene();
+        this.registerAndroidEvent(this.warScene);
+        UIManage.target = this.warScene;
         World.instance.addChildAt(UIManage.target, 0);
         CtrlScene.getInstance().showTop();
         CtrlScene.getInstance().showCtrl();
     }
 
     //隐藏圣地地图页面
-    public hideShengDiScene():void {
-        if (this.shengDiScene != null) {
-            console.log("hideShengDi");
-            this.clear(this.shengDiScene);
+    public hideWarScene():void {
+        if (this.warScene != null) {
+            console.log("hideWarScene");
+            this.clear(this.warScene);
         }
-        else console.log("shengDiScene   had   not  instance");
+        else console.log("warScene   had   not  instance");
     }
 
     //键盘按钮的模拟

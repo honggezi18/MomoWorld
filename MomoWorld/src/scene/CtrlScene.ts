@@ -1,15 +1,3 @@
-//Momo在信息页面实现装备武器
-//Momo实现hero属性数据的变化
-//实现卸下装备功能
-//判断该位置是否装备道具
-//实现卸下后，装备返回背包，以及从背包中实现装备道具
-//搭建装备选择页面
-//实现从装备选择框着装装备
-//装备等级的显示
-//内存回收
-//点击约束
-
-
 //操作层页面
 class CtrlScene extends egret.DisplayObjectContainer {
     private static instance;
@@ -44,6 +32,8 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private skill2:egret.Bitmap;
     private attack:egret.Bitmap;
     private jump:egret.Bitmap;
+    private bloodNum:egret.TextField;//血量瓶数量
+    private powerNum:egret.TextField;//法力瓶数量
     private isCtrl:boolean = false;
 
     //每日任务界面
@@ -126,7 +116,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
     private bag_btnItem:egret.Bitmap;//物品选择卡
     private bag_btnPiece:egret.Bitmap;//碎片选择卡
     private bag_btnDrup:egret.Bitmap;//药品选择卡
-    private bagBooldBox:egret.Bitmap;//红瓶携带框
+    private bagBloodBox:egret.Bitmap;//红瓶携带框
     private bagPowerBox:egret.Bitmap;//蓝瓶携带框
     private bagItems:Array<egret.Bitmap>;//商品项背景
     private bagIcon:Array<egret.Bitmap>;//各个图标
@@ -198,27 +188,55 @@ class CtrlScene extends egret.DisplayObjectContainer {
     }
 
     //显示操作层
-    public showCtrl(type:string = "war"):void {
-        this.isCtrl = true;
-        this.ctrlBackgorund = Tool.addBitmap(this, "ctrl_topBackground_png", 0, 410, this.width, 70, false, false);
-        this.left = Tool.addBitmap(this, "ctrl_left_png", 50, 445, 50, 50, true, true);
-        this.right = Tool.addBitmap(this, "ctrl_right_png", 120, 445, 50, 50, true, true);
-        this.attack = Tool.addBitmap(this, "ctrl_attack_png", 680, 445, 50, 50, true, true);
-        this.jump = Tool.addBitmap(this, "ctrl_jump_png", 750, 445, 50, 50, true, true);
+    public showCtrl(type:string = "war", index:number = -1):void {
+        console.log("type   " + type);
+
+        function init() {
+            this.isCtrl = true;
+            this.ctrlBackgorund = Tool.addBitmap(this, "ctrl_topBackground_png", 0, 410, this.width, 70, false, false);
+            this.left = Tool.addBitmap(this, "ctrl_left_png", 50, 445, 50, 50, true, true);
+            this.right = Tool.addBitmap(this, "ctrl_right_png", 120, 445, 50, 50, true, true);
+            this.attack = Tool.addBitmap(this, "ctrl_attack_png", 680, 445, 50, 50, true, true);
+            this.jump = Tool.addBitmap(this, "ctrl_jump_png", 750, 445, 50, 50, true, true);
+        }
 
         if (type == "war") {
-            if (getDrup(GameData.bag_BooldId))this.blood = Tool.addBitmap(this, getDrup(GameData.bag_BooldId).res, 190, 445, 50, 50, true, true);
-            if (getDrup(GameData.bag_PowerId))this.power = Tool.addBitmap(this, getDrup(GameData.bag_PowerId).res, 260, 445, 50, 50, true, true);
+            init.call(this);
+            if (getDrup(GameData.bag_BloodId)) {
+                this.bloodNum = Tool.addTextField(this, 190, 415, 30, 16, 16, 0x000000, getDrupNum(GameData.bag_BloodId));
+                this.bloodNum.textAlign = egret.HorizontalAlign.RIGHT;
+                this.blood = Tool.addBitmap(this, getDrup(GameData.bag_BloodId).res, 190, 445, 50, 50, false, true);
+                this.blood.touchEnabled = true;
+                this.blood.addEventListener(egret.TouchEvent.TOUCH_END, this.showCtrl.bind(this, "drup", GameData.bag_BloodId), this);
+            }
+            if (getDrup(GameData.bag_PowerId)) {
+                this.powerNum = Tool.addTextField(this, 260, 415, 30, 16, 16, 0x000000, getDrupNum(GameData.bag_PowerId));
+                this.bloodNum.textAlign = egret.HorizontalAlign.RIGHT;
+                this.power = Tool.addBitmap(this, getDrup(GameData.bag_PowerId).res, 260, 445, 50, 50, false, true);
+                this.power.touchEnabled = true;
+                this.power.addEventListener(egret.TouchEvent.TOUCH_END, this.showCtrl.bind(this, "drup", GameData.bag_PowerId), this);
+            }
             this.skill1 = Tool.addBitmap(this, ability.skill1[GameData.skill1Index].icon, 540, 445, 50, 50, true, true);
             this.skill2 = Tool.addBitmap(this, ability.skill2[GameData.skill2Index].icon, 610, 445, 50, 50, true, true);
         }
         else if (type == "welcome") {
+            init.call(this);
             this.level = Tool.addTextField(this, 250, 425, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
             this.expText = Tool.addTextField(this, 460, 415, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
             this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 460, 440, 120, 30);
             Tool.addBitmap(this, "ctrl_barBackground_png", 460 - 5, 440 - 5, 120 + 10, 30 + 10);
         }
-        this.ctrlData("show");
+        else if (type == "drup") {//使用药品
+            var drup = getDrup(index);
+            Hero.getInstance().setData(drup.func, drup.funcNum);//恢复玩家数值
+            var drupNum = setDrupNum(index, -1);
+            console.log("func   " + drup.func + "Num" + "   " + this[drup.func + "Num"]);
+            this[drup.func + "Num"].text = drupNum + "";
+            if (drupNum < 1) {
+                this[drup.func + ""].alpha = 0.5;
+                this[drup.func + ""].touchEnabled = false;
+            }
+        }
     }
 
     //显示提示信息
@@ -300,7 +318,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
             this.weaponBackground = Tool.addBitmap(this.weaponContainer, "weapon_background" + this.weaponState + "_png", 0, 0, 500, 300);
             this.weaponExpbar = Tool.addBitmap(this.weaponContainer, "weapon_expbar_png", 224, 47, 95, 25);
             var tempText = Tool.addTextField(this.weaponContainer, 192, 48, 30, 25, 25, 0x000000, "30");
-            tempText.stroke = 1;
+            tempText.stroke = 0.5;
 
             this.weaponBackground.touchEnabled = true;
             this.weaponBackground.addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {
@@ -718,7 +736,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
 
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 34 + a * 55.2, i * 70 + 32, 40, 40, false, true));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
-                    this.bagItemNum[index].stroke = 1;
+                    this.bagItemNum[index].stroke = 0.5;
                     this.bagItemNum[index].visible = false;
                     this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
@@ -753,9 +771,9 @@ class CtrlScene extends egret.DisplayObjectContainer {
             tw.to({scaleX: 1, scaleY: 1}, 500, egret.Ease.backOut);
 
             //生成药瓶选择框
-            this.bagBooldBox = Tool.addBitmap(this.bagItemGroup, "bag_bloodBox_png", 0, 0, 65, 60, false, true);
+            this.bagBloodBox = Tool.addBitmap(this.bagItemGroup, "bag_bloodBox_png", 0, 0, 65, 60, false, true);
             this.bagPowerBox = Tool.addBitmap(this.bagItemGroup, "bag_powerBox_png", 0, 0, 65, 60, false, true);
-            this.bagBooldBox.visible = false;
+            this.bagBloodBox.visible = false;
             this.bagPowerBox.visible = false;
         }
         else if (type == "hide") {
@@ -774,7 +792,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
                 this.bagIcon = null;
                 this.bag_btnEquipment = null;
                 this.bag_btnItem = null;
-                this.bagBooldBox = null;
+                this.bagBloodBox = null;
                 this.bag_btnPiece = null;
                 this.bagItemNum = null;
                 this.bagDiamondNum = null;
@@ -813,7 +831,7 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     this.bagIcon.push(Tool.addBitmap(this.bagItemGroup, data.res, 34 + a * 55.2, i * 70 + 32, 40, 40, false, true));
                     this.bagItemNum.push(Tool.addTextField(this.bagItemGroup, 35 + a * 55.2, i * 70 + 40, 20, 15, 15, 0x000000, num + ""));
                     if (this.bagBtnName == "Equipment")this.bagItemNum[index].visible = false;
-                    this.bagItemNum[index].stroke = 1;
+                    this.bagItemNum[index].stroke = 0.5;
                     this.bagItemNum[index].textAlign = egret.HorizontalAlign.RIGHT;
                     this.bagIcon[index].touchEnabled = true;
                     this.bagIcon[index].addEventListener(egret.TouchEvent.TOUCH_TAP, function (e:egret.TouchEvent) {//添加点击响应
@@ -829,15 +847,15 @@ class CtrlScene extends egret.DisplayObjectContainer {
             }
 
             //判断当前是否是药品栏，进行药瓶携带框的视图调整
-            this.bagBooldBox.visible = false;
+            this.bagBloodBox.visible = false;
             this.bagPowerBox.visible = false;
             if (this.bagBtnName !== "Drup")return;
             GameData.bag_Drup.forEach(function (item, index) {
-                if (GameData.bag_BooldId == Math.floor(item)) {
-                    this.bagItemGroup.setChildIndex(this.bagBooldBox, 99);
-                    this.bagBooldBox.visible = true;
-                    this.bagBooldBox.x = 34 + index % 7 * 55.2;
-                    this.bagBooldBox.y = Math.floor(index / 7) * 70 + 32;
+                if (GameData.bag_BloodId == Math.floor(item)) {
+                    this.bagItemGroup.setChildIndex(this.bagBloodBox, 99);
+                    this.bagBloodBox.visible = true;
+                    this.bagBloodBox.x = 34 + index % 7 * 55.2;
+                    this.bagBloodBox.y = Math.floor(index / 7) * 70 + 32;
                 }
                 else if (GameData.bag_PowerId == Math.floor(item)) {
                     this.bagItemGroup.setChildIndex(this.bagPowerBox, 99);
@@ -931,12 +949,12 @@ class CtrlScene extends egret.DisplayObjectContainer {
                     else if (this.bagBtnName == "Drup") {//通过药品类型判断携带还是使用
                         var id = Math.floor(GameData["bag_" + this.bagBtnName][this.bagIndex]);
                         var data2 = window["get" + this.bagBtnName](id);
-                        if (data2.func == "boold") {
-                            this.bagBooldBox.visible = true;
-                            GameData.bag_BooldId = id;
-                            this.bagBooldBox.x = 34 + this.bagIndex % 7 * 55.2;
-                            this.bagBooldBox.y = Math.floor(this.bagIndex / 7) * 70 + 32;
-                            this.bagItemGroup.setChildIndex(this.bagBooldBox, 99);
+                        if (data2.func == "blood") {
+                            this.bagBloodBox.visible = true;
+                            GameData.bag_BloodId = id;
+                            this.bagBloodBox.x = 34 + this.bagIndex % 7 * 55.2;
+                            this.bagBloodBox.y = Math.floor(this.bagIndex / 7) * 70 + 32;
+                            this.bagItemGroup.setChildIndex(this.bagBloodBox, 99);
                         }
                         else if (data2.func == "power") {
                             this.bagPowerBox.visible = true;

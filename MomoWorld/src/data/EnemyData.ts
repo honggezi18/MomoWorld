@@ -56,7 +56,7 @@ var enemy1 = {
         offsetX: -30,
         offsetY: -35,
         items: [
-            "thing1"
+            "0"
         ]
     },
 };

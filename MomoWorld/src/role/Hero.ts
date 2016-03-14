@@ -1,37 +1,37 @@
-//µØÍ¼Ñ¡ÔñÒ³Ãæ
+//?????????
 class Hero extends egret.DisplayObjectContainer {
     static instance;
-    public body:p2.Body;//½ÇÉ«¸ÕÌå
-    public show:egret.MovieClip;//½ÇÉ«Æ¤·ô
-    public show2:egret.MovieClip;//¸¨ÖúÆ¤·ô
-    public data:any;//¾²Ì¬Êı¾İ
+    public body:p2.Body;//???????
+    public show:egret.MovieClip;//??????
+    public show2:egret.MovieClip;//???????
+    public data:any;//??????
 
-    public bloodMax:number = 1;//µ±Ç°×î´óÑªÁ¿
-    public blood:number = 1;//ÑªÁ¿
-    public powerMax:number = 1;//µ±Ç°×î´ó·¨Á¦Öµ
-    public power:number = 1;//·¨Á¦Öµ
-    public expMax:number = 1;//µ±Ç°×î´ó¾­ÑéÖµ
-    public exp:number = 1;//¾­ÑéÖµ
-    public level:number = 1;//µ±Ç°µÈ¼¶
-    private offsetX:number = 0;//µ±Ç°Æ¤·ôµÄÆ«ÒÆÖµ
+    public bloodMax:number = 1;//?????????
+    public blood:number = 1;//???
+    public powerMax:number = 1;//?????????
+    public power:number = 1;//?????
+    public expMax:number = 1;//?????????
+    public exp:number = 1;//?????
+    public level:number = 1;//??????
+    private offsetX:number = 0;//????????????
     private offsetY:number = 0;
-    private toward:number = 1;//µ±Ç°µÄ³¯Ïò,ÆäÖĞ1ÎªÏò×ó¡£-1ÎªÏòÓÒ
-    private attackCD:number = 0;//ÆÕÍ¨¹¥»÷µÄÀäÈ´Ê±¼ä
-    private hitCD:number = 0;//±»¹¥»÷Ê±µÄÀäÈ´Ê±¼ä
-    private moveSpeed:number = 8;//½ÇÉ«ÒÆ¶¯µÄËÙ¶È
-    private jumpPower:number = 5;//µ¯ÌøÁ¦
+    private toward:number = 1;//????????,????1?????-1?????
+    private attackCD:number = 0;//???????????????
+    private hitCD:number = 0;//???????????????
+    private moveSpeed:number = 8;//???????????
+    private jumpPower:number = 5;//??????
 
     private _name:string = "1";
-    private jumpState:string = "";//±êÊ¾½ÇÉ«µ±Ç°ÌøÔ¾µÄ×´Ì¬
-    private actionType:string = "";//ÔË¶¯×´Ì¬
-    private mcType:string = "";//±êÊ¾µ±Ç°¶¯»­µÄÀàĞÍ
+    private jumpState:string = "";//????????????????
+    private actionType:string = "";//?????
+    private mcType:string = "";//????????????????
 
-    private isDie:boolean = false;//±êÊ¾ÊÇ·ñÒÑ¾­ËÀÍö
-    private isLevelUp:boolean = false;//±êÊ¾ÕıÔÚÉı¼¶
-    private isWalking:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÕıÔÚ±¼ÅÜ
-    private isHitting:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÕıÔÚ±»¹¥»÷
-    private isMissing:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÉÁ±Ü×´Ì¬,¼´±»¹¥»÷ºóµÄ¶ÌÔİÎŞµĞ
-    private isAttack:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÕıÔÚ¹¥»÷×´Ì¬
+    private isDie:boolean = false;//?????????????
+    private isLevelUp:boolean = false;//?????????
+    private isWalking:boolean = false;//????????????????
+    private isHitting:boolean = false;//??????????????????
+    private isMissing:boolean = false;//???????????????,?????????????????
+    private isAttack:boolean = false;//??????????????????
 
 
     public static getInstance():Hero {
@@ -46,7 +46,7 @@ class Hero extends egret.DisplayObjectContainer {
         this.init(name);
     }
 
-    //³õÊ¼»¯×ÊÔ´
+    //????????
     public init(name):void {
         this._name = name;
         this.data = getHero(this._name);
@@ -63,34 +63,34 @@ class Hero extends egret.DisplayObjectContainer {
         this.action("stand");
     }
 
-    //Í¬²½º¯Êı
+    //???????
     public syncFun():void {
         if (this.blood < 0 && !this.isDie)this.action("die");
 
-        //ÉèÖÃ±»¹¥»÷¼ì²â
+        //????????????
         this.checkHit();
 
-        //Í¬²½ÈËÎïÆ¤·ô
+        //??????????
         P2Tool.syncDisplay(this.body);
         var bodyX = P2Tool.getEgretNum(this.body.position[0]);
         var bodyY = P2Tool.getEgretY(this.body.position[1]);
         this.show.x = bodyX + this.offsetX * this.toward;
         this.show.y = bodyY + this.offsetY;
 
-        //ÉèÖÃÈËÎï×óÓÒÒÆ¶¯
+        //???????????????
         if (this.body.position[0] < P2Tool.getP2Num(25))this.body.position[0] = P2Tool.getP2Num(25);
         if (this.body.position[0] > P2Tool.getP2Num(UIManage.target.tureWidth - 25))this.body.position[0] = P2Tool.getP2Num(UIManage.target.tureWidth - 25);
         if (this.isWalking == true)this.body.position[0] -= P2Tool.getP2Num(this.moveSpeed) * this.toward;
-        if (this.isLevelUp) {//Éı¼¶Ê±µÄÆ¤·ôÍ¬²½
+        if (this.isLevelUp) {//???????????
             this.show2.y = P2Tool.getEgretY(this.body.position[1]) + this.data.levelUp.offsetY;
             this.show2.x = P2Tool.getEgretNum(this.body.position[0]) + this.data.levelUp.offsetX;
         }
 
-        //Í¬²½³¡¾°
+        //???????
         var parent = UIManage.target;
         if (bodyX > GameData.gameWidth / 2 && bodyX < parent.measuredWidth - GameData.gameWidth / 2) parent.x = GameData.gameWidth / 2 - bodyX;
 
-        //¼ì²âheroµÄÌøÔ¾
+        //???hero?????
         if (this.body.velocity[1] < 0 && this.jumpState == "up")this.jumpState = "down";
         if (this.body.velocity[1] > 0 && this.jumpState == "down") {
             if (this.isWalking)this.setMoveClip("walk");
@@ -98,7 +98,7 @@ class Hero extends egret.DisplayObjectContainer {
             this.jumpState = "empty";
         }
 
-        //±»¹¥»÷Ê±µÄ´¦Àí
+        //????????????
         if (this.isMissing) {
             this.hitCD--;
             if (this.hitCD < 0 && this.isHitting == true) {
@@ -109,7 +109,7 @@ class Hero extends egret.DisplayObjectContainer {
 
         }
 
-        //½øĞĞ¹¥»÷Ê±µÄ´¦Àí
+        //?????????????
         if (this.isAttack) {
             this.attackCD--;
             if (this.attackCD < 0) {
@@ -120,21 +120,21 @@ class Hero extends egret.DisplayObjectContainer {
 
     }
 
-    //¼ì²âÅö×²
+    //??????
     public checkHit():void {
-        //¼ì²â¼ñÊ°ÎïÆ·
+        //????????
         for (var i = 0; i < GameData.itemArray.length; i++) {
             var tempItem:Item = GameData.itemArray[i];
             if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)tempItem.pickUp();
         }
 
-        //¼ì²â±»¹¥»÷
+        //???????
         if (this.isMissing || this.isDie)return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var temp:Enemy = GameData.enemyArray[i];
             if (temp.isDie)return;
 
-            if (temp.isSkill == false) {//ÆÕÍ¨Åö×²µÄ¼ì²â
+            if (temp.isSkill == false) {//??????????
                 var direction1 = Math.abs(temp.show.x - P2Tool.getEgretNum(this.body.position[0]));
                 if (direction1 < temp.data.stand.halfWidth) {
                     this.action("hit");
@@ -144,7 +144,7 @@ class Hero extends egret.DisplayObjectContainer {
                     return;
                 }
             }
-            else {//¼¼ÄÜ¹¥»÷µÄ¼ì²â
+            else {//???????????
                 var direction1 = (P2Tool.getEgretNum(temp.body.position[0]) - P2Tool.getEgretNum(this.body.position[0])) * temp.toward;
                 if (direction1 < temp.data.attack.range && direction1 > 0) {
                     this.action("hit");
@@ -158,11 +158,10 @@ class Hero extends egret.DisplayObjectContainer {
         }
     }
 
-    //½ÇÉ«µÄ¶¯×÷
+    //????????
     public action(type:string):void {
         if (this.actionType == type || this.isHitting || this.isDie)return;
         this.actionType = type;
-
 
         if (type == "RightDown" || type == "LeftDown") {
             this.toward = 1;
@@ -205,7 +204,7 @@ class Hero extends egret.DisplayObjectContainer {
             this.isAttack = false;
             this.isWalking = false;
         }
-        else if (type == "levelUp") {//Éı¼¶
+        else if (type == "levelUp") {//??
             this.isLevelUp = true;
             this.level++;
             this.power = this.powerMax;
@@ -221,7 +220,7 @@ class Hero extends egret.DisplayObjectContainer {
             }, this);
         }
 
-        //¼ì²âÊÇ·ñ½øÈëµØÍ¼´«ÊäÃÅ
+        //?????????????????
         if (type == "UpDown" && this.show.x > 1840 && this.show.x < 1945) {
             console.log("UpDown");
             UIManage.getInstance().hideWelcome();
@@ -230,14 +229,14 @@ class Hero extends egret.DisplayObjectContainer {
 
     }
 
-    //¶¯»­²¥·Å½áÊø
+    //???????????
     public mcOver():void {
         if (this.mcType == "die") {
             World.P2World.removeBody(this.body);
         }
     }
 
-    //ÉèÖÃÆ¤·ô¶¯»­µÄÇĞ»»
+    //????????????????
     public setMoveClip(type:string):void {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;
@@ -248,5 +247,24 @@ class Hero extends egret.DisplayObjectContainer {
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         this.show.scaleX = this.toward;
+    }
+
+    //è®¾ç½®äººç‰©æ•°å€¼
+    public setData(type:string, num:number) {
+        if (type == "blood") {
+            this.blood += num;
+            if (this.blood > this.bloodMax)this.blood = this.bloodMax;
+        }
+        else if (type == "power") {
+            this.power += num;
+            if (this.power > this.powerMax)this.power = this.powerMax;
+        }
+        else if (type == "exp") {
+            this.exp += num;
+            if (this.exp >= this.expMax) {
+                this.exp -= this.expMax;
+                this.action("levelUp");
+            }
+        }
     }
 }

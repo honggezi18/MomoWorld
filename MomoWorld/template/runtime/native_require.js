@@ -33,7 +33,7 @@ var game_file_list = [
 	"bin-debug/role/Num.js",
 	"bin-debug/scene/CtrlScene.js",
 	"bin-debug/scene/MapScene.js",
-	"bin-debug/scene/ShengDiScene.js",
+	"bin-debug/scene/WarScene.js",
 	"bin-debug/scene/WelcomeScene.js",
 	//----auto game_file_list end----
 ];

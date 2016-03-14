@@ -1,27 +1,27 @@
-//¹ÖÎïÒ³Ãæ
+//ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 class Enemy extends egret.DisplayObjectContainer {
 
-    public show:egret.MovieClip;//½ÇÉ«Æ¤·ô
-    public body:p2.Body;//½ÇÉ«¸ÕÌå
-    public data:any;//¾²Ì¬Êý¾Ý
+    public show:egret.MovieClip;//ï¿½ï¿½É«Æ¤ï¿½ï¿½
+    public body:p2.Body;//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+    public data:any;//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½
 
-    private offsetX:number = 0;//µ±Ç°Æ¤·ôµÄÆ«ÒÆÖµ
+    private offsetX:number = 0;//ï¿½ï¿½Ç°Æ¤ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½Öµ
     private offsetY:number = 0;
-    private blood:number = 1;//ÑªÁ¿
-    public toward:number = 1;//µ±Ç°µÄ³¯Ïò,ÆäÖÐ1ÎªÏò×ó¡£-1ÎªÏòÓÒ
+    private blood:number = 1;//Ñªï¿½ï¿½
+    public toward:number = 1;//ï¿½ï¿½Ç°ï¿½Ä³ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½1Îªï¿½ï¿½ï¿½ï¿½-1Îªï¿½ï¿½ï¿½ï¿½
 
-    private moveTime:number = 0;//ÐÐ×ßµÄÊ±¼ä
-    private standTime:number = 0;//ÐÐ×ßµÄÊ±¼ä
-    private hitCD:number = 0;//±»¹¥»÷Ê±µÄÀäÈ´Ê±¼ä
+    private moveTime:number = 0;//ï¿½ï¿½ï¿½ßµï¿½Ê±ï¿½ï¿½
+    private standTime:number = 0;//ï¿½ï¿½ï¿½ßµï¿½Ê±ï¿½ï¿½
+    private hitCD:number = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
 
-    private actionType:string = "";//±êÊ¾½ÇÉ«µ±Ç°×´Ì¬
-    private mcType:string = "";//±êÊ¾µ±Ç°¶¯»­µÄÀàÐÍ
+    private actionType:string = "";//ï¿½ï¿½Ê¾ï¿½ï¿½É«ï¿½ï¿½Ç°×´Ì¬
+    private mcType:string = "";//ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private _name:string = "empty";
 
-    public isDie:boolean = false;//±êÊ¾ÊÇ·ñÒÑ¾­ËÀÍö
-    public isSkill:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÔÚ·¢¶¯¼¼ÄÜ
-    private isAngry:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñ´¦ÓÚÉúÆø×´Ì¬£¬¼´ÊÇ·ñ±»¹¥»÷¹ý
-    private isMissing:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÉÁ±Ü×´Ì¬,¼´±»¹¥»÷ºóµÄ¶ÌÔÝÎÞµÐ
+    public isDie:boolean = false;//ï¿½ï¿½Ê¾ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½
+    public isSkill:boolean = false;//ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½Ç·ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private isAngry:boolean = false;//ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¹ï¿½ï¿½ï¿½ï¿½ï¿½
+    private isMissing:boolean = false;//ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Þµï¿½
 
 
     constructor(name:string, x:number) {
@@ -29,36 +29,36 @@ class Enemy extends egret.DisplayObjectContainer {
         this.init(name, x);
     }
 
-    //³õÊ¼»¯×ÊÔ´
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ô´
     public init(name:string, x:number):void {
         this._name = name;
         this.data = getEnemy(this._name);
         this.blood = this.data.blood;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
         this.body = P2Tool.createBox(this, World.P2World, x, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
-        this.body.shapes[0].collisionGroup = 2;//ÉèÖÃµ±Ç°ËùÔÚÅö×²×é
-        this.body.shapes[0].collisionMask = 1;//ÓëÄÇÐ©×é·¢ÉúÅö×²
+        this.body.shapes[0].collisionGroup = 2;//ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½
+        this.body.shapes[0].collisionMask = 1;//ï¿½ï¿½ï¿½ï¿½Ð©ï¿½é·¢ï¿½ï¿½ï¿½ï¿½×²
         this.setChildIndex(this.show, 99);
         this.action("stand");
     }
 
-    //Í¬²½º¯Êý
+    //Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public syncFun():void {
-        //¼ì²âËÀÍö
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (this.blood < 0 && !this.isDie)this.action("die");
         if (this.isDie)return;
 
-        this.checkHit(); //¼ì²â±»¹¥»÷
+        this.checkHit(); //ï¿½ï¿½â±»ï¿½ï¿½ï¿½ï¿½
 
-        //Í¬²½Æ¤·ô
+        //Í¬ï¿½ï¿½Æ¤ï¿½ï¿½
         P2Tool.syncDisplay(this.body);
-        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;//¸ù¾ÝÏò×ó»¹ÊÇÏòÓÒµÄ²»Í¬¸Ä±ä¸÷¸ö¶¯×÷µÄÆ«ÒÆÖµ
+        this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ²ï¿½Í¬ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½Öµ
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
 
 
-        //×ßÂ·¶¯×÷µÄÊµÏÖ
+        //ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
         if (this.actionType == "walk") {
-            if (this.isAngry) {//´¦ÓÚÉúÆø×´Ì¬£¬²»¶ÏÐÐ×ß
+            if (this.isAngry) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 var walk = function () {
                     if (Hero.getInstance().body.position[0] > this.body.position[0] + P2Tool.getP2Num(50))this.toward = -1;
                     else if (Hero.getInstance().body.position[0] < this.body.position[0] - P2Tool.getP2Num(50))this.toward = 1;
@@ -67,7 +67,7 @@ class Enemy extends egret.DisplayObjectContainer {
                 }.bind(this);
 
                 if (this.data.attack == null)walk();
-                else {//Momo,Ìí¼ÓÅÐ¶Ï£¬ÏÈÅÐ¶ÏÊÇ·ñÔÚskill¹¥»÷·¶Î§ÄÚ¡£
+                else {//Momo,ï¿½ï¿½ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½skillï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½Ú¡ï¿½
                     var distance:number = Math.abs(P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0]));
                     if (distance < this.data.attack.range)this.action("attack");
                     else walk();
@@ -75,9 +75,9 @@ class Enemy extends egret.DisplayObjectContainer {
                 return;
             }
 
-            //ÆÕÍ¨µÄËæ»úÐÐ×ß
+            //ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             this.moveTime--;
-            var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward;//ÉèÖÃÐÐ×ßÔ¼Êø
+            var tempX = this.show.measuredWidth / 2 - this.offsetX * this.toward;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½
             var parentWidth = UIManage.target.tureWidth;
             if (this.show.x > tempX && this.show.x < parentWidth - tempX)this.body.position[0] -= P2Tool.getP2Num(this.data.walk.speed * this.toward);
 
@@ -87,20 +87,20 @@ class Enemy extends egret.DisplayObjectContainer {
             }
         }
 
-        //µÈ´ýµÄÀäÈ´¼ÆÊ±Æ÷
+        //ï¿½È´ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Ê±ï¿½ï¿½
         else if (this.actionType == "stand") {
             this.standTime--;
             if (this.standTime == 0)this.action("walk");
         }
 
-        //±»¹¥»÷µÄÀäÈ´¼ÆÊ±Æ÷
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½Ê±ï¿½ï¿½
         else if (this.actionType == "hit") {
             this.hitCD--;
             if (this.hitCD == 0)this.action("walk");
         }
     }
 
-    //¼ì²â±»¹¥»÷
+    //ï¿½ï¿½â±»ï¿½ï¿½ï¿½ï¿½
     public checkHit():void {
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet:Bullet = GameData.bulletArray[i];
@@ -120,7 +120,7 @@ class Enemy extends egret.DisplayObjectContainer {
         }
     }
 
-    //½ÇÉ«µÄ¶¯×÷
+    //ï¿½ï¿½É«ï¿½Ä¶ï¿½ï¿½ï¿½
     public action(type:string):void {
         this.actionType = type;
         var temp:egret.Bitmap = <egret.Bitmap>this.body.displays[0];
@@ -148,22 +148,18 @@ class Enemy extends egret.DisplayObjectContainer {
         else if (type == "die") {
             this.isDie = true;
             this.setMoveClip("die");
-            Hero.getInstance().exp += this.data.exp;
-            if (Hero.getInstance().exp >= Hero.getInstance().expMax) {
-                Hero.getInstance().exp -= Hero.getInstance().expMax;
-                Hero.getInstance().action("levelUp");
-            }
+            Hero.getInstance().setData("exp", this.data.exp);
         }
 
 
     }
 
-    //¶¯»­²¥·Å½áÊø
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½
     public mcOver():void {
         if (this.mcType == "attack") {
             this.isMissing = false;
-            var distance:number = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward;//ÅÐ¶ÏÊÇ·ñ¼ÌÐø¹¥»÷£¬»¹ÊÇÒÆ¶¯
-            if (distance > this.data.attack.range || distance < 0) {//Èô¾àÀë²»×ã£¬ÔòÇÐ»»³É×ßÂ·£¬·ñÔò¼ÌÐø¹¥»÷
+            var distance:number = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward;//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+            if (distance > this.data.attack.range || distance < 0) {//ï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ã£¬ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 this.isSkill = false;
                 this.action("walk");
             }
@@ -177,7 +173,7 @@ class Enemy extends egret.DisplayObjectContainer {
         }
     }
 
-    //ÉèÖÃÆ¤·ô¶¯»­µÄÇÐ»»
+    //ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½
     public setMoveClip(type:string):void {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;
@@ -188,7 +184,7 @@ class Enemy extends egret.DisplayObjectContainer {
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
         this.show.scaleX = this.toward;
 
-        //ÉèÖÃ¶¯»­µÄÊÂ¼þÕìÌý
+        //ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
         this.show.addEventListener(egret.Event.LOOP_COMPLETE, this.mcOver, this);
         if (this.mcType == "attack")this.show.addEventListener(egret.MovieClipEvent.FRAME_LABEL, (e:egret.MovieClipEvent)=> {
             if (e.frameLabel == "@attackTure")this.isSkill = true;
