@@ -28,7 +28,7 @@ class GameData {
     static skill1State = [1.25, 0.30, 0.30, 0.30, 0.30];
     static skill2State = [1.25, 0.30, 0.30, 0.30, 0.30];
     static abilityState = [0.30, 0.30, 0.30, 0.30, 0.30];
-    static skill1Index:number = 0;//技能下标一
+    static skill1Index:number = 2;//技能下标一
     static skill2Index:number = 0;//技能下标一
 
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量/100
@@ -36,8 +36,8 @@ class GameData {
     static bag_Piece = [0.0, 0.0, 0.0, 0.0,];
     static bag_Item = [0.0, 0.0,];
     static bag_Drup = [0.05, 1.05];
-    static bag_BloodId:number = -1;//携带的红瓶ID
-    static bag_PowerId:number = -1;//携带的蓝瓶ID
+    static bag_BloodId:number = 0;//携带的红瓶ID
+    static bag_PowerId:number = 1;//携带的蓝瓶ID
 
     //玩家信息
     static data_Equipment = {//携带的装备ID

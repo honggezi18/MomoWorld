@@ -1,11 +1,20 @@
-//×Óµ¯Êı¾İÀà
+//å­å¼¹æ¨¡å‹
 
-var getBullet = function (name) {
-    if (name == "1")return bullet1;
+var getBullet = function (index) {
+    return window["bullet" + index];
 };
 
 var bullet1 = {
     name: "bullet1",
-    range: 350,//¹¥»÷¾àÀë
+    range: 350,//å°„ç¨‹
 
+};
+
+var bullet2 = {
+    name: "bullet2",
+    range: 500,//å°„ç¨‹
+
+    offsetX: 100,//å‡»ä¸­ç›®æ ‡åŠ¨ç”»çš„åç§»å€¼
+    offsetY: -100,
+    scale:0.8//åŠ¨ç”»ç¼©æ”¾å¤§å°
 };

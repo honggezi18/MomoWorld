@@ -32,19 +32,17 @@ var Enemy = (function (_super) {
         this.setChildIndex(this.show, 99);
         this.action("stand");
     };
-    //ͬ������
+    //同步函数
     p.syncFun = function () {
-        //�������
-        if (this.blood < 0 && !this.isDie)
-            this.action("die");
+        //检查死亡
         if (this.isDie)
             return;
-        this.checkHit(); //��ⱻ����
-        //ͬ��Ƥ��
+        //this.checkHit(); //检查碰撞
+        //ͬ同步皮肤
         P2Tool.syncDisplay(this.body);
         this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward; //������������ҵĲ�ͬ�ı����������ƫ��ֵ
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
-        //��·������ʵ��
+        //执行动作
         if (this.actionType == "walk") {
             if (this.isAngry) {
                 var walk = function () {
@@ -88,7 +86,7 @@ var Enemy = (function (_super) {
                 this.action("walk");
         }
     };
-    //��ⱻ����
+    //检测碰撞
     p.checkHit = function () {
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet = GameData.bulletArray[i];
@@ -127,6 +125,7 @@ var Enemy = (function (_super) {
             this.standTime = Math.floor(Math.random() * this.data.stand.spaceTime) + this.data.stand.baseTime;
         }
         else if (type == "hit" && !this.isMissing) {
+            this.isAngry = true;
             this.isSkill = false;
             this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
@@ -178,6 +177,15 @@ var Enemy = (function (_super) {
                 if (e.frameLabel == "@attackTure")
                     _this.isSkill = true;
             }, this);
+    };
+    //设置人物数值
+    p.setData = function (type, num) {
+        if (type == "blood") {
+            this.blood += num;
+            if (this.blood < 0 && !this.isDie)
+                this.action("die");
+            return this.blood;
+        }
     };
     return Enemy;
 })(egret.DisplayObjectContainer);

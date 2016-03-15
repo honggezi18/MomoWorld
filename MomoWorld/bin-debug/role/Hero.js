@@ -17,16 +17,18 @@ var Hero = (function (_super) {
         this.hitCD = 0; //???????????????
         this.moveSpeed = 8; //???????????
         this.jumpPower = 5; //??????
+        this.skillIndex = -1; //触发技能的技能下标
         this._name = "1";
         this.jumpState = ""; //????????????????
         this.actionType = ""; //?????
         this.mcType = ""; //????????????????
-        this.isDie = false; //?????????????
-        this.isLevelUp = false; //?????????
-        this.isWalking = false; //????????????????
-        this.isHitting = false; //??????????????????
-        this.isMissing = false; //???????????????,?????????????????
-        this.isAttack = false; //??????????????????
+        this.isDie = false; //表示是否处于死亡状态
+        this.isLevelUp = false; //表示是否升级
+        this.isWalking = false; //表示是否正在行走
+        this.isHitting = false; //表示是否正在被攻击
+        this.isMissing = false; //表示是否正在处于无敌状态
+        this.isSkilling = false; //表示是否正在处于发动技能状态
+        this.isAttack = false; //表示是否正在进行普通攻击
         if (Hero.instance == null)
             Hero.instance = this;
         else
@@ -91,7 +93,10 @@ var Hero = (function (_super) {
                 this.action("stand");
             this.jumpState = "empty";
         }
-        //????????????
+        //进行普通攻击的CD
+        if (this.attackCD > 0)
+            this.attackCD--;
+        //处于无敌状态
         if (this.isMissing) {
             this.hitCD--;
             if (this.hitCD < 0 && this.isHitting == true) {
@@ -101,14 +106,37 @@ var Hero = (function (_super) {
             if (this.hitCD < -80)
                 this.isMissing = false;
         }
-        //进行普通攻击的CD
-        if (this.attackCD > 0)
-            this.attackCD--;
         //按下攻击键不放，进行连续攻击
         if (this.isAttack) {
             if (this.attackCD < 1) {
                 this.attackCD = this.data.attack.CD;
-                GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
+                GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2, this.data.attack.powerBase, this.data.attack.powerSpace));
+            }
+        }
+        //按下攻击键不放，进行连续攻击
+        if (this.isSkilling) {
+            if (this.attackCD < 1) {
+                console.log("this.skill    " + this.skillIndex);
+                var tempSkill = this.data["skill" + this.skillIndex]; //获取技能信息
+                if (this.setData("power", -tempSkill.cost) > -1) {
+                    this.attackCD = tempSkill.CD;
+                    switch (this.skillIndex) {
+                        case 0:
+                            GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2, tempSkill.powerBase, tempSkill.powerSpace));
+                            break;
+                        case 1:
+                            GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2, tempSkill.powerBase, tempSkill.powerSpace));
+                            window.setTimeout(function () {
+                                GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2, tempSkill.powerBase, tempSkill.powerSpace));
+                            }.bind(this), 100);
+                            break;
+                        case 2:
+                            GameData.bulletArray.push(new Bullet("2", tempSkill.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2, tempSkill.powerBase, tempSkill.powerSpace));
+                            break;
+                        case 0:
+                            break;
+                    }
+                }
             }
         }
     };
@@ -171,6 +199,12 @@ var Hero = (function (_super) {
             this.setMoveClip("attack");
         }
         else if (type == "SkillDown") {
+            if (!this.isSkilling)
+                this.attackCD = 0;
+            if (this.attackCD > 0 || this.power < 1)
+                return;
+            this.isAttack = false;
+            this.isWalking = false;
             this.setSkill(other);
         }
         else if (type == "JumpDown") {
@@ -197,6 +231,7 @@ var Hero = (function (_super) {
             this.setMoveClip("stand");
             this.isAttack = false;
             this.isWalking = false;
+            this.isSkilling = false;
         }
         else if (type == "levelUp") {
             this.isLevelUp = true;
@@ -244,11 +279,17 @@ var Hero = (function (_super) {
             this.blood += num;
             if (this.blood > this.bloodMax)
                 this.blood = this.bloodMax;
+            return this.blood;
         }
         else if (type == "power") {
             this.power += num;
             if (this.power > this.powerMax)
                 this.power = this.powerMax;
+            else if (this.power < 0) {
+                this.power -= num;
+                return this.power + num;
+            }
+            return this.power;
         }
         else if (type == "exp") {
             this.exp += num;
@@ -256,19 +297,25 @@ var Hero = (function (_super) {
                 this.exp -= this.expMax;
                 this.action("levelUp");
             }
+            return this.exp;
         }
     };
     //角色技能的实现
     p.setSkill = function (index) {
         console.log("setSkill   " + index);
+        this.skillIndex = index;
+        this.isSkilling = true;
         switch (index) {
-            case 1:
+            case 0:
+                this.setMoveClip("attack");
                 break;
             case 1:
+                this.setMoveClip("attack");
                 break;
-            case 1:
+            case 2:
+                this.setMoveClip("attack");
                 break;
-            case 1:
+            case 3:
                 break;
         }
     };

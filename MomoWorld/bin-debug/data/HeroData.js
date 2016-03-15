@@ -30,12 +30,6 @@ var hero1 = {
         speed: 10,
         CD: 30 //冷却时间
     },
-    skill: {
-        offsetX: -2,
-        offsetY: -22.5,
-        powerBase: 50,
-        powerSpace: 20,
-    },
     hit: {
         offsetX: -13,
         offsetY: -20,
@@ -49,5 +43,47 @@ var hero1 = {
     levelUp: {
         offsetX: 0,
         offsetY: -80
+    },
+    skill0: {
+        offsetX: -2,
+        offsetY: -22.5,
+        skillOffsetX: -12,
+        skillOffsetY: -17.5,
+        powerBase: 50,
+        powerSpace: 20,
+        cost: 10,
+        speed: 20,
+        CD: 10,
+        range: [
+            {},
+            {},]
+    },
+    skill1: {
+        offsetX: -2,
+        offsetY: -22.5,
+        skillOffsetX: -12,
+        skillOffsetY: -17.5,
+        powerBase: 50,
+        powerSpace: 20,
+        cost: 10,
+        speed: 15,
+        CD: 20,
+        range: [
+            {},
+            {},]
+    },
+    skill2: {
+        offsetX: -2,
+        offsetY: -22.5,
+        skillOffsetX: -12,
+        skillOffsetY: -17.5,
+        powerBase: 100,
+        powerSpace: 50,
+        cost: 20,
+        speed: 15,
+        CD: 30,
+        range: [
+            {},
+            {},]
     },
 };

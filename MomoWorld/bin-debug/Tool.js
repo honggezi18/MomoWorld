@@ -60,10 +60,14 @@ var Tool = (function () {
         var mc = new egret.MovieClip(mcFactory.generateMovieClipData(type));
         mc.scaleX = scale;
         mc.scaleY = scale;
+        mc.x = x;
+        mc.y = y;
         target.addChild(mc);
         if (isCenter) {
             mc.anchorOffsetX = mc.measuredWidth / 2;
             mc.anchorOffsetY = mc.measuredHeight / 2;
+            mc.x += mc.anchorOffsetX;
+            mc.y += mc.anchorOffsetY;
         }
         mc.play(time);
         return mc;

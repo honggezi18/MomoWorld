@@ -7,7 +7,7 @@ class Enemy extends egret.DisplayObjectContainer {
 
     private offsetX:number = 0;//��ǰƤ����ƫ��ֵ
     private offsetY:number = 0;
-    private blood:number = 1;//Ѫ��
+    public blood:number = 1;//Ѫ��
     public toward:number = 1;//��ǰ�ĳ���,����1Ϊ����-1Ϊ����
 
     private moveTime:number = 0;//���ߵ�ʱ��
@@ -20,7 +20,7 @@ class Enemy extends egret.DisplayObjectContainer {
 
     public isDie:boolean = false;//��ʾ�Ƿ��Ѿ�����
     public isSkill:boolean = false;//��ʾ��ǰ�Ƿ��ڷ�������
-    private isAngry:boolean = false;//��ʾ��ǰ�Ƿ�������״̬�����Ƿ񱻹�����
+    public isAngry:boolean = false;//��ʾ��ǰ�Ƿ�������״̬�����Ƿ񱻹�����
     private isMissing:boolean = false;//��ʾ��ǰ�Ƿ�����״̬,����������Ķ����޵�
 
 
@@ -42,21 +42,20 @@ class Enemy extends egret.DisplayObjectContainer {
         this.action("stand");
     }
 
-    //ͬ������
+    //同步函数
     public syncFun():void {
-        //�������
-        if (this.blood < 0 && !this.isDie)this.action("die");
+        //检查死亡
         if (this.isDie)return;
 
-        this.checkHit(); //��ⱻ����
+        //this.checkHit(); //检查碰撞
 
-        //ͬ��Ƥ��
+        //ͬ同步皮肤
         P2Tool.syncDisplay(this.body);
         this.show.x = P2Tool.getEgretNum(this.body.position[0]) + this.offsetX * this.toward;//������������ҵĲ�ͬ�ı����������ƫ��ֵ
         this.show.y = P2Tool.getEgretY(this.body.position[1]) + this.offsetY;
 
 
-        //��·������ʵ��
+        //执行动作
         if (this.actionType == "walk") {
             if (this.isAngry) {//��������״̬����������
                 var walk = function () {
@@ -100,7 +99,7 @@ class Enemy extends egret.DisplayObjectContainer {
         }
     }
 
-    //��ⱻ����
+    //检测碰撞
     public checkHit():void {
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet:Bullet = GameData.bulletArray[i];
@@ -137,6 +136,7 @@ class Enemy extends egret.DisplayObjectContainer {
             this.standTime = Math.floor(Math.random() * this.data.stand.spaceTime) + this.data.stand.baseTime;
         }
         else if (type == "hit" && !this.isMissing) {
+            this.isAngry = true;
             this.isSkill = false;
             this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
@@ -189,5 +189,14 @@ class Enemy extends egret.DisplayObjectContainer {
         if (this.mcType == "attack")this.show.addEventListener(egret.MovieClipEvent.FRAME_LABEL, (e:egret.MovieClipEvent)=> {
             if (e.frameLabel == "@attackTure")this.isSkill = true;
         }, this);
+    }
+
+    //设置人物数值
+    public setData(type:string, num:number):number {
+        if (type == "blood") {
+            this.blood += num;
+            if (this.blood < 0 && !this.isDie)this.action("die");
+            return this.blood;
+        }
     }
 }

@@ -34,13 +34,6 @@ var hero1 = {
         CD: 30//冷却时间
     },
 
-    skill: {
-        offsetX: -2,
-        offsetY: -22.5,
-        powerBase: 50,//��ײ�����Ļ���ֵ
-        powerSpace: 20,//����ֵ
-    },
-
     hit: {
         offsetX: -13,
         offsetY: -20,
@@ -57,4 +50,50 @@ var hero1 = {
         offsetX: 0,
         offsetY: -80
     },
+
+    skill0: {
+        offsetX: -2,//人物动画的位移值
+        offsetY: -22.5,
+        skillOffsetX: -12,//技能动画的位移值
+        skillOffsetY: -17.5,
+        powerBase: 50,//技能基础攻击值
+        powerSpace: 20,//技能攻击值波动范围
+        cost:10,//消耗的魔法值
+        speed: 20,//技能攻击速度
+        CD: 10,//技能冷却时间
+        range:[//技能的攻击范围
+            {},
+            {},]
+    },
+
+    skill1: {
+        offsetX: -2,//人物动画的位移值
+        offsetY: -22.5,
+        skillOffsetX: -12,//技能动画的位移值
+        skillOffsetY: -17.5,
+        powerBase: 50,//技能基础攻击值
+        powerSpace: 20,//技能攻击值波动范围
+        cost:10,//消耗的魔法值
+        speed: 15,//技能攻击速度
+        CD: 20,//技能冷却时间
+        range:[//技能的攻击范围
+            {},
+            {},]
+    },
+
+    skill2: {
+        offsetX: -2,//人物动画的位移值
+        offsetY: -22.5,
+        skillOffsetX: -12,//技能动画的位移值
+        skillOffsetY: -17.5,
+        powerBase: 100,//技能基础攻击值
+        powerSpace: 50,//技能攻击值波动范围
+        cost:20,//消耗的魔法值
+        speed: 15,//技能攻击速度
+        CD: 30,//技能冷却时间
+        range:[//技能的攻击范围
+            {},
+            {},]
+    },
+
 };

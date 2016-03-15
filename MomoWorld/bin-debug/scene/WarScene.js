@@ -46,9 +46,13 @@ var WarScene = (function (_super) {
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet = GameData.bulletArray[i];
             if (tempBullet.isOver) {
-                tempBullet.show.parent.removeChild(tempBullet.show);
-                Tool.removeOne(GameData.bulletArray, i);
-                i--;
+                if (tempBullet.hitMC != null) {
+                    tempBullet.hitMC.parent.removeChild(tempBullet.hitMC);
+                    GameData.bulletArray.splice(i, 1);
+                    console.log("length  " + GameData.bulletArray.length);
+                }
+                if (tempBullet.isBulletOver)
+                    tempBullet.show.parent.removeChild(tempBullet.show);
             }
         }
         //释放内存，消除物品
@@ -101,7 +105,7 @@ var WarScene = (function (_super) {
         if (msg == "DownDown" || msg == "LeftDown" || msg == "RightDown" || msg == "UpDown") {
             Hero.getInstance().action(msg);
         }
-        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp" || msg == "AttackUp" || msg == "SkillUp" || msg == "GetUp") {
+        else if (msg == "RightUp" || msg == "LeftUp" || msg == "UpUp" || msg == "DownUp" || msg == "AttackUp" || msg == "Skill1Up" || msg == "Skill2Up" || msg == "GetUp") {
             Hero.getInstance().action("stand");
         }
         else if (msg == "JumpUp") {
@@ -113,8 +117,11 @@ var WarScene = (function (_super) {
         else if (msg == "AttackDown") {
             Hero.getInstance().action("AttackDown");
         }
-        else if (msg == "SkillDown") {
-            Hero.getInstance().action("SkillDown");
+        else if (msg == "Skill1Down") {
+            Hero.getInstance().action("SkillDown", GameData.skill1Index);
+        }
+        else if (msg == "Skill2Down") {
+            Hero.getInstance().action("SkillDown", GameData.skill2Index + 5);
         }
         else if (msg == "GetDown") {
             Hero.getInstance().action("GetDown");

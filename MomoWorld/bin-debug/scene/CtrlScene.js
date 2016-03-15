@@ -1579,7 +1579,7 @@ var CtrlScene = (function (_super) {
             else if (e.target == this.skill1)
                 Hero.getInstance().action("SkillDown", GameData.skill1Index);
             else if (e.target == this.skill2)
-                Hero.getInstance().action("SkillDown", GameData.skill2Index + 4);
+                Hero.getInstance().action("SkillDown", GameData.skill2Index + 5);
         }
     };
     //触屏松开

@@ -21,7 +21,7 @@
 		"name":"enemy"
 	},
 	{
-		"keys":"bullet1_png",
+		"keys":"bullet1_png,bullet2_png,attack_hit2_png,attack_hit2_json",
 		"name":"attack"
 	},
 	{
@@ -939,5 +939,20 @@
 		"subkeys":"item_drup0_png,item_drup10_png,item_drup11_png,item_drup12_png,item_drup13_png,item_drup14_png,item_drup15_png,item_drup16_png,item_drup17_png,item_drup18_png,item_drup19_png,item_drup1_png,item_drup20_png,item_drup21_png,item_drup22_png,item_drup23_png,item_drup24_png,item_drup25_png,item_drup2_png,item_drup3_png,item_drup4_png,item_drup5_png,item_drup6_png,item_drup7_png,item_drup8_png,item_drup9_png",
 		"type":"sheet",
 		"url":"assets/item/drup.json"
+	},
+	{
+		"name":"bullet2_png",
+		"type":"image",
+		"url":"assets/attack/bullet2.png"
+	},
+	{
+		"name":"attack_hit2_png",
+		"type":"image",
+		"url":"assets/attack/attack_hit2.png"
+	},
+	{
+		"name":"attack_hit2_json",
+		"type":"json",
+		"url":"assets/attack/attack_hit2.json"
 	}]
 }

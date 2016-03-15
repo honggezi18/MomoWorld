@@ -7,7 +7,7 @@ class Tool {
 
 
     //添加一个显示容器
-    static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false,isScale:boolean = false):egret.DisplayObjectContainer {
+    static addDisplayContainer(target:any, x:number, y:number, width:number, height:number, isCenter:boolean = false, isScale:boolean = false):egret.DisplayObjectContainer {
         var temp = new egret.DisplayObjectContainer();
         target.addChild(temp);
         temp.x = x;
@@ -56,10 +56,14 @@ class Tool {
         var mc = new egret.MovieClip(mcFactory.generateMovieClipData(type));
         mc.scaleX = scale;
         mc.scaleY = scale;
+        mc.x = x;
+        mc.y = y;
         target.addChild(mc);
         if (isCenter) {
             mc.anchorOffsetX = mc.measuredWidth / 2;
             mc.anchorOffsetY = mc.measuredHeight / 2;
+            mc.x += mc.anchorOffsetX;
+            mc.y += mc.anchorOffsetY;
         }
         mc.play(time);
         return mc;

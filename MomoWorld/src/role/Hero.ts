@@ -20,6 +20,7 @@ class Hero extends egret.DisplayObjectContainer {
     private hitCD:number = 0;//???????????????
     private moveSpeed:number = 8;//???????????
     private jumpPower:number = 5;//??????
+    private skillIndex:number = -1;//触发技能的技能下标
 
     private _name:string = "1";
     private jumpState:string = "";//????????????????
@@ -98,7 +99,10 @@ class Hero extends egret.DisplayObjectContainer {
             this.jumpState = "empty";
         }
 
-        //????????????
+        //进行普通攻击的CD
+        if (this.attackCD > 0)this.attackCD--;
+
+        //处于无敌状态
         if (this.isMissing) {
             this.hitCD--;
             if (this.hitCD < 0 && this.isHitting == true) {
@@ -109,14 +113,54 @@ class Hero extends egret.DisplayObjectContainer {
 
         }
 
-        //进行普通攻击的CD
-        if (this.attackCD > 0)this.attackCD--;
-
         //按下攻击键不放，进行连续攻击
         if (this.isAttack) {
             if (this.attackCD < 1) {
                 this.attackCD = this.data.attack.CD;
-                GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward, P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward, P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2));
+                GameData.bulletArray.push(new Bullet("1", this.data.attack.speed, this.toward,
+                    P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward,
+                    P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2,
+                    this.data.attack.powerBase, this.data.attack.powerSpace));
+            }
+        }
+
+
+        //按下攻击键不放，进行连续攻击
+        if (this.isSkilling) {
+            if (this.attackCD < 1) {
+                console.log("this.skill    " + this.skillIndex);
+                var tempSkill = this.data["skill" + this.skillIndex];//获取技能信息
+                if (this.setData("power", -tempSkill.cost) > -1) {
+                    this.attackCD = tempSkill.CD;
+                    switch (this.skillIndex) {//根据不同技能实现不同的攻击效果
+                        case 0:
+                            GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward,
+                                P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward,
+                                P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2,
+                                tempSkill.powerBase, tempSkill.powerSpace));
+                            break;
+                        case 1:
+                            GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward,
+                                P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward,
+                                P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2,
+                                tempSkill.powerBase, tempSkill.powerSpace));
+                            window.setTimeout(function () {
+                                GameData.bulletArray.push(new Bullet("1", tempSkill.speed, this.toward,
+                                    P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward,
+                                    P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2,
+                                    tempSkill.powerBase, tempSkill.powerSpace));
+                            }.bind(this), 100);
+                            break;
+                        case 2:
+                            GameData.bulletArray.push(new Bullet("2", tempSkill.speed, this.toward,
+                                P2Tool.getEgretNum(this.body.position[0]) - GameData.bodyWidth * this.toward,
+                                P2Tool.getEgretY(this.body.position[1]) - GameData.bodyWidth / 2,
+                                tempSkill.powerBase, tempSkill.powerSpace));
+                            break;
+                        case 0:
+                            break;
+                    }
+                }
             }
         }
 
@@ -179,6 +223,10 @@ class Hero extends egret.DisplayObjectContainer {
             this.setMoveClip("attack");
         }
         else if (type == "SkillDown") {//调用相应技能进行显示
+            if (!this.isSkilling)this.attackCD = 0;
+            if (this.attackCD > 0 || this.power < 1)return;
+            this.isAttack = false;
+            this.isWalking = false;
             this.setSkill(other);
         }
         else if (type == "JumpDown") {
@@ -205,6 +253,7 @@ class Hero extends egret.DisplayObjectContainer {
             this.setMoveClip("stand");
             this.isAttack = false;
             this.isWalking = false;
+            this.isSkilling = false;
         }
         else if (type == "levelUp") {//升级
             this.isLevelUp = true;
@@ -251,14 +300,20 @@ class Hero extends egret.DisplayObjectContainer {
     }
 
     //设置人物数值
-    public setData(type:string, num:number) {
+    public setData(type:string, num:number):number {
         if (type == "blood") {
             this.blood += num;
             if (this.blood > this.bloodMax)this.blood = this.bloodMax;
+            return this.blood;
         }
         else if (type == "power") {
             this.power += num;
             if (this.power > this.powerMax)this.power = this.powerMax;
+            else if (this.power < 0) {
+                this.power -= num;
+                return this.power + num;
+            }
+            return this.power;
         }
         else if (type == "exp") {
             this.exp += num;
@@ -266,19 +321,24 @@ class Hero extends egret.DisplayObjectContainer {
                 this.exp -= this.expMax;
                 this.action("levelUp");
             }
+            return this.exp;
         }
     }
 
     //角色技能的实现
     public setSkill(index:number) {
         console.log("setSkill   " + index);
+        this.skillIndex = index;
         this.isSkilling = true;
         switch (index) {
             case 0:
+                this.setMoveClip("attack");
                 break;
             case 1:
+                this.setMoveClip("attack");
                 break;
             case 2:
+                this.setMoveClip("attack");
                 break;
             case 3:
                 break;
