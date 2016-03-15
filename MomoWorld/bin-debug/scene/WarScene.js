@@ -39,6 +39,12 @@ var WarScene = (function (_super) {
             var tempEnemy = GameData.enemyArray[i];
             if (tempEnemy.isDie)
                 GameData.enemyArray.splice(i, 1);
+            if (GameData.enemyArray.length < 10) {
+                var tempX = Math.random() * 1000 + 200;
+                var tempEnemy = new Enemy("1", tempX);
+                GameData.enemyArray.push(tempEnemy);
+                this.role.addChild(tempEnemy);
+            }
         }
         //释放内存，消除子弹
         for (var i = 0; i < GameData.bulletArray.length; i++) {

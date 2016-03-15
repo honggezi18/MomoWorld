@@ -49,8 +49,13 @@ class WarScene extends egret.DisplayObjectContainer {
         //释放内存，消除enemy
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var tempEnemy:Enemy = GameData.enemyArray[i];
-            if (tempEnemy.isDie) GameData.enemyArray.splice(i,1);
-
+            if (tempEnemy.isDie) GameData.enemyArray.splice(i, 1);
+            if (GameData.enemyArray.length < 10) {
+                var tempX = Math.random() * 1000 + 200;
+                var tempEnemy = new Enemy("1", tempX);
+                GameData.enemyArray.push(tempEnemy);
+                this.role.addChild(tempEnemy);
+            }
         }
 
         //释放内存，消除子弹
@@ -59,7 +64,7 @@ class WarScene extends egret.DisplayObjectContainer {
             if (tempBullet.isOver) {
                 if (tempBullet.hitMC != null) tempBullet.show.parent.removeChild(tempBullet.hitMC);
                 tempBullet.show.parent.removeChild(tempBullet.show);
-                GameData.bulletArray.splice(i,1);
+                GameData.bulletArray.splice(i, 1);
             }
         }
 
@@ -68,10 +73,9 @@ class WarScene extends egret.DisplayObjectContainer {
             var tempItem = GameData.itemArray[i];
             if (tempItem.isOver) {
                 tempItem.show.parent.removeChild(tempItem.show);
-                GameData.itemArray.splice(i,1);
+                GameData.itemArray.splice(i, 1);
             }
         }
-
 
         Hero.getInstance().syncFun();//同步英雄
         CtrlScene.getInstance().syncFun();//同步操作面板
@@ -135,6 +139,4 @@ class WarScene extends egret.DisplayObjectContainer {
             Hero.getInstance().action("GetDown");
         }
     }
-
-
 }

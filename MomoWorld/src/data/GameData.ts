@@ -32,9 +32,9 @@ class GameData {
     static skill2Index:number = 1;//技能下标一
 
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量/100
-    static bag_Equipment = [0, 0, 0, 0];
-    static bag_Piece = [0.0, 0.0, 0.0, 0.0,];
-    static bag_Item = [0.0, 0.0,];
+    static bag_Equipment = [101, 201, 303, 405];
+    static bag_Piece = [];
+    static bag_Item = [0.05, 0.05,];
     static bag_Drup = [0.05, 1.05];
     static bag_BloodId:number = 0;//携带的红瓶ID
     static bag_PowerId:number = 1;//携带的蓝瓶ID

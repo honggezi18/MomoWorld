@@ -52,7 +52,8 @@ var Hero = (function (_super) {
         this.expMax = this.data.exp;
         this.exp = 0;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
+        this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "", false);
+        //this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;
         this.body.shapes[0].collisionMask = 1;
         this.action("stand");
@@ -336,7 +337,6 @@ var Hero = (function (_super) {
         if (data === void 0) { data = null; }
         if (tempHeroX === void 0) { tempHeroX = 0; }
         for (var i = 0, max = GameData.enemyArray.length; i < max; i++) {
-            //for (var i = 0, max = 1; i < max; i++) {
             var tempEnemy = GameData.enemyArray[i];
             var tempX = P2Tool.getEgretNum(tempEnemy.body.position[0]);
             if (tempEnemy.isDie)

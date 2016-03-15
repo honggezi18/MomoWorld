@@ -28,10 +28,7 @@ var Main = (function (_super) {
             GameData.loadData();
             GameData.reset();
             this.stage.addChild(new World());
-            //UIManage.getInstance().showWelcome();
-            //UIManage.getInstance().showMap();
-            GameData.mapIndex = 0;
-            UIManage.getInstance().showWarScene();
+            UIManage.getInstance().showWelcome();
         }
         else {
             RES.loadGroup(this.resList[this.hadLoad]);

@@ -1,25 +1,25 @@
 //��Ʒ������
 var Item = (function () {
-    //���캯��
+    //构造函数
     function Item(name, x, y) {
         this._name = "1";
         this.isStand = false;
         this.isOver = false;
         this.hadPick = false; //��ʾ��ǰ�Ƿ��Ѿ�����ʰ
-        this.originY = 0; //��Ʒ��ʼY������
+        this.originY = 0; //��Ʒ��ʼY�����
         this.range = 25; //��Ʒ���㴥���뾶
         this.missTime = 500; //��Ʒ��ʧ�ĵȴ�ʱ��
         this._name = name;
         this.data = getItem(this._name);
         this.originY = y;
-        this.show = Tool.addBitmap(UIManage.target.item, "item_" + this.data.name + "_png", x, y, GameData.bodyWidth, GameData.bodyWidth, false);
+        this.show = Tool.addBitmap(UIManage.target.item, this.data.res, x, y, GameData.bodyWidth, GameData.bodyWidth, false);
         this.show.anchorOffsetX = this.show.width / 2;
         this.show.anchorOffsetY = this.show.height / 2;
         this.show.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
         this.drop();
     }
     var d = __define,c=Item;p=c.prototype;
-    //���䶯��
+    //物品掉落函数
     p.drop = function () {
         var tw1 = egret.Tween.get(this.show);
         tw1.to({ y: this.originY - 60, rotation: 360 * 3 }, 300, egret.Ease.sineIn).call(function () {
@@ -27,7 +27,7 @@ var Item = (function () {
             tw2.to({ y: this.originY + 10, rotation: 360 * 2 }, 300).call(this.stand, this);
         }, this);
     };
-    //�ȴ�����
+    //浮动函数
     p.stand = function () {
         this.isStand = true;
         var tw1 = egret.Tween.get(this.show);
@@ -36,7 +36,7 @@ var Item = (function () {
             tw2.to({ y: this.originY + 10 }, 800).call(this.stand, this);
         }, this);
     };
-    //��ʰ����
+    //被捡拾函数
     p.pickUp = function () {
         if (this.hadPick || !this.isStand)
             return;
@@ -45,9 +45,15 @@ var Item = (function () {
         var heroX = P2Tool.getEgretNum(Hero.getInstance().body.position[0]);
         var heroY = P2Tool.getEgretY(Hero.getInstance().body.position[1]) - 30;
         var tw1 = egret.Tween.get(this.show);
-        tw1.to({ x: heroX, y: heroY, alpha: 0, scaleX: 0.5, scaleY: 0.5 }, 400, egret.Ease.backIn).call(this.onRemove, this);
+        tw1.to({
+            x: heroX,
+            y: heroY,
+            alpha: 0,
+            scaleX: 0.5,
+            scaleY: 0.5
+        }, 400, egret.Ease.backIn).call(this.onRemove, this);
     };
-    //ͬ������
+    //皮肤同步函数
     p.syncFun = function () {
         if (this.isOver)
             return;
@@ -57,7 +63,7 @@ var Item = (function () {
             tw1.to({ alpha: 0 }, 500).call(this.onRemove, this);
         }
     };
-    //��������
+    //移除，释放内存函数
     p.onRemove = function (e) {
         this.isOver = true;
         this.show.visible = false;

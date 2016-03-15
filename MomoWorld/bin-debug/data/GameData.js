@@ -85,9 +85,9 @@ var GameData = (function () {
     GameData.skill1Index = 2; //技能下标一
     GameData.skill2Index = 1; //技能下标一
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量/100
-    GameData.bag_Equipment = [0, 0, 0, 0];
-    GameData.bag_Piece = [0.0, 0.0, 0.0, 0.0,];
-    GameData.bag_Item = [0.0, 0.0,];
+    GameData.bag_Equipment = [101, 201, 303, 405];
+    GameData.bag_Piece = [];
+    GameData.bag_Item = [0.05, 0.05,];
     GameData.bag_Drup = [0.05, 1.05];
     GameData.bag_BloodId = 0; //携带的红瓶ID
     GameData.bag_PowerId = 1; //携带的蓝瓶ID

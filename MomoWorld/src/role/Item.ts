@@ -1,28 +1,28 @@
-//ÎïÆ·µôÂäÀà
+//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class Item {
     public show:egret.Bitmap;
-    public data:any;//¾²Ì¬Êı¾İ
+    public data:any;//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½
     private _name:string = "1";
     public isStand:boolean = false;
     public isOver:boolean = false;
-    public hadPick:boolean = false;//±êÊ¾µ±Ç°ÊÇ·ñÒÑ¾­±»¼ñÊ°
-    private originY:number = 0;//ÎïÆ·³õÊ¼YÖá×ø±ê
-    public range:number = 25;//ÎïÆ·µÄÅã´¥Åö°ë¾¶
-    private missTime:number = 500;//ÎïÆ·ÏûÊ§µÄµÈ´ıÊ±¼ä
+    public hadPick:boolean = false;//ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê°
+    private originY:number = 0;//ï¿½ï¿½Æ·ï¿½ï¿½Ê¼Yï¿½ï¿½ï¿½ï¿½ï¿½
+    public range:number = 25;//ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ã´¥ï¿½ï¿½ï¿½ë¾¶
+    private missTime:number = 500;//ï¿½ï¿½Æ·ï¿½ï¿½Ê§ï¿½ÄµÈ´ï¿½Ê±ï¿½ï¿½
 
-    //¹¹Ôìº¯Êı
+    //æ„é€ å‡½æ•°
     constructor(name:string, x:number, y:number) {
         this._name = name;
         this.data = getItem(this._name);
         this.originY = y;
-        this.show = Tool.addBitmap(UIManage.target.item, "item_" + this.data.name + "_png", x, y, GameData.bodyWidth, GameData.bodyWidth, false);
+        this.show = Tool.addBitmap(UIManage.target.item, this.data.res, x, y, GameData.bodyWidth, GameData.bodyWidth, false);
         this.show.anchorOffsetX = this.show.width / 2;
         this.show.anchorOffsetY = this.show.height / 2;
         this.show.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemove, this);
         this.drop();
     }
 
-    //µôÂä¶¯×÷
+    //ç‰©å“æ‰è½å‡½æ•°
     public drop():void {
         var tw1:egret.Tween = egret.Tween.get(this.show);
         tw1.to({y: this.originY - 60, rotation: 360 * 3}, 300, egret.Ease.sineIn).call(function () {
@@ -31,7 +31,7 @@ class Item {
         }, this);
     }
 
-    //µÈ´ı¶¯×÷
+    //æµ®åŠ¨å‡½æ•°
     public stand():void {
         this.isStand = true;
         var tw1:egret.Tween = egret.Tween.get(this.show);
@@ -41,7 +41,7 @@ class Item {
         }, this);
     }
 
-    //¼ñÊ°¶¯×÷
+    //è¢«æ¡æ‹¾å‡½æ•°
     public pickUp():void {
         if (this.hadPick || !this.isStand)return;
         this.hadPick = true;
@@ -49,10 +49,16 @@ class Item {
         var heroX = P2Tool.getEgretNum(Hero.getInstance().body.position[0]);
         var heroY = P2Tool.getEgretY(Hero.getInstance().body.position[1]) - 30;
         var tw1:egret.Tween = egret.Tween.get(this.show);
-        tw1.to({x: heroX,y: heroY, alpha: 0, scaleX: 0.5, scaleY: 0.5}, 400, egret.Ease.backIn).call(this.onRemove, this);
+        tw1.to({
+            x: heroX,
+            y: heroY,
+            alpha: 0,
+            scaleX: 0.5,
+            scaleY: 0.5
+        }, 400, egret.Ease.backIn).call(this.onRemove, this);
     }
 
-    //Í¬²½º¯Êı
+    //çš®è‚¤åŒæ­¥å‡½æ•°
     public syncFun():void {
         if (this.isOver)return;
         this.missTime--;
@@ -62,7 +68,7 @@ class Item {
         }
     }
 
-    //Çå³ıÄÚÈİ
+    //ç§»é™¤ï¼Œé‡Šæ”¾å†…å­˜å‡½æ•°
     public onRemove(e:egret.Event):void {
         this.isOver = true;
         this.show.visible = false;

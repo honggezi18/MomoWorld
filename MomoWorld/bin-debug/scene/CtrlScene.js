@@ -250,16 +250,16 @@ var CtrlScene = (function (_super) {
             var i = 0;
             var background = Tool.addBitmap(this.dataContainer, "data_background_png", 0, 0, 500, 400);
             //玩家数值显示
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "职业:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "等级:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "血量:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法量:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法攻:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法抗:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "攻速:" + i).textAlign = egret.HorizontalAlign.LEFT;
-            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "移速:" + i).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "职业:" + "弓箭手").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "等级:" + Hero.getInstance().level).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "血量:" + Hero.getInstance().bloodMax).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法量:" + Hero.getInstance().powerMax).textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物攻:" + "20").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法攻:" + "23").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "物抗:" + "34").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "法抗:" + "42").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "攻速:" + "21").textAlign = egret.HorizontalAlign.LEFT;
+            Tool.addTextField(this.dataContainer, 300, 35 + 30 * (i++), 170, 20, 20, 0x000000, "移速:" + "13").textAlign = egret.HorizontalAlign.LEFT;
             //玩家装备显示//设置坐标数组，装备名数组，根据数组名检查装备，再显示图标，即装备种类固定数组下标，这样连接图标的点击响应
             var value;
             for (value in GameData.data_Equipment) {

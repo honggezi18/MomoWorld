@@ -60,7 +60,8 @@ class Hero extends egret.DisplayObjectContainer {
         this.expMax = this.data.exp;
         this.exp = 0;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
+        this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "", false);
+        //this.body = P2Tool.createBox(this, World.P2World, 200, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2;
         this.body.shapes[0].collisionMask = 1;
         this.action("stand");

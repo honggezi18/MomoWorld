@@ -26,7 +26,8 @@ var Enemy = (function (_super) {
         this.data = getEnemy(this._name);
         this.blood = this.data.blood;
         this.show = Tool.addMoveClip(this, this.data.name, "stand", 0, 0, 1, -1, true);
-        this.body = P2Tool.createBox(this, World.P2World, x, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
+        this.body = P2Tool.createBox(this, World.P2World, x, 50, GameData.bodyWidth, GameData.bodyWidth, "", false);
+        //this.body = P2Tool.createBox(this, World.P2World, x, 50, GameData.bodyWidth, GameData.bodyWidth, "testColor_png", false);
         this.body.shapes[0].collisionGroup = 2; //���õ�ǰ������ײ��
         this.body.shapes[0].collisionMask = 1; //����Щ�鷢����ײ
         this.setChildIndex(this.show, 99);
@@ -112,8 +113,8 @@ var Enemy = (function (_super) {
     p.action = function (type, other) {
         if (other === void 0) { other = null; }
         this.actionType = type;
-        var temp = this.body.displays[0];
-        this.setChildIndex(temp, 99);
+        //var temp:egret.Bitmap = <egret.Bitmap>this.body.displays[0];
+        //this.setChildIndex(temp, 99);
         if (type == "walk") {
             this.toward = 1;
             if (Math.random() < 0.5)
@@ -166,8 +167,8 @@ var Enemy = (function (_super) {
             this.show = null;
             this.parent.removeChild(this);
             World.P2World.removeBody(this.body);
-            var random = Math.floor(Math.random() * this.data.die.items.length);
-            GameData.itemArray.push(new Item(this.data.die.items[random], P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1])));
+            var random = Math.floor(Math.random() * this.data.dropItem.length);
+            GameData.itemArray.push(new Item(this.data.dropItem[random].id, P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1])));
         }
     };
     //播放动作动画
