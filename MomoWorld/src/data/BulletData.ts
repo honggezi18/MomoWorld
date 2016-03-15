@@ -11,10 +11,11 @@ var bullet1 = {
 };
 
 var bullet2 = {
+    id: 2,
     name: "bullet2",
     range: 500,//射程
 
-    offsetX: 100,//击中目标动画的偏移值
-    offsetY: -100,
-    scale:0.8//动画缩放大小
+    offsetX: 30,//击中目标动画的偏移值
+    offsetY: 10,
+    scale: 0.8//动画缩放大小
 };

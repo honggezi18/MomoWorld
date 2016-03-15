@@ -29,7 +29,7 @@ class GameData {
     static skill2State = [1.25, 0.30, 0.30, 0.30, 0.30];
     static abilityState = [0.30, 0.30, 0.30, 0.30, 0.30];
     static skill1Index:number = 2;//技能下标一
-    static skill2Index:number = 0;//技能下标一
+    static skill2Index:number = 1;//技能下标一
 
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量/100
     static bag_Equipment = [0, 0, 0, 0];

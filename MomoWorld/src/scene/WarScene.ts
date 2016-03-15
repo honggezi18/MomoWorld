@@ -49,18 +49,17 @@ class WarScene extends egret.DisplayObjectContainer {
         //释放内存，消除enemy
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var tempEnemy:Enemy = GameData.enemyArray[i];
-            if (tempEnemy.isDie)GameData.enemyArray.splice(i,1);
+            if (tempEnemy.isDie) GameData.enemyArray.splice(i,1);
+
         }
 
         //释放内存，消除子弹
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet:Bullet = GameData.bulletArray[i];
             if (tempBullet.isOver) {
-                if (tempBullet.hitMC != null) {
-                    tempBullet.hitMC.parent.removeChild(tempBullet.hitMC);
-                    GameData.bulletArray.splice(i,1);
-                }
-                if(tempBullet.isBulletOver)tempBullet.show.parent.removeChild(tempBullet.show);
+                if (tempBullet.hitMC != null) tempBullet.show.parent.removeChild(tempBullet.hitMC);
+                tempBullet.show.parent.removeChild(tempBullet.show);
+                GameData.bulletArray.splice(i,1);
             }
         }
 
@@ -85,8 +84,6 @@ class WarScene extends egret.DisplayObjectContainer {
     public onTouchStart(e:egret.TouchEvent):void {
         e.stopImmediatePropagation();
         console.log("onTouchStart");
-        //Hero.getInstance().action("levelUp");
-        //new Item("thing1", P2Tool.getEgretNum(Hero.getInstance().body.position[0]), P2Tool.getEgretY(Hero.getInstance().body.position[1]));
     }
 
     //触屏松开

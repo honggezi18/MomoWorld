@@ -1,4 +1,4 @@
-//����ҳ��
+//敌人类
 var Enemy = (function (_super) {
     __extends(Enemy, _super);
     function Enemy(name, x) {
@@ -20,7 +20,7 @@ var Enemy = (function (_super) {
         this.init(name, x);
     }
     var d = __define,c=Enemy;p=c.prototype;
-    //��ʼ����Դ
+    //初始化
     p.init = function (name, x) {
         this._name = name;
         this.data = getEnemy(this._name);
@@ -108,8 +108,9 @@ var Enemy = (function (_super) {
             }
         }
     };
-    //��ɫ�Ķ���
-    p.action = function (type) {
+    //实现各动作指令
+    p.action = function (type, other) {
+        if (other === void 0) { other = null; }
         this.actionType = type;
         var temp = this.body.displays[0];
         this.setChildIndex(temp, 99);
@@ -129,6 +130,10 @@ var Enemy = (function (_super) {
             this.isSkill = false;
             this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
+            if (other != null && this.hitEffect == null) {
+                this.hitEffect = Tool.addMoveClip(this, "attack_hit" + other.id, "attack_hit" + other.id, P2Tool.getEgretNum(this.body.position[0]) - other.offsetX, this.show.y - other.offsetY, other.scale, 1, true);
+                this.hitEffect.addEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "hitEffect"), this);
+            }
         }
         else if (type == "attack") {
             this.isMissing = true;
@@ -140,8 +145,15 @@ var Enemy = (function (_super) {
             Hero.getInstance().setData("exp", this.data.exp);
         }
     };
-    //�������Ž���
-    p.mcOver = function () {
+    //动画执行结束后的回调
+    p.mcOver = function (type) {
+        if (type === void 0) { type = null; }
+        if (type == "hitEffect") {
+            this.removeChild(this.hitEffect);
+            this.hitEffect.removeEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "hitEffect"), this);
+            this.hitEffect = null;
+            return;
+        }
         if (this.mcType == "attack") {
             this.isMissing = false;
             var distance = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward; //�ж��Ƿ������������ƶ�
@@ -158,7 +170,7 @@ var Enemy = (function (_super) {
             GameData.itemArray.push(new Item(this.data.die.items[random], P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1])));
         }
     };
-    //����Ƥ���������л�
+    //播放动作动画
     p.setMoveClip = function (type) {
         var _this = this;
         this.mcType = type;

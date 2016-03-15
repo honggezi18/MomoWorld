@@ -1,7 +1,7 @@
-//����ҳ��
+//敌人类
 class Enemy extends egret.DisplayObjectContainer {
-
     public show:egret.MovieClip;//��ɫƤ��
+    public hitEffect:egret.MovieClip;//��ɫƤ��
     public body:p2.Body;//��ɫ����
     public data:any;//��̬���
 
@@ -29,7 +29,7 @@ class Enemy extends egret.DisplayObjectContainer {
         this.init(name, x);
     }
 
-    //��ʼ����Դ
+    //初始化
     public init(name:string, x:number):void {
         this._name = name;
         this.data = getEnemy(this._name);
@@ -119,8 +119,8 @@ class Enemy extends egret.DisplayObjectContainer {
         }
     }
 
-    //��ɫ�Ķ���
-    public action(type:string):void {
+    //实现各动作指令
+    public action(type:string, other:any = null):void {
         this.actionType = type;
         var temp:egret.Bitmap = <egret.Bitmap>this.body.displays[0];
         this.setChildIndex(temp, 99);
@@ -140,6 +140,13 @@ class Enemy extends egret.DisplayObjectContainer {
             this.isSkill = false;
             this.hitCD = this.data.hit.CD;
             this.setMoveClip("hit");
+
+            if (other != null && this.hitEffect == null) {
+                this.hitEffect = Tool.addMoveClip(this, "attack_hit" + other.id, "attack_hit" + other.id,
+                    P2Tool.getEgretNum(this.body.position[0]) - other.offsetX,
+                    this.show.y - other.offsetY, other.scale, 1, true);
+                this.hitEffect.addEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "hitEffect"), this);
+            }
         }
         else if (type == "attack") {
             this.isMissing = true;
@@ -154,8 +161,14 @@ class Enemy extends egret.DisplayObjectContainer {
 
     }
 
-    //�������Ž���
-    public mcOver():void {
+    //动画执行结束后的回调
+    public mcOver(type:string = null):void {
+        if (type == "hitEffect") {
+            this.removeChild(this.hitEffect);
+            this.hitEffect.removeEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "hitEffect"), this);
+            this.hitEffect = null;
+            return;
+        }
         if (this.mcType == "attack") {
             this.isMissing = false;
             var distance:number = (P2Tool.getEgretNum(this.body.position[0]) - P2Tool.getEgretNum(Hero.getInstance().body.position[0])) * this.toward;//�ж��Ƿ������������ƶ�
@@ -173,7 +186,7 @@ class Enemy extends egret.DisplayObjectContainer {
         }
     }
 
-    //����Ƥ���������л�
+    //播放动作动画
     public setMoveClip(type:string):void {
         this.mcType = type;
         this.offsetX = this.data[type].offsetX;

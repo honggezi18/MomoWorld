@@ -66,8 +66,6 @@ var Tool = (function () {
         if (isCenter) {
             mc.anchorOffsetX = mc.measuredWidth / 2;
             mc.anchorOffsetY = mc.measuredHeight / 2;
-            mc.x += mc.anchorOffsetX;
-            mc.y += mc.anchorOffsetY;
         }
         mc.play(time);
         return mc;

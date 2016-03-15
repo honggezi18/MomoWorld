@@ -37,22 +37,17 @@ var WarScene = (function (_super) {
         //释放内存，消除enemy
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var tempEnemy = GameData.enemyArray[i];
-            if (tempEnemy.isDie) {
-                Tool.removeOne(GameData.enemyArray, i);
-                i--;
-            }
+            if (tempEnemy.isDie)
+                GameData.enemyArray.splice(i, 1);
         }
         //释放内存，消除子弹
         for (var i = 0; i < GameData.bulletArray.length; i++) {
             var tempBullet = GameData.bulletArray[i];
             if (tempBullet.isOver) {
-                if (tempBullet.hitMC != null) {
-                    tempBullet.hitMC.parent.removeChild(tempBullet.hitMC);
-                    GameData.bulletArray.splice(i, 1);
-                    console.log("length  " + GameData.bulletArray.length);
-                }
-                if (tempBullet.isBulletOver)
-                    tempBullet.show.parent.removeChild(tempBullet.show);
+                if (tempBullet.hitMC != null)
+                    tempBullet.show.parent.removeChild(tempBullet.hitMC);
+                tempBullet.show.parent.removeChild(tempBullet.show);
+                GameData.bulletArray.splice(i, 1);
             }
         }
         //释放内存，消除物品
@@ -60,8 +55,7 @@ var WarScene = (function (_super) {
             var tempItem = GameData.itemArray[i];
             if (tempItem.isOver) {
                 tempItem.show.parent.removeChild(tempItem.show);
-                Tool.removeOne(GameData.itemArray, i);
-                i--;
+                GameData.itemArray.splice(i, 1);
             }
         }
         Hero.getInstance().syncFun(); //同步英雄
@@ -77,8 +71,6 @@ var WarScene = (function (_super) {
     p.onTouchStart = function (e) {
         e.stopImmediatePropagation();
         console.log("onTouchStart");
-        //Hero.getInstance().action("levelUp");
-        //new Item("thing1", P2Tool.getEgretNum(Hero.getInstance().body.position[0]), P2Tool.getEgretY(Hero.getInstance().body.position[1]));
     };
     //触屏松开
     p.onTouchEnd = function (e) {

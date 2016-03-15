@@ -58,10 +58,10 @@ var hero1 = {
         skillOffsetY: -17.5,
         powerBase: 50,//技能基础攻击值
         powerSpace: 20,//技能攻击值波动范围
-        cost:10,//消耗的魔法值
+        cost: 10,//消耗的魔法值
         speed: 20,//技能攻击速度
         CD: 10,//技能冷却时间
-        range:[//技能的攻击范围
+        range: [//技能的攻击范围
             {},
             {},]
     },
@@ -69,31 +69,38 @@ var hero1 = {
     skill1: {
         offsetX: -2,//人物动画的位移值
         offsetY: -22.5,
-        skillOffsetX: -12,//技能动画的位移值
-        skillOffsetY: -17.5,
         powerBase: 50,//技能基础攻击值
         powerSpace: 20,//技能攻击值波动范围
-        cost:10,//消耗的魔法值
+        cost: 10,//消耗的魔法值
         speed: 15,//技能攻击速度
         CD: 20,//技能冷却时间
-        range:[//技能的攻击范围
-            {},
-            {},]
     },
 
     skill2: {
         offsetX: -2,//人物动画的位移值
         offsetY: -22.5,
-        skillOffsetX: -12,//技能动画的位移值
-        skillOffsetY: -17.5,
         powerBase: 100,//技能基础攻击值
         powerSpace: 50,//技能攻击值波动范围
-        cost:20,//消耗的魔法值
+        cost: 20,//消耗的魔法值
         speed: 15,//技能攻击速度
         CD: 30,//技能冷却时间
-        range:[//技能的攻击范围
-            {},
-            {},]
+    },
+
+    skill6: {
+        id: 6,
+        offsetX: -2,//人物动画的位移值
+        offsetY: -22.5,
+        skillScale: 0.6,//技能动画缩放系数
+        skillOffsetX: -120,//技能动画的位移值
+        skillOffsetY: -240,
+        hitOffsetX: 0,//目标被攻击动画位移
+        hitOffsetY: 0,
+        powerBase: 100,//技能基础攻击值
+        powerSpace: 50,//技能攻击值波动范围
+        cost: 40,//消耗的魔法值
+        speed: 15,//技能攻击速度
+        CD: 100,//技能冷却时间
+        range: [{x: -300, space: 600}]//技能的攻击范围
     },
 
 };

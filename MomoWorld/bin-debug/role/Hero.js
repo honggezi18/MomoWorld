@@ -255,7 +255,14 @@ var Hero = (function (_super) {
         }
     };
     //帧动画播放完成后的回调
-    p.mcOver = function () {
+    p.mcOver = function (type) {
+        if (type === void 0) { type = null; }
+        if (type == "skillShow") {
+            this.removeChild(this.skillShow);
+            this.skillShow.removeEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "hitEffect"), this);
+            this.skillShow = null;
+            return;
+        }
         if (this.mcType == "die") {
             World.P2World.removeBody(this.body);
         }
@@ -315,8 +322,43 @@ var Hero = (function (_super) {
             case 2:
                 this.setMoveClip("attack");
                 break;
-            case 3:
+            case 6:
+                this.setMoveClip("attack");
+                this.parent.setChildIndex(this, 999);
+                this.skillShow = Tool.addMoveClip(this, "attack_skill6", "attack_skill6", P2Tool.getEgretNum(this.body.position[0]) + this.data.skill6.skillOffsetX, this.show.y + this.data.skill6.skillOffsetY, this.data.skill6.skillScale, 1, true);
+                this.skillShow.addEventListener(egret.Event.COMPLETE, this.mcOver.bind(this, "skillShow"), this);
+                window.setTimeout(this.setSkillFun.bind(this, this.data.skill6, P2Tool.getEgretNum(this.body.position[0])), 1000);
                 break;
+        }
+    };
+    //设置技能的效果
+    p.setSkillFun = function (data, tempHeroX) {
+        if (data === void 0) { data = null; }
+        if (tempHeroX === void 0) { tempHeroX = 0; }
+        for (var i = 0, max = GameData.enemyArray.length; i < max; i++) {
+            //for (var i = 0, max = 1; i < max; i++) {
+            var tempEnemy = GameData.enemyArray[i];
+            var tempX = P2Tool.getEgretNum(tempEnemy.body.position[0]);
+            if (tempEnemy.isDie)
+                continue;
+            for (var a = 0; a < data.range.length; a++) {
+                var range = data.range[a];
+                if (range.x + tempHeroX < tempX && range.x + range.space + tempHeroX > tempX) {
+                    tempEnemy.action("hit", {
+                        id: data.id,
+                        scale: data.scale,
+                        offsetX: data.hitOffsetX,
+                        offsetY: data.hitOffsetY,
+                    });
+                    var powerSpace = Math.floor(Math.random() * data.powerSpace);
+                    var power = data.powerBase + powerSpace;
+                    if (powerSpace > data.powerSpace * 0.8)
+                        new Num("num3", P2Tool.getEgretNum(tempEnemy.body.position[0]), P2Tool.getEgretY(tempEnemy.body.position[1]) - 50, power);
+                    else
+                        new Num("num2", P2Tool.getEgretNum(tempEnemy.body.position[0]), P2Tool.getEgretY(tempEnemy.body.position[1]) - 50, power);
+                    tempEnemy.setData("blood", -power); //目标进行扣血
+                }
+            }
         }
     };
     return Hero;

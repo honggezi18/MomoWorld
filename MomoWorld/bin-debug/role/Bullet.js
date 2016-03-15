@@ -8,7 +8,6 @@ var Bullet = (function () {
         this.toward = 1; //子弹射击的方向，1为右边，-1为左边
         this.powerBase = 0; //该子弹的基本威力
         this.powerSpace = 0; //该子弹威力的浮动值
-        this.isBulletOver = false;
         this.isOver = false;
         this._name = name;
         this.speed = speed;
@@ -25,8 +24,6 @@ var Bullet = (function () {
     var d = __define,c=Bullet;p=c.prototype;
     //同步函数，子弹前进
     p.syncFun = function () {
-        if (this.isBulletOver)
-            return;
         this.show.x -= this.speed * this.toward;
         var distance = Math.abs(this.show.x - this.originX);
         if (distance > this.data.range - 50)
@@ -42,9 +39,8 @@ var Bullet = (function () {
                 continue;
             var direction1 = Math.abs(this.show.x - P2Tool.getEgretNum(tempEnemy.body.position[0])); //子弹和目标的距离
             if (direction1 < tempEnemy.data.stand.halfWidth) {
-                this.hitEffect(P2Tool.getEgretNum(tempEnemy.body.position[0]));
-                this.isBulletOver = true;
-                tempEnemy.action("hit");
+                this.isOver = true; //击中目标，是子弹不再往下走
+                tempEnemy.action("hit", this.data);
                 var powerSpace = Math.floor(Math.random() * this.powerSpace);
                 var power = this.powerBase + powerSpace;
                 if (powerSpace > this.powerSpace * 0.8)
@@ -55,21 +51,6 @@ var Bullet = (function () {
                 return;
             }
         }
-    };
-    //若有击中反馈的，则在本函数播放击中动画
-    p.hitEffect = function (x) {
-        if (this.data.offsetX == null) {
-            this.isOver = true; //击中目标，是子弹不再往下走
-            return;
-        }
-        this.hitMC = Tool.addMoveClip(UIManage.target.item, "attack_hit" + this._name, "attack_hit" + this._name, x - this.data.offsetX, this.show.y + this.data.offsetY, this.data.scale, 1, true);
-        this.hitMC.addEventListener(egret.Event.COMPLETE, this.mcOver, this);
-    };
-    //帧动画播放完成后的回调
-    p.mcOver = function () {
-        console.log("mcOver");
-        this.isOver = true;
-        this.hitMC.removeEventListener(egret.Event.COMPLETE, this.mcOver, this);
     };
     return Bullet;
 })();

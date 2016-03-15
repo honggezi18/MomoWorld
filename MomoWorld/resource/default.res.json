@@ -21,7 +21,7 @@
 		"name":"enemy"
 	},
 	{
-		"keys":"bullet1_png,bullet2_png,attack_hit2_png,attack_hit2_json",
+		"keys":"bullet1_png,bullet2_png,attack_hit2_png,attack_hit2_json,attack_hit6_png,attack_skill6_png,attack_hit6_json,attack_skill6_json",
 		"name":"attack"
 	},
 	{
@@ -954,5 +954,25 @@
 		"name":"attack_hit2_json",
 		"type":"json",
 		"url":"assets/attack/attack_hit2.json"
+	},
+	{
+		"name":"attack_hit6_png",
+		"type":"image",
+		"url":"assets/attack/attack_hit6.png"
+	},
+	{
+		"name":"attack_skill6_png",
+		"type":"image",
+		"url":"assets/attack/attack_skill6.png"
+	},
+	{
+		"name":"attack_hit6_json",
+		"type":"json",
+		"url":"assets/attack/attack_hit6.json"
+	},
+	{
+		"name":"attack_skill6_json",
+		"type":"json",
+		"url":"assets/attack/attack_skill6.json"
 	}]
 }

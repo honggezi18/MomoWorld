@@ -83,7 +83,7 @@ var GameData = (function () {
     GameData.skill2State = [1.25, 0.30, 0.30, 0.30, 0.30];
     GameData.abilityState = [0.30, 0.30, 0.30, 0.30, 0.30];
     GameData.skill1Index = 2; //技能下标一
-    GameData.skill2Index = 0; //技能下标一
+    GameData.skill2Index = 1; //技能下标一
     //背包面板数据,通过ID进行物品的索引    保存格式：ID号+“。”+物品数量/100
     GameData.bag_Equipment = [0, 0, 0, 0];
     GameData.bag_Piece = [0.0, 0.0, 0.0, 0.0,];

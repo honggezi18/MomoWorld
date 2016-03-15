@@ -61,29 +61,35 @@ var hero1 = {
     skill1: {
         offsetX: -2,
         offsetY: -22.5,
-        skillOffsetX: -12,
-        skillOffsetY: -17.5,
         powerBase: 50,
         powerSpace: 20,
         cost: 10,
         speed: 15,
         CD: 20,
-        range: [
-            {},
-            {},]
     },
     skill2: {
         offsetX: -2,
         offsetY: -22.5,
-        skillOffsetX: -12,
-        skillOffsetY: -17.5,
         powerBase: 100,
         powerSpace: 50,
         cost: 20,
         speed: 15,
         CD: 30,
-        range: [
-            {},
-            {},]
+    },
+    skill6: {
+        id: 6,
+        offsetX: -2,
+        offsetY: -22.5,
+        skillScale: 0.6,
+        skillOffsetX: -120,
+        skillOffsetY: -240,
+        hitOffsetX: 0,
+        hitOffsetY: 0,
+        powerBase: 100,
+        powerSpace: 50,
+        cost: 40,
+        speed: 15,
+        CD: 100,
+        range: [{ x: -300, space: 600 }] //技能的攻击范围
     },
 };
