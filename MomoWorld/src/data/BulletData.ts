@@ -7,7 +7,6 @@ var getBullet = function (index) {
 var bullet1 = {
     name: "bullet1",
     range: 350,//射程
-
 };
 
 var bullet2 = {

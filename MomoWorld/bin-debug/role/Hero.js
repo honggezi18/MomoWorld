@@ -60,7 +60,7 @@ var Hero = (function (_super) {
     };
     //同步函数
     p.syncFun = function () {
-        if (this.blood < 0 && !this.isDie)
+        if (this.blood < 1 && !this.isDie)
             this.action("die");
         this.checkHit(); //检测碰撞
         //同步皮肤
@@ -149,7 +149,7 @@ var Hero = (function (_super) {
             if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)
                 tempItem.pickUp();
         }
-        //???????
+        //受攻击的监测
         if (this.isMissing || this.isDie)
             return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
@@ -161,7 +161,7 @@ var Hero = (function (_super) {
                 if (direction1 < temp.data.stand.halfWidth) {
                     this.action("hit");
                     var power = temp.data.stand.powerBase + Math.floor(Math.random() * temp.data.stand.powerSpace);
-                    this.blood -= power;
+                    this.setData("blood", -power);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -171,7 +171,7 @@ var Hero = (function (_super) {
                 if (direction1 < temp.data.attack.range && direction1 > 0) {
                     this.action("hit");
                     var power = temp.data.attack.powerBase + Math.floor(Math.random() * temp.data.attack.powerSpace);
-                    this.blood -= power;
+                    this.setData("blood", -power);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -227,6 +227,10 @@ var Hero = (function (_super) {
             this.isHitting = false;
             this.isWalking = false;
             this.setMoveClip("die");
+            window.setTimeout(500, CtrlScene.getInstance().showSure("闯关失败，返回基地", function () {
+                UIManage.getInstance().hideWarScene();
+                UIManage.getInstance().showWelcome();
+            }));
         }
         else if (type == "stand") {
             this.setMoveClip("stand");
@@ -287,6 +291,8 @@ var Hero = (function (_super) {
             this.blood += num;
             if (this.blood > this.bloodMax)
                 this.blood = this.bloodMax;
+            if (this.blood < 0)
+                this.blood = 0;
             return this.blood;
         }
         else if (type == "power") {

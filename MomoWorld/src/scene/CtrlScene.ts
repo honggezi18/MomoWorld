@@ -170,24 +170,39 @@ class CtrlScene extends egret.DisplayObjectContainer {
     }
 
     //显示顶部层
-    public showTop():void {
-        this.isTop = true;
-        this.topBackgorund = Tool.addBitmap(this, "ctrl_topBackground_png", 0, 0, this.width, 80);
-        Tool.addBitmap(this, "ctrl_barBackground_png", 200 - 5, 35 - 5, 120 + 10, 30 + 10);
-        Tool.addBitmap(this, "ctrl_barBackground_png", 350 - 5, 35 - 5, 120 + 10, 30 + 10);
-        Tool.addBitmap(this, "ctrl_barBackground_png", 500 - 5, 35 - 5, 120 + 10, 30 + 10);
-        this.bloodBar = Tool.addBitmap(this, "ctrl_bloodBar_png", 200, 35, 120, 30);
-        this.powerBar = Tool.addBitmap(this, "ctrl_powerBar_png", 350, 35, 120, 30);
-        this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 500, 35, 120, 30);
-        this.bloodText = Tool.addTextField(this, 200, 10, 0, 0, 15, 0x000000, "血量:" + Hero.getInstance().blood + " / " + Hero.getInstance().bloodMax);
-        this.powerText = Tool.addTextField(this, 350, 10, 0, 0, 15, 0x000000, "法力:" + Hero.getInstance().power + " / " + Hero.getInstance().powerMax);
-        this.expText = Tool.addTextField(this, 500, 10, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
-        this.level = Tool.addTextField(this, 20, 20, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
-        this.map = Tool.addTextField(this, 700, 20, 0, 0, 30, 0x000000, UIManage.target.mapData.name);
+    public showTop(ctrl:string = "show"):void {
+        if (ctrl == "show") {
+            this.isTop = true;
+            this.topBackgorund = Tool.addBitmap(this, "ctrl_topBackground_png", 0, 0, this.width, 80);
+            Tool.addBitmap(this, "ctrl_barBackground_png", 200 - 5, 35 - 5, 120 + 10, 30 + 10);
+            Tool.addBitmap(this, "ctrl_barBackground_png", 350 - 5, 35 - 5, 120 + 10, 30 + 10);
+            Tool.addBitmap(this, "ctrl_barBackground_png", 500 - 5, 35 - 5, 120 + 10, 30 + 10);
+            this.bloodBar = Tool.addBitmap(this, "ctrl_bloodBar_png", 200, 35, 120, 30);
+            this.powerBar = Tool.addBitmap(this, "ctrl_powerBar_png", 350, 35, 120, 30);
+            this.expBar = Tool.addBitmap(this, "ctrl_expBar_png", 500, 35, 120, 30);
+            this.bloodText = Tool.addTextField(this, 200, 10, 0, 0, 15, 0x000000, "血量:" + Hero.getInstance().blood + " / " + Hero.getInstance().bloodMax);
+            this.powerText = Tool.addTextField(this, 350, 10, 0, 0, 15, 0x000000, "法力:" + Hero.getInstance().power + " / " + Hero.getInstance().powerMax);
+            this.expText = Tool.addTextField(this, 500, 10, 0, 0, 15, 0x000000, "经验:" + Hero.getInstance().exp + " / " + Hero.getInstance().expMax);
+            this.level = Tool.addTextField(this, 20, 20, 0, 0, 30, 0x000000, "LEVEL:" + Hero.getInstance().level);
+            this.map = Tool.addTextField(this, 700, 20, 0, 0, 30, 0x000000, UIManage.target.mapData.name);
 
-        this.bloodBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
-        this.powerBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
-        this.expBar.scale9Grid = new egret.Rectangle(5, 1, 110, 16);
+            this.bloodBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
+            this.powerBar.scale9Grid = new egret.Rectangle(5, 1, 98, 16);
+            this.expBar.scale9Grid = new egret.Rectangle(5, 1, 110, 16);
+        }
+        else if (ctrl == "hide" && this.isTop) {
+            this.isTop = false;
+            this.topBackgorund = Tool.clearItem(this.topBackgorund);
+            this.bloodBar = Tool.clearItem(this.bloodBar);
+            this.powerBar = Tool.clearItem(this.powerBar);
+            this.expBar = Tool.clearItem(this.expBar);
+            this.bloodText = Tool.clearItem(this.bloodText);
+            this.powerText = Tool.clearItem(this.powerText);
+            this.expText = Tool.clearItem(this.expText);
+            this.level = Tool.clearItem(this.level);
+            this.map = Tool.clearItem(this.map);
+        }
+
     }
 
     //显示操作层

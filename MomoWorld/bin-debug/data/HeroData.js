@@ -5,7 +5,7 @@ var getHero = function (name) {
 //主角模式
 var hero1 = {
     name: "hero1",
-    blood: 500,
+    blood: 50,
     power: 200,
     exp: 155,
     expSpace: 200,

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Egret</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="true"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <style>
+        html, body {
+            -ms-touch-action: none;
+            background: #888888;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+        window.addEventListener("keydown", function (e) {
+            if (e.keyCode == 13)window["keyConfirm"].call(window["gameObj"], 'Enter');
+            if (e.keyCode == 16)window["keyMenu"].call(window["gameObj"], 'Menu');
+            if (e.keyCode == 67)window["keyJump"].call(window["gameObj"], 'JumpDown');
+            if (e.keyCode == 90)window["keyAttack"].call(window["gameObj"], 'AttackDown');
+            if (e.keyCode == 88)window["keySkill1"].call(window["gameObj"], 'Skill1Down');
+            if (e.keyCode == 86)window["keySkill2"].call(window["gameObj"], 'Skill2Down');
+            if (e.keyCode == 37)window["keyLeft"].call(window["gameObj"], 'LeftDown');
+            if (e.keyCode == 38)window["keyUp"].call(window["gameObj"], 'UpDown');
+            if (e.keyCode == 39)window["keyRight"].call(window["gameObj"], 'RightDown');
+            if (e.keyCode == 40)window["keyDown"].call(window["gameObj"], 'DownDown');
+        });
+        window.addEventListener("keyup", function (e) {
+            if (e.keyCode == 13)window["keyConfirm"].call(window["gameObj"], 'Enter');
+            if (e.keyCode == 16)window["keyMenu"].call(window["gameObj"], 'Menu');
+            if (e.keyCode == 67)window["keyJump"].call(window["gameObj"], 'JumpUp');
+            if (e.keyCode == 88)window["keySkill1"].call(window["gameObj"], 'Skill1Up');
+            if (e.keyCode == 86)window["keySkill2"].call(window["gameObj"], 'Skill2Up');
+            if (e.keyCode == 90)window["keyAttack"].call(window["gameObj"], 'AttackUp');
+            if (e.keyCode == 37)window["keyLeft"].call(window["gameObj"], 'LeftUp');
+            if (e.keyCode == 38)window["keyUp"].call(window["gameObj"], 'UpUp');
+            if (e.keyCode == 39)window["keyRight"].call(window["gameObj"], 'RightUp');
+            if (e.keyCode == 40)window["keyDown"].call(window["gameObj"], 'DownUp');
+        });
+    </script>
+
+    <!--这个标签为通过egret提供的第三方库的方式生成的 javascript 文件-->
+    <!--modules_files_start-->
+	<script egret="lib" src="libs/modules/egret/egret.min.js"></script>
+	<script egret="lib" src="libs/modules/egret/egret.web.min.js"></script>
+	<script egret="lib" src="libs/modules/game/game.min.js"></script>
+	<script egret="lib" src="libs/modules/game/game.web.min.js"></script>
+	<script egret="lib" src="libs/modules/tween/tween.min.js"></script>
+	<script egret="lib" src="libs/modules/res/res.min.js"></script>
+	<script egret="lib" src="libs/modules/eui/eui.min.js"></script>
+	<script egret="lib" src="libs/modules/p2/p2.min.js"></script>
+	<!--modules_files_end-->
+
+    <!--这个标签为不通过egret提供的第三方库的方式使用的 javascript 文件，请将这些文件放在libs下，但不要放在modules下面。-->
+    <!--other_libs_files_start-->
+    <!--other_libs_files_end-->
+
+    <!--这个标签会被替换为项目中所有的 javascript 文件-->
+    <!--game_files_start-->
+	<script src="main.min.js"></script>
+	<!--game_files_end-->
+</head>
+<body>
+
+<div style="margin: auto;width: 100%;height: 100%;" class="egret-player"
+     data-entry-class="Main"
+     data-orientation="landscape"
+     data-scale-mode="exactFit"
+     data-resolution-mode="retina"
+     data-frame-rate="60"
+     data-content-width="800"
+     data-content-height="480"
+     data-show-paint-rect="false"
+     data-multi-fingered="2"
+     data-show-fps="false" data-show-log="false"
+     data-log-filter="" data-show-fps-style="x:0,y:0,size:30,textColor:0x00c200,bgAlpha:0.9">
+</div>
+<script>
+    egret.runEgret();
+</script>
+</body>
+</html>

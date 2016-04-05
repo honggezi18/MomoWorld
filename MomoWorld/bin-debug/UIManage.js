@@ -81,6 +81,9 @@ var UIManage = (function () {
     p.hideWarScene = function () {
         if (this.warScene != null) {
             console.log("hideWarScene");
+            CtrlScene.getInstance().showTop("hide");
+            GameData.enemyArray = [];
+            GameData.bulletArray = [];
             this.clear(this.warScene);
         }
         else

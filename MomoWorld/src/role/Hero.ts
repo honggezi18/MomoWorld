@@ -69,7 +69,7 @@ class Hero extends egret.DisplayObjectContainer {
 
     //同步函数
     public syncFun():void {
-        if (this.blood < 0 && !this.isDie)this.action("die");
+        if (this.blood < 1 && !this.isDie)this.action("die");
 
         this.checkHit();//检测碰撞
 
@@ -176,28 +176,28 @@ class Hero extends egret.DisplayObjectContainer {
             if (Math.abs(P2Tool.getEgretNum(this.body.position[0]) - tempItem.show.x) < tempItem.range)tempItem.pickUp();
         }
 
-        //???????
+        //受攻击的监测
         if (this.isMissing || this.isDie)return;
         for (var i = 0; i < GameData.enemyArray.length; i++) {
             var temp:Enemy = GameData.enemyArray[i];
             if (temp.isDie)return;
 
-            if (temp.isSkill == false) {//??????????
+            if (temp.isSkill == false) {//所受普通攻击
                 var direction1 = Math.abs(temp.show.x - P2Tool.getEgretNum(this.body.position[0]));
                 if (direction1 < temp.data.stand.halfWidth) {
                     this.action("hit");
                     var power:number = temp.data.stand.powerBase + Math.floor(Math.random() * temp.data.stand.powerSpace);
-                    this.blood -= power;
+                    this.setData("blood", -power);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
             }
-            else {//???????????
+            else {//所受技能攻击
                 var direction1 = (P2Tool.getEgretNum(temp.body.position[0]) - P2Tool.getEgretNum(this.body.position[0])) * temp.toward;
                 if (direction1 < temp.data.attack.range && direction1 > 0) {
                     this.action("hit");
                     var power:number = temp.data.attack.powerBase + Math.floor(Math.random() * temp.data.attack.powerSpace);
-                    this.blood -= power;
+                    this.setData("blood", -power);
                     new Num("num1", P2Tool.getEgretNum(this.body.position[0]), P2Tool.getEgretY(this.body.position[1]) - 50, power);
                     return;
                 }
@@ -250,6 +250,10 @@ class Hero extends egret.DisplayObjectContainer {
             this.isHitting = false;
             this.isWalking = false;
             this.setMoveClip("die");
+            window.setTimeout(500, CtrlScene.getInstance().showSure("闯关失败，返回基地", function () {
+                UIManage.getInstance().hideWarScene();
+                UIManage.getInstance().showWelcome();
+            }));
         }
         else if (type == "stand") {
             this.setMoveClip("stand");
@@ -312,6 +316,7 @@ class Hero extends egret.DisplayObjectContainer {
         if (type == "blood") {
             this.blood += num;
             if (this.blood > this.bloodMax)this.blood = this.bloodMax;
+            if (this.blood < 0)this.blood = 0;
             return this.blood;
         }
         else if (type == "power") {

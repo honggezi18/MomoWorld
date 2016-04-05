@@ -32,6 +32,7 @@ var game_file_list = [
 	"bin-debug/role/Item.js",
 	"bin-debug/role/Num.js",
 	"bin-debug/scene/CtrlScene.js",
+	"bin-debug/scene/LoadingScene.js",
 	"bin-debug/scene/MapScene.js",
 	"bin-debug/scene/WarScene.js",
 	"bin-debug/scene/WelcomeScene.js",

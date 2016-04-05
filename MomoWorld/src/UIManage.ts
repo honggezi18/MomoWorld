@@ -85,6 +85,9 @@ class UIManage {
     public hideWarScene():void {
         if (this.warScene != null) {
             console.log("hideWarScene");
+            CtrlScene.getInstance().showTop("hide");
+            GameData.enemyArray = [];
+            GameData.bulletArray = [];
             this.clear(this.warScene);
         }
         else console.log("warScene   had   not  instance");
